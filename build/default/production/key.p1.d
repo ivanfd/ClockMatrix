@@ -1,0 +1,20 @@
+ build/default/production/key.d  \
+ build/default/production/key.p1:  \
+ key.c  \
+init.h  \
+timer.h  \
+main.h  \
+dispatcher.h  \
+FontS.h  \
+onewire.h  \
+i2c.h  \
+key.h  \
+pict.h  \
+ds3231.h  \
+interrupt.h  \
+Font.h  \
+common.h  \
+max7221.h  \
+display.h  \
+ds18b20.h  \
+events.h 

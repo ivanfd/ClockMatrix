@@ -1,0 +1,20 @@
+ build/default/production/ds18b20.d  \
+ build/default/production/ds18b20.p1:  \
+ ds18b20.c  \
+init.h  \
+timer.h  \
+main.h  \
+dispatcher.h  \
+FontS.h  \
+onewire.h  \
+i2c.h  \
+key.h  \
+pict.h  \
+ds3231.h  \
+interrupt.h  \
+Font.h  \
+common.h  \
+max7221.h  \
+display.h  \
+ds18b20.h  \
+events.h 
