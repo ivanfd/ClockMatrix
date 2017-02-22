@@ -5352,6 +5352,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.h: 15: void Interrupt_Init(void);
 [; ;onewire.h: 12: uint8_t ow_reset(void);
 [; ;onewire.h: 13: uint8_t read_bit(void);
+[; ;onewire.h: 14: void write_bit(uint8_t bitval);
+[; ;onewire.h: 15: uint8_t read_byte(void);
 "10 ds18b20.h
 [v _fract `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fract
@@ -5388,9 +5390,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 49: void version(void);
 [; ;common.h: 50: void default_state(void);
 [; ;interrupt.h: 17: void interrupt InterruptManager(void);
-[v F3177 `(v ~T0 @X0 1 tf ]
+[v F3181 `(v ~T0 @X0 1 tf ]
 "4 interrupt.c
-[v _INTERRUPT_InterruptManager `IF3177 ~T0 @X0 1 e ]
+[v _INTERRUPT_InterruptManager `IF3181 ~T0 @X0 1 e ]
 "5
 {
 [; ;interrupt.c: 4: void interrupt INTERRUPT_InterruptManager (void)

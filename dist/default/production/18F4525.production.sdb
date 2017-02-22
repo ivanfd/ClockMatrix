@@ -132,6 +132,8 @@
 [v _Init7221 Init7221 `(v  1 e 1 0 ]
 "5 D:\Ivan\Electro\XC8\18F4525\onewire.c
 [v _ow_reset ow_reset `(uc  1 e 1 0 ]
+"22
+[v _read_bit read_bit `(uc  1 e 1 0 ]
 "5 D:\Ivan\Electro\XC8\18F4525\timer.c
 [v _TMR1Init TMR1Init `(v  1 e 1 0 ]
 "185 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f4525.h

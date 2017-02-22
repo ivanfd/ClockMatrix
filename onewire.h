@@ -12,6 +12,7 @@
 uint8_t ow_reset(void);
 uint8_t read_bit(void);
 void write_bit(uint8_t bitval);
+uint8_t read_byte(void);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

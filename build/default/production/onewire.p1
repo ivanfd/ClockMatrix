@@ -5363,6 +5363,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 50: void default_state(void);
 [; ;onewire.h: 12: uint8_t ow_reset(void);
 [; ;onewire.h: 13: uint8_t read_bit(void);
+[; ;onewire.h: 14: void write_bit(uint8_t bitval);
+[; ;onewire.h: 15: uint8_t read_byte(void);
 "5 onewire.c
 [v _ow_reset `(uc ~T0 @X0 1 ef ]
 "6
@@ -5486,4 +5488,54 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;onewire.c: 46: }
 "46
 [e :UE 274 ]
+}
+"50
+[v _read_byte `(uc ~T0 @X0 1 ef ]
+"51
+{
+[; ;onewire.c: 50: uint8_t read_byte(void)
+[; ;onewire.c: 51: {
+[e :U _read_byte ]
+[f ]
+"52
+[v _i `uc ~T0 @X0 1 a ]
+"53
+[v _val `uc ~T0 @X0 1 a ]
+[; ;onewire.c: 52: uint8_t i;
+[; ;onewire.c: 53: uint8_t val = 0;
+[e = _val -> -> 0 `i `uc ]
+[; ;onewire.c: 55: for(i=0;i<8;i++)
+"55
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 277  ]
+[e $U 278  ]
+"56
+[e :U 277 ]
+[; ;onewire.c: 56: {
+{
+[; ;onewire.c: 57: if(read_bit()) val |= (0x01 << i);
+"57
+[e $ ! != -> ( _read_bit ..  `i -> -> -> 0 `i `uc `i 280  ]
+[e =| _val -> << -> 1 `i _i `uc ]
+[e :U 280 ]
+[; ;onewire.c: 58: _delay((unsigned long)((120)*(40000000/4000000.0)));
+"58
+[e ( __delay (1 -> * -> -> 120 `i `d / -> -> 40000000 `l `d .4000000.0 `ul ]
+"59
+}
+"55
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 277  ]
+[e :U 278 ]
+"59
+}
+[; ;onewire.c: 59: }
+[; ;onewire.c: 61: return val;
+"61
+[e ) _val ]
+[e $UE 276  ]
+[; ;onewire.c: 62: }
+"62
+[e :UE 276 ]
 }

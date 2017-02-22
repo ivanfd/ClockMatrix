@@ -79,7 +79,7 @@ intcode CODE 0 8 8 6 1
 dataCOMRAM COMRAM 1 5D 5D 1 1
 bssCOMRAM COMRAM 1 1 1 33 1
 mediumconst MEDIUMCONST 0 BAAA BAAA 556 1
-$C:\Temp\s4r0.obj
+$C:\Temp\s28o.obj
 idloc IDLOC 0 200000 200000 8 1
 init CODE 0 E E 4 1
 reset_vec CODE 0 0 0 4 1
@@ -839,43 +839,43 @@ E64 text0 CODE >27:D:\Ivan\Electro\XC8\18F4525\main.c
 E7C text0 CODE >28:D:\Ivan\Electro\XC8\18F4525\main.c
 E8E text0 CODE >29:D:\Ivan\Electro\XC8\18F4525\main.c
 E90 text0 CODE >33:D:\Ivan\Electro\XC8\18F4525\main.c
-E96 cinit CODE >5293:C:\Temp\s4r0.
-E96 cinit CODE >5295:C:\Temp\s4r0.
-E96 cinit CODE >5298:C:\Temp\s4r0.
-E96 cinit CODE >5358:C:\Temp\s4r0.
-E98 cinit CODE >5359:C:\Temp\s4r0.
-E9A cinit CODE >5360:C:\Temp\s4r0.
-E9C cinit CODE >5361:C:\Temp\s4r0.
-E9E cinit CODE >5362:C:\Temp\s4r0.
-EA0 cinit CODE >5363:C:\Temp\s4r0.
-EA2 cinit CODE >5364:C:\Temp\s4r0.
-EA4 cinit CODE >5365:C:\Temp\s4r0.
-EA8 cinit CODE >5369:C:\Temp\s4r0.
-EAC cinit CODE >5370:C:\Temp\s4r0.
-EAE cinit CODE >5371:C:\Temp\s4r0.
-EAE cinit CODE >5372:C:\Temp\s4r0.
-EB0 cinit CODE >5373:C:\Temp\s4r0.
-EB2 cinit CODE >5374:C:\Temp\s4r0.
-EB4 cinit CODE >5377:C:\Temp\s4r0.
-EB8 cinit CODE >5378:C:\Temp\s4r0.
-EBA cinit CODE >5379:C:\Temp\s4r0.
-EBA cinit CODE >5380:C:\Temp\s4r0.
-EBC cinit CODE >5381:C:\Temp\s4r0.
-EBE cinit CODE >5382:C:\Temp\s4r0.
-EC0 cinit CODE >5385:C:\Temp\s4r0.
-EC2 cinit CODE >5388:C:\Temp\s4r0.
-EC6 cinit CODE >5389:C:\Temp\s4r0.
-EC8 cinit CODE >5390:C:\Temp\s4r0.
-EC8 cinit CODE >5391:C:\Temp\s4r0.
-ECA cinit CODE >5392:C:\Temp\s4r0.
-ECC cinit CODE >5393:C:\Temp\s4r0.
-ECE cinit CODE >5399:C:\Temp\s4r0.
-ECE cinit CODE >5401:C:\Temp\s4r0.
-ED0 cinit CODE >5402:C:\Temp\s4r0.
-ED2 cinit CODE >5404:C:\Temp\s4r0.
-ED4 cinit CODE >5405:C:\Temp\s4r0.
-ED6 cinit CODE >5406:C:\Temp\s4r0.
-ED8 cinit CODE >5407:C:\Temp\s4r0.
+E96 cinit CODE >5293:C:\Temp\s28o.
+E96 cinit CODE >5295:C:\Temp\s28o.
+E96 cinit CODE >5298:C:\Temp\s28o.
+E96 cinit CODE >5358:C:\Temp\s28o.
+E98 cinit CODE >5359:C:\Temp\s28o.
+E9A cinit CODE >5360:C:\Temp\s28o.
+E9C cinit CODE >5361:C:\Temp\s28o.
+E9E cinit CODE >5362:C:\Temp\s28o.
+EA0 cinit CODE >5363:C:\Temp\s28o.
+EA2 cinit CODE >5364:C:\Temp\s28o.
+EA4 cinit CODE >5365:C:\Temp\s28o.
+EA8 cinit CODE >5369:C:\Temp\s28o.
+EAC cinit CODE >5370:C:\Temp\s28o.
+EAE cinit CODE >5371:C:\Temp\s28o.
+EAE cinit CODE >5372:C:\Temp\s28o.
+EB0 cinit CODE >5373:C:\Temp\s28o.
+EB2 cinit CODE >5374:C:\Temp\s28o.
+EB4 cinit CODE >5377:C:\Temp\s28o.
+EB8 cinit CODE >5378:C:\Temp\s28o.
+EBA cinit CODE >5379:C:\Temp\s28o.
+EBA cinit CODE >5380:C:\Temp\s28o.
+EBC cinit CODE >5381:C:\Temp\s28o.
+EBE cinit CODE >5382:C:\Temp\s28o.
+EC0 cinit CODE >5385:C:\Temp\s28o.
+EC2 cinit CODE >5388:C:\Temp\s28o.
+EC6 cinit CODE >5389:C:\Temp\s28o.
+EC8 cinit CODE >5390:C:\Temp\s28o.
+EC8 cinit CODE >5391:C:\Temp\s28o.
+ECA cinit CODE >5392:C:\Temp\s28o.
+ECC cinit CODE >5393:C:\Temp\s28o.
+ECE cinit CODE >5399:C:\Temp\s28o.
+ECE cinit CODE >5401:C:\Temp\s28o.
+ED0 cinit CODE >5402:C:\Temp\s28o.
+ED2 cinit CODE >5404:C:\Temp\s28o.
+ED4 cinit CODE >5405:C:\Temp\s28o.
+ED6 cinit CODE >5406:C:\Temp\s28o.
+ED8 cinit CODE >5407:C:\Temp\s28o.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -901,7 +901,7 @@ __end_of_RTOS_Init 1352 0 CODE 0 text6 dist/default/production\18F4525.productio
 _RTOS_DeleteTask C3A 0 CODE 0 text37 dist/default/production\18F4525.production.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\18F4525.production.obj
 decimal_to_bcd@d 4C 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
-__mediumconst BAAA 0 MEDIUMCONST 0 mediumconst C:\Temp\s4r0.obj
+__mediumconst BAAA 0 MEDIUMCONST 0 mediumconst C:\Temp\s28o.obj
 __size_of_RTOS_Init 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 __Heeprom_data 0 0 EEDATA 0 eeprom_data dist/default/production\18F4525.production.obj
 __CFG_MCLRE$ON 0 0 ABS 0 - dist/default/production\18F4525.production.obj
@@ -927,13 +927,13 @@ _LATD F8C 0 ABS 0 - dist/default/production\18F4525.production.obj
 _RCEN 7E2B 0 ABS 0 - dist/default/production\18F4525.production.obj
 _RSEN 7E29 0 ABS 0 - dist/default/production\18F4525.production.obj
 _TMR0 FD6 0 ABS 0 - dist/default/production\18F4525.production.obj
-___sp 0 0 STACK 2 stack C:\Temp\s4r0.obj
+___sp 0 0 STACK 2 stack C:\Temp\s28o.obj
 __end_of_I2C_start 10F8 0 CODE 0 text47 dist/default/production\18F4525.production.obj
 _main E48 0 CODE 0 text0 dist/default/production\18F4525.production.obj
 RTOS_DeleteTask@i 4A 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 btemp 5E 0 COMRAM 1 temp dist/default/production\18F4525.production.obj
 __end_of_I2C_write 129C 0 CODE 0 text45 dist/default/production\18F4525.production.obj
-start E 0 CODE 0 init C:\Temp\s4r0.obj
+start E 0 CODE 0 init C:\Temp\s28o.obj
 __size_of_I2C_start 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 key_press@key 42 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 __size_of_I2C_write 0 0 ABS 0 - dist/default/production\18F4525.production.obj
@@ -971,11 +971,11 @@ __size_of_SYSTEM_Initialize 0 0 ABS 0 - dist/default/production\18F4525.producti
 __HdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\18F4525.production.obj
 bcd_to_decimal@d 43 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 _I2C_read_noack 1320 0 CODE 0 text49 dist/default/production\18F4525.production.obj
-__accesstop 80 0 ABS 0 - C:\Temp\s4r0.obj
-intlevel0 0 0 CODE 0 text C:\Temp\s4r0.obj
-intlevel1 0 0 CODE 0 text C:\Temp\s4r0.obj
-intlevel2 0 0 CODE 0 text C:\Temp\s4r0.obj
-intlevel3 0 0 CODE 0 text C:\Temp\s4r0.obj
+__accesstop 80 0 ABS 0 - C:\Temp\s28o.obj
+intlevel0 0 0 CODE 0 text C:\Temp\s28o.obj
+intlevel1 0 0 CODE 0 text C:\Temp\s28o.obj
+intlevel2 0 0 CODE 0 text C:\Temp\s28o.obj
+intlevel3 0 0 CODE 0 text C:\Temp\s28o.obj
 __LbssCOMRAM 0 0 ABS 0 bssCOMRAM dist/default/production\18F4525.production.obj
 _putchar_b_buf D14 0 CODE 0 text28 dist/default/production\18F4525.production.obj
 __size_of_setDate 0 0 ABS 0 - dist/default/production\18F4525.production.obj
@@ -995,8 +995,8 @@ FillBuf@i 4C 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.
 __end_of_scroll_text C2A 0 CODE 0 text3 dist/default/production\18F4525.production.obj
 __size_ofi2_RTOS_SetTask 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 _FillBuf 5DC 0 CODE 0 text38 dist/default/production\18F4525.production.obj
-___inthi_sp 0 0 STACK 2 stack C:\Temp\s4r0.obj
-___intlo_sp 0 0 STACK 2 stack C:\Temp\s4r0.obj
+___inthi_sp 0 0 STACK 2 stack C:\Temp\s28o.obj
+___intlo_sp 0 0 STACK 2 stack C:\Temp\s28o.obj
 version@i 49 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\18F4525.production.obj
 _bcd_to_decimal 12E4 0 CODE 0 text43 dist/default/production\18F4525.production.obj
@@ -1112,7 +1112,7 @@ __size_of_pic_to_led 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\18F4525.production.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/production\18F4525.production.obj
 RTOS_SetTask@taskFunc 42 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Temp\s4r0.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Temp\s28o.obj
 __size_of_Send_Byte_7221 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 __end_of_sprintf 1066 0 CODE 0 text2 dist/default/production\18F4525.production.obj
 __Hcomram 0 0 ABS 0 comram dist/default/production\18F4525.production.obj
@@ -1456,8 +1456,8 @@ DS3231_Read@value 46 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.pro
 setDate@dateSet 4F 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 __Lfardata 0 0 FARRAM 0 fardata dist/default/production\18F4525.production.obj
 _show_digit 2E1 -284 COMRAM 1 bitbssCOMRAM dist/default/production\18F4525.production.obj
-stackhi F7F 0 ABS 0 - C:\Temp\s4r0.obj
-stacklo 164 0 ABS 0 - C:\Temp\s4r0.obj
+stackhi F7F 0 ABS 0 - C:\Temp\s28o.obj
+stacklo 164 0 ABS 0 - C:\Temp\s28o.obj
 I2C_restart@adres 44 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 __size_of_I2C_read_noack 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 __Lintcode 8 0 CODE 0 intcode dist/default/production\18F4525.production.obj
@@ -1562,7 +1562,7 @@ __Ltext53 0 0 ABS 0 text53 dist/default/production\18F4525.production.obj
 __Ltext54 0 0 ABS 0 text54 dist/default/production\18F4525.production.obj
 __Ltext55 0 0 ABS 0 text55 dist/default/production\18F4525.production.obj
 __Ltext56 0 0 ABS 0 text56 dist/default/production\18F4525.production.obj
-__ramtop 1000 0 RAM 0 ramtop C:\Temp\s4r0.obj
+__ramtop 1000 0 RAM 0 ramtop C:\Temp\s28o.obj
 _sprintf 103E 0 CODE 0 text2 dist/default/production\18F4525.production.obj
 ___lbmod@dividend 47 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 __Lpowerup E 0 CODE 0 powerup dist/default/production\18F4525.production.obj

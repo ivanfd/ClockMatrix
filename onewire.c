@@ -44,3 +44,19 @@ void write_bit(uint8_t bitval)
       DQ = 1;
       TRIS_DQ = 1;
 }
+
+
+//******************************************************************************
+uint8_t read_byte(void)
+{
+   uint8_t i;
+   uint8_t val = 0;
+
+   for(i=0;i<8;i++)
+   {
+      if(read_bit()) val |= (0x01 << i);
+      __delay_us(120);  // To finish time slot
+   }
+
+   return val;
+}

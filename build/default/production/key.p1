@@ -5283,6 +5283,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.h: 15: void Interrupt_Init(void);
 [; ;onewire.h: 12: uint8_t ow_reset(void);
 [; ;onewire.h: 13: uint8_t read_bit(void);
+[; ;onewire.h: 14: void write_bit(uint8_t bitval);
+[; ;onewire.h: 15: uint8_t read_byte(void);
 "10 ds18b20.h
 [v _fract `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fract
@@ -5348,8 +5350,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _key_press ]
 [f ]
 "7
-[v F3178 `uc ~T0 @X0 1 s count ]
-[i F3178
+[v F3182 `uc ~T0 @X0 1 s count ]
+[i F3182
 -> -> 0 `i `uc
 ]
 "8
@@ -5403,16 +5405,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;key.c: 23: if(count <= 30)
 "23
-[e $ ! <= -> F3178 `i -> 30 `i 282  ]
+[e $ ! <= -> F3182 `i -> 30 `i 282  ]
 [; ;key.c: 24: {
 "24
 {
 [; ;key.c: 25: count++;
 "25
-[e ++ F3178 -> -> 1 `i `uc ]
+[e ++ F3182 -> -> 1 `i `uc ]
 [; ;key.c: 26: if(count == 30)
 "26
-[e $ ! == -> F3178 `i -> 30 `i 283  ]
+[e $ ! == -> F3182 `i -> 30 `i 283  ]
 [; ;key.c: 27: {
 "27
 {
@@ -5421,7 +5423,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _events _key ]
 [; ;key.c: 30: count = 0;
 "30
-[e = F3178 -> -> 0 `i `uc ]
+[e = F3182 -> -> 0 `i `uc ]
 "31
 }
 [e :U 283 ]
@@ -5442,7 +5444,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;key.c: 36: count = 0;
 "36
-[e = F3178 -> -> 0 `i `uc ]
+[e = F3182 -> -> 0 `i `uc ]
 "38
 }
 [e :U 284 ]
