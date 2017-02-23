@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="0">
-  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff8300000009000000d3040000cf020000</PLACEMENT>
+  <PLACEMENT>2c00000002000000030000000083ffff0083ffffffffffffffffffff8300000009000000d3040000cf020000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
@@ -15,7 +15,7 @@
      <ITEM name="Version">100</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="350" x="116" flags="00000033" y="68" h="200" pid="1" iid="-1">
+   <POPUP w="350" x="119" flags="00008033" y="322" h="200" pid="1" iid="-1">
     <PROPERTIES>
      <ITEM name="Address Column Width">83</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -24,16 +24,17 @@
      <ITEM name="Item 1">"INTCON2","0x0FF1",00000009,0000000C,4081,1,0,D38C0000,0,00000000,00000000</ITEM>
      <ITEM name="Item 2">"TMR1H","0x0FCF",00000009,0000000C,4047,1,2,00000002,0,00000000,00000000</ITEM>
      <ITEM name="Item 3">"TMR1L","0x0FCE",00000009,0000000C,4046,1,2,00000002,0,00000000,00000000</ITEM>
+     <ITEM name="Item 4">"11","0x0011",00000009,00000004,17,4,5,00000008,0,00000000,00000000</ITEM>
      <ITEM name="Name Column Width">83</ITEM>
      <ITEM name="ShowAddresses">Yes</ITEM>
      <ITEM name="ShowPreviousValues">No</ITEM>
      <ITEM name="ShowTypes">No</ITEM>
      <ITEM name="ShowWatchPoint">Yes</ITEM>
      <ITEM name="TriggerMode">0</ITEM>
-     <ITEM name="Value Column Width">83</ITEM>
+     <ITEM name="Value Column Width">99</ITEM>
      <ITEM name="Version">100</ITEM>
      <ITEM name="Watch Expression Column Width">83</ITEM>
-     <ITEM name="nItems">4</ITEM>
+     <ITEM name="nItems">5</ITEM>
     </PROPERTIES>
    </POPUP>
    <POPUP w="20" x="1141" flags="00000001" y="50" h="3" pid="1" iid="10">
@@ -49,17 +50,17 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="803" x="635" flags="0000002b" y="127" h="576" pid="1" iid="9">
+   <POPUP w="803" x="83" flags="0000002b" y="71" h="576" pid="1" iid="9">
     <PROPERTIES>
-     <ITEM name="Breakpoint 0">"",0A96,0000,6962,4174,1
+     <ITEM name="Breakpoint 0">"",08E0,0000,DA0F,4174,-1
 </ITEM>
-     <ITEM name="Breakpoint 1">"",02BE,0000,4364,4174,1
+     <ITEM name="Breakpoint 1">"",085C,0000,D40A,4174,-1
 </ITEM>
-     <ITEM name="Breakpoint 2">"",02F6,0000,37A1,4174,1
+     <ITEM name="Breakpoint 2">"",08FE,0000,0963,A0DC,1
 </ITEM>
-     <ITEM name="Breakpoint 3">"",0300,0000,1046,4174,1
+     <ITEM name="Breakpoint 3">"",13C8,0000,A0C3,5783,-1
 </ITEM>
-     <ITEM name="Breakpoint 4">"",0016,0000,0E21,9826,1
+     <ITEM name="Breakpoint 4">"",13D4,0000,6E65,5783,-1
 </ITEM>
      <ITEM name="Breakpoint 5">"",00BE,0000,8706,9826,-1
 </ITEM>
@@ -72,7 +73,7 @@
      <ITEM name="nBreakpoints">1</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="444" x="5" flags="0000000b" y="5" h="678" pid="2" iid="9">
+   <POPUP w="436" x="28" flags="0000000b" y="0" h="703" pid="2" iid="9">
     <PROPERTIES>
      <ITEM name="Address Column Width">94</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -84,7 +85,7 @@
      <ITEM name="ShowTypes">No</ITEM>
      <ITEM name="ShowWatchPoint">No</ITEM>
      <ITEM name="TriggerMode">0</ITEM>
-     <ITEM name="Value Column Width">94</ITEM>
+     <ITEM name="Value Column Width">183</ITEM>
      <ITEM name="Version">100</ITEM>
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
@@ -165,7 +166,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="8" x="368" flags="00000008" y="428" h="1" pid="1" iid="21">
+   <POPUP w="8" x="224" flags="00000008" y="435" h="1" pid="1" iid="21">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>

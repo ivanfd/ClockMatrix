@@ -14,10 +14,10 @@
 
 
 #define BUF_SIZE COUNT_MATRIX * 8
-#define SPEED_STRING 60 // швидкість бігучої строки, підібрати
-#define DELAY_SHIFT_DOWN 50 // швидкість ефекту зсуву вниз
+#define SPEED_STRING 60     // швидкість бігучої строки, підібрати
+#define DELAY_SHIFT_DOWN 30 // швидкість ефекту зсуву вниз
 
-struct Time_Get               // структура для годин
+struct Time_Get             // структура для годин
 {
    uint8_t Ts;          // секунди         
    uint8_t Tmin;        // хвилини    
@@ -52,6 +52,7 @@ struct Time_Get               // структура для годин
  void putchar_down(uint8_t x, uint8_t symbol);
  void putchar_down_s(uint8_t x, uint8_t symbol);
  void pic_to_led(uint8_t x, uint8_t pic);
+ void scroll_left(void);
  
 #endif	/* XC_HEADER_TEMPLATE_H */
 

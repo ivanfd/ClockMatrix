@@ -2,6 +2,29 @@ Version 3.2 HI-TECH Software Intermediate Code
 "20 display.h
 [s S270 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S270 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
+"12 onewire.h
+[v _ow_reset `(uc ~T0 @X0 0 ef ]
+"16
+[v _write_byte `(v ~T0 @X0 0 ef1`uc ]
+"5270 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f4525.h
+[s S220 :2 `uc 1 :1 `uc 1 ]
+[n S220 . . NOT_T1SYNC ]
+"5274
+[s S221 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S221 . TMR1ON TMR1CS nT1SYNC T1OSCEN T1CKPS T1RUN RD16 ]
+"5283
+[s S222 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S222 . . T1SYNC . T1CKPS0 T1CKPS1 ]
+"5290
+[s S223 :3 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S223 . . SOSCEN . T1RD16 ]
+"5269
+[u S219 `S220 1 `S221 1 `S222 1 `S223 1 ]
+[n S219 . . . . . ]
+"5297
+[v _T1CONbits `VS219 ~T0 @X0 0 e@4045 ]
+"15 onewire.h
+[v _read_byte `(uc ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -5273,6 +5296,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 52: void putchar_down(uint8_t x, uint8_t symbol);
 [; ;display.h: 53: void putchar_down_s(uint8_t x, uint8_t symbol);
 [; ;display.h: 54: void pic_to_led(uint8_t x, uint8_t pic);
+[; ;display.h: 55: void scroll_left(void);
 [; ;init.h: 13: void SYSTEM_Initialize(void);
 [; ;init.h: 14: void Port_Init(void);
 [; ;init.h: 15: void Interrupt_Init(void);
@@ -5295,6 +5319,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;onewire.h: 13: uint8_t read_bit(void);
 [; ;onewire.h: 14: void write_bit(uint8_t bitval);
 [; ;onewire.h: 15: uint8_t read_byte(void);
+[; ;onewire.h: 16: void write_byte(uint8_t val);
+[; ;onewire.h: 17: void Waiting_WR (void);
 [; ;common.h: 39: void INT0_ISR(void);
 [; ;common.h: 40: void GetTime(void);
 [; ;common.h: 41: void time_set_min(void);
@@ -5307,6 +5333,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 48: void time_led();
 [; ;common.h: 49: void version(void);
 [; ;common.h: 50: void default_state(void);
+[; ;common.h: 51: void home_temp(void);
 "10 ds18b20.h
 [v _fract `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fract
@@ -5330,3 +5357,238 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
+[; ;ds18b20.h: 13: uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
+[; ;ds18b20.h: 14: void init_ds18b20(void);
+"4 ds18b20.c
+[v _scratch `uc ~T0 @X0 -> 9 `i e ]
+[; ;ds18b20.c: 4: uint8_t scratch[9];
+"5
+[v _minus `b ~T0 @X0 1 e ]
+[i _minus
+-> 0 `i
+]
+[; ;ds18b20.c: 5: bit minus = 0;
+"12
+[v _init_ds18b20 `(v ~T0 @X0 1 ef ]
+"13
+{
+[; ;ds18b20.c: 12: void init_ds18b20(void)
+[; ;ds18b20.c: 13: {
+[e :U _init_ds18b20 ]
+[f ]
+[; ;ds18b20.c: 15: if (!ow_reset())
+"15
+[e $ ! ! != -> ( _ow_reset ..  `i -> -> -> 0 `i `uc `i 273  ]
+[; ;ds18b20.c: 16: {
+"16
+{
+[; ;ds18b20.c: 18: write_byte(0xCC);
+"18
+[e ( _write_byte (1 -> -> 204 `i `uc ]
+[; ;ds18b20.c: 19: write_byte(0x4E);
+"19
+[e ( _write_byte (1 -> -> 78 `i `uc ]
+[; ;ds18b20.c: 20: write_byte(0x00);
+"20
+[e ( _write_byte (1 -> -> 0 `i `uc ]
+[; ;ds18b20.c: 21: write_byte(0x00);
+"21
+[e ( _write_byte (1 -> -> 0 `i `uc ]
+[; ;ds18b20.c: 22: write_byte(0x1F);
+"22
+[e ( _write_byte (1 -> -> 31 `i `uc ]
+"23
+}
+[e :U 273 ]
+[; ;ds18b20.c: 23: }
+[; ;ds18b20.c: 24: }
+"24
+[e :UE 272 ]
+}
+"32
+[v _readTemp_Single `(uc ~T0 @X0 1 ef3`*ui`*uc`*uc ]
+"33
+{
+[; ;ds18b20.c: 32: uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val )
+[; ;ds18b20.c: 33: {
+[e :U _readTemp_Single ]
+"32
+[v _buf `*ui ~T0 @X0 1 r1 ]
+[v _time_flag `*uc ~T0 @X0 1 r2 ]
+[v _timer_val `*uc ~T0 @X0 1 r3 ]
+"33
+[f ]
+"35
+[v _temp `ui ~T0 @X0 1 a ]
+[; ;ds18b20.c: 35: uint16_t temp = 0;
+[e = _temp -> -> 0 `i `ui ]
+"36
+[v _i `uc ~T0 @X0 1 a ]
+[v _tmp `uc ~T0 @X0 1 a ]
+[; ;ds18b20.c: 36: uint8_t i, tmp;
+[; ;ds18b20.c: 38: switch(*time_flag)
+"38
+[e $U 276  ]
+[; ;ds18b20.c: 39: {
+"39
+{
+[; ;ds18b20.c: 40: case 0:
+"40
+[e :U 277 ]
+[; ;ds18b20.c: 41: if (!ow_reset())
+"41
+[e $ ! ! != -> ( _ow_reset ..  `i -> -> -> 0 `i `uc `i 278  ]
+[; ;ds18b20.c: 42: {
+"42
+{
+[; ;ds18b20.c: 43: write_byte(0xCC);
+"43
+[e ( _write_byte (1 -> -> 204 `i `uc ]
+[; ;ds18b20.c: 44: write_byte(0x4E);
+"44
+[e ( _write_byte (1 -> -> 78 `i `uc ]
+[; ;ds18b20.c: 45: write_byte(0x00);
+"45
+[e ( _write_byte (1 -> -> 0 `i `uc ]
+[; ;ds18b20.c: 46: write_byte(0x00);
+"46
+[e ( _write_byte (1 -> -> 0 `i `uc ]
+[; ;ds18b20.c: 47: write_byte(0x1F);
+"47
+[e ( _write_byte (1 -> -> 31 `i `uc ]
+[; ;ds18b20.c: 48: ow_reset();
+"48
+[e ( _ow_reset ..  ]
+[; ;ds18b20.c: 49: write_byte(0xCC);
+"49
+[e ( _write_byte (1 -> -> 204 `i `uc ]
+[; ;ds18b20.c: 50: write_byte(0x44);
+"50
+[e ( _write_byte (1 -> -> 68 `i `uc ]
+[; ;ds18b20.c: 51: *timer_val = 0;
+"51
+[e = *U _timer_val -> -> 0 `i `uc ]
+[; ;ds18b20.c: 52: *time_flag = 2;
+"52
+[e = *U _time_flag -> -> 2 `i `uc ]
+[; ;ds18b20.c: 53: T1CONbits.TMR1ON = 1;
+"53
+[e = . . _T1CONbits 1 0 -> -> 1 `i `uc ]
+[; ;ds18b20.c: 55: return 0;
+"55
+[e ) -> -> 0 `i `uc ]
+[e $UE 274  ]
+"56
+}
+[e :U 278 ]
+[; ;ds18b20.c: 56: }
+[; ;ds18b20.c: 57: break;
+"57
+[e $U 275  ]
+[; ;ds18b20.c: 58: case 1:
+"58
+[e :U 279 ]
+[; ;ds18b20.c: 72: ow_reset();
+"72
+[e ( _ow_reset ..  ]
+[; ;ds18b20.c: 73: write_byte(0xCC);
+"73
+[e ( _write_byte (1 -> -> 204 `i `uc ]
+[; ;ds18b20.c: 74: write_byte(0xBE);
+"74
+[e ( _write_byte (1 -> -> 190 `i `uc ]
+[; ;ds18b20.c: 75: for(i=0; i<2; i++)
+"75
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 2 `i 280  ]
+[e $U 281  ]
+"76
+[e :U 280 ]
+[; ;ds18b20.c: 76: {
+{
+[; ;ds18b20.c: 77: scratch[i]= read_byte();
+"77
+[e = *U + &U _scratch * -> _i `ux -> -> # *U &U _scratch `ui `ux ( _read_byte ..  ]
+"78
+}
+"75
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 2 `i 280  ]
+[e :U 281 ]
+"78
+}
+[; ;ds18b20.c: 78: }
+[; ;ds18b20.c: 80: temp =(((uint16_t)scratch[1])<<8)|((uint16_t)scratch[0]);
+"80
+[e = _temp | << -> *U + &U _scratch * -> -> -> 1 `i `ui `ux -> -> # *U &U _scratch `ui `ux `ui -> 8 `i -> *U + &U _scratch * -> -> -> 0 `i `ui `ux -> -> # *U &U _scratch `ui `ux `ui ]
+[; ;ds18b20.c: 83: if (temp & 0x8000)
+"83
+[e $ ! != & _temp -> 32768 `ui -> -> 0 `i `ui 283  ]
+[; ;ds18b20.c: 84: {
+"84
+{
+[; ;ds18b20.c: 85: temp = -temp;
+"85
+[e = _temp -U _temp ]
+[; ;ds18b20.c: 86: minus=1;
+"86
+[e = _minus -> -> 1 `i `b ]
+"87
+}
+[e :U 283 ]
+[; ;ds18b20.c: 87: }
+[; ;ds18b20.c: 89: tmp = temp & 0x0f;
+"89
+[e = _tmp -> & _temp -> -> 15 `i `ui `uc ]
+[; ;ds18b20.c: 90: tmp = fract[tmp];
+"90
+[e = _tmp *U + &U _fract * -> _tmp `ux -> -> # *U &U _fract `ui `ux ]
+[; ;ds18b20.c: 91: temp = temp>>4;
+"91
+[e = _temp >> _temp -> 4 `i ]
+[; ;ds18b20.c: 92: temp = (temp & 0x00ff) * 10;
+"92
+[e = _temp * & _temp -> -> 255 `i `ui -> -> 10 `i `ui ]
+[; ;ds18b20.c: 93: temp = temp + tmp;
+"93
+[e = _temp + _temp -> _tmp `ui ]
+[; ;ds18b20.c: 96: *buf = temp;
+"96
+[e = *U _buf _temp ]
+[; ;ds18b20.c: 97: *time_flag = 0;
+"97
+[e = *U _time_flag -> -> 0 `i `uc ]
+[; ;ds18b20.c: 99: return 1;
+"99
+[e ) -> -> 1 `i `uc ]
+[e $UE 274  ]
+[; ;ds18b20.c: 100: break;
+"100
+[e $U 275  ]
+[; ;ds18b20.c: 101: case 2:
+"101
+[e :U 284 ]
+[; ;ds18b20.c: 102: return 0;;
+"102
+[e ) -> -> 0 `i `uc ]
+[e $UE 274  ]
+[; ;ds18b20.c: 103: break;
+"103
+[e $U 275  ]
+"104
+}
+[; ;ds18b20.c: 104: }
+[e $U 275  ]
+"38
+[e :U 276 ]
+[e [\ *U _time_flag , $ -> -> 0 `i `uc 277
+ , $ -> -> 1 `i `uc 279
+ , $ -> -> 2 `i `uc 284
+ 275 ]
+"104
+[e :U 275 ]
+[; ;ds18b20.c: 105: }
+"105
+[e :UE 274 ]
+}

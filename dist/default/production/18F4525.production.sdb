@@ -19,6 +19,10 @@
 [v ___lbdiv __lbdiv `(uc  1 e 1 0 ]
 "4 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\lbmod.c
 [v ___lbmod __lbmod `(uc  1 e 1 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
 "10 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\sprcadd.c
 [v ___fladd __fladd `(d  1 e 3 0 ]
 "245
@@ -29,29 +33,31 @@
 [v ___flmul __flmul `(d  1 e 3 0 ]
 "15 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\Umul32.c
 [v ___lmul __lmul `(ul  1 e 4 0 ]
-"14 D:\Ivan\Electro\XC8\18F4525\common.c
+"15 D:\Ivan\Electro\XC8\18F4525\common.c
 [v _GetTime GetTime `(v  1 e 1 0 ]
-"23
+"24
 [v _time_set_min time_set_min `(v  1 e 1 0 ]
-"75
+"76
 [v _time_set_hr time_set_hr `(v  1 e 1 0 ]
-"137
+"138
 [v _time_set_yr time_set_yr `(v  1 e 1 0 ]
-"187
+"188
 [v _time_set_mt time_set_mt `(v  1 e 1 0 ]
-"287
+"288
 [v _time_set_dt time_set_dt `(v  1 e 1 0 ]
-"338
+"339
 [v _time_set_dy time_set_dy `(v  1 e 1 0 ]
-"417
+"419
+[v _home_temp home_temp `(v  1 e 1 0 ]
+"456
 [v _time_led time_led `(v  1 e 1 0 ]
-"463
+"505
 [v _version version `(v  1 e 1 0 ]
-"477
+"519
 [v _default_state default_state `(v  1 e 1 0 ]
-"483
+"525
 [v _INT0_ISR INT0_ISR `(v  1 e 1 0 ]
-"493
+"542
 [v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
 "10 D:\Ivan\Electro\XC8\18F4525\dispatcher.c
 [v _RTOS_Init RTOS_Init `(v  1 e 1 0 ]
@@ -72,12 +78,20 @@
 [v _pic_to_led pic_to_led `(v  1 e 1 0 ]
 "50
 [v _putchar_b_buf putchar_b_buf `(v  1 e 1 0 ]
+"98
+[v _putchar_down putchar_down `(v  1 e 1 0 ]
+"120
+[v _putchar_down_s putchar_down_s `(v  1 e 1 0 ]
 "145
 [v _clear_matrix clear_matrix `(v  1 e 1 0 ]
 "156
 [v _FillBuf FillBuf `(v  1 e 1 0 ]
 "229
 [v _scroll_text scroll_text `(uc  1 e 1 0 ]
+"271
+[v _scroll_left scroll_left `(v  1 e 1 0 ]
+"32 D:\Ivan\Electro\XC8\18F4525\ds18b20.c
+[v _readTemp_Single readTemp_Single `(uc  1 e 1 0 ]
 "4 D:\Ivan\Electro\XC8\18F4525\ds3231.c
 [v _bcd_to_decimal bcd_to_decimal `(uc  1 e 1 0 ]
 "10
@@ -112,9 +126,9 @@
 [v _I2C_stop I2C_stop `(v  1 e 1 0 ]
 "64 D:\Ivan\Electro\XC8\18F4525\init.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
-"77
+"78
 [v _Port_Init Port_Init `(v  1 e 1 0 ]
-"92
+"93
 [v _Interrupt_Init Interrupt_Init `(v  1 e 1 0 ]
 "4 D:\Ivan\Electro\XC8\18F4525\interrupt.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
@@ -134,6 +148,12 @@
 [v _ow_reset ow_reset `(uc  1 e 1 0 ]
 "22
 [v _read_bit read_bit `(uc  1 e 1 0 ]
+"34
+[v _write_bit write_bit `(v  1 e 1 0 ]
+"50
+[v _read_byte read_byte `(uc  1 e 1 0 ]
+"66
+[v _write_byte write_byte `(v  1 e 1 0 ]
 "5 D:\Ivan\Electro\XC8\18F4525\timer.c
 [v _TMR1Init TMR1Init `(v  1 e 1 0 ]
 "185 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f4525.h
@@ -205,7 +225,7 @@
 [v _TRISB TRISB `VEuc  1 e 1 @3987 ]
 "1809
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-[s S1088 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S1241 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -215,8 +235,8 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "1841
-[u S1106 . 1 `S1088 1 . 1 0 `S253 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES1106  1 e 1 @3988 ]
+[u S1259 . 1 `S1241 1 . 1 0 `S253 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES1259  1 e 1 @3988 ]
 "2030
 [v _TRISD TRISD `VEuc  1 e 1 @3989 ]
 [s S554 . 1 `uc 1 TMR1IE 1 0 :1:0 
@@ -261,8 +281,31 @@
 [v _SSPADD SSPADD `VEuc  1 e 1 @4040 ]
 "5046
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
-"5264
-[v _T1CON T1CON `VEuc  1 e 1 @4045 ]
+[s S879 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_T1SYNC 1 0 :1:2 
+]
+"5297
+[s S882 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 TMR1CS 1 0 :1:1 
+`uc 1 nT1SYNC 1 0 :1:2 
+`uc 1 T1OSCEN 1 0 :1:3 
+`uc 1 T1CKPS 1 0 :2:4 
+`uc 1 T1RUN 1 0 :1:6 
+`uc 1 RD16 1 0 :1:7 
+]
+[s S890 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 T1SYNC 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+]
+[s S896 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 SOSCEN 1 0 :1:3 
+`uc 1 . 1 0 :3:4 
+`uc 1 T1RD16 1 0 :1:7 
+]
+[u S901 . 1 `S879 1 . 1 0 `S882 1 . 1 0 `S890 1 . 1 0 `S896 1 . 1 0 ]
+[v _T1CONbits T1CONbits `VES901  1 e 1 @4045 ]
 "5372
 [v _TMR1L TMR1L `VEuc  1 e 1 @4046 ]
 "5378
@@ -340,6 +383,11 @@
 [v _show_digit show_digit `b  1 e 0 0 ]
 "10
 [v _en_put en_put `b  1 e 0 0 ]
+"11
+[v _temperature temperature `ui  1 e 2 0 ]
+"12
+[v _timer_val timer_val `uc  1 e 1 0 ]
+[v _time_flag time_flag `uc  1 e 1 0 ]
 [s S416 task 8 `*.37(v 1 pFunc 2 0 `ui 1 delay 2 2 `ui 1 period 2 4 `ui 1 run 2 6 ]
 "3 D:\Ivan\Electro\XC8\18F4525\dispatcher.c
 [v _TaskArray TaskArray `VE[15]S416  1 s 120 TaskArray ]
@@ -358,6 +406,10 @@
 "29 D:\Ivan\Electro\XC8\18F4525\display.h
 [v _TTime TTime `S21  1 e 7 0 ]
 [v _TSTime TSTime `S21  1 e 7 0 ]
+"4 D:\Ivan\Electro\XC8\18F4525\ds18b20.c
+[v _scratch scratch `[9]uc  1 e 9 0 ]
+"10 D:\Ivan\Electro\XC8\18F4525\ds18b20.h
+[v _fract fract `C[16]uc  1 e 16 0 ]
 "12 D:\Ivan\Electro\XC8\18F4525\Font.h
 [v _Font Font `C[256][5]uc  1 e 1280 0 ]
 "3 D:\Ivan\Electro\XC8\18F4525\FontS.h
@@ -369,12 +421,12 @@
 {
 "37
 } 0
-"463 D:\Ivan\Electro\XC8\18F4525\common.c
+"505 D:\Ivan\Electro\XC8\18F4525\common.c
 [v _version version `(v  1 e 1 0 ]
 {
-"465
+"507
 [v version@i i `uc  1 a 1 21 ]
-"475
+"517
 } 0
 "492 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
@@ -396,7 +448,7 @@
 "64 D:\Ivan\Electro\XC8\18F4525\init.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
-"75
+"76
 } 0
 "5 D:\Ivan\Electro\XC8\18F4525\timer.c
 [v _TMR1Init TMR1Init `(v  1 e 1 0 ]
@@ -408,15 +460,15 @@
 {
 "17
 } 0
-"77 D:\Ivan\Electro\XC8\18F4525\init.c
+"78 D:\Ivan\Electro\XC8\18F4525\init.c
 [v _Port_Init Port_Init `(v  1 e 1 0 ]
 {
-"90
+"91
 } 0
-"92
+"93
 [v _Interrupt_Init Interrupt_Init `(v  1 e 1 0 ]
 {
-"96
+"97
 } 0
 "77 D:\Ivan\Electro\XC8\18F4525\max7221.c
 [v _Init7221 Init7221 `(v  1 e 1 0 ]
@@ -450,46 +502,51 @@
 [v _RTOS_DispatchTask RTOS_DispatchTask `(v  1 e 1 0 ]
 {
 "87
-[v RTOS_DispatchTask@function function `*.37(v  1 a 2 35 ]
+[v RTOS_DispatchTask@function function `*.37(v  1 a 2 41 ]
 "86
-[v RTOS_DispatchTask@i i `uc  1 a 1 38 ]
-[v RTOS_DispatchTask@j j `uc  1 a 1 37 ]
+[v RTOS_DispatchTask@i i `uc  1 a 1 44 ]
+[v RTOS_DispatchTask@j j `uc  1 a 1 43 ]
 "124
 } 0
-"23 D:\Ivan\Electro\XC8\18F4525\common.c
+"419 D:\Ivan\Electro\XC8\18F4525\common.c
+[v _home_temp home_temp `(v  1 e 1 0 ]
+{
+"452
+} 0
+"24
 [v _time_set_min time_set_min `(v  1 e 1 0 ]
 {
-"70
+"71
 } 0
-"14
+"15
 [v _GetTime GetTime `(v  1 e 1 0 ]
 {
-"18
+"19
 } 0
-"338
+"339
 [v _time_set_dy time_set_dy `(v  1 e 1 0 ]
 {
-"412
+"413
 } 0
-"287
+"288
 [v _time_set_dt time_set_dt `(v  1 e 1 0 ]
 {
-"332
+"333
 } 0
-"187
+"188
 [v _time_set_mt time_set_mt `(v  1 e 1 0 ]
 {
-"282
+"283
 } 0
-"477
+"519
 [v _default_state default_state `(v  1 e 1 0 ]
 {
-"480
+"522
 } 0
-"75
+"76
 [v _time_set_hr time_set_hr `(v  1 e 1 0 ]
 {
-"133
+"134
 } 0
 "5 D:\Ivan\Electro\XC8\18F4525\key.c
 [v _key_press key_press `(v  1 e 1 0 ]
@@ -500,15 +557,15 @@
 [v key_press@count count `uc  1 s 1 count ]
 "39
 } 0
-"417 D:\Ivan\Electro\XC8\18F4525\common.c
+"456 D:\Ivan\Electro\XC8\18F4525\common.c
 [v _time_led time_led `(v  1 e 1 0 ]
 {
-"459
+"501
 } 0
-"137
+"138
 [v _time_set_yr time_set_yr `(v  1 e 1 0 ]
 {
-"182
+"183
 } 0
 "71 D:\Ivan\Electro\XC8\18F4525\ds3231.c
 [v _setTime setTime `(v  1 e 1 0 ]
@@ -567,7 +624,135 @@
 [v putchar_b_buf@x x `uc  1 a 1 26 ]
 "69
 } 0
-"29
+"156
+[v _FillBuf FillBuf `(v  1 e 1 0 ]
+{
+"158
+[v FillBuf@i i `uc  1 a 1 24 ]
+"183
+} 0
+"271
+[v _scroll_left scroll_left `(v  1 e 1 0 ]
+{
+"273
+[v scroll_left@i i `uc  1 a 1 24 ]
+[v scroll_left@speed speed `uc  1 a 1 23 ]
+[v scroll_left@k k `uc  1 a 1 22 ]
+[v scroll_left@j j `uc  1 a 1 21 ]
+"290
+} 0
+"32 D:\Ivan\Electro\XC8\18F4525\ds18b20.c
+[v _readTemp_Single readTemp_Single `(uc  1 e 1 0 ]
+{
+"35
+[v readTemp_Single@temp temp `ui  1 a 2 27 ]
+"36
+[v readTemp_Single@i i `uc  1 a 1 26 ]
+[v readTemp_Single@tmp tmp `uc  1 a 1 25 ]
+"32
+[v readTemp_Single@buf buf `*.30ui  1 p 1 20 ]
+[v readTemp_Single@time_flag time_flag `*.30uc  1 p 1 21 ]
+[v readTemp_Single@timer_val timer_val `*.30uc  1 p 1 22 ]
+"105
+} 0
+"66 D:\Ivan\Electro\XC8\18F4525\onewire.c
+[v _write_byte write_byte `(v  1 e 1 0 ]
+{
+[v write_byte@val val `uc  1 a 1 wreg ]
+"68
+[v write_byte@i i `uc  1 a 1 19 ]
+"69
+[v write_byte@temp temp `uc  1 a 1 18 ]
+"66
+[v write_byte@val val `uc  1 a 1 wreg ]
+"71
+[v write_byte@val val `uc  1 a 1 17 ]
+"79
+} 0
+"34
+[v _write_bit write_bit `(v  1 e 1 0 ]
+{
+[v write_bit@bitval bitval `uc  1 a 1 wreg ]
+[v write_bit@bitval bitval `uc  1 a 1 wreg ]
+"36
+[v write_bit@bitval bitval `uc  1 a 1 14 ]
+"46
+} 0
+"50
+[v _read_byte read_byte `(uc  1 e 1 0 ]
+{
+"52
+[v read_byte@i i `uc  1 a 1 17 ]
+"53
+[v read_byte@val val `uc  1 a 1 16 ]
+"62
+} 0
+"22
+[v _read_bit read_bit `(uc  1 e 1 0 ]
+{
+"31
+} 0
+"5
+[v _ow_reset ow_reset `(uc  1 e 1 0 ]
+{
+"7
+[v ow_reset@presence presence `uc  1 a 1 15 ]
+"17
+} 0
+"120 D:\Ivan\Electro\XC8\18F4525\display.c
+[v _putchar_down_s putchar_down_s `(v  1 e 1 0 ]
+{
+[v putchar_down_s@x x `uc  1 a 1 wreg ]
+"122
+[v putchar_down_s@i i `uc  1 a 1 31 ]
+[v putchar_down_s@j j `uc  1 a 1 30 ]
+[v putchar_down_s@k k `uc  1 a 1 29 ]
+"120
+[v putchar_down_s@x x `uc  1 a 1 wreg ]
+[v putchar_down_s@symbol symbol `uc  1 p 1 22 ]
+"127
+[v putchar_down_s@x x `uc  1 a 1 28 ]
+"140
+} 0
+"98
+[v _putchar_down putchar_down `(v  1 e 1 0 ]
+{
+[v putchar_down@x x `uc  1 a 1 wreg ]
+"100
+[v putchar_down@i i `uc  1 a 1 35 ]
+[v putchar_down@j j `uc  1 a 1 34 ]
+[v putchar_down@k k `uc  1 a 1 33 ]
+"98
+[v putchar_down@x x `uc  1 a 1 wreg ]
+[v putchar_down@symbol symbol `uc  1 p 1 26 ]
+"102
+[v putchar_down@x x `uc  1 a 1 32 ]
+"115
+} 0
+"51 D:\Ivan\Electro\XC8\18F4525\max7221.c
+[v _Update_Matrix Update_Matrix `(v  1 e 1 0 ]
+{
+"53
+[v Update_Matrix@i i `uc  1 a 1 19 ]
+[v Update_Matrix@j j `uc  1 a 1 18 ]
+[v Update_Matrix@data data `uc  1 a 1 17 ]
+"51
+[v Update_Matrix@buf buf `*.30uc  1 p 1 16 ]
+"70
+} 0
+"6
+[v _Send_Byte_7221 Send_Byte_7221 `(v  1 e 1 0 ]
+{
+[v Send_Byte_7221@dat dat `uc  1 a 1 wreg ]
+"8
+[v Send_Byte_7221@i i `uc  1 a 1 15 ]
+"6
+[v Send_Byte_7221@dat dat `uc  1 a 1 wreg ]
+"10
+[v Send_Byte_7221@dat dat `uc  1 a 1 14 ]
+"28
+} 0
+"29 D:\Ivan\Electro\XC8\18F4525\display.c
 [v _pic_to_led pic_to_led `(v  1 e 1 0 ]
 {
 [v pic_to_led@x x `uc  1 a 1 wreg ]
@@ -602,67 +787,34 @@
 [v pixel_off@x x `uc  1 a 1 18 ]
 "24
 } 0
-"5 D:\Ivan\Electro\XC8\18F4525\onewire.c
-[v _ow_reset ow_reset `(uc  1 e 1 0 ]
-{
-"17
-} 0
-"145 D:\Ivan\Electro\XC8\18F4525\display.c
+"145
 [v _clear_matrix clear_matrix `(v  1 e 1 0 ]
 {
 "147
 [v clear_matrix@i i `uc  1 a 1 14 ]
 "150
 } 0
-"51 D:\Ivan\Electro\XC8\18F4525\max7221.c
-[v _Update_Matrix Update_Matrix `(v  1 e 1 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
 {
-"53
-[v Update_Matrix@i i `uc  1 a 1 19 ]
-[v Update_Matrix@j j `uc  1 a 1 18 ]
-[v Update_Matrix@data data `uc  1 a 1 17 ]
-"51
-[v Update_Matrix@buf buf `*.30uc  1 p 1 16 ]
-"70
-} 0
-"6
-[v _Send_Byte_7221 Send_Byte_7221 `(v  1 e 1 0 ]
-{
-[v Send_Byte_7221@dat dat `uc  1 a 1 wreg ]
+"11
+[v ___lwmod@counter counter `uc  1 a 1 25 ]
 "8
-[v Send_Byte_7221@i i `uc  1 a 1 15 ]
-"6
-[v Send_Byte_7221@dat dat `uc  1 a 1 wreg ]
-"10
-[v Send_Byte_7221@dat dat `uc  1 a 1 14 ]
-"28
+[v ___lwmod@dividend dividend `ui  1 p 2 21 ]
+[v ___lwmod@divisor divisor `ui  1 p 2 23 ]
+"26
 } 0
-"22 D:\Ivan\Electro\XC8\18F4525\dispatcher.c
-[v _RTOS_SetTask RTOS_SetTask `(v  1 e 1 0 ]
+"8 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 {
-"24
-[v RTOS_SetTask@i i `uc  1 a 1 22 ]
-"22
-[v RTOS_SetTask@taskFunc taskFunc `*.37(v  1 p 2 14 ]
-[v RTOS_SetTask@taskDelay taskDelay `ui  1 p 2 16 ]
-[v RTOS_SetTask@taskPeriod taskPeriod `ui  1 p 2 18 ]
-"54
-} 0
-"59
-[v _RTOS_DeleteTask RTOS_DeleteTask `(v  1 e 1 0 ]
-{
-"61
-[v RTOS_DeleteTask@i i `uc  1 a 1 22 ]
-"59
-[v RTOS_DeleteTask@taskFunc taskFunc `*.37(v  1 p 2 14 ]
-"78
-} 0
-"156 D:\Ivan\Electro\XC8\18F4525\display.c
-[v _FillBuf FillBuf `(v  1 e 1 0 ]
-{
-"158
-[v FillBuf@i i `uc  1 a 1 24 ]
-"183
+"11
+[v ___lwdiv@quotient quotient `ui  1 a 2 18 ]
+"12
+[v ___lwdiv@counter counter `uc  1 a 1 20 ]
+"8
+[v ___lwdiv@dividend dividend `ui  1 p 2 14 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 16 ]
+"31
 } 0
 "4 C:\Program Files (x86)\Microchip\xc8\v1.41\sources\common\lbmod.c
 [v ___lbmod __lbmod `(uc  1 e 1 0 ]
@@ -693,6 +845,26 @@
 "9
 [v ___lbdiv@dividend dividend `uc  1 a 1 15 ]
 "26
+} 0
+"22 D:\Ivan\Electro\XC8\18F4525\dispatcher.c
+[v _RTOS_SetTask RTOS_SetTask `(v  1 e 1 0 ]
+{
+"24
+[v RTOS_SetTask@i i `uc  1 a 1 22 ]
+"22
+[v RTOS_SetTask@taskFunc taskFunc `*.37(v  1 p 2 14 ]
+[v RTOS_SetTask@taskDelay taskDelay `ui  1 p 2 16 ]
+[v RTOS_SetTask@taskPeriod taskPeriod `ui  1 p 2 18 ]
+"54
+} 0
+"59
+[v _RTOS_DeleteTask RTOS_DeleteTask `(v  1 e 1 0 ]
+{
+"61
+[v RTOS_DeleteTask@i i `uc  1 a 1 22 ]
+"59
+[v RTOS_DeleteTask@taskFunc taskFunc `*.37(v  1 p 2 14 ]
+"78
 } 0
 "46 D:\Ivan\Electro\XC8\18F4525\ds3231.c
 [v _getTime getTime `(v  1 e 1 0 ]
@@ -780,20 +952,20 @@
 {
 "24
 } 0
-"493 D:\Ivan\Electro\XC8\18F4525\common.c
+"542 D:\Ivan\Electro\XC8\18F4525\common.c
 [v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
 {
-"505
+"564
 } 0
 "127 D:\Ivan\Electro\XC8\18F4525\dispatcher.c
 [v _TMR0_ISR TMR0_ISR `(v  1 e 1 0 ]
 {
 "137
 } 0
-"483 D:\Ivan\Electro\XC8\18F4525\common.c
+"525 D:\Ivan\Electro\XC8\18F4525\common.c
 [v _INT0_ISR INT0_ISR `(v  1 e 1 0 ]
 {
-"488
+"537
 } 0
 "22 D:\Ivan\Electro\XC8\18F4525\dispatcher.c
 [v i2_RTOS_SetTask RTOS_SetTask `(v  1 e 1 0 ]

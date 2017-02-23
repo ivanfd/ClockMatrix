@@ -5277,6 +5277,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 52: void putchar_down(uint8_t x, uint8_t symbol);
 [; ;display.h: 53: void putchar_down_s(uint8_t x, uint8_t symbol);
 [; ;display.h: 54: void pic_to_led(uint8_t x, uint8_t pic);
+[; ;display.h: 55: void scroll_left(void);
 [; ;timer.h: 13: void TMR1Init(void);
 [; ;init.h: 13: void SYSTEM_Initialize(void);
 [; ;init.h: 14: void Port_Init(void);
@@ -5285,6 +5286,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;onewire.h: 13: uint8_t read_bit(void);
 [; ;onewire.h: 14: void write_bit(uint8_t bitval);
 [; ;onewire.h: 15: uint8_t read_byte(void);
+[; ;onewire.h: 16: void write_byte(uint8_t val);
+[; ;onewire.h: 17: void Waiting_WR (void);
 "10 ds18b20.h
 [v _fract `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fract
@@ -5308,6 +5311,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
+[; ;ds18b20.h: 13: uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
+[; ;ds18b20.h: 14: void init_ds18b20(void);
 [; ;common.h: 39: void INT0_ISR(void);
 [; ;common.h: 40: void GetTime(void);
 [; ;common.h: 41: void time_set_min(void);
@@ -5320,6 +5325,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 48: void time_led();
 [; ;common.h: 49: void version(void);
 [; ;common.h: 50: void default_state(void);
+[; ;common.h: 51: void home_temp(void);
 [; ;interrupt.h: 17: void interrupt InterruptManager(void);
 [; ;dispatcher.h: 13: typedef struct task
 [; ;dispatcher.h: 14: {
@@ -5350,8 +5356,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U _key_press ]
 [f ]
 "7
-[v F3182 `uc ~T0 @X0 1 s count ]
-[i F3182
+[v F3196 `uc ~T0 @X0 1 s count ]
+[i F3196
 -> -> 0 `i `uc
 ]
 "8
@@ -5405,16 +5411,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;key.c: 23: if(count <= 30)
 "23
-[e $ ! <= -> F3182 `i -> 30 `i 282  ]
+[e $ ! <= -> F3196 `i -> 30 `i 282  ]
 [; ;key.c: 24: {
 "24
 {
 [; ;key.c: 25: count++;
 "25
-[e ++ F3182 -> -> 1 `i `uc ]
+[e ++ F3196 -> -> 1 `i `uc ]
 [; ;key.c: 26: if(count == 30)
 "26
-[e $ ! == -> F3182 `i -> 30 `i 283  ]
+[e $ ! == -> F3196 `i -> 30 `i 283  ]
 [; ;key.c: 27: {
 "27
 {
@@ -5423,7 +5429,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _events _key ]
 [; ;key.c: 30: count = 0;
 "30
-[e = F3182 -> -> 0 `i `uc ]
+[e = F3196 -> -> 0 `i `uc ]
 "31
 }
 [e :U 283 ]
@@ -5444,7 +5450,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;key.c: 36: count = 0;
 "36
-[e = F3182 -> -> 0 `i `uc ]
+[e = F3196 -> -> 0 `i `uc ]
 "38
 }
 [e :U 284 ]

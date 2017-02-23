@@ -4162,9 +4162,15 @@ uint8_t ow_reset(void);
 uint8_t read_bit(void);
 void write_bit(uint8_t bitval);
 uint8_t read_byte(void);
+void write_byte(uint8_t val);
+void Waiting_WR (void);
 
 # 10 "ds18b20.h"
 const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
+
+
+uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
+void init_ds18b20(void);
 
 # 39 "common.h"
 void INT0_ISR(void);
@@ -4179,6 +4185,7 @@ void TMR1_ISR();
 void time_led();
 void version(void);
 void default_state(void);
+void home_temp(void);
 
 # 22 "max7221.h"
 void Send_Byte_7221(uint8_t dat);
@@ -4235,6 +4242,7 @@ uint8_t scroll_text(void);
 void putchar_down(uint8_t x, uint8_t symbol);
 void putchar_down_s(uint8_t x, uint8_t symbol);
 void pic_to_led(uint8_t x, uint8_t pic);
+void scroll_left(void);
 
 # 4 "display.c"
 uint8_t Dis_Buff[4 * 8];
@@ -4339,7 +4347,7 @@ for(i=0;i<5;i++)
 Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | (Font[symbol][i] >> (8-1-j));
 }
 
-for(k=0;k<50;k++)
+for(k=0;k<30;k++)
 _delay((unsigned long)((1)*(40000000/4000.0)));
 Update_Matrix(Dis_Buff);
 
@@ -4354,8 +4362,8 @@ void putchar_down_s(uint8_t x, uint8_t symbol)
 {
 uint8_t i, j, k;
 
-if(symbol != 0)
-symbol -= 47;
+
+
 
 for(j=0;j<=7;j++)
 {
@@ -4364,7 +4372,7 @@ for(i=0;i<3;i++)
 Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | (FontS[symbol][i] >> (8-1-j));
 }
 
-for(k=0;k<50;k++)
+for(k=0;k<30;k++)
 _delay((unsigned long)((1)*(40000000/4000.0)));
 Update_Matrix(Dis_Buff);
 
@@ -4482,6 +4490,28 @@ Dis_Buff[31] = Font[ text_buf[i_char]][i_bchar++];
 
 
 return 1;
+
+}
+
+# 271
+void scroll_left(void)
+{
+uint8_t i,j,k,speed = 100;
+
+
+for (k=0;k<=31;k++)
+{
+for (i=0; i<=31; i++)
+Dis_Buff[i] = Dis_Buff[i+1];
+
+Dis_Buff[31] = 0;
+Update_Matrix(Dis_Buff);
+for(j=0; j<speed; j++)
+_delay((unsigned long)((1)*(40000000/4000.0)));
+if (speed > 10) speed -=10;
+
+}
+
 
 }
 

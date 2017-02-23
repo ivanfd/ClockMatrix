@@ -48,7 +48,7 @@
  void time_led(); 
  void version(void);
  void default_state(void);
-
+ void home_temp(void);
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */

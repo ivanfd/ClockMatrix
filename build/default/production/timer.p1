@@ -2,8 +2,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 "20 display.h
 [s S270 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S270 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
-"5264 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f4525.h
-[v _T1CON `Vuc ~T0 @X0 0 e@4045 ]
+"5270 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f4525.h
+[s S220 :2 `uc 1 :1 `uc 1 ]
+[n S220 . . NOT_T1SYNC ]
+"5274
+[s S221 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S221 . TMR1ON TMR1CS nT1SYNC T1OSCEN T1CKPS T1RUN RD16 ]
+"5283
+[s S222 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S222 . . T1SYNC . T1CKPS0 T1CKPS1 ]
+"5290
+[s S223 :3 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S223 . . SOSCEN . T1RD16 ]
+"5269
+[u S219 `S220 1 `S221 1 `S222 1 `S223 1 ]
+[n S219 . . . . . ]
+"5297
+[v _T1CONbits `VS219 ~T0 @X0 0 e@4045 ]
 "5378
 [v _TMR1H `Vuc ~T0 @X0 0 e@4047 ]
 "5372
@@ -5290,6 +5305,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 52: void putchar_down(uint8_t x, uint8_t symbol);
 [; ;display.h: 53: void putchar_down_s(uint8_t x, uint8_t symbol);
 [; ;display.h: 54: void pic_to_led(uint8_t x, uint8_t pic);
+[; ;display.h: 55: void scroll_left(void);
 [; ;interrupt.h: 17: void interrupt InterruptManager(void);
 [; ;dispatcher.h: 13: typedef struct task
 [; ;dispatcher.h: 14: {
@@ -5311,6 +5327,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;onewire.h: 13: uint8_t read_bit(void);
 [; ;onewire.h: 14: void write_bit(uint8_t bitval);
 [; ;onewire.h: 15: uint8_t read_byte(void);
+[; ;onewire.h: 16: void write_byte(uint8_t val);
+[; ;onewire.h: 17: void Waiting_WR (void);
 "10 ds18b20.h
 [v _fract `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fract
@@ -5334,6 +5352,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
+[; ;ds18b20.h: 13: uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
+[; ;ds18b20.h: 14: void init_ds18b20(void);
 [; ;common.h: 39: void INT0_ISR(void);
 [; ;common.h: 40: void GetTime(void);
 [; ;common.h: 41: void time_set_min(void);
@@ -5346,6 +5366,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 48: void time_led();
 [; ;common.h: 49: void version(void);
 [; ;common.h: 50: void default_state(void);
+[; ;common.h: 51: void home_temp(void);
 [; ;timer.h: 13: void TMR1Init(void);
 "5 timer.c
 [v _TMR1Init `(v ~T0 @X0 1 ef ]
@@ -5355,9 +5376,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;timer.c: 6: {
 [e :U _TMR1Init ]
 [f ]
-[; ;timer.c: 7: T1CON = 0b00000001;
+[; ;timer.c: 7: T1CONbits.TMR1ON = 0;
 "7
-[e = _T1CON -> -> 1 `i `uc ]
+[e = . . _T1CONbits 1 0 -> -> 0 `i `uc ]
 [; ;timer.c: 8: TMR1H = ((unsigned char)(((15536)>>8)&0xFF));
 "8
 [e = _TMR1H -> & >> -> 15536 `i -> 8 `i -> 255 `i `uc ]

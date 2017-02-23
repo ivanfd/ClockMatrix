@@ -9,6 +9,7 @@
 #define KEY_DOWN_EVENT 3
 #define KEY_EXIT_EVENT 4
 #define MAIN_EVENT 5
+#define TEMP_EVENT 6
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */

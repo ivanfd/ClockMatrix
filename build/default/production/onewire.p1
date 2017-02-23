@@ -5308,6 +5308,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 52: void putchar_down(uint8_t x, uint8_t symbol);
 [; ;display.h: 53: void putchar_down_s(uint8_t x, uint8_t symbol);
 [; ;display.h: 54: void pic_to_led(uint8_t x, uint8_t pic);
+[; ;display.h: 55: void scroll_left(void);
 [; ;init.h: 13: void SYSTEM_Initialize(void);
 [; ;init.h: 14: void Port_Init(void);
 [; ;init.h: 15: void Interrupt_Init(void);
@@ -5349,6 +5350,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 ]
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
+[; ;ds18b20.h: 13: uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
+[; ;ds18b20.h: 14: void init_ds18b20(void);
 [; ;common.h: 39: void INT0_ISR(void);
 [; ;common.h: 40: void GetTime(void);
 [; ;common.h: 41: void time_set_min(void);
@@ -5361,10 +5364,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 48: void time_led();
 [; ;common.h: 49: void version(void);
 [; ;common.h: 50: void default_state(void);
+[; ;common.h: 51: void home_temp(void);
 [; ;onewire.h: 12: uint8_t ow_reset(void);
 [; ;onewire.h: 13: uint8_t read_bit(void);
 [; ;onewire.h: 14: void write_bit(uint8_t bitval);
 [; ;onewire.h: 15: uint8_t read_byte(void);
+[; ;onewire.h: 16: void write_byte(uint8_t val);
+[; ;onewire.h: 17: void Waiting_WR (void);
 "5 onewire.c
 [v _ow_reset `(uc ~T0 @X0 1 ef ]
 "6
@@ -5538,4 +5544,71 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;onewire.c: 62: }
 "62
 [e :UE 276 ]
+}
+"66
+[v _write_byte `(v ~T0 @X0 1 ef1`uc ]
+"67
+{
+[; ;onewire.c: 66: void write_byte(uint8_t val)
+[; ;onewire.c: 67: {
+[e :U _write_byte ]
+"66
+[v _val `uc ~T0 @X0 1 r1 ]
+"67
+[f ]
+"68
+[v _i `uc ~T0 @X0 1 a ]
+"69
+[v _temp `uc ~T0 @X0 1 a ]
+[; ;onewire.c: 68: uint8_t i;
+[; ;onewire.c: 69: uint8_t temp;
+[; ;onewire.c: 71: for (i=0;i<8;i++)
+"71
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 8 `i 282  ]
+[e $U 283  ]
+"72
+[e :U 282 ]
+[; ;onewire.c: 72: {
+{
+[; ;onewire.c: 73: temp = val >> i;
+"73
+[e = _temp -> >> -> _val `i _i `uc ]
+[; ;onewire.c: 74: temp &= 0x01;
+"74
+[e =& _temp -> -> 1 `i `uc ]
+[; ;onewire.c: 75: write_bit(temp);
+"75
+[e ( _write_bit (1 _temp ]
+"76
+}
+"71
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 8 `i 282  ]
+[e :U 283 ]
+"76
+}
+[; ;onewire.c: 76: }
+[; ;onewire.c: 78: _delay((unsigned long)((105)*(40000000/4000000.0)));
+"78
+[e ( __delay (1 -> * -> -> 105 `i `d / -> -> 40000000 `l `d .4000000.0 `ul ]
+[; ;onewire.c: 79: }
+"79
+[e :UE 281 ]
+}
+"81
+[v _Waiting_WR `(v ~T0 @X0 1 ef ]
+"82
+{
+[; ;onewire.c: 81: void Waiting_WR (void)
+[; ;onewire.c: 82: {
+[e :U _Waiting_WR ]
+[f ]
+[; ;onewire.c: 83: _delay((unsigned long)((52)*(40000000/4000000.0)));
+"83
+[e ( __delay (1 -> * -> -> 52 `i `d / -> -> 40000000 `l `d .4000000.0 `ul ]
+[; ;onewire.c: 84: }
+"84
+[e :UE 285 ]
 }

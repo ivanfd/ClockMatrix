@@ -4,7 +4,7 @@
 
 void TMR1Init(void)
 {
-  T1CON	 = 0b00000001;
+  T1CONbits.TMR1ON	 = 0;
   TMR1H = HIGH_BYTE(TMR1Val);
   TMR1L = LOW_BYTE(TMR1Val); 
   PIE1bits.TMR1IE = 1; // переривання від таймера 1

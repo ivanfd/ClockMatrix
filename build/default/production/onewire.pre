@@ -4182,6 +4182,7 @@ uint8_t scroll_text(void);
 void putchar_down(uint8_t x, uint8_t symbol);
 void putchar_down_s(uint8_t x, uint8_t symbol);
 void pic_to_led(uint8_t x, uint8_t pic);
+void scroll_left(void);
 
 # 13 "init.h"
 void SYSTEM_Initialize(void);
@@ -4216,6 +4217,10 @@ void key_press(void);
 # 10 "ds18b20.h"
 const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 
+
+uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
+void init_ds18b20(void);
+
 # 39 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
@@ -4229,12 +4234,15 @@ void TMR1_ISR();
 void time_led();
 void version(void);
 void default_state(void);
+void home_temp(void);
 
 # 12 "onewire.h"
 uint8_t ow_reset(void);
 uint8_t read_bit(void);
 void write_bit(uint8_t bitval);
 uint8_t read_byte(void);
+void write_byte(uint8_t val);
+void Waiting_WR (void);
 
 # 5 "onewire.c"
 uint8_t ow_reset(void)
@@ -4294,4 +4302,26 @@ _delay((unsigned long)((120)*(40000000/4000000.0)));
 }
 
 return val;
+}
+
+
+
+void write_byte(uint8_t val)
+{
+uint8_t i;
+uint8_t temp;
+
+for (i=0;i<8;i++)
+{
+temp = val >> i;
+temp &= 0x01;
+write_bit(temp);
+}
+
+_delay((unsigned long)((105)*(40000000/4000000.0)));
+}
+
+void Waiting_WR (void)
+{
+_delay((unsigned long)((52)*(40000000/4000000.0)));
 }

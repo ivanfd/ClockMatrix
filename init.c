@@ -66,10 +66,11 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
 
     Port_Init();  
     I2C_Init();
+    Init7221();
     TMR1Init();
     Interrupt_Init();
-    Init7221();
     DS3231_init();
+   // init_ds18b20();
     RTOS_Init();
 
 }

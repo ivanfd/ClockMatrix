@@ -60,3 +60,25 @@ uint8_t read_byte(void)
 
    return val;
 }
+
+
+//******************************************************************************
+void write_byte(uint8_t val)
+{
+   uint8_t i;
+   uint8_t temp;
+
+   for (i=0;i<8;i++)
+   {
+      temp = val >> i;
+      temp &= 0x01;
+      write_bit(temp);
+   }
+
+   __delay_us(105);
+}
+
+void Waiting_WR (void)
+{
+   __delay_us(52);         //
+}//---------------------------------------------------------------------------------------

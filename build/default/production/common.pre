@@ -4182,6 +4182,7 @@ uint8_t scroll_text(void);
 void putchar_down(uint8_t x, uint8_t symbol);
 void putchar_down_s(uint8_t x, uint8_t symbol);
 void pic_to_led(uint8_t x, uint8_t pic);
+void scroll_left(void);
 
 # 13 "init.h"
 void SYSTEM_Initialize(void);
@@ -4218,9 +4219,15 @@ uint8_t ow_reset(void);
 uint8_t read_bit(void);
 void write_bit(uint8_t bitval);
 uint8_t read_byte(void);
+void write_byte(uint8_t val);
+void Waiting_WR (void);
 
 # 10 "ds18b20.h"
 const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
+
+
+uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
+void init_ds18b20(void);
 
 # 39 "common.h"
 void INT0_ISR(void);
@@ -4235,6 +4242,7 @@ void TMR1_ISR();
 void time_led();
 void version(void);
 void default_state(void);
+void home_temp(void);
 
 # 3 "common.c"
 extern uint8_t TxtBuf[6];
@@ -4245,7 +4253,8 @@ uint8_t events = 5;
 uint8_t delay_digit = 0;
 bit show_digit;
 bit en_put;
-
+uint16_t temperature;
+uint8_t timer_val = 0, time_flag = 0;
 
 
 void GetTime(void)
@@ -4568,7 +4577,7 @@ Update_Matrix(Dis_Buff);
 en_put=1;
 }
 
-# 338
+# 339
 void time_set_dy(void)
 {
 switch (events)
@@ -4645,6 +4654,41 @@ Update_Matrix(Dis_Buff);
 en_put=1;
 }
 
+# 419
+void home_temp(void)
+{
+switch (events)
+{
+case 5:
+if (readTemp_Single(&temperature, &time_flag, &timer_val))
+{
+clear_matrix();
+pic_to_led(3,1);
+putchar_down(13,(temperature/100) % 10 + 48);
+putchar_down(19,(temperature/10) % 10 + 48);
+putchar_down(25,176);
+events = 6;
+RTOS_SetTask(default_state, 750, 0);
+}
+break;
+case 6:
+break;
+case 4:
+events = 5;
+scroll_left();
+putchar_down(0, (TTime.Thr/10) % 10 + 48);
+putchar_down(6, TTime.Thr % 10 + 48);
+putchar_down(13, (TTime.Tmin/10) % 10 + 48);
+putchar_down(19, TTime.Tmin % 10 + 48);
+getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
+putchar_down_s(25, (TTime.Ts/10) % 10 + 1);
+putchar_down_s(29, TTime.Ts % 10 + 1);
+RTOS_DeleteTask(default_state);
+RTOS_DeleteTask(home_temp);
+RTOS_SetTask(time_led,0,20);
+break;
+}
+}
 
 
 
@@ -4656,11 +4700,10 @@ switch (events)
 {
 case 5:
 FillBuf();
-
+if(((TTime.Ts>2)&&(TTime.Ts<4))||((TTime.Ts>45)&&(TTime.Ts<47)))
+events = 3;
 break;
 case 1:
-
-# 440
 RTOS_DeleteTask(time_led);
 RTOS_SetTask(time_set_min, 0, 50);
 RTOS_SetTask(default_state, 2000, 0);
@@ -4668,13 +4711,24 @@ TSTime = TTime;
 events = 5;
 break;
 case 2:
-clear_matrix();
-pic_to_led(0,1);
-pic_to_led(8,2);
-pic_to_led(16,3);
+asm("nop");
+
+# 481
 break;
 case 3:
-ow_reset();
+
+
+scroll_left();
+RTOS_DeleteTask(time_led);
+RTOS_SetTask(home_temp, 0, 20);
+events = 5;
+break;
+case 4:
+events = 5;
+RTOS_DeleteTask(default_state);
+break;
+case 6:
+
 break;
 }
 Update_Matrix(Dis_Buff);
@@ -4706,6 +4760,8 @@ events = 4;
 
 void INT0_ISR(void)
 {
+
+# 534
 RTOS_SetTask(GetTime, 0, 0);
 
 
@@ -4717,6 +4773,15 @@ RTOS_SetTask(GetTime, 0, 0);
 void TMR1_ISR(void)
 {
 
-# 505
+
+if(++timer_val >= 30)
+{
+timer_val = 0;
+time_flag = 1;
+T1CONbits.TMR1ON = 0;
+
+}
+
+# 564
 }
 

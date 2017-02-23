@@ -8,7 +8,8 @@ uint8_t events = MAIN_EVENT;        //
 uint8_t delay_digit = 0;            // для паузи мигання цифр
 bit show_digit;                     // чи показувати цифри, в нал. мигання
 bit en_put;                         // чи можна писати у буфер символи
-
+uint16_t temperature;               // температура з кімнатного датчика
+uint8_t timer_val = 0, time_flag = 0;  // для конвертування температури
 // читаємо з DS3231 години, хвилини, секунди та дату
 // 
 void GetTime(void)
@@ -411,6 +412,44 @@ if(en_put)
        en_put=1;
 }
 
+
+//**************************************************
+//      температура з кімнатного датчика
+//*************************************************
+ void home_temp(void)
+ {
+    switch (events)
+    {
+        case MAIN_EVENT:
+            if (readTemp_Single(&temperature, &time_flag, &timer_val))
+            {
+                clear_matrix();
+                pic_to_led(3,1);
+                putchar_down(13,(temperature/100) % 10 + 48);
+                putchar_down(19,(temperature/10) % 10 + 48);
+                putchar_down(25,176);
+                events = TEMP_EVENT;
+                RTOS_SetTask(default_state, 750, 0);  // 3,5 секунд для виходу
+            }
+            break;
+        case TEMP_EVENT:
+            break;    
+        case KEY_EXIT_EVENT:  // повертаємось в показ часу
+            events = MAIN_EVENT;
+            scroll_left();
+            putchar_down(0, (TTime.Thr/10) % 10 + 48);  
+            putchar_down(6, TTime.Thr % 10 + 48);     
+            putchar_down(13, (TTime.Tmin/10) % 10 + 48);
+            putchar_down(19, TTime.Tmin % 10 + 48);
+            getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
+            putchar_down_s(25, (TTime.Ts/10) % 10 + 1);
+            putchar_down_s(29, TTime.Ts % 10 + 1);            
+            RTOS_DeleteTask(default_state);
+            RTOS_DeleteTask(home_temp);
+            RTOS_SetTask(time_led,0,cycle_main);
+            break;
+    }
+ }
 //==================================================
 //  виводимо годину на дисплей -:)
 //==================================================
@@ -422,35 +461,38 @@ void time_led()
    {
         case MAIN_EVENT:
             FillBuf();
-//            Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+            if(((TTime.Ts>2)&&(TTime.Ts<4))||((TTime.Ts>45)&&(TTime.Ts<47)))
+                events = KEY_DOWN_EVENT;
             break;
-        case  KEY_OK_EVENT:
-//                putchar_down(0,0);
-//                putchar_down(6,0);
-//                putchar_down(13,0);
-//                putchar_down(19,0);
-//                putchar_down_s(25,0);
-//                putchar_down_s(29,0);
-//                putchar_down(0, TTimeConv.hr_10);  
-//                putchar_down(6, TTimeConv.hr_1);     
-//                putchar_down(13, TTimeConv.min_10);
-//                putchar_down(19, TTimeConv.min_1);
-//                putchar_down_s(25, TTimeConv.s_10);
-//                putchar_down_s(29, TTimeConv.s_1);
-            RTOS_DeleteTask(time_led);
-            RTOS_SetTask(time_set_min, 0, 50);
+        case  KEY_OK_EVENT:     // якщо натиснули кнопку ОК
+            RTOS_DeleteTask(time_led);  // видаяляємо задачу в якій сидимо
+            RTOS_SetTask(time_set_min, 0, 50); //  ставимо задачу налаштування годинника
             RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
             TSTime = TTime;
             events = MAIN_EVENT;
             break;
         case  KEY_UP_EVENT:
-            clear_matrix();
-            pic_to_led(0,1);
-            pic_to_led(8,2);
-            pic_to_led(16,3);
+            asm("nop");
+          //  scroll_left();
+//            clear_matrix();
+//            pic_to_led(0,1);
+//            pic_to_led(8,2);
+//            pic_to_led(16,3);
             break;
         case  KEY_DOWN_EVENT:
-            ow_reset();
+            //ow_reset();
+        //    init_ds18b20();
+            scroll_left();
+            RTOS_DeleteTask(time_led);      //видаляємо задачу
+            RTOS_SetTask(home_temp, 0, cycle_main); //додаємо задачу 
+            events = MAIN_EVENT;
+            break;
+        case KEY_EXIT_EVENT:
+            events = MAIN_EVENT;
+            RTOS_DeleteTask(default_state);
+            break; 
+        case TEMP_EVENT:
+            
             break;
    }           
             Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
@@ -482,7 +524,14 @@ void default_state(void)
 // функція переривання по входу RB0
  void INT0_ISR(void)
 {
-        RTOS_SetTask(GetTime, 0, 0); // додаємо одноразовий запуск задачі в диспетчер
+     
+//     if (++count = 2)
+//     {
+//         count = 0;
+//         timer_flag = 1;
+//     }
+     
+     RTOS_SetTask(GetTime, 0, 0); // додаємо одноразовий запуск задачі в диспетчер
                                         // кожні 500мс.
 
 }
@@ -492,7 +541,17 @@ void default_state(void)
 
  void TMR1_ISR(void)
 {
-//     delay_digit++;
+
+     
+     if(++timer_val >= 30)
+     {
+         timer_val = 0;
+         time_flag = 1;
+         T1CONbits.TMR1ON = 0;
+
+     }
+     
+     //     delay_digit++;
 //     if(delay_digit > 30)
 //     {
 //         delay_digit = 0;

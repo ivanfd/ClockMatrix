@@ -121,8 +121,8 @@ void putchar_down_s(uint8_t x, uint8_t symbol)
 {
 uint8_t i, j, k;
 
-if(symbol != 0)
-    symbol -= 47;
+//if(symbol != 0)
+ //   symbol -= 47;
     
   for(j=0;j<=7;j++)     //проходимо всі 8 строк
   {
@@ -264,3 +264,28 @@ uint8_t scroll_text(void)
     
 }
 
+
+//********************************************
+//  зсовуємо текст зправа наліво
+//********************************************
+void scroll_left(void)
+{
+    uint8_t i,j,k,speed = 100;
+   
+    
+    for (k=0;k<=31;k++)
+    {
+        for (i=0; i<=31; i++)
+            Dis_Buff[i] = Dis_Buff[i+1];
+
+        Dis_Buff[31] = 0;
+        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+        for(j=0; j<speed; j++)
+                __delay_ms(1);
+        if (speed > 10) speed -=10;   
+
+    }     
+    
+    
+}
+    

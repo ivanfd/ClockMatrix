@@ -4182,6 +4182,7 @@ uint8_t scroll_text(void);
 void putchar_down(uint8_t x, uint8_t symbol);
 void putchar_down_s(uint8_t x, uint8_t symbol);
 void pic_to_led(uint8_t x, uint8_t pic);
+void scroll_left(void);
 
 # 17 "interrupt.h"
 void interrupt InterruptManager(void);
@@ -4215,9 +4216,15 @@ uint8_t ow_reset(void);
 uint8_t read_bit(void);
 void write_bit(uint8_t bitval);
 uint8_t read_byte(void);
+void write_byte(uint8_t val);
+void Waiting_WR (void);
 
 # 10 "ds18b20.h"
 const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
+
+
+uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
+void init_ds18b20(void);
 
 # 39 "common.h"
 void INT0_ISR(void);
@@ -4232,6 +4239,7 @@ void TMR1_ISR();
 void time_led();
 void version(void);
 void default_state(void);
+void home_temp(void);
 
 # 13 "timer.h"
 void TMR1Init(void);
@@ -4239,7 +4247,7 @@ void TMR1Init(void);
 # 5 "timer.c"
 void TMR1Init(void)
 {
-T1CON = 0b00000001;
+T1CONbits.TMR1ON = 0;
 TMR1H = ((unsigned char)(((15536)>>8)&0xFF));
 TMR1L = ((unsigned char)((15536)&0xFF));
 PIE1bits.TMR1IE = 1;
