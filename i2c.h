@@ -13,6 +13,7 @@ uint8_t I2C_write (uint8_t data);       // запис байту
 uint8_t I2C_read_noack (void);          //читати байт
 uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
 void I2C_stop (void);                   // формувати стоп біт
+uint8_t i2c_read_ack (void);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

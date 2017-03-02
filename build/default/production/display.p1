@@ -5102,9 +5102,44 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c.h: 13: uint8_t I2C_read_noack (void);
 [; ;i2c.h: 14: uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
 [; ;i2c.h: 15: void I2C_stop (void);
-[; ;init.h: 13: void SYSTEM_Initialize(void);
-[; ;init.h: 14: void Port_Init(void);
-[; ;init.h: 15: void Interrupt_Init(void);
+[; ;i2c.h: 16: uint8_t i2c_read_ack (void);
+[; ;eusart.h: 8: void init_uart(void);
+[; ;eusart.h: 9: void putch(char data);
+[; ;ds3231.h: 38: uint8_t bcd_to_decimal(uint8_t d);
+[; ;ds3231.h: 39: uint8_t decimal_to_bcd(uint8_t d);
+[; ;ds3231.h: 43: uint8_t DS3231_Read(uint8_t address);
+[; ;ds3231.h: 48: void DS3231_Write(uint8_t address, uint8_t value);
+[; ;ds3231.h: 51: void DS3231_init();
+[; ;ds3231.h: 55: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1);
+[; ;ds3231.h: 57: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
+[; ;ds3231.h: 59: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
+[; ;ds3231.h: 60: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
+[; ;key.h: 22: void key_press(void);
+[; ;onewire.h: 12: uint8_t ow_reset(void);
+[; ;onewire.h: 13: uint8_t read_bit(void);
+[; ;onewire.h: 14: void write_bit(uint8_t bitval);
+[; ;onewire.h: 15: uint8_t read_byte(void);
+[; ;onewire.h: 16: void write_byte(uint8_t val);
+[; ;onewire.h: 17: void Waiting_WR (void);
+"11 bmp180.h
+[v _OSS `Cuc ~T0 @X0 1 e ]
+[i _OSS
+-> -> 0 `i `uc
+]
+[; ;bmp180.h: 11: const uint8_t OSS = 0;
+[; ;bmp180.h: 14: int8_t BMP085ReadByte(uint8_t address);
+[; ;bmp180.h: 15: int16_t bmp085ReadInt(uint8_t address);
+[; ;bmp180.h: 16: void BMP085WriteByte(uint8_t address, int8_t data);
+[; ;bmp180.h: 17: void bmp085Calibration();
+[; ;bmp180.h: 18: int32_t BMP085ReadUT();
+[; ;bmp180.h: 19: int32_t bmp085ReadUP();
+[; ;bmp180.h: 20: int32_t BMP085GetTemp(int32_t _tu);
+[; ;bmp180.h: 21: int32_t BMP085GetPressure(int32_t _pu);
+[; ;bmp180.h: 22: uint32_t BMP085Pressure(uint8_t getTemp);
+[; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
+[; ;init.h: 15: void SYSTEM_Initialize(void);
+[; ;init.h: 16: void Port_Init(void);
+[; ;init.h: 17: void Interrupt_Init(void);
 [; ;timer.h: 13: void TMR1Init(void);
 [; ;interrupt.h: 17: void interrupt InterruptManager(void);
 [; ;dispatcher.h: 13: typedef struct task
@@ -5119,22 +5154,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dispatcher.h: 26: void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod);
 [; ;dispatcher.h: 27: void RTOS_DeleteTask (void (*taskFunc)(void));
 [; ;dispatcher.h: 28: void RTOS_DispatchTask (void);
-[; ;key.h: 22: void key_press(void);
-[; ;ds3231.h: 38: uint8_t bcd_to_decimal(uint8_t d);
-[; ;ds3231.h: 39: uint8_t decimal_to_bcd(uint8_t d);
-[; ;ds3231.h: 43: uint8_t DS3231_Read(uint8_t address);
-[; ;ds3231.h: 48: void DS3231_Write(uint8_t address, uint8_t value);
-[; ;ds3231.h: 51: void DS3231_init();
-[; ;ds3231.h: 55: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1);
-[; ;ds3231.h: 57: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
-[; ;ds3231.h: 59: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
-[; ;ds3231.h: 60: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
-[; ;onewire.h: 12: uint8_t ow_reset(void);
-[; ;onewire.h: 13: uint8_t read_bit(void);
-[; ;onewire.h: 14: void write_bit(uint8_t bitval);
-[; ;onewire.h: 15: uint8_t read_byte(void);
-[; ;onewire.h: 16: void write_byte(uint8_t val);
-[; ;onewire.h: 17: void Waiting_WR (void);
 "10 ds18b20.h
 [v _fract `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fract
@@ -5160,26 +5179,26 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 [; ;ds18b20.h: 13: uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
 [; ;ds18b20.h: 14: void init_ds18b20(void);
-[; ;common.h: 39: void INT0_ISR(void);
-[; ;common.h: 40: void GetTime(void);
-[; ;common.h: 41: void time_set_min(void);
-[; ;common.h: 42: void time_set_hr(void);
-[; ;common.h: 43: void time_set_yr(void);
-[; ;common.h: 44: void time_set_mt(void);
-[; ;common.h: 45: void time_set_dt(void);
-[; ;common.h: 46: void time_set_dy(void);
-[; ;common.h: 47: void TMR1_ISR();
-[; ;common.h: 48: void time_led();
-[; ;common.h: 49: void version(void);
-[; ;common.h: 50: void default_state(void);
-[; ;common.h: 51: void home_temp(void);
+[; ;common.h: 41: void INT0_ISR(void);
+[; ;common.h: 42: void GetTime(void);
+[; ;common.h: 43: void time_set_min(void);
+[; ;common.h: 44: void time_set_hr(void);
+[; ;common.h: 45: void time_set_yr(void);
+[; ;common.h: 46: void time_set_mt(void);
+[; ;common.h: 47: void time_set_dt(void);
+[; ;common.h: 48: void time_set_dy(void);
+[; ;common.h: 49: void TMR1_ISR();
+[; ;common.h: 50: void time_led();
+[; ;common.h: 51: void version(void);
+[; ;common.h: 52: void default_state(void);
+[; ;common.h: 53: void home_temp(void);
 [; ;max7221.h: 22: void Send_Byte_7221(uint8_t dat);
 [; ;max7221.h: 23: void Cmd7221(uint8_t adr, uint8_t val );
 [; ;max7221.h: 24: void Update_Matrix(uint8_t *buf);
 [; ;max7221.h: 25: void Init7221();
-[v F3147 `Cuc ~T0 @X0 -> 3 `i t ]
+[v F3170 `Cuc ~T0 @X0 -> 3 `i t ]
 "3 FontS.h
-[v _FontS `F3147 ~T0 @X0 -> 0 `x e ]
+[v _FontS `F3170 ~T0 @X0 -> 0 `x e ]
 [i _FontS
 :U ..
 :U ..
@@ -5263,9 +5282,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;FontS.h: 13: {0x7C,0x54,0x7C},
 [; ;FontS.h: 14: {0x5C,0x54,0x7C}
 [; ;FontS.h: 15: };
-[v F3149 `Cuc ~T0 @X0 -> 7 `i t ]
+[v F3172 `Cuc ~T0 @X0 -> 7 `i t ]
 "3 pict.h
-[v _pic7x8 `F3149 ~T0 @X0 -> 0 `x e ]
+[v _pic7x8 `F3172 ~T0 @X0 -> 0 `x e ]
 [i _pic7x8
 :U ..
 :U ..
@@ -5689,11 +5708,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "107
 }
 [; ;display.c: 107: }
-[; ;display.c: 109: for(k=0;k<30;k++)
+[; ;display.c: 109: for(k=0;k<20;k++)
 "109
 {
 [e = _k -> -> 0 `i `uc ]
-[e $ < -> _k `i -> 30 `i 308  ]
+[e $ < -> _k `i -> 20 `i 308  ]
 [e $U 309  ]
 "110
 [e :U 308 ]
@@ -5701,7 +5720,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
 "109
 [e ++ _k -> -> 1 `i `uc ]
-[e $ < -> _k `i -> 30 `i 308  ]
+[e $ < -> _k `i -> 20 `i 308  ]
 [e :U 309 ]
 "110
 }
@@ -5770,11 +5789,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "132
 }
 [; ;display.c: 132: }
-[; ;display.c: 134: for(k=0;k<30;k++)
+[; ;display.c: 134: for(k=0;k<20;k++)
 "134
 {
 [e = _k -> -> 0 `i `uc ]
-[e $ < -> _k `i -> 30 `i 318  ]
+[e $ < -> _k `i -> 20 `i 318  ]
 [e $U 319  ]
 "135
 [e :U 318 ]
@@ -5782,7 +5801,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
 "134
 [e ++ _k -> -> 1 `i `uc ]
-[e $ < -> _k `i -> 30 `i 318  ]
+[e $ < -> _k `i -> 20 `i 318  ]
 [e :U 319 ]
 "135
 }
@@ -5854,385 +5873,396 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 326 ]
 [; ;display.c: 161: {
 {
-[; ;display.c: 162: Dis_Buff[i] = Font[(TTime.Thr/10) % 10 + 48][i];
+[; ;display.c: 162: if((TTime.Thr/10) % 10)
 "162
-[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> -> + % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> -> + % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
-[; ;display.c: 163: Dis_Buff[i + 6] = Font[TTime.Thr % 10 + 48][i];
+[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 329  ]
+[; ;display.c: 163: Dis_Buff[i] = Font[(TTime.Thr/10) % 10 + 48][i];
 "163
-[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 6 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> -> + % -> . _TTime 2 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> -> + % -> . _TTime 2 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
-[; ;display.c: 164: Dis_Buff[i + 13] = Font[(TTime.Tmin/10) % 10 + 48][i];
+[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> -> + % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> -> + % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+[e $U 330  ]
 "164
-[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 13 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> -> + % / -> . _TTime 1 `i -> 10 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> -> + % / -> . _TTime 1 `i -> 10 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
-[; ;display.c: 165: Dis_Buff[i + 19] = Font[TTime.Tmin % 10 + 48][i];
+[e :U 329 ]
+[; ;display.c: 164: else
+[; ;display.c: 165: Dis_Buff[i] = 0x00;
 "165
-[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 19 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> -> + % -> . _TTime 1 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> -> + % -> . _TTime 1 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[e :U 330 ]
+[; ;display.c: 167: Dis_Buff[i + 6] = Font[TTime.Thr % 10 + 48][i];
 "167
+[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 6 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> -> + % -> . _TTime 2 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> -> + % -> . _TTime 2 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+[; ;display.c: 168: Dis_Buff[i + 13] = Font[(TTime.Tmin/10) % 10 + 48][i];
+"168
+[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 13 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> -> + % / -> . _TTime 1 `i -> 10 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> -> + % / -> . _TTime 1 `i -> 10 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+[; ;display.c: 169: Dis_Buff[i + 19] = Font[TTime.Tmin % 10 + 48][i];
+"169
+[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 19 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> -> + % -> . _TTime 1 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> -> + % -> . _TTime 1 `i -> 10 `i -> 48 `i `ui `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+"171
 }
 "160
 [e =+ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 5 `i 326  ]
 [e :U 327 ]
-"167
+"171
 }
-[; ;display.c: 167: }
-[; ;display.c: 169: for (i=0; i<3; ++i)
-"169
+[; ;display.c: 171: }
+[; ;display.c: 173: for (i=0; i<3; ++i)
+"173
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 3 `i 329  ]
-[e $U 330  ]
-"170
-[e :U 329 ]
-[; ;display.c: 170: {
+[e $ < -> _i `i -> 3 `i 331  ]
+[e $U 332  ]
+"174
+[e :U 331 ]
+[; ;display.c: 174: {
 {
-[; ;display.c: 171: Dis_Buff[i + 25] = FontS[(TTime.Ts/10) % 10 + 1][i];
-"171
-[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 25 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _FontS * -> -> + % / -> . _TTime 0 `i -> 10 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> -> + % / -> . _TTime 0 `i -> 10 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux ]
-[; ;display.c: 172: Dis_Buff[i + 29] = FontS[TTime.Ts % 10 + 1][i];
-"172
-[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 29 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _FontS * -> -> + % -> . _TTime 0 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> -> + % -> . _TTime 0 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux ]
-"173
-}
-"169
-[e =+ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 3 `i 329  ]
-[e :U 330 ]
-"173
-}
-[; ;display.c: 173: }
-[; ;display.c: 175: Dis_Buff[5] = 0;
+[; ;display.c: 175: Dis_Buff[i + 25] = FontS[(TTime.Ts/10) % 10 + 1][i];
 "175
-[e = *U + &U _Dis_Buff * -> -> -> 5 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 176: Dis_Buff[11] = 0x80;
+[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 25 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _FontS * -> -> + % / -> . _TTime 0 `i -> 10 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> -> + % / -> . _TTime 0 `i -> 10 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux ]
+[; ;display.c: 176: Dis_Buff[i + 29] = FontS[TTime.Ts % 10 + 1][i];
 "176
-[e = *U + &U _Dis_Buff * -> -> -> 11 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 128 `i `uc ]
-[; ;display.c: 177: Dis_Buff[12] = 0x80;
+[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 29 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _FontS * -> -> + % -> . _TTime 0 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> -> + % -> . _TTime 0 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux ]
 "177
-[e = *U + &U _Dis_Buff * -> -> -> 12 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 128 `i `uc ]
-[; ;display.c: 178: Dis_Buff[18] = 0;
-"178
-[e = *U + &U _Dis_Buff * -> -> -> 18 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 179: Dis_Buff[24] = 0;
+}
+"173
+[e =+ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 3 `i 331  ]
+[e :U 332 ]
+"177
+}
+[; ;display.c: 177: }
+[; ;display.c: 179: Dis_Buff[5] = 0;
 "179
-[e = *U + &U _Dis_Buff * -> -> -> 24 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 180: Dis_Buff[28] = 0;
+[e = *U + &U _Dis_Buff * -> -> -> 5 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 180: Dis_Buff[11] = 0x80;
 "180
-[e = *U + &U _Dis_Buff * -> -> -> 28 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 183: }
+[e = *U + &U _Dis_Buff * -> -> -> 11 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 128 `i `uc ]
+[; ;display.c: 181: Dis_Buff[12] = 0x80;
+"181
+[e = *U + &U _Dis_Buff * -> -> -> 12 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 128 `i `uc ]
+[; ;display.c: 182: Dis_Buff[18] = 0;
+"182
+[e = *U + &U _Dis_Buff * -> -> -> 18 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 183: Dis_Buff[24] = 0;
 "183
+[e = *U + &U _Dis_Buff * -> -> -> 24 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 184: Dis_Buff[28] = 0;
+"184
+[e = *U + &U _Dis_Buff * -> -> -> 28 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 187: }
+"187
 [e :UE 325 ]
 }
-"192
+"196
 [v _FillBufS `(v ~T0 @X0 1 ef3`*uc`uc`uc ]
-"193
+"197
 {
-[; ;display.c: 192: void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag)
-[; ;display.c: 193: {
+[; ;display.c: 196: void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag)
+[; ;display.c: 197: {
 [e :U _FillBufS ]
-"192
+"196
 [v _buf `*uc ~T0 @X0 1 r1 ]
 [v _edit_Flag `uc ~T0 @X0 1 r2 ]
 [v _scr_flag `uc ~T0 @X0 1 r3 ]
-"193
+"197
 [f ]
-"194
+"198
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
 [v _d `uc ~T0 @X0 1 a ]
 [v _nch `uc ~T0 @X0 1 a ]
-[; ;display.c: 194: uint8_t i, j, d, nch = 0;
+[; ;display.c: 198: uint8_t i, j, d, nch = 0;
 [e = _nch -> -> 0 `i `uc ]
-[; ;display.c: 195: d = 0;
-"195
+[; ;display.c: 199: d = 0;
+"199
 [e = _d -> -> 0 `i `uc ]
-[; ;display.c: 197: for (j=0;j<=4;++j)
-"197
+[; ;display.c: 201: for (j=0;j<=4;++j)
+"201
 {
 [e = _j -> -> 0 `i `uc ]
-[e $ <= -> _j `i -> 4 `i 333  ]
-[e $U 334  ]
-"198
-[e :U 333 ]
-[; ;display.c: 198: {
+[e $ <= -> _j `i -> 4 `i 335  ]
+[e $U 336  ]
+"202
+[e :U 335 ]
+[; ;display.c: 202: {
 {
-[; ;display.c: 199: for (i=0;i<=4;++i)
-"199
+[; ;display.c: 203: for (i=0;i<=4;++i)
+"203
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ <= -> _i `i -> 4 `i 336  ]
-[e $U 337  ]
-"200
-[e :U 336 ]
-[; ;display.c: 200: {
-{
-[; ;display.c: 201: if((nch >= 3) && edit_Flag)
-"201
-[e $ ! && >= -> _nch `i -> 3 `i != -> _edit_Flag `i -> -> -> 0 `i `uc `i 339  ]
-[; ;display.c: 202: Dis_Buff[d] = (Font[*(buf + j)] [i]) + 0x80;
-"202
-[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux -> + -> *U + &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux `i -> 128 `i `uc ]
-[e $U 340  ]
-"203
-[e :U 339 ]
-[; ;display.c: 203: else
-[; ;display.c: 204: Dis_Buff[d] = Font[*(buf + j)] [i];
+[e $ <= -> _i `i -> 4 `i 338  ]
+[e $U 339  ]
 "204
-[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
-[e :U 340 ]
-[; ;display.c: 205: d++;
+[e :U 338 ]
+[; ;display.c: 204: {
+{
+[; ;display.c: 205: if((nch >= 3) && edit_Flag)
 "205
-[e ++ _d -> -> 1 `i `uc ]
+[e $ ! && >= -> _nch `i -> 3 `i != -> _edit_Flag `i -> -> -> 0 `i `uc `i 341  ]
+[; ;display.c: 206: Dis_Buff[d] = (Font[*(buf + j)] [i]) + 0x80;
 "206
-}
-"199
-[e =+ _i -> -> 1 `i `uc ]
-[e $ <= -> _i `i -> 4 `i 336  ]
-[e :U 337 ]
-"206
-}
-[; ;display.c: 206: }
-[; ;display.c: 208: Dis_Buff[d] = 0;
+[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux -> + -> *U + &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux `i -> 128 `i `uc ]
+[e $U 342  ]
+"207
+[e :U 341 ]
+[; ;display.c: 207: else
+[; ;display.c: 208: Dis_Buff[d] = Font[*(buf + j)] [i];
 "208
-[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+[e :U 342 ]
 [; ;display.c: 209: d++;
 "209
 [e ++ _d -> -> 1 `i `uc ]
-[; ;display.c: 210: nch++;
 "210
-[e ++ _nch -> -> 1 `i `uc ]
-"212
 }
-"197
-[e =+ _j -> -> 1 `i `uc ]
-[e $ <= -> _j `i -> 4 `i 333  ]
-[e :U 334 ]
-"212
+"203
+[e =+ _i -> -> 1 `i `uc ]
+[e $ <= -> _i `i -> 4 `i 338  ]
+[e :U 339 ]
+"210
 }
-[; ;display.c: 212: }
-[; ;display.c: 213: if (scr_flag)
+[; ;display.c: 210: }
+[; ;display.c: 212: Dis_Buff[d] = 0;
+"212
+[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 213: d++;
 "213
-[e $ ! != -> _scr_flag `i -> -> -> 0 `i `uc `i 341  ]
-[; ;display.c: 214: {
+[e ++ _d -> -> 1 `i `uc ]
+[; ;display.c: 214: nch++;
 "214
-{
-[; ;display.c: 215: Dis_Buff[30] = Font[*(buf + 5)] [0];
-"215
-[e = *U + &U _Dis_Buff * -> -> -> 30 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
-[; ;display.c: 216: Dis_Buff[31] = Font[*(buf + 5)] [1];
+[e ++ _nch -> -> 1 `i `uc ]
 "216
-[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+}
+"201
+[e =+ _j -> -> 1 `i `uc ]
+[e $ <= -> _j `i -> 4 `i 335  ]
+[e :U 336 ]
+"216
+}
+[; ;display.c: 216: }
+[; ;display.c: 217: if (scr_flag)
 "217
-}
-[; ;display.c: 217: }
-[e $U 342  ]
+[e $ ! != -> _scr_flag `i -> -> -> 0 `i `uc `i 343  ]
+[; ;display.c: 218: {
 "218
-[e :U 341 ]
-[; ;display.c: 218: else
-[; ;display.c: 219: {
+{
+[; ;display.c: 219: Dis_Buff[30] = Font[*(buf + 5)] [0];
 "219
-{
-[; ;display.c: 220: Dis_Buff[30] = 0;
+[e = *U + &U _Dis_Buff * -> -> -> 30 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+[; ;display.c: 220: Dis_Buff[31] = Font[*(buf + 5)] [1];
 "220
-[e = *U + &U _Dis_Buff * -> -> -> 30 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 221: Dis_Buff[31] = 0;
+[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
 "221
-[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+}
+[; ;display.c: 221: }
+[e $U 344  ]
 "222
-}
-[e :U 342 ]
-[; ;display.c: 222: }
-[; ;display.c: 223: }
+[e :U 343 ]
+[; ;display.c: 222: else
+[; ;display.c: 223: {
 "223
-[e :UE 332 ]
-}
-"229
-[v _scroll_text `(uc ~T0 @X0 1 ef ]
-"230
 {
-[; ;display.c: 229: uint8_t scroll_text(void)
-[; ;display.c: 230: {
+[; ;display.c: 224: Dis_Buff[30] = 0;
+"224
+[e = *U + &U _Dis_Buff * -> -> -> 30 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 225: Dis_Buff[31] = 0;
+"225
+[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+"226
+}
+[e :U 344 ]
+[; ;display.c: 226: }
+[; ;display.c: 227: }
+"227
+[e :UE 334 ]
+}
+"233
+[v _scroll_text `(uc ~T0 @X0 1 ef ]
+"234
+{
+[; ;display.c: 233: uint8_t scroll_text(void)
+[; ;display.c: 234: {
 [e :U _scroll_text ]
 [f ]
-"231
+"235
 [v _i `uc ~T0 @X0 1 a ]
-[; ;display.c: 231: uint8_t i;
-[; ;display.c: 233: for (i=0; i<31; i++)
-"233
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 31 `i 344  ]
-[e $U 345  ]
-"234
-[e :U 344 ]
-[; ;display.c: 234: Dis_Buff[i] = Dis_Buff[i+1];
-[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _Dis_Buff * -> -> + -> _i `i -> 1 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux ]
-"233
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 31 `i 344  ]
-[e :U 345 ]
-"234
-}
-[; ;display.c: 236: if ((i_bchar) >= 5)
-"236
-[e $ ! >= -> _i_bchar `i -> 5 `i 347  ]
-[; ;display.c: 237: {
+[; ;display.c: 235: uint8_t i;
+[; ;display.c: 237: for (i=0; i<31; i++)
 "237
 {
-[; ;display.c: 238: if (text_buf[i_char] == 0)
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 31 `i 346  ]
+[e $U 347  ]
 "238
-[e $ ! == -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `i -> 0 `i 348  ]
-[; ;display.c: 239: {
-"239
-{
-[; ;display.c: 240: i_bchar++;
-"240
-[e ++ _i_bchar -> -> 1 `i `uc ]
-[; ;display.c: 241: if (i_bchar >= 32)
-"241
-[e $ ! >= -> _i_bchar `i -> 32 `i 349  ]
-[; ;display.c: 242: {
-"242
-{
-[; ;display.c: 243: i_char = 0;
-"243
-[e = _i_char -> -> 0 `i `uc ]
-[; ;display.c: 244: i_bchar = 0;
-"244
-[e = _i_bchar -> -> 0 `i `uc ]
-[; ;display.c: 245: return 0;
-"245
-[e ) -> -> 0 `i `uc ]
-[e $UE 343  ]
-"246
-}
-[e :U 349 ]
-"247
-}
-[; ;display.c: 246: }
-[; ;display.c: 247: }
-[e $U 350  ]
-"248
-[e :U 348 ]
-[; ;display.c: 248: else
-[; ;display.c: 249: {
-"249
-{
-[; ;display.c: 250: Dis_Buff[31] = 0;
-"250
-[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 251: i_bchar = 0;
-"251
-[e = _i_bchar -> -> 0 `i `uc ]
-[; ;display.c: 252: i_char++;
-"252
-[e ++ _i_char -> -> 1 `i `uc ]
-"253
-}
-[e :U 350 ]
-"254
-}
-[; ;display.c: 253: }
-[; ;display.c: 254: }
-[e $U 351  ]
-"255
+[e :U 346 ]
+[; ;display.c: 238: Dis_Buff[i] = Dis_Buff[i+1];
+[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _Dis_Buff * -> -> + -> _i `i -> 1 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux ]
+"237
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 31 `i 346  ]
 [e :U 347 ]
-[; ;display.c: 255: else
-[; ;display.c: 256: {
-"256
+"238
+}
+[; ;display.c: 240: if ((i_bchar) >= 5)
+"240
+[e $ ! >= -> _i_bchar `i -> 5 `i 349  ]
+[; ;display.c: 241: {
+"241
 {
-[; ;display.c: 257: Dis_Buff[31] = Font[ text_buf[i_char]][i_bchar++];
-"257
-[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> ++ _i_bchar -> -> 1 `i `uc `ux -> -> # *U &U *U + &U _Font * -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
-"259
+[; ;display.c: 242: if (text_buf[i_char] == 0)
+"242
+[e $ ! == -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `i -> 0 `i 350  ]
+[; ;display.c: 243: {
+"243
+{
+[; ;display.c: 244: i_bchar++;
+"244
+[e ++ _i_bchar -> -> 1 `i `uc ]
+[; ;display.c: 245: if (i_bchar >= 32)
+"245
+[e $ ! >= -> _i_bchar `i -> 32 `i 351  ]
+[; ;display.c: 246: {
+"246
+{
+[; ;display.c: 247: i_char = 0;
+"247
+[e = _i_char -> -> 0 `i `uc ]
+[; ;display.c: 248: i_bchar = 0;
+"248
+[e = _i_bchar -> -> 0 `i `uc ]
+[; ;display.c: 249: return 0;
+"249
+[e ) -> -> 0 `i `uc ]
+[e $UE 345  ]
+"250
 }
 [e :U 351 ]
-[; ;display.c: 259: }
-[; ;display.c: 263: return 1;
-"263
-[e ) -> -> 1 `i `uc ]
-[e $UE 343  ]
-[; ;display.c: 265: }
-"265
-[e :UE 343 ]
+"251
 }
-"271
-[v _scroll_left `(v ~T0 @X0 1 ef ]
-"272
+[; ;display.c: 250: }
+[; ;display.c: 251: }
+[e $U 352  ]
+"252
+[e :U 350 ]
+[; ;display.c: 252: else
+[; ;display.c: 253: {
+"253
 {
-[; ;display.c: 271: void scroll_left(void)
-[; ;display.c: 272: {
+[; ;display.c: 254: Dis_Buff[31] = 0;
+"254
+[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 255: i_bchar = 0;
+"255
+[e = _i_bchar -> -> 0 `i `uc ]
+[; ;display.c: 256: i_char++;
+"256
+[e ++ _i_char -> -> 1 `i `uc ]
+"257
+}
+[e :U 352 ]
+"258
+}
+[; ;display.c: 257: }
+[; ;display.c: 258: }
+[e $U 353  ]
+"259
+[e :U 349 ]
+[; ;display.c: 259: else
+[; ;display.c: 260: {
+"260
+{
+[; ;display.c: 261: Dis_Buff[31] = Font[ text_buf[i_char]][i_bchar++];
+"261
+[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> ++ _i_bchar -> -> 1 `i `uc `ux -> -> # *U &U *U + &U _Font * -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+"263
+}
+[e :U 353 ]
+[; ;display.c: 263: }
+[; ;display.c: 267: return 1;
+"267
+[e ) -> -> 1 `i `uc ]
+[e $UE 345  ]
+[; ;display.c: 269: }
+"269
+[e :UE 345 ]
+}
+"275
+[v _scroll_left `(v ~T0 @X0 1 ef ]
+"276
+{
+[; ;display.c: 275: void scroll_left(void)
+[; ;display.c: 276: {
 [e :U _scroll_left ]
 [f ]
-"273
+"277
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
 [v _k `uc ~T0 @X0 1 a ]
 [v _speed `uc ~T0 @X0 1 a ]
-[; ;display.c: 273: uint8_t i,j,k,speed = 100;
+[; ;display.c: 277: uint8_t i,j,k,speed = 100;
 [e = _speed -> -> 100 `i `uc ]
-[; ;display.c: 276: for (k=0;k<=31;k++)
-"276
+[; ;display.c: 280: for (k=0;k<=31;k++)
+"280
 {
 [e = _k -> -> 0 `i `uc ]
-[e $ <= -> _k `i -> 31 `i 353  ]
-[e $U 354  ]
-"277
-[e :U 353 ]
-[; ;display.c: 277: {
+[e $ <= -> _k `i -> 31 `i 355  ]
+[e $U 356  ]
+"281
+[e :U 355 ]
+[; ;display.c: 281: {
 {
-[; ;display.c: 278: for (i=0; i<=31; i++)
-"278
+[; ;display.c: 282: for (i=0; i<=31; i++)
+"282
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ <= -> _i `i -> 31 `i 356  ]
-[e $U 357  ]
-"279
-[e :U 356 ]
-[; ;display.c: 279: Dis_Buff[i] = Dis_Buff[i+1];
-[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _Dis_Buff * -> -> + -> _i `i -> 1 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux ]
-"278
-[e ++ _i -> -> 1 `i `uc ]
-[e $ <= -> _i `i -> 31 `i 356  ]
-[e :U 357 ]
-"279
-}
-[; ;display.c: 281: Dis_Buff[31] = 0;
-"281
-[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 282: Update_Matrix(Dis_Buff);
-"282
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;display.c: 283: for(j=0; j<speed; j++)
+[e $ <= -> _i `i -> 31 `i 358  ]
+[e $U 359  ]
 "283
+[e :U 358 ]
+[; ;display.c: 283: Dis_Buff[i] = Dis_Buff[i+1];
+[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _Dis_Buff * -> -> + -> _i `i -> 1 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux ]
+"282
+[e ++ _i -> -> 1 `i `uc ]
+[e $ <= -> _i `i -> 31 `i 358  ]
+[e :U 359 ]
+"283
+}
+[; ;display.c: 285: Dis_Buff[31] = 0;
+"285
+[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 286: Update_Matrix(Dis_Buff);
+"286
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;display.c: 287: for(j=0; j<speed; j++)
+"287
 {
 [e = _j -> -> 0 `i `uc ]
-[e $U 362  ]
-"284
-[e :U 359 ]
-[; ;display.c: 284: _delay((unsigned long)((1)*(40000000/4000.0)));
+[e $U 364  ]
+"288
+[e :U 361 ]
+[; ;display.c: 288: _delay((unsigned long)((1)*(40000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-"283
+"287
 [e ++ _j -> -> 1 `i `uc ]
+[e :U 364 ]
+[e $ < -> _j `i -> _speed `i 361  ]
 [e :U 362 ]
-[e $ < -> _j `i -> _speed `i 359  ]
-[e :U 360 ]
-"284
+"288
 }
-[; ;display.c: 285: if (speed > 10) speed -=10;
-"285
-[e $ ! > -> _speed `i -> 10 `i 363  ]
+[; ;display.c: 289: if (speed > 10) speed -=10;
+"289
+[e $ ! > -> _speed `i -> 10 `i 365  ]
 [e =- _speed -> -> 10 `i `uc ]
-[e :U 363 ]
-"287
+[e :U 365 ]
+"291
 }
-"276
+"280
 [e ++ _k -> -> 1 `i `uc ]
-[e $ <= -> _k `i -> 31 `i 353  ]
-[e :U 354 ]
-"287
+[e $ <= -> _k `i -> 31 `i 355  ]
+[e :U 356 ]
+"291
 }
-[; ;display.c: 287: }
-[; ;display.c: 290: }
-"290
-[e :UE 352 ]
+[; ;display.c: 291: }
+[; ;display.c: 294: }
+"294
+[e :UE 354 ]
 }

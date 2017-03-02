@@ -18,6 +18,7 @@
 
 
 #define VERSION "Clock v1.0 by Ivan_fd"
+//#define DEBUG   // для відладки, розкоментувати.
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */

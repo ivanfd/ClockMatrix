@@ -21,6 +21,8 @@
       <itemPath>pict.h</itemPath>
       <itemPath>ds18b20.h</itemPath>
       <itemPath>onewire.h</itemPath>
+      <itemPath>bmp180.h</itemPath>
+      <itemPath>eusart.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -42,6 +44,8 @@
       <itemPath>key.c</itemPath>
       <itemPath>ds18b20.c</itemPath>
       <itemPath>onewire.c</itemPath>
+      <itemPath>bmp180.c</itemPath>
+      <itemPath>eusart.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

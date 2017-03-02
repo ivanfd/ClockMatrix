@@ -4123,6 +4123,7 @@ uint8_t I2C_write (uint8_t data);
 uint8_t I2C_read_noack (void);
 uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
 void I2C_stop (void);
+uint8_t i2c_read_ack (void);
 
 # 38 "ds3231.h"
 uint8_t bcd_to_decimal(uint8_t d);
@@ -4206,7 +4207,26 @@ void key_press(void);
 # 13 "timer.h"
 void TMR1Init(void);
 
-# 13 "init.h"
+# 8 "eusart.h"
+void init_uart(void);
+void putch(char data);
+
+# 11 "bmp180.h"
+const uint8_t OSS = 0;
+
+
+int8_t BMP085ReadByte(uint8_t address);
+int16_t bmp085ReadInt(uint8_t address);
+void BMP085WriteByte(uint8_t address, int8_t data);
+void bmp085Calibration();
+int32_t BMP085ReadUT();
+int32_t bmp085ReadUP();
+int32_t BMP085GetTemp(int32_t _tu);
+int32_t BMP085GetPressure(int32_t _pu);
+uint32_t BMP085Pressure(uint8_t getTemp);
+uint32_t BMP085Temperature(void);
+
+# 15 "init.h"
 void SYSTEM_Initialize(void);
 void Port_Init(void);
 void Interrupt_Init(void);
@@ -4226,7 +4246,7 @@ const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
 void init_ds18b20(void);
 
-# 39 "common.h"
+# 41 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 void time_set_min(void);

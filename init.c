@@ -70,8 +70,11 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     TMR1Init();
     Interrupt_Init();
     DS3231_init();
-   // init_ds18b20();
+    init_ds18b20();
     RTOS_Init();
+    init_uart();
+    bmp085Calibration();
+
 
 }
 

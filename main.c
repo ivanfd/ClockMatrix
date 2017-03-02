@@ -21,7 +21,7 @@ void main(void) {
     SYSTEM_Initialize(); // ініціалізація контролера
 
     clear_matrix();
-    version();
+   // version();
     
     INTERRUPT_GlobalInterruptDisable();
     RTOS_SetTask(time_led, 100, cycle_main); // додаємо задачу, запуск кожних 100мс, затримка перед запуском 500ms

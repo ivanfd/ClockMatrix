@@ -2,7 +2,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "20 display.h
 [s S270 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S270 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
-"14 init.h
+"16 init.h
 [v _Port_Init `(v ~T0 @X0 0 ef ]
 "9 i2c.h
 [v _I2C_Init `(v ~T0 @X0 0 ef ]
@@ -10,12 +10,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Init7221 `(v ~T0 @X0 0 ef ]
 "13 timer.h
 [v _TMR1Init `(v ~T0 @X0 0 ef ]
-"15 init.h
+"17 init.h
 [v _Interrupt_Init `(v ~T0 @X0 0 ef ]
 "51 ds3231.h
 [v _DS3231_init `(v ~T0 @X0 0 ef ]
+"14 ds18b20.h
+[v _init_ds18b20 `(v ~T0 @X0 0 ef ]
 "25 dispatcher.h
 [v _RTOS_Init `(v ~T0 @X0 0 ef ]
+"12 C:\Program Files (x86)\Microchip\xc8\v1.41\include\conio.h
+[v _init_uart `(v ~T0 @X0 0 ef ]
+"17 bmp180.h
+[v _bmp085Calibration `(v ~T0 @X0 0 ef ]
 "1094 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f4525.h
 [v _LATC `Vuc ~T0 @X0 0 e@3979 ]
 "1809
@@ -5449,19 +5455,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 [; ;ds18b20.h: 13: uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
 [; ;ds18b20.h: 14: void init_ds18b20(void);
-[; ;common.h: 39: void INT0_ISR(void);
-[; ;common.h: 40: void GetTime(void);
-[; ;common.h: 41: void time_set_min(void);
-[; ;common.h: 42: void time_set_hr(void);
-[; ;common.h: 43: void time_set_yr(void);
-[; ;common.h: 44: void time_set_mt(void);
-[; ;common.h: 45: void time_set_dt(void);
-[; ;common.h: 46: void time_set_dy(void);
-[; ;common.h: 47: void TMR1_ISR();
-[; ;common.h: 48: void time_led();
-[; ;common.h: 49: void version(void);
-[; ;common.h: 50: void default_state(void);
-[; ;common.h: 51: void home_temp(void);
+"11 bmp180.h
+[v _OSS `Cuc ~T0 @X0 1 e ]
+[i _OSS
+-> -> 0 `i `uc
+]
+[; ;bmp180.h: 11: const uint8_t OSS = 0;
+[; ;bmp180.h: 14: int8_t BMP085ReadByte(uint8_t address);
+[; ;bmp180.h: 15: int16_t bmp085ReadInt(uint8_t address);
+[; ;bmp180.h: 16: void BMP085WriteByte(uint8_t address, int8_t data);
+[; ;bmp180.h: 17: void bmp085Calibration();
+[; ;bmp180.h: 18: int32_t BMP085ReadUT();
+[; ;bmp180.h: 19: int32_t bmp085ReadUP();
+[; ;bmp180.h: 20: int32_t BMP085GetTemp(int32_t _tu);
+[; ;bmp180.h: 21: int32_t BMP085GetPressure(int32_t _pu);
+[; ;bmp180.h: 22: uint32_t BMP085Pressure(uint8_t getTemp);
+[; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
+[; ;eusart.h: 8: void init_uart(void);
+[; ;eusart.h: 9: void putch(char data);
+[; ;common.h: 41: void INT0_ISR(void);
+[; ;common.h: 42: void GetTime(void);
+[; ;common.h: 43: void time_set_min(void);
+[; ;common.h: 44: void time_set_hr(void);
+[; ;common.h: 45: void time_set_yr(void);
+[; ;common.h: 46: void time_set_mt(void);
+[; ;common.h: 47: void time_set_dt(void);
+[; ;common.h: 48: void time_set_dy(void);
+[; ;common.h: 49: void TMR1_ISR();
+[; ;common.h: 50: void time_led();
+[; ;common.h: 51: void version(void);
+[; ;common.h: 52: void default_state(void);
+[; ;common.h: 53: void home_temp(void);
 [; ;i2c.h: 9: void I2C_Init(void);
 [; ;i2c.h: 10: uint8_t I2C_start (uint8_t adress, uint8_t _R_W);
 [; ;i2c.h: 11: void I2C_idle (void);
@@ -5469,9 +5493,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c.h: 13: uint8_t I2C_read_noack (void);
 [; ;i2c.h: 14: uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
 [; ;i2c.h: 15: void I2C_stop (void);
-[; ;init.h: 13: void SYSTEM_Initialize(void);
-[; ;init.h: 14: void Port_Init(void);
-[; ;init.h: 15: void Interrupt_Init(void);
+[; ;i2c.h: 16: uint8_t i2c_read_ack (void);
+[; ;init.h: 15: void SYSTEM_Initialize(void);
+[; ;init.h: 16: void Port_Init(void);
+[; ;init.h: 17: void Interrupt_Init(void);
 "64 init.c
 [v _SYSTEM_Initialize `(v ~T0 @X0 1 ef ]
 "65
@@ -5498,73 +5523,82 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.c: 72: DS3231_init();
 "72
 [e ( _DS3231_init ..  ]
+[; ;init.c: 73: init_ds18b20();
+"73
+[e ( _init_ds18b20 ..  ]
 [; ;init.c: 74: RTOS_Init();
 "74
 [e ( _RTOS_Init ..  ]
-[; ;init.c: 76: }
+[; ;init.c: 75: init_uart();
+"75
+[e ( _init_uart ..  ]
+[; ;init.c: 76: bmp085Calibration();
 "76
+[e ( _bmp085Calibration ..  ]
+[; ;init.c: 79: }
+"79
 [e :UE 272 ]
 }
-"78
+"81
 [v _Port_Init `(v ~T0 @X0 1 ef ]
-"79
+"82
 {
-[; ;init.c: 78: void Port_Init(void)
-[; ;init.c: 79: {
+[; ;init.c: 81: void Port_Init(void)
+[; ;init.c: 82: {
 [e :U _Port_Init ]
 [f ]
-[; ;init.c: 80: LATC = 0x00;
-"80
-[e = _LATC -> -> 0 `i `uc ]
-[; ;init.c: 81: TRISC = 0b00011000;
-"81
-[e = _TRISC -> -> 24 `i `uc ]
-[; ;init.c: 82: LATB = 0x00;
-"82
-[e = _LATB -> -> 0 `i `uc ]
-[; ;init.c: 83: TRISB = 0b00011111;
+[; ;init.c: 83: LATC = 0x00;
 "83
-[e = _TRISB -> -> 31 `i `uc ]
-[; ;init.c: 84: INTCON2 &= (~(1<<7));
+[e = _LATC -> -> 0 `i `uc ]
+[; ;init.c: 84: TRISC = 0b00011000;
 "84
-[e =& _INTCON2 -> ~ << -> 1 `i -> 7 `i `uc ]
-[; ;init.c: 85: LATD = 0x00;
+[e = _TRISC -> -> 24 `i `uc ]
+[; ;init.c: 85: LATB = 0x00;
 "85
-[e = _LATD -> -> 0 `i `uc ]
-[; ;init.c: 86: TRISD = 0x00;
+[e = _LATB -> -> 0 `i `uc ]
+[; ;init.c: 86: TRISB = 0b00011111;
 "86
-[e = _TRISD -> -> 0 `i `uc ]
-[; ;init.c: 87: INTCON2bits.INTEDG0 = 1;
+[e = _TRISB -> -> 31 `i `uc ]
+[; ;init.c: 87: INTCON2 &= (~(1<<7));
 "87
-[e = . . _INTCON2bits 1 6 -> -> 1 `i `uc ]
-[; ;init.c: 88: INTCONbits.INT0IF = 0;
+[e =& _INTCON2 -> ~ << -> 1 `i -> 7 `i `uc ]
+[; ;init.c: 88: LATD = 0x00;
 "88
-[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-[; ;init.c: 89: INTCONbits.INT0IE = 1;
+[e = _LATD -> -> 0 `i `uc ]
+[; ;init.c: 89: TRISD = 0x00;
 "89
-[e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
-[; ;init.c: 90: PORTCbits.RC0 = 1;
+[e = _TRISD -> -> 0 `i `uc ]
+[; ;init.c: 90: INTCON2bits.INTEDG0 = 1;
 "90
-[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; ;init.c: 91: }
+[e = . . _INTCON2bits 1 6 -> -> 1 `i `uc ]
+[; ;init.c: 91: INTCONbits.INT0IF = 0;
 "91
+[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
+[; ;init.c: 92: INTCONbits.INT0IE = 1;
+"92
+[e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
+[; ;init.c: 93: PORTCbits.RC0 = 1;
+"93
+[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
+[; ;init.c: 94: }
+"94
 [e :UE 273 ]
 }
-"93
+"96
 [v _Interrupt_Init `(v ~T0 @X0 1 ef ]
-"94
+"97
 {
-[; ;init.c: 93: void Interrupt_Init(void)
-[; ;init.c: 94: {
+[; ;init.c: 96: void Interrupt_Init(void)
+[; ;init.c: 97: {
 [e :U _Interrupt_Init ]
 [f ]
-[; ;init.c: 95: (INTCONbits.GIE = 1);
-"95
+[; ;init.c: 98: (INTCONbits.GIE = 1);
+"98
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;init.c: 96: (INTCONbits.PEIE = 1);
-"96
+[; ;init.c: 99: (INTCONbits.PEIE = 1);
+"99
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;init.c: 97: }
-"97
+[; ;init.c: 100: }
+"100
 [e :UE 274 ]
 }

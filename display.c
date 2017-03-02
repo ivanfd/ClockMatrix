@@ -159,7 +159,11 @@ void FillBuf(void)
  
      for(i=0; i<5; ++i)
       {
+        if((TTime.Thr/10) % 10)
          Dis_Buff[i] = Font[(TTime.Thr/10) % 10 + 48][i];
+        else
+         Dis_Buff[i] = 0x00;
+
          Dis_Buff[i + 6] = Font[TTime.Thr % 10 + 48][i];
          Dis_Buff[i + 13] = Font[(TTime.Tmin/10) % 10 + 48][i];
          Dis_Buff[i + 19] = Font[TTime.Tmin % 10 + 48][i];

@@ -4107,6 +4107,7 @@ uint8_t I2C_write (uint8_t data);
 uint8_t I2C_read_noack (void);
 uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
 void I2C_stop (void);
+uint8_t i2c_read_ack (void);
 
 # 38 "ds3231.h"
 uint8_t bcd_to_decimal(uint8_t d);
@@ -4184,7 +4185,37 @@ void putchar_down_s(uint8_t x, uint8_t symbol);
 void pic_to_led(uint8_t x, uint8_t pic);
 void scroll_left(void);
 
-# 13 "init.h"
+# 8 "eusart.h"
+void init_uart(void);
+void putch(char data);
+
+# 22 "key.h"
+void key_press(void);
+
+# 12 "onewire.h"
+uint8_t ow_reset(void);
+uint8_t read_bit(void);
+void write_bit(uint8_t bitval);
+uint8_t read_byte(void);
+void write_byte(uint8_t val);
+void Waiting_WR (void);
+
+# 11 "bmp180.h"
+const uint8_t OSS = 0;
+
+
+int8_t BMP085ReadByte(uint8_t address);
+int16_t bmp085ReadInt(uint8_t address);
+void BMP085WriteByte(uint8_t address, int8_t data);
+void bmp085Calibration();
+int32_t BMP085ReadUT();
+int32_t bmp085ReadUP();
+int32_t BMP085GetTemp(int32_t _tu);
+int32_t BMP085GetPressure(int32_t _pu);
+uint32_t BMP085Pressure(uint8_t getTemp);
+uint32_t BMP085Temperature(void);
+
+# 15 "init.h"
 void SYSTEM_Initialize(void);
 void Port_Init(void);
 void Interrupt_Init(void);
@@ -4211,17 +4242,6 @@ void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeri
 void RTOS_DeleteTask (void (*taskFunc)(void));
 void RTOS_DispatchTask (void);
 
-# 22 "key.h"
-void key_press(void);
-
-# 12 "onewire.h"
-uint8_t ow_reset(void);
-uint8_t read_bit(void);
-void write_bit(uint8_t bitval);
-uint8_t read_byte(void);
-void write_byte(uint8_t val);
-void Waiting_WR (void);
-
 # 10 "ds18b20.h"
 const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 
@@ -4229,7 +4249,7 @@ const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
 void init_ds18b20(void);
 
-# 39 "common.h"
+# 41 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 void time_set_min(void);
@@ -4291,12 +4311,14 @@ case 2:
 TSTime.Tmin++;
 if(TSTime.Tmin > 59) TSTime.Tmin = 0;
 RTOS_SetTask(default_state, 2000, 0);
+setTime(TSTime.Thr,TSTime.Tmin,0);
 events = 5;
 break;
 case 3:
 TSTime.Tmin--;
 if(TSTime.Tmin == 255) TSTime.Tmin = 59;
 RTOS_SetTask(default_state, 2000, 0);
+setTime(TSTime.Thr,TSTime.Tmin,0);
 events = 5;
 break;
 }
@@ -4364,7 +4386,10 @@ if(show_digit)
 putchar_b_buf(13,(TSTime.Tmin/10) % 10 + 48);
 putchar_b_buf(19,TSTime.Tmin % 10 + 48);
 
+if((TSTime.Thr/10) % 10)
 putchar_b_buf(0,(TSTime.Thr/10) % 10 + 48);
+else
+putchar_b_buf(0,0);
 putchar_b_buf(6,TSTime.Thr % 10 + 48);
 }
 else
@@ -4577,7 +4602,7 @@ Update_Matrix(Dis_Buff);
 en_put=1;
 }
 
-# 339
+# 344
 void time_set_dy(void)
 {
 switch (events)
@@ -4654,29 +4679,43 @@ Update_Matrix(Dis_Buff);
 en_put=1;
 }
 
-# 419
+# 424
 void home_temp(void)
 {
 switch (events)
 {
 case 5:
-if (readTemp_Single(&temperature, &time_flag, &timer_val))
-{
+
+
 clear_matrix();
+if (!((temperature/10) % 10))
+{
 pic_to_led(3,1);
-putchar_down(13,(temperature/100) % 10 + 48);
-putchar_down(19,(temperature/10) % 10 + 48);
+
+putchar_down(13,temperature % 10 + 48);
+putchar_down(19,176);
+}else
+{
+pic_to_led(3,1);
+putchar_down(13,(temperature/10) % 10 + 48);
+putchar_down(19,temperature % 10 + 48);
 putchar_down(25,176);
+
+}
 events = 6;
 RTOS_SetTask(default_state, 750, 0);
-}
+
+
+
 break;
 case 6:
 break;
 case 4:
 events = 5;
 scroll_left();
+if((TTime.Thr/10) % 10)
 putchar_down(0, (TTime.Thr/10) % 10 + 48);
+else putchar_down(0, 0);
 putchar_down(6, TTime.Thr % 10 + 48);
 putchar_down(13, (TTime.Tmin/10) % 10 + 48);
 putchar_down(19, TTime.Tmin % 10 + 48);
@@ -4700,7 +4739,11 @@ switch (events)
 {
 case 5:
 FillBuf();
-if(((TTime.Ts>2)&&(TTime.Ts<4))||((TTime.Ts>45)&&(TTime.Ts<47)))
+if((TTime.Ts>5)&&(TTime.Ts<7))
+{
+readTemp_Single(&temperature, &time_flag, &timer_val);
+}
+if(((TTime.Ts>14)&&(TTime.Ts<16))||((TTime.Ts>45)&&(TTime.Ts<47)))
 events = 3;
 break;
 case 1:
@@ -4711,9 +4754,12 @@ TSTime = TTime;
 events = 5;
 break;
 case 2:
-asm("nop");
 
-# 481
+
+
+BMP085Pressure(1);
+
+# 507
 break;
 case 3:
 
@@ -4761,7 +4807,7 @@ events = 4;
 void INT0_ISR(void)
 {
 
-# 534
+# 560
 RTOS_SetTask(GetTime, 0, 0);
 
 
@@ -4774,7 +4820,7 @@ void TMR1_ISR(void)
 {
 
 
-if(++timer_val >= 30)
+if(++timer_val >= 150)
 {
 timer_val = 0;
 time_flag = 1;
@@ -4782,6 +4828,6 @@ T1CONbits.TMR1ON = 0;
 
 }
 
-# 564
+# 590
 }
 

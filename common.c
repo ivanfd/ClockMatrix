@@ -46,12 +46,14 @@ void time_set_min(void)
             TSTime.Tmin++;
             if(TSTime.Tmin > 59) TSTime.Tmin = 0;
             RTOS_SetTask(default_state, 2000, 0);  // 5 секунд для виходу
+            setTime(TSTime.Thr,TSTime.Tmin,0);
             events = MAIN_EVENT;
             break;
         case KEY_DOWN_EVENT:
             TSTime.Tmin--;
             if(TSTime.Tmin == 255) TSTime.Tmin = 59;            
             RTOS_SetTask(default_state, 2000, 0);  // 5 секунд для виходу
+            setTime(TSTime.Thr,TSTime.Tmin,0);
             events = MAIN_EVENT;
             break;            
    }   
@@ -119,7 +121,10 @@ void time_set_hr(void)
             putchar_b_buf(13,(TSTime.Tmin/10) % 10 + 48);
             putchar_b_buf(19,TSTime.Tmin % 10 + 48);
 
+            if((TSTime.Thr/10) % 10)
             putchar_b_buf(0,(TSTime.Thr/10) % 10 + 48);
+            else
+            putchar_b_buf(0,0);
             putchar_b_buf(6,TSTime.Thr % 10 + 48);
         }
         else 
@@ -421,23 +426,37 @@ if(en_put)
     switch (events)
     {
         case MAIN_EVENT:
-            if (readTemp_Single(&temperature, &time_flag, &timer_val))
-            {
+         //   if (readTemp_Single(&temperature, &time_flag, &timer_val))
+         //   {
                 clear_matrix();
-                pic_to_led(3,1);
-                putchar_down(13,(temperature/100) % 10 + 48);
-                putchar_down(19,(temperature/10) % 10 + 48);
-                putchar_down(25,176);
+                if (!((temperature/10) % 10)) // якщо перша цифра 0
+                {
+                    pic_to_led(3,1);
+                  //  putchar_down(13,(temperature/10) % 10 + 48);
+                    putchar_down(13,temperature % 10 + 48);
+                    putchar_down(19,176);
+                }else
+                {
+                    pic_to_led(3,1);
+                    putchar_down(13,(temperature/10) % 10 + 48);
+                    putchar_down(19,temperature % 10 + 48);
+                    putchar_down(25,176);
+                    
+                }
                 events = TEMP_EVENT;
                 RTOS_SetTask(default_state, 750, 0);  // 3,5 секунд для виходу
-            }
+
+           // }
+                
             break;
         case TEMP_EVENT:
             break;    
         case KEY_EXIT_EVENT:  // повертаємось в показ часу
             events = MAIN_EVENT;
             scroll_left();
+            if((TTime.Thr/10) % 10)
             putchar_down(0, (TTime.Thr/10) % 10 + 48);  
+            else putchar_down(0, 0);
             putchar_down(6, TTime.Thr % 10 + 48);     
             putchar_down(13, (TTime.Tmin/10) % 10 + 48);
             putchar_down(19, TTime.Tmin % 10 + 48);
@@ -461,7 +480,11 @@ void time_led()
    {
         case MAIN_EVENT:
             FillBuf();
-            if(((TTime.Ts>2)&&(TTime.Ts<4))||((TTime.Ts>45)&&(TTime.Ts<47)))
+            if((TTime.Ts>5)&&(TTime.Ts<7))
+            {
+                readTemp_Single(&temperature, &time_flag, &timer_val);
+            }
+            if(((TTime.Ts>14)&&(TTime.Ts<16))||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо температуру
                 events = KEY_DOWN_EVENT;
             break;
         case  KEY_OK_EVENT:     // якщо натиснули кнопку ОК
@@ -472,7 +495,10 @@ void time_led()
             events = MAIN_EVENT;
             break;
         case  KEY_UP_EVENT:
-            asm("nop");
+   //         asm("nop");
+ //           printf("AC1: %d\n\r", -1026);
+//            bmp085Calibration();
+            BMP085Pressure(1);
           //  scroll_left();
 //            clear_matrix();
 //            pic_to_led(0,1);
@@ -543,7 +569,7 @@ void default_state(void)
 {
 
      
-     if(++timer_val >= 30)
+     if(++timer_val >= 150)      // затримка > 375мс
      {
          timer_val = 0;
          time_flag = 1;

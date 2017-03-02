@@ -4107,6 +4107,7 @@ uint8_t I2C_write (uint8_t data);
 uint8_t I2C_read_noack (void);
 uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
 void I2C_stop (void);
+uint8_t i2c_read_ack (void);
 
 # 38 "ds3231.h"
 uint8_t bcd_to_decimal(uint8_t d);
@@ -4184,7 +4185,37 @@ void putchar_down_s(uint8_t x, uint8_t symbol);
 void pic_to_led(uint8_t x, uint8_t pic);
 void scroll_left(void);
 
-# 13 "init.h"
+# 8 "eusart.h"
+void init_uart(void);
+void putch(char data);
+
+# 22 "key.h"
+void key_press(void);
+
+# 12 "onewire.h"
+uint8_t ow_reset(void);
+uint8_t read_bit(void);
+void write_bit(uint8_t bitval);
+uint8_t read_byte(void);
+void write_byte(uint8_t val);
+void Waiting_WR (void);
+
+# 11 "bmp180.h"
+const uint8_t OSS = 0;
+
+
+int8_t BMP085ReadByte(uint8_t address);
+int16_t bmp085ReadInt(uint8_t address);
+void BMP085WriteByte(uint8_t address, int8_t data);
+void bmp085Calibration();
+int32_t BMP085ReadUT();
+int32_t bmp085ReadUP();
+int32_t BMP085GetTemp(int32_t _tu);
+int32_t BMP085GetPressure(int32_t _pu);
+uint32_t BMP085Pressure(uint8_t getTemp);
+uint32_t BMP085Temperature(void);
+
+# 15 "init.h"
 void SYSTEM_Initialize(void);
 void Port_Init(void);
 void Interrupt_Init(void);
@@ -4211,18 +4242,7 @@ void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeri
 void RTOS_DeleteTask (void (*taskFunc)(void));
 void RTOS_DispatchTask (void);
 
-# 22 "key.h"
-void key_press(void);
-
-# 12 "onewire.h"
-uint8_t ow_reset(void);
-uint8_t read_bit(void);
-void write_bit(uint8_t bitval);
-uint8_t read_byte(void);
-void write_byte(uint8_t val);
-void Waiting_WR (void);
-
-# 39 "common.h"
+# 41 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 void time_set_min(void);
@@ -4259,7 +4279,7 @@ write_byte(0xCC);
 write_byte(0x4E);
 write_byte(0x00);
 write_byte(0x00);
-write_byte(0x1F);
+write_byte(0x7F);
 }
 }
 
@@ -4268,19 +4288,15 @@ uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val )
 {
 
 uint16_t temp = 0;
-uint8_t i, tmp;
+uint8_t i, tmp, fptmp;
 
 switch(*time_flag)
 {
 case 0:
 if (!ow_reset())
 {
-write_byte(0xCC);
-write_byte(0x4E);
-write_byte(0x00);
-write_byte(0x00);
-write_byte(0x1F);
-ow_reset();
+
+# 49
 write_byte(0xCC);
 write_byte(0x44);
 *timer_val = 0;
@@ -4315,6 +4331,12 @@ tmp = fract[tmp];
 temp = temp>>4;
 temp = (temp & 0x00ff) * 10;
 temp = temp + tmp;
+
+# 99
+fptmp = temp % 10;
+temp = temp / 10;
+
+if (fptmp >=6) temp += 1;
 
 
 *buf = temp;

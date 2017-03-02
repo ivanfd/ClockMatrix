@@ -19,7 +19,7 @@ void init_ds18b20(void)
         write_byte(0x4E);    
         write_byte(0x00);    
         write_byte(0x00);    
-        write_byte(0x1F); //9 -біт режим  
+        write_byte(0x7F); //12 -біт режим  
     }
 }
 
@@ -33,19 +33,19 @@ uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val )
 {
                                                         
    uint16_t temp = 0;  // температура
-   uint8_t i, tmp;
+   uint8_t i, tmp, fptmp;
 
 switch(*time_flag)
 {
         case 0:
            if (!ow_reset())  // якщо датчик присутній
            {
-             write_byte(0xCC); //  команда пропуск ROM
-             write_byte(0x4E); //  конвертувати температуру
-             write_byte(0x00);    
-             write_byte(0x00);    
-             write_byte(0x1F); //9 -біт режим      
-             ow_reset();
+//             write_byte(0xCC); //  команда пропуск ROM
+//             write_byte(0x4E); //  конвертувати температуру
+//             write_byte(0x00);    
+//             write_byte(0x00);    
+//             write_byte(0x3F); //10 -біт режим      
+//             ow_reset();
              write_byte(0xCC); //  команда пропуск ROM
              write_byte(0x44); //  конвертувати температуру
              *timer_val = 0;
@@ -91,8 +91,17 @@ switch(*time_flag)
            temp = temp>>4;      //  формуємо кінцеву температуру
            temp = (temp & 0x00ff) * 10; 
            temp = temp + tmp;
+           
+            #ifdef DEBUG
+                printf("Temperature: %d\n\r ", temp);
+            #endif
 
-
+           fptmp = temp % 10;// остача
+           temp = temp / 10; // ціла частина
+           
+           if (fptmp >=6) temp += 1;
+           //  temp = floor(temp);
+           
            *buf = temp;
            *time_flag = 0;
 

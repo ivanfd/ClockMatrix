@@ -14,6 +14,8 @@
 #include "main.h"
 #include "onewire.h"
 #include "ds18b20.h"
+#include "bmp180.h"
+#include "eusart.h"
 
 
 #define SetBit(x,y)    do{ x |=  (1 << (y));} while(0)

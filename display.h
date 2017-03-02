@@ -15,7 +15,7 @@
 
 #define BUF_SIZE COUNT_MATRIX * 8
 #define SPEED_STRING 60     // швидкість бігучої строки, підібрати
-#define DELAY_SHIFT_DOWN 30 // швидкість ефекту зсуву вниз
+#define DELAY_SHIFT_DOWN 20 // швидкість ефекту зсуву вниз
 
 struct Time_Get             // структура для годин
 {

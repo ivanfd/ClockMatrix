@@ -9,6 +9,8 @@
 #include "common.h"
 #include "timer.h"
 #include "dispatcher.h"
+#include "eusart.h"
+#include "bmp180.h"
 
 void SYSTEM_Initialize(void);  // ініціалізація контролера
 void Port_Init(void);  // ініціалізація портів

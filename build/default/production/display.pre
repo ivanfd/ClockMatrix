@@ -4101,36 +4101,11 @@ uint8_t I2C_write (uint8_t data);
 uint8_t I2C_read_noack (void);
 uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
 void I2C_stop (void);
+uint8_t i2c_read_ack (void);
 
-# 13 "init.h"
-void SYSTEM_Initialize(void);
-void Port_Init(void);
-void Interrupt_Init(void);
-
-# 13 "timer.h"
-void TMR1Init(void);
-
-# 17 "interrupt.h"
-void interrupt InterruptManager(void);
-
-# 13 "dispatcher.h"
-typedef struct task
-{
-void (*pFunc) (void);
-uint16_t delay;
-uint16_t period;
-uint16_t run;
-}task;
-
-# 24
-void TMR0_ISR(void);
-void RTOS_Init (void);
-void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod);
-void RTOS_DeleteTask (void (*taskFunc)(void));
-void RTOS_DispatchTask (void);
-
-# 22 "key.h"
-void key_press(void);
+# 8 "eusart.h"
+void init_uart(void);
+void putch(char data);
 
 # 38 "ds3231.h"
 uint8_t bcd_to_decimal(uint8_t d);
@@ -4157,6 +4132,9 @@ void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
 void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
 void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
 
+# 22 "key.h"
+void key_press(void);
+
 # 12 "onewire.h"
 uint8_t ow_reset(void);
 uint8_t read_bit(void);
@@ -4165,6 +4143,48 @@ uint8_t read_byte(void);
 void write_byte(uint8_t val);
 void Waiting_WR (void);
 
+# 11 "bmp180.h"
+const uint8_t OSS = 0;
+
+
+int8_t BMP085ReadByte(uint8_t address);
+int16_t bmp085ReadInt(uint8_t address);
+void BMP085WriteByte(uint8_t address, int8_t data);
+void bmp085Calibration();
+int32_t BMP085ReadUT();
+int32_t bmp085ReadUP();
+int32_t BMP085GetTemp(int32_t _tu);
+int32_t BMP085GetPressure(int32_t _pu);
+uint32_t BMP085Pressure(uint8_t getTemp);
+uint32_t BMP085Temperature(void);
+
+# 15 "init.h"
+void SYSTEM_Initialize(void);
+void Port_Init(void);
+void Interrupt_Init(void);
+
+# 13 "timer.h"
+void TMR1Init(void);
+
+# 17 "interrupt.h"
+void interrupt InterruptManager(void);
+
+# 13 "dispatcher.h"
+typedef struct task
+{
+void (*pFunc) (void);
+uint16_t delay;
+uint16_t period;
+uint16_t run;
+}task;
+
+# 24
+void TMR0_ISR(void);
+void RTOS_Init (void);
+void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod);
+void RTOS_DeleteTask (void (*taskFunc)(void));
+void RTOS_DispatchTask (void);
+
 # 10 "ds18b20.h"
 const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 
@@ -4172,7 +4192,7 @@ const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
 void init_ds18b20(void);
 
-# 39 "common.h"
+# 41 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 void time_set_min(void);
@@ -4347,7 +4367,7 @@ for(i=0;i<5;i++)
 Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | (Font[symbol][i] >> (8-1-j));
 }
 
-for(k=0;k<30;k++)
+for(k=0;k<20;k++)
 _delay((unsigned long)((1)*(40000000/4000.0)));
 Update_Matrix(Dis_Buff);
 
@@ -4372,7 +4392,7 @@ for(i=0;i<3;i++)
 Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | (FontS[symbol][i] >> (8-1-j));
 }
 
-for(k=0;k<30;k++)
+for(k=0;k<20;k++)
 _delay((unsigned long)((1)*(40000000/4000.0)));
 Update_Matrix(Dis_Buff);
 
@@ -4397,7 +4417,11 @@ uint8_t i;
 
 for(i=0; i<5; ++i)
 {
+if((TTime.Thr/10) % 10)
 Dis_Buff[i] = Font[(TTime.Thr/10) % 10 + 48][i];
+else
+Dis_Buff[i] = 0x00;
+
 Dis_Buff[i + 6] = Font[TTime.Thr % 10 + 48][i];
 Dis_Buff[i + 13] = Font[(TTime.Tmin/10) % 10 + 48][i];
 Dis_Buff[i + 19] = Font[TTime.Tmin % 10 + 48][i];
@@ -4420,7 +4444,7 @@ Dis_Buff[28] = 0;
 
 }
 
-# 192
+# 196
 void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag)
 {
 uint8_t i, j, d, nch = 0;
@@ -4454,7 +4478,7 @@ Dis_Buff[31] = 0;
 }
 }
 
-# 229
+# 233
 uint8_t scroll_text(void)
 {
 uint8_t i;
@@ -4493,7 +4517,7 @@ return 1;
 
 }
 
-# 271
+# 275
 void scroll_left(void)
 {
 uint8_t i,j,k,speed = 100;

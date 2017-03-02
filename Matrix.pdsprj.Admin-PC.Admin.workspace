@@ -8,14 +8,14 @@
   <PWI>
    <POPUP w="800" x="79" flags="00000002" y="121" h="200" pid="0" iid="-1">
     <PROPERTIES>
-     <ITEM name="Message Column Width">542</ITEM>
+     <ITEM name="Message Column Width">663</ITEM>
      <ITEM name="ShowGrid">No</ITEM>
      <ITEM name="Source Column Width">100</ITEM>
      <ITEM name="Time Column Width">120</ITEM>
      <ITEM name="Version">100</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="350" x="119" flags="00008033" y="322" h="200" pid="1" iid="-1">
+   <POPUP w="437" x="203" flags="00000033" y="0" h="286" pid="1" iid="-1">
     <PROPERTIES>
      <ITEM name="Address Column Width">83</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -24,7 +24,10 @@
      <ITEM name="Item 1">"INTCON2","0x0FF1",00000009,0000000C,4081,1,0,D38C0000,0,00000000,00000000</ITEM>
      <ITEM name="Item 2">"TMR1H","0x0FCF",00000009,0000000C,4047,1,2,00000002,0,00000000,00000000</ITEM>
      <ITEM name="Item 3">"TMR1L","0x0FCE",00000009,0000000C,4046,1,2,00000002,0,00000000,00000000</ITEM>
-     <ITEM name="Item 4">"11","0x0011",00000009,00000004,17,4,5,00000008,0,00000000,00000000</ITEM>
+     <ITEM name="Item 4">"SSPCON1","0x0FC6",00000009,0000000C,4038,1,0,80CE0000,0,00000000,00000000</ITEM>
+     <ITEM name="Item 5">"SSPCON2","0x0FC5",00000009,0000000C,4037,1,0,64F40000,0,00000000,00000000</ITEM>
+     <ITEM name="Item 6">"SSPBUF","0x0FC9",00000009,0000000C,4041,1,2,00000002,0,00000000,00000000</ITEM>
+     <ITEM name="Item 7">"SSPSTAT","0x0FC7",00000009,0000000C,4039,1,0,23740000,0,00000000,00000000</ITEM>
      <ITEM name="Name Column Width">83</ITEM>
      <ITEM name="ShowAddresses">Yes</ITEM>
      <ITEM name="ShowPreviousValues">No</ITEM>
@@ -34,7 +37,7 @@
      <ITEM name="Value Column Width">99</ITEM>
      <ITEM name="Version">100</ITEM>
      <ITEM name="Watch Expression Column Width">83</ITEM>
-     <ITEM name="nItems">5</ITEM>
+     <ITEM name="nItems">8</ITEM>
     </PROPERTIES>
    </POPUP>
    <POPUP w="20" x="1141" flags="00000001" y="50" h="3" pid="1" iid="10">
@@ -50,15 +53,15 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="803" x="83" flags="0000002b" y="71" h="576" pid="1" iid="9">
+   <POPUP w="803" x="521" flags="0000002b" y="247" h="424" pid="1" iid="9">
     <PROPERTIES>
-     <ITEM name="Breakpoint 0">"",08E0,0000,DA0F,4174,-1
+     <ITEM name="Breakpoint 0">"",0BC6,0000,F5DF,6B34,1
 </ITEM>
-     <ITEM name="Breakpoint 1">"",085C,0000,D40A,4174,-1
+     <ITEM name="Breakpoint 1">"",0014,0000,FE80,6B34,1
 </ITEM>
-     <ITEM name="Breakpoint 2">"",08FE,0000,0963,A0DC,1
+     <ITEM name="Breakpoint 2">"",02B6,0000,D263,6B34,1
 </ITEM>
-     <ITEM name="Breakpoint 3">"",13C8,0000,A0C3,5783,-1
+     <ITEM name="Breakpoint 3">"",02F0,0000,F2E2,6B34,1
 </ITEM>
      <ITEM name="Breakpoint 4">"",13D4,0000,6E65,5783,-1
 </ITEM>
@@ -70,10 +73,10 @@
      <ITEM name="DISPOPCODES">No</ITEM>
      <ITEM name="FIXUPBPTS">Yes</ITEM>
      <ITEM name="WordsOnly">No</ITEM>
-     <ITEM name="nBreakpoints">1</ITEM>
+     <ITEM name="nBreakpoints">4</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="436" x="28" flags="0000000b" y="0" h="703" pid="2" iid="9">
+   <POPUP w="419" x="66" flags="0000800b" y="0" h="703" pid="2" iid="9">
     <PROPERTIES>
      <ITEM name="Address Column Width">94</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -85,7 +88,7 @@
      <ITEM name="ShowTypes">No</ITEM>
      <ITEM name="ShowWatchPoint">No</ITEM>
      <ITEM name="TriggerMode">0</ITEM>
-     <ITEM name="Value Column Width">183</ITEM>
+     <ITEM name="Value Column Width">334</ITEM>
      <ITEM name="Version">100</ITEM>
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
@@ -239,6 +242,22 @@
      <ITEM name="ComboBox1008">A</ITEM>
      <ITEM name="ComboBox1009">N</ITEM>
      <ITEM name="HSplitter1Pos">100</ITEM>
+     <ITEM name="VSplitter1Pos">6</ITEM>
+    </PROPERTIES>
+   </POPUP>
+   <POPUP w="958" x="65" flags="00000022" y="71" h="338" pid="0" iid="23">
+    <PROPERTIES>
+     <ITEM name="ComboBox1000">S</ITEM>
+     <ITEM name="ComboBox1001">Sr</ITEM>
+     <ITEM name="ComboBox1002">P</ITEM>
+     <ITEM name="ComboBox1003">A</ITEM>
+     <ITEM name="ComboBox1004">N</ITEM>
+     <ITEM name="ComboBox1005">S</ITEM>
+     <ITEM name="ComboBox1006">Sr</ITEM>
+     <ITEM name="ComboBox1007">P</ITEM>
+     <ITEM name="ComboBox1008">A</ITEM>
+     <ITEM name="ComboBox1009">N</ITEM>
+     <ITEM name="HSplitter1Pos">70</ITEM>
      <ITEM name="VSplitter1Pos">6</ITEM>
     </PROPERTIES>
    </POPUP>
