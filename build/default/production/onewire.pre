@@ -4099,17 +4099,15 @@ void Cmd7221(uint8_t adr, uint8_t val );
 void Update_Matrix(uint8_t *buf);
 void Init7221();
 
-# 9 "i2c.h"
-void I2C_Init(void);
-uint8_t I2C_start (uint8_t adress, uint8_t _R_W);
-void I2C_idle (void);
-uint8_t I2C_write (uint8_t data);
-uint8_t I2C_read_noack (void);
-uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
-void I2C_stop (void);
-uint8_t i2c_read_ack (void);
+# 10 "i2c.h"
+void I2C_Master_Wait();
+void I2C_Master_Start();
+void I2C_Master_RepeatedStart();
+void I2C_Master_Stop();
+void I2C_Master_Write(uint8_t d);
+uint8_t I2C_Master_Read(uint8_t a);
 
-# 38 "ds3231.h"
+# 39 "ds3231.h"
 uint8_t bcd_to_decimal(uint8_t d);
 uint8_t decimal_to_bcd(uint8_t d);
 
@@ -4193,17 +4191,17 @@ void putch(char data);
 void key_press(void);
 
 # 11 "bmp180.h"
-const uint8_t OSS = 0;
+const uint8_t OSS = 3;
 
 
-int8_t BMP085ReadByte(uint8_t address);
+uint8_t BMP085ReadByte(uint8_t address);
 int16_t bmp085ReadInt(uint8_t address);
 void BMP085WriteByte(uint8_t address, int8_t data);
 void bmp085Calibration();
 int32_t BMP085ReadUT();
 int32_t bmp085ReadUP();
 int32_t BMP085GetTemp(int32_t _tu);
-int32_t BMP085GetPressure(int32_t _pu);
+uint16_t BMP085GetPressure(int32_t _pu);
 uint32_t BMP085Pressure(uint8_t getTemp);
 uint32_t BMP085Temperature(void);
 

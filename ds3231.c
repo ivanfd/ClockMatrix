@@ -16,21 +16,24 @@ uint8_t decimal_to_bcd(uint8_t d)
 uint8_t DS3231_Read(uint8_t address)
 {                                     
          uint8_t value = 0;
-         I2C_start(DS3231_Address,0);
-         I2C_write(address);           
-         I2C_restart(DS3231_Address,1);
-         value = I2C_read_noack();
-         I2C_stop();                
+         I2C_Master_Start();
+         I2C_Master_Write(DS3231_AddressW);
+         I2C_Master_Write(address);
+         I2C_Master_RepeatedStart();
+         I2C_Master_Write(DS3231_AddressR);
+         value = I2C_Master_Read(0);        // читаємо без підтвердження
+         I2C_Master_Stop();
          return value;
 }                     
 
 
 void DS3231_Write(uint8_t address, uint8_t value)   
 { 
-         I2C_start(DS3231_Address,0);
-         I2C_write(address);
-         I2C_write(value);   
-         I2C_stop();
+         I2C_Master_Start();
+         I2C_Master_Write(DS3231_AddressW);    
+         I2C_Master_Write(address);
+         I2C_Master_Write(value);
+         I2C_Master_Stop();
 } 
 
 

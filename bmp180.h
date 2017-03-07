@@ -6,19 +6,19 @@
 #include "i2c.h"
 #include "main.h"
 
-#define BMP085_ADDRESS 0xEE          // I2C адреса BMP180
+#define BMP180_ADDRESS 0xEE          // I2C адреса BMP180
 
-const uint8_t OSS =  0; // роздільна здатність 0,1,2,3 
+const uint8_t OSS =  3; // роздільна здатність 0,1,2,3 
 
 
-int8_t BMP085ReadByte(uint8_t address);
+uint8_t BMP085ReadByte(uint8_t address);
 int16_t bmp085ReadInt(uint8_t address);
 void BMP085WriteByte(uint8_t address, int8_t data);
 void bmp085Calibration();
 int32_t BMP085ReadUT();
 int32_t bmp085ReadUP();
 int32_t BMP085GetTemp(int32_t _tu);
-int32_t BMP085GetPressure(int32_t _pu);
+uint16_t BMP085GetPressure(int32_t _pu);
 uint32_t BMP085Pressure(uint8_t getTemp);
 uint32_t BMP085Temperature(void);
 

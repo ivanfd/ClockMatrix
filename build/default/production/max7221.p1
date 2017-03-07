@@ -5100,26 +5100,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Font.h: 267: {0x7C,0x10,0x38,0x44,0x38},
 [; ;Font.h: 268: {0x48,0x54,0x34,0x14,0x7C}
 [; ;Font.h: 269: };
-[; ;i2c.h: 9: void I2C_Init(void);
-[; ;i2c.h: 10: uint8_t I2C_start (uint8_t adress, uint8_t _R_W);
-[; ;i2c.h: 11: void I2C_idle (void);
-[; ;i2c.h: 12: uint8_t I2C_write (uint8_t data);
-[; ;i2c.h: 13: uint8_t I2C_read_noack (void);
-[; ;i2c.h: 14: uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
-[; ;i2c.h: 15: void I2C_stop (void);
-[; ;i2c.h: 16: uint8_t i2c_read_ack (void);
-[; ;ds3231.h: 38: uint8_t bcd_to_decimal(uint8_t d);
-[; ;ds3231.h: 39: uint8_t decimal_to_bcd(uint8_t d);
-[; ;ds3231.h: 43: uint8_t DS3231_Read(uint8_t address);
-[; ;ds3231.h: 48: void DS3231_Write(uint8_t address, uint8_t value);
-[; ;ds3231.h: 51: void DS3231_init();
-[; ;ds3231.h: 55: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1);
-[; ;ds3231.h: 57: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
-[; ;ds3231.h: 59: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
-[; ;ds3231.h: 60: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
-[v F3061 `Cuc ~T0 @X0 -> 3 `i t ]
+[; ;i2c.h: 10: void I2C_Master_Wait();
+[; ;i2c.h: 11: void I2C_Master_Start();
+[; ;i2c.h: 12: void I2C_Master_RepeatedStart();
+[; ;i2c.h: 13: void I2C_Master_Stop();
+[; ;i2c.h: 14: void I2C_Master_Write(uint8_t d);
+[; ;i2c.h: 15: uint8_t I2C_Master_Read(uint8_t a);
+[; ;ds3231.h: 39: uint8_t bcd_to_decimal(uint8_t d);
+[; ;ds3231.h: 40: uint8_t decimal_to_bcd(uint8_t d);
+[; ;ds3231.h: 44: uint8_t DS3231_Read(uint8_t address);
+[; ;ds3231.h: 49: void DS3231_Write(uint8_t address, uint8_t value);
+[; ;ds3231.h: 52: void DS3231_init();
+[; ;ds3231.h: 56: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1);
+[; ;ds3231.h: 58: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
+[; ;ds3231.h: 60: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
+[; ;ds3231.h: 61: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
+[v F3051 `Cuc ~T0 @X0 -> 3 `i t ]
 "3 FontS.h
-[v _FontS `F3061 ~T0 @X0 -> 0 `x e ]
+[v _FontS `F3051 ~T0 @X0 -> 0 `x e ]
 [i _FontS
 :U ..
 :U ..
@@ -5203,9 +5201,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;FontS.h: 13: {0x7C,0x54,0x7C},
 [; ;FontS.h: 14: {0x5C,0x54,0x7C}
 [; ;FontS.h: 15: };
-[v F3063 `Cuc ~T0 @X0 -> 7 `i t ]
+[v F3053 `Cuc ~T0 @X0 -> 7 `i t ]
 "3 pict.h
-[v _pic7x8 `F3063 ~T0 @X0 -> 0 `x e ]
+[v _pic7x8 `F3053 ~T0 @X0 -> 0 `x e ]
 [i _pic7x8
 :U ..
 :U ..
@@ -5294,17 +5292,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 "11 bmp180.h
 [v _OSS `Cuc ~T0 @X0 1 e ]
 [i _OSS
--> -> 0 `i `uc
+-> -> 3 `i `uc
 ]
-[; ;bmp180.h: 11: const uint8_t OSS = 0;
-[; ;bmp180.h: 14: int8_t BMP085ReadByte(uint8_t address);
+[; ;bmp180.h: 11: const uint8_t OSS = 3;
+[; ;bmp180.h: 14: uint8_t BMP085ReadByte(uint8_t address);
 [; ;bmp180.h: 15: int16_t bmp085ReadInt(uint8_t address);
 [; ;bmp180.h: 16: void BMP085WriteByte(uint8_t address, int8_t data);
 [; ;bmp180.h: 17: void bmp085Calibration();
 [; ;bmp180.h: 18: int32_t BMP085ReadUT();
 [; ;bmp180.h: 19: int32_t bmp085ReadUP();
 [; ;bmp180.h: 20: int32_t BMP085GetTemp(int32_t _tu);
-[; ;bmp180.h: 21: int32_t BMP085GetPressure(int32_t _pu);
+[; ;bmp180.h: 21: uint16_t BMP085GetPressure(int32_t _pu);
 [; ;bmp180.h: 22: uint32_t BMP085Pressure(uint8_t getTemp);
 [; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
 [; ;init.h: 15: void SYSTEM_Initialize(void);

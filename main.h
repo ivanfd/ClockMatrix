@@ -4,6 +4,7 @@
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 #include <stdint.h>
+#include <stdio.h>
 #include "init.h"
 #include "interrupt.h"
 #include "dispatcher.h"
@@ -18,7 +19,7 @@
 
 
 #define VERSION "Clock v1.0 by Ivan_fd"
-//#define DEBUG   // для відладки, розкоментувати.
+#define DEBUG   // для відладки, розкоментувати.
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */

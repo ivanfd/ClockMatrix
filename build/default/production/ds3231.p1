@@ -2,16 +2,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 "20 display.h
 [s S270 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S270 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
-"10 i2c.h
-[v _I2C_start `(uc ~T0 @X0 0 ef2`uc`uc ]
-"12
-[v _I2C_write `(uc ~T0 @X0 0 ef1`uc ]
+"11 i2c.h
+[v _I2C_Master_Start `(v ~T0 @X0 0 ef ]
 "14
-[v _I2C_restart `(uc ~T0 @X0 0 ef2`uc`uc ]
-"13
-[v _I2C_read_noack `(uc ~T0 @X0 0 ef ]
+[v _I2C_Master_Write `(v ~T0 @X0 0 ef1`uc ]
+"12
+[v _I2C_Master_RepeatedStart `(v ~T0 @X0 0 ef ]
 "15
-[v _I2C_stop `(v ~T0 @X0 0 ef ]
+[v _I2C_Master_Read `(uc ~T0 @X0 0 ef1`uc ]
+"13
+[v _I2C_Master_Stop `(v ~T0 @X0 0 ef ]
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef signed short long int int24_t;
@@ -5268,14 +5268,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 53: void putchar_down_s(uint8_t x, uint8_t symbol);
 [; ;display.h: 54: void pic_to_led(uint8_t x, uint8_t pic);
 [; ;display.h: 55: void scroll_left(void);
-[; ;i2c.h: 9: void I2C_Init(void);
-[; ;i2c.h: 10: uint8_t I2C_start (uint8_t adress, uint8_t _R_W);
-[; ;i2c.h: 11: void I2C_idle (void);
-[; ;i2c.h: 12: uint8_t I2C_write (uint8_t data);
-[; ;i2c.h: 13: uint8_t I2C_read_noack (void);
-[; ;i2c.h: 14: uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
-[; ;i2c.h: 15: void I2C_stop (void);
-[; ;i2c.h: 16: uint8_t i2c_read_ack (void);
+[; ;i2c.h: 10: void I2C_Master_Wait();
+[; ;i2c.h: 11: void I2C_Master_Start();
+[; ;i2c.h: 12: void I2C_Master_RepeatedStart();
+[; ;i2c.h: 13: void I2C_Master_Stop();
+[; ;i2c.h: 14: void I2C_Master_Write(uint8_t d);
+[; ;i2c.h: 15: uint8_t I2C_Master_Read(uint8_t a);
 [; ;eusart.h: 8: void init_uart(void);
 [; ;eusart.h: 9: void putch(char data);
 [; ;key.h: 22: void key_press(void);
@@ -5288,17 +5286,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 "11 bmp180.h
 [v _OSS `Cuc ~T0 @X0 1 e ]
 [i _OSS
--> -> 0 `i `uc
+-> -> 3 `i `uc
 ]
-[; ;bmp180.h: 11: const uint8_t OSS = 0;
-[; ;bmp180.h: 14: int8_t BMP085ReadByte(uint8_t address);
+[; ;bmp180.h: 11: const uint8_t OSS = 3;
+[; ;bmp180.h: 14: uint8_t BMP085ReadByte(uint8_t address);
 [; ;bmp180.h: 15: int16_t bmp085ReadInt(uint8_t address);
 [; ;bmp180.h: 16: void BMP085WriteByte(uint8_t address, int8_t data);
 [; ;bmp180.h: 17: void bmp085Calibration();
 [; ;bmp180.h: 18: int32_t BMP085ReadUT();
 [; ;bmp180.h: 19: int32_t bmp085ReadUP();
 [; ;bmp180.h: 20: int32_t BMP085GetTemp(int32_t _tu);
-[; ;bmp180.h: 21: int32_t BMP085GetPressure(int32_t _pu);
+[; ;bmp180.h: 21: uint16_t BMP085GetPressure(int32_t _pu);
 [; ;bmp180.h: 22: uint32_t BMP085Pressure(uint8_t getTemp);
 [; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
 [; ;init.h: 15: void SYSTEM_Initialize(void);
@@ -5356,15 +5354,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 51: void version(void);
 [; ;common.h: 52: void default_state(void);
 [; ;common.h: 53: void home_temp(void);
-[; ;ds3231.h: 38: uint8_t bcd_to_decimal(uint8_t d);
-[; ;ds3231.h: 39: uint8_t decimal_to_bcd(uint8_t d);
-[; ;ds3231.h: 43: uint8_t DS3231_Read(uint8_t address);
-[; ;ds3231.h: 48: void DS3231_Write(uint8_t address, uint8_t value);
-[; ;ds3231.h: 51: void DS3231_init();
-[; ;ds3231.h: 55: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1);
-[; ;ds3231.h: 57: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
-[; ;ds3231.h: 59: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
-[; ;ds3231.h: 60: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
+[; ;ds3231.h: 39: uint8_t bcd_to_decimal(uint8_t d);
+[; ;ds3231.h: 40: uint8_t decimal_to_bcd(uint8_t d);
+[; ;ds3231.h: 44: uint8_t DS3231_Read(uint8_t address);
+[; ;ds3231.h: 49: void DS3231_Write(uint8_t address, uint8_t value);
+[; ;ds3231.h: 52: void DS3231_init();
+[; ;ds3231.h: 56: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1);
+[; ;ds3231.h: 58: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
+[; ;ds3231.h: 60: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
+[; ;ds3231.h: 61: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
 "4 ds3231.c
 [v _bcd_to_decimal `(uc ~T0 @X0 1 ef1`uc ]
 "5
@@ -5418,205 +5416,214 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _value `uc ~T0 @X0 1 a ]
 [; ;ds3231.c: 18: uint8_t value = 0;
 [e = _value -> -> 0 `i `uc ]
-[; ;ds3231.c: 19: I2C_start(0xD0,0);
+[; ;ds3231.c: 19: I2C_Master_Start();
 "19
-[e ( _I2C_start (2 , -> -> 208 `i `uc -> -> 0 `i `uc ]
-[; ;ds3231.c: 20: I2C_write(address);
+[e ( _I2C_Master_Start ..  ]
+[; ;ds3231.c: 20: I2C_Master_Write(0xD0);
 "20
-[e ( _I2C_write (1 _address ]
-[; ;ds3231.c: 21: I2C_restart(0xD0,1);
+[e ( _I2C_Master_Write (1 -> -> 208 `i `uc ]
+[; ;ds3231.c: 21: I2C_Master_Write(address);
 "21
-[e ( _I2C_restart (2 , -> -> 208 `i `uc -> -> 1 `i `uc ]
-[; ;ds3231.c: 22: value = I2C_read_noack();
+[e ( _I2C_Master_Write (1 _address ]
+[; ;ds3231.c: 22: I2C_Master_RepeatedStart();
 "22
-[e = _value ( _I2C_read_noack ..  ]
-[; ;ds3231.c: 23: I2C_stop();
+[e ( _I2C_Master_RepeatedStart ..  ]
+[; ;ds3231.c: 23: I2C_Master_Write(0xD1);
 "23
-[e ( _I2C_stop ..  ]
-[; ;ds3231.c: 24: return value;
+[e ( _I2C_Master_Write (1 -> -> 209 `i `uc ]
+[; ;ds3231.c: 24: value = I2C_Master_Read(0);
 "24
+[e = _value ( _I2C_Master_Read (1 -> -> 0 `i `uc ]
+[; ;ds3231.c: 25: I2C_Master_Stop();
+"25
+[e ( _I2C_Master_Stop ..  ]
+[; ;ds3231.c: 26: return value;
+"26
 [e ) _value ]
 [e $UE 274  ]
-[; ;ds3231.c: 25: }
-"25
+[; ;ds3231.c: 27: }
+"27
 [e :UE 274 ]
 }
-"28
+"30
 [v _DS3231_Write `(v ~T0 @X0 1 ef2`uc`uc ]
-"29
+"31
 {
-[; ;ds3231.c: 28: void DS3231_Write(uint8_t address, uint8_t value)
-[; ;ds3231.c: 29: {
+[; ;ds3231.c: 30: void DS3231_Write(uint8_t address, uint8_t value)
+[; ;ds3231.c: 31: {
 [e :U _DS3231_Write ]
-"28
+"30
 [v _address `uc ~T0 @X0 1 r1 ]
 [v _value `uc ~T0 @X0 1 r2 ]
-"29
-[f ]
-[; ;ds3231.c: 30: I2C_start(0xD0,0);
-"30
-[e ( _I2C_start (2 , -> -> 208 `i `uc -> -> 0 `i `uc ]
-[; ;ds3231.c: 31: I2C_write(address);
 "31
-[e ( _I2C_write (1 _address ]
-[; ;ds3231.c: 32: I2C_write(value);
+[f ]
+[; ;ds3231.c: 32: I2C_Master_Start();
 "32
-[e ( _I2C_write (1 _value ]
-[; ;ds3231.c: 33: I2C_stop();
+[e ( _I2C_Master_Start ..  ]
+[; ;ds3231.c: 33: I2C_Master_Write(0xD0);
 "33
-[e ( _I2C_stop ..  ]
-[; ;ds3231.c: 34: }
+[e ( _I2C_Master_Write (1 -> -> 208 `i `uc ]
+[; ;ds3231.c: 34: I2C_Master_Write(address);
 "34
+[e ( _I2C_Master_Write (1 _address ]
+[; ;ds3231.c: 35: I2C_Master_Write(value);
+"35
+[e ( _I2C_Master_Write (1 _value ]
+[; ;ds3231.c: 36: I2C_Master_Stop();
+"36
+[e ( _I2C_Master_Stop ..  ]
+[; ;ds3231.c: 37: }
+"37
 [e :UE 275 ]
 }
-"37
+"40
 [v _DS3231_init `(v ~T0 @X0 1 ef ]
-"38
+"41
 {
-[; ;ds3231.c: 37: void DS3231_init()
-[; ;ds3231.c: 38: {
+[; ;ds3231.c: 40: void DS3231_init()
+[; ;ds3231.c: 41: {
 [e :U _DS3231_init ]
 [f ]
-[; ;ds3231.c: 39: DS3231_Write(0x0E, 0x00);
-"39
+[; ;ds3231.c: 42: DS3231_Write(0x0E, 0x00);
+"42
 [e ( _DS3231_Write (2 , -> -> 14 `i `uc -> -> 0 `i `uc ]
-[; ;ds3231.c: 40: DS3231_Write(0x0F, 0x08);
-"40
+[; ;ds3231.c: 43: DS3231_Write(0x0F, 0x08);
+"43
 [e ( _DS3231_Write (2 , -> -> 15 `i `uc -> -> 8 `i `uc ]
-[; ;ds3231.c: 41: }
-"41
+[; ;ds3231.c: 44: }
+"44
 [e :UE 276 ]
 }
-"46
+"49
 [v _getTime `(v ~T0 @X0 1 ef3`*uc`*uc`*uc ]
-"47
+"50
 {
-[; ;ds3231.c: 46: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1)
-[; ;ds3231.c: 47: {
+[; ;ds3231.c: 49: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1)
+[; ;ds3231.c: 50: {
 [e :U _getTime ]
-"46
+"49
 [v _p3 `*uc ~T0 @X0 1 r1 ]
 [v _p2 `*uc ~T0 @X0 1 r2 ]
 [v _p1 `*uc ~T0 @X0 1 r3 ]
-"47
-[f ]
-[; ;ds3231.c: 48: *p1 = DS3231_Read(0x00);
-"48
-[e = *U _p1 ( _DS3231_Read (1 -> -> 0 `i `uc ]
-[; ;ds3231.c: 49: *p1 = bcd_to_decimal(*p1);
-"49
-[e = *U _p1 ( _bcd_to_decimal (1 *U _p1 ]
-[; ;ds3231.c: 50: *p2 = DS3231_Read(0x01);
 "50
-[e = *U _p2 ( _DS3231_Read (1 -> -> 1 `i `uc ]
-[; ;ds3231.c: 51: *p2 = bcd_to_decimal(*p2);
+[f ]
+[; ;ds3231.c: 51: *p1 = DS3231_Read(0x00);
 "51
-[e = *U _p2 ( _bcd_to_decimal (1 *U _p2 ]
-[; ;ds3231.c: 52: *p3 = (0x3F & DS3231_Read(0x02));
+[e = *U _p1 ( _DS3231_Read (1 -> -> 0 `i `uc ]
+[; ;ds3231.c: 52: *p1 = bcd_to_decimal(*p1);
 "52
-[e = *U _p3 -> & -> 63 `i -> ( _DS3231_Read (1 -> -> 2 `i `uc `i `uc ]
-[; ;ds3231.c: 53: *p3 = bcd_to_decimal(*p3);
+[e = *U _p1 ( _bcd_to_decimal (1 *U _p1 ]
+[; ;ds3231.c: 53: *p2 = DS3231_Read(0x01);
 "53
-[e = *U _p3 ( _bcd_to_decimal (1 *U _p3 ]
-[; ;ds3231.c: 54: }
+[e = *U _p2 ( _DS3231_Read (1 -> -> 1 `i `uc ]
+[; ;ds3231.c: 54: *p2 = bcd_to_decimal(*p2);
 "54
+[e = *U _p2 ( _bcd_to_decimal (1 *U _p2 ]
+[; ;ds3231.c: 55: *p3 = (0x3F & DS3231_Read(0x02));
+"55
+[e = *U _p3 -> & -> 63 `i -> ( _DS3231_Read (1 -> -> 2 `i `uc `i `uc ]
+[; ;ds3231.c: 56: *p3 = bcd_to_decimal(*p3);
+"56
+[e = *U _p3 ( _bcd_to_decimal (1 *U _p3 ]
+[; ;ds3231.c: 57: }
+"57
 [e :UE 277 ]
 }
-"59
+"62
 [v _getDate `(v ~T0 @X0 1 ef4`*uc`*uc`*uc`*uc ]
-"60
+"63
 {
-[; ;ds3231.c: 59: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1)
-[; ;ds3231.c: 60: {
+[; ;ds3231.c: 62: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1)
+[; ;ds3231.c: 63: {
 [e :U _getDate ]
-"59
+"62
 [v _p4 `*uc ~T0 @X0 1 r1 ]
 [v _p3 `*uc ~T0 @X0 1 r2 ]
 [v _p2 `*uc ~T0 @X0 1 r3 ]
 [v _p1 `*uc ~T0 @X0 1 r4 ]
-"60
-[f ]
-[; ;ds3231.c: 61: *p1 = DS3231_Read(0x06);
-"61
-[e = *U _p1 ( _DS3231_Read (1 -> -> 6 `i `uc ]
-[; ;ds3231.c: 62: *p1 = bcd_to_decimal(*p1);
-"62
-[e = *U _p1 ( _bcd_to_decimal (1 *U _p1 ]
-[; ;ds3231.c: 63: *p2 = (0x1F & DS3231_Read(0x05));
 "63
-[e = *U _p2 -> & -> 31 `i -> ( _DS3231_Read (1 -> -> 5 `i `uc `i `uc ]
-[; ;ds3231.c: 64: *p2 = bcd_to_decimal(*p2);
+[f ]
+[; ;ds3231.c: 64: *p1 = DS3231_Read(0x06);
 "64
-[e = *U _p2 ( _bcd_to_decimal (1 *U _p2 ]
-[; ;ds3231.c: 65: *p3 = (0x3F & DS3231_Read(0x04));
+[e = *U _p1 ( _DS3231_Read (1 -> -> 6 `i `uc ]
+[; ;ds3231.c: 65: *p1 = bcd_to_decimal(*p1);
 "65
-[e = *U _p3 -> & -> 63 `i -> ( _DS3231_Read (1 -> -> 4 `i `uc `i `uc ]
-[; ;ds3231.c: 66: *p3 = bcd_to_decimal(*p3);
+[e = *U _p1 ( _bcd_to_decimal (1 *U _p1 ]
+[; ;ds3231.c: 66: *p2 = (0x1F & DS3231_Read(0x05));
 "66
-[e = *U _p3 ( _bcd_to_decimal (1 *U _p3 ]
-[; ;ds3231.c: 67: *p4 = (0x07 & DS3231_Read(0x03));
+[e = *U _p2 -> & -> 31 `i -> ( _DS3231_Read (1 -> -> 5 `i `uc `i `uc ]
+[; ;ds3231.c: 67: *p2 = bcd_to_decimal(*p2);
 "67
-[e = *U _p4 -> & -> 7 `i -> ( _DS3231_Read (1 -> -> 3 `i `uc `i `uc ]
-[; ;ds3231.c: 68: *p4 = bcd_to_decimal(*p4);
+[e = *U _p2 ( _bcd_to_decimal (1 *U _p2 ]
+[; ;ds3231.c: 68: *p3 = (0x3F & DS3231_Read(0x04));
 "68
-[e = *U _p4 ( _bcd_to_decimal (1 *U _p4 ]
-[; ;ds3231.c: 69: }
+[e = *U _p3 -> & -> 63 `i -> ( _DS3231_Read (1 -> -> 4 `i `uc `i `uc ]
+[; ;ds3231.c: 69: *p3 = bcd_to_decimal(*p3);
 "69
+[e = *U _p3 ( _bcd_to_decimal (1 *U _p3 ]
+[; ;ds3231.c: 70: *p4 = (0x07 & DS3231_Read(0x03));
+"70
+[e = *U _p4 -> & -> 7 `i -> ( _DS3231_Read (1 -> -> 3 `i `uc `i `uc ]
+[; ;ds3231.c: 71: *p4 = bcd_to_decimal(*p4);
+"71
+[e = *U _p4 ( _bcd_to_decimal (1 *U _p4 ]
+[; ;ds3231.c: 72: }
+"72
 [e :UE 278 ]
 }
-"71
+"74
 [v _setTime `(v ~T0 @X0 1 ef3`uc`uc`uc ]
-"72
+"75
 {
-[; ;ds3231.c: 71: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet)
-[; ;ds3231.c: 72: {
+[; ;ds3231.c: 74: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet)
+[; ;ds3231.c: 75: {
 [e :U _setTime ]
-"71
+"74
 [v _hSet `uc ~T0 @X0 1 r1 ]
 [v _mSet `uc ~T0 @X0 1 r2 ]
 [v _sSet `uc ~T0 @X0 1 r3 ]
-"72
-[f ]
-[; ;ds3231.c: 73: DS3231_Write(0x00, (decimal_to_bcd(sSet)));
-"73
-[e ( _DS3231_Write (2 , -> -> 0 `i `uc ( _decimal_to_bcd (1 _sSet ]
-[; ;ds3231.c: 74: DS3231_Write(0x01, (decimal_to_bcd(mSet)));
-"74
-[e ( _DS3231_Write (2 , -> -> 1 `i `uc ( _decimal_to_bcd (1 _mSet ]
-[; ;ds3231.c: 75: DS3231_Write(0x02, (0x3F & (decimal_to_bcd(hSet))));
 "75
-[e ( _DS3231_Write (2 , -> -> 2 `i `uc -> & -> 63 `i -> ( _decimal_to_bcd (1 _hSet `i `uc ]
-[; ;ds3231.c: 76: }
+[f ]
+[; ;ds3231.c: 76: DS3231_Write(0x00, (decimal_to_bcd(sSet)));
 "76
+[e ( _DS3231_Write (2 , -> -> 0 `i `uc ( _decimal_to_bcd (1 _sSet ]
+[; ;ds3231.c: 77: DS3231_Write(0x01, (decimal_to_bcd(mSet)));
+"77
+[e ( _DS3231_Write (2 , -> -> 1 `i `uc ( _decimal_to_bcd (1 _mSet ]
+[; ;ds3231.c: 78: DS3231_Write(0x02, (0x3F & (decimal_to_bcd(hSet))));
+"78
+[e ( _DS3231_Write (2 , -> -> 2 `i `uc -> & -> 63 `i -> ( _decimal_to_bcd (1 _hSet `i `uc ]
+[; ;ds3231.c: 79: }
+"79
 [e :UE 279 ]
 }
-"79
+"82
 [v _setDate `(v ~T0 @X0 1 ef4`uc`uc`uc`uc ]
-"80
+"83
 {
-[; ;ds3231.c: 79: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet)
-[; ;ds3231.c: 80: {
+[; ;ds3231.c: 82: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet)
+[; ;ds3231.c: 83: {
 [e :U _setDate ]
-"79
+"82
 [v _daySet `uc ~T0 @X0 1 r1 ]
 [v _dateSet `uc ~T0 @X0 1 r2 ]
 [v _monthSet `uc ~T0 @X0 1 r3 ]
 [v _yearSet `uc ~T0 @X0 1 r4 ]
-"80
-[f ]
-[; ;ds3231.c: 81: DS3231_Write(0x03, (decimal_to_bcd(daySet)));
-"81
-[e ( _DS3231_Write (2 , -> -> 3 `i `uc ( _decimal_to_bcd (1 _daySet ]
-[; ;ds3231.c: 82: DS3231_Write(0x04, (decimal_to_bcd(dateSet)));
-"82
-[e ( _DS3231_Write (2 , -> -> 4 `i `uc ( _decimal_to_bcd (1 _dateSet ]
-[; ;ds3231.c: 83: DS3231_Write(0x05, (decimal_to_bcd(monthSet)));
 "83
-[e ( _DS3231_Write (2 , -> -> 5 `i `uc ( _decimal_to_bcd (1 _monthSet ]
-[; ;ds3231.c: 84: DS3231_Write(0x06, (decimal_to_bcd(yearSet)));
+[f ]
+[; ;ds3231.c: 84: DS3231_Write(0x03, (decimal_to_bcd(daySet)));
 "84
-[e ( _DS3231_Write (2 , -> -> 6 `i `uc ( _decimal_to_bcd (1 _yearSet ]
-[; ;ds3231.c: 85: }
+[e ( _DS3231_Write (2 , -> -> 3 `i `uc ( _decimal_to_bcd (1 _daySet ]
+[; ;ds3231.c: 85: DS3231_Write(0x04, (decimal_to_bcd(dateSet)));
 "85
+[e ( _DS3231_Write (2 , -> -> 4 `i `uc ( _decimal_to_bcd (1 _dateSet ]
+[; ;ds3231.c: 86: DS3231_Write(0x05, (decimal_to_bcd(monthSet)));
+"86
+[e ( _DS3231_Write (2 , -> -> 5 `i `uc ( _decimal_to_bcd (1 _monthSet ]
+[; ;ds3231.c: 87: DS3231_Write(0x06, (decimal_to_bcd(yearSet)));
+"87
+[e ( _DS3231_Write (2 , -> -> 6 `i `uc ( _decimal_to_bcd (1 _yearSet ]
+[; ;ds3231.c: 88: }
+"88
 [e :UE 280 ]
 }

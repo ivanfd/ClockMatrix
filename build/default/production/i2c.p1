@@ -14,18 +14,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _PEN `Vb ~T0 @X0 0 e@32298 ]
 "4690
 [v _SSPCON2 `Vuc ~T0 @X0 0 e@4037 ]
-"7513
-[v _R_W `Vb ~T0 @X0 0 e@32314 ]
 "7535
 [v _SEN `Vb ~T0 @X0 0 e@32296 ]
-"5046
-[v _SSPBUF `Vuc ~T0 @X0 0 e@4041 ]
-"6721
-[v _ACKSTAT `Vb ~T0 @X0 0 e@32302 ]
 "7497
 [v _RSEN `Vb ~T0 @X0 0 e@32297 ]
-"7571
-[v _SSPIF `Vb ~T0 @X0 0 e@31987 ]
+"5046
+[v _SSPBUF `Vuc ~T0 @X0 0 e@4041 ]
 "7451
 [v _RCEN `Vb ~T0 @X0 0 e@32299 ]
 "6717
@@ -5123,15 +5117,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;max7221.h: 23: void Cmd7221(uint8_t adr, uint8_t val );
 [; ;max7221.h: 24: void Update_Matrix(uint8_t *buf);
 [; ;max7221.h: 25: void Init7221();
-[; ;ds3231.h: 38: uint8_t bcd_to_decimal(uint8_t d);
-[; ;ds3231.h: 39: uint8_t decimal_to_bcd(uint8_t d);
-[; ;ds3231.h: 43: uint8_t DS3231_Read(uint8_t address);
-[; ;ds3231.h: 48: void DS3231_Write(uint8_t address, uint8_t value);
-[; ;ds3231.h: 51: void DS3231_init();
-[; ;ds3231.h: 55: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1);
-[; ;ds3231.h: 57: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
-[; ;ds3231.h: 59: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
-[; ;ds3231.h: 60: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
+[; ;ds3231.h: 39: uint8_t bcd_to_decimal(uint8_t d);
+[; ;ds3231.h: 40: uint8_t decimal_to_bcd(uint8_t d);
+[; ;ds3231.h: 44: uint8_t DS3231_Read(uint8_t address);
+[; ;ds3231.h: 49: void DS3231_Write(uint8_t address, uint8_t value);
+[; ;ds3231.h: 52: void DS3231_init();
+[; ;ds3231.h: 56: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1);
+[; ;ds3231.h: 58: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
+[; ;ds3231.h: 60: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
+[; ;ds3231.h: 61: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
 [v F3051 `Cuc ~T0 @X0 -> 3 `i t ]
 "3 FontS.h
 [v _FontS `F3051 ~T0 @X0 -> 0 `x e ]
@@ -5309,17 +5303,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 "11 bmp180.h
 [v _OSS `Cuc ~T0 @X0 1 e ]
 [i _OSS
--> -> 0 `i `uc
+-> -> 3 `i `uc
 ]
-[; ;bmp180.h: 11: const uint8_t OSS = 0;
-[; ;bmp180.h: 14: int8_t BMP085ReadByte(uint8_t address);
+[; ;bmp180.h: 11: const uint8_t OSS = 3;
+[; ;bmp180.h: 14: uint8_t BMP085ReadByte(uint8_t address);
 [; ;bmp180.h: 15: int16_t bmp085ReadInt(uint8_t address);
 [; ;bmp180.h: 16: void BMP085WriteByte(uint8_t address, int8_t data);
 [; ;bmp180.h: 17: void bmp085Calibration();
 [; ;bmp180.h: 18: int32_t BMP085ReadUT();
 [; ;bmp180.h: 19: int32_t bmp085ReadUP();
 [; ;bmp180.h: 20: int32_t BMP085GetTemp(int32_t _tu);
-[; ;bmp180.h: 21: int32_t BMP085GetPressure(int32_t _pu);
+[; ;bmp180.h: 21: uint16_t BMP085GetPressure(int32_t _pu);
 [; ;bmp180.h: 22: uint32_t BMP085Pressure(uint8_t getTemp);
 [; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
 [; ;init.h: 15: void SYSTEM_Initialize(void);
@@ -5377,14 +5371,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 51: void version(void);
 [; ;common.h: 52: void default_state(void);
 [; ;common.h: 53: void home_temp(void);
-[; ;i2c.h: 9: void I2C_Init(void);
-[; ;i2c.h: 10: uint8_t I2C_start (uint8_t adress, uint8_t _R_W);
-[; ;i2c.h: 11: void I2C_idle (void);
-[; ;i2c.h: 12: uint8_t I2C_write (uint8_t data);
-[; ;i2c.h: 13: uint8_t I2C_read_noack (void);
-[; ;i2c.h: 14: uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
-[; ;i2c.h: 15: void I2C_stop (void);
-[; ;i2c.h: 16: uint8_t i2c_read_ack (void);
+[; ;i2c.h: 10: void I2C_Master_Wait();
+[; ;i2c.h: 11: void I2C_Master_Start();
+[; ;i2c.h: 12: void I2C_Master_RepeatedStart();
+[; ;i2c.h: 13: void I2C_Master_Stop();
+[; ;i2c.h: 14: void I2C_Master_Write(uint8_t d);
+[; ;i2c.h: 15: uint8_t I2C_Master_Read(uint8_t a);
 "11 i2c.c
 [v _I2C_Init `(v ~T0 @X0 1 ef ]
 "12
@@ -5399,12 +5391,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c.c: 14: SSPCON1 = 0b00101000;
 "14
 [e = _SSPCON1 -> -> 40 `i `uc ]
-[; ;i2c.c: 15: SSPSTAT = 0b10000000;
+[; ;i2c.c: 15: SSPSTAT = 0b00000000;
 "15
-[e = _SSPSTAT -> -> 128 `i `uc ]
-[; ;i2c.c: 17: SSPADD = 0x1F;
-"17
-[e = _SSPADD -> -> 31 `i `uc ]
+[e = _SSPSTAT -> -> 0 `i `uc ]
+[; ;i2c.c: 16: SSPADD = 0x63;
+"16
+[e = _SSPADD -> -> 99 `i `uc ]
 [; ;i2c.c: 18: PEN = 1;
 "18
 [e = _PEN -> -> 1 `i `b ]
@@ -5420,283 +5412,139 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 272 ]
 }
 "24
-[v _I2C_idle `(v ~T0 @X0 1 ef ]
+[v _I2C_Master_Wait `(v ~T0 @X0 1 ef ]
 "25
 {
-[; ;i2c.c: 24: void I2C_idle (void)
+[; ;i2c.c: 24: void I2C_Master_Wait()
 [; ;i2c.c: 25: {
-[e :U _I2C_idle ]
+[e :U _I2C_Master_Wait ]
 [f ]
-[; ;i2c.c: 26: while((SSPCON2 & 0x1F) || R_W);
+[; ;i2c.c: 26: while ((SSPSTAT & 0x04) || (SSPCON2 & 0x1F));
 "26
 [e $U 277  ]
 [e :U 278 ]
 [e :U 277 ]
-[e $ || != & -> _SSPCON2 `i -> 31 `i -> 0 `i _R_W 278  ]
+[e $ || != & -> _SSPSTAT `i -> 4 `i -> 0 `i != & -> _SSPCON2 `i -> 31 `i -> 0 `i 278  ]
 [e :U 279 ]
 [; ;i2c.c: 27: }
 "27
 [e :UE 276 ]
 }
-"32
-[v _I2C_start `(uc ~T0 @X0 1 ef2`uc`uc ]
-"33
+"30
+[v _I2C_Master_Start `(v ~T0 @X0 1 ef ]
+"31
 {
-[; ;i2c.c: 32: uint8_t I2C_start (uint8_t adress, uint8_t _R_W)
-[; ;i2c.c: 33: {
-[e :U _I2C_start ]
-"32
-[v _adress `uc ~T0 @X0 1 r1 ]
-[v __R_W `uc ~T0 @X0 1 r2 ]
-"33
+[; ;i2c.c: 30: void I2C_Master_Start()
+[; ;i2c.c: 31: {
+[e :U _I2C_Master_Start ]
 [f ]
-[; ;i2c.c: 34: I2C_idle();
-"34
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 35: SEN = 1;
-"35
+[; ;i2c.c: 32: I2C_Master_Wait();
+"32
+[e ( _I2C_Master_Wait ..  ]
+[; ;i2c.c: 33: SEN = 1;
+"33
 [e = _SEN -> -> 1 `i `b ]
-[; ;i2c.c: 36: I2C_idle();
-"36
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 37: if(_R_W == 0) adress &= 0b11111110;
-"37
-[e $ ! == -> __R_W `i -> 0 `i 281  ]
-[e =& _adress -> -> 254 `i `uc ]
-[e $U 282  ]
-"38
-[e :U 281 ]
-[; ;i2c.c: 38: else adress |= 0b00000001;
-[e =| _adress -> -> 1 `i `uc ]
-[e :U 282 ]
-[; ;i2c.c: 39: SSPBUF=adress;
-"39
-[e = _SSPBUF _adress ]
-[; ;i2c.c: 40: I2C_idle();
-"40
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 41: if (ACKSTAT==0) return 0;
-"41
-[e $ ! == -> _ACKSTAT `i -> 0 `i 283  ]
-[e ) -> -> 0 `i `uc ]
-[e $UE 280  ]
-[e $U 284  ]
-"42
-[e :U 283 ]
-[; ;i2c.c: 42: else
-[; ;i2c.c: 43: { PEN = 1; while (PEN); return 1;}
-"43
-{
-[e = _PEN -> -> 1 `i `b ]
-[e $U 285  ]
-[e :U 286 ]
-[e :U 285 ]
-[e $ _PEN 286  ]
-[e :U 287 ]
-[e ) -> -> 1 `i `uc ]
-[e $UE 280  ]
-}
-[e :U 284 ]
-[; ;i2c.c: 44: }
-"44
+[; ;i2c.c: 34: }
+"34
 [e :UE 280 ]
 }
-"48
-[v _I2C_restart `(uc ~T0 @X0 1 ef2`uc`uc ]
-"49
+"37
+[v _I2C_Master_RepeatedStart `(v ~T0 @X0 1 ef ]
+"38
 {
-[; ;i2c.c: 48: uint8_t I2C_restart (uint8_t adres, uint8_t _R_W)
-[; ;i2c.c: 49: {
-[e :U _I2C_restart ]
-"48
-[v _adres `uc ~T0 @X0 1 r1 ]
-[v __R_W `uc ~T0 @X0 1 r2 ]
-"49
+[; ;i2c.c: 37: void I2C_Master_RepeatedStart()
+[; ;i2c.c: 38: {
+[e :U _I2C_Master_RepeatedStart ]
 [f ]
-[; ;i2c.c: 50: I2C_idle();
-"50
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 51: RSEN = 1;
-"51
+[; ;i2c.c: 39: I2C_Master_Wait();
+"39
+[e ( _I2C_Master_Wait ..  ]
+[; ;i2c.c: 40: RSEN = 1;
+"40
 [e = _RSEN -> -> 1 `i `b ]
-[; ;i2c.c: 52: I2C_idle();
+[; ;i2c.c: 41: }
+"41
+[e :UE 281 ]
+}
+"44
+[v _I2C_Master_Stop `(v ~T0 @X0 1 ef ]
+"45
+{
+[; ;i2c.c: 44: void I2C_Master_Stop()
+[; ;i2c.c: 45: {
+[e :U _I2C_Master_Stop ]
+[f ]
+[; ;i2c.c: 46: I2C_Master_Wait();
+"46
+[e ( _I2C_Master_Wait ..  ]
+[; ;i2c.c: 47: PEN = 1;
+"47
+[e = _PEN -> -> 1 `i `b ]
+[; ;i2c.c: 48: }
+"48
+[e :UE 282 ]
+}
+"51
+[v _I2C_Master_Write `(v ~T0 @X0 1 ef1`uc ]
 "52
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 53: if(_R_W == 0) adres &= 0b11111110;
+{
+[; ;i2c.c: 51: void I2C_Master_Write(uint8_t d)
+[; ;i2c.c: 52: {
+[e :U _I2C_Master_Write ]
+"51
+[v _d `uc ~T0 @X0 1 r1 ]
+"52
+[f ]
+[; ;i2c.c: 53: I2C_Master_Wait();
 "53
-[e $ ! == -> __R_W `i -> 0 `i 289  ]
-[e =& _adres -> -> 254 `i `uc ]
-[e $U 290  ]
+[e ( _I2C_Master_Wait ..  ]
+[; ;i2c.c: 54: SSPBUF = d;
 "54
-[e :U 289 ]
-[; ;i2c.c: 54: else adres |= 0b00000001;
-[e =| _adres -> -> 1 `i `uc ]
-[e :U 290 ]
-[; ;i2c.c: 55: SSPBUF = adres;
+[e = _SSPBUF _d ]
+[; ;i2c.c: 55: }
 "55
-[e = _SSPBUF _adres ]
-[; ;i2c.c: 56: I2C_idle();
-"56
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 57: if (ACKSTAT == 0) return 0;
-"57
-[e $ ! == -> _ACKSTAT `i -> 0 `i 291  ]
-[e ) -> -> 0 `i `uc ]
-[e $UE 288  ]
-[e $U 292  ]
+[e :UE 283 ]
+}
 "58
-[e :U 291 ]
-[; ;i2c.c: 58: else
-[; ;i2c.c: 59: { PEN = 1; while (PEN); return 1;}
+[v _I2C_Master_Read `(uc ~T0 @X0 1 ef1`uc ]
 "59
 {
-[e = _PEN -> -> 1 `i `b ]
-[e $U 293  ]
-[e :U 294 ]
-[e :U 293 ]
-[e $ _PEN 294  ]
-[e :U 295 ]
-[e ) -> -> 1 `i `uc ]
-[e $UE 288  ]
-}
-[e :U 292 ]
-[; ;i2c.c: 60: }
+[; ;i2c.c: 58: uint8_t I2C_Master_Read(uint8_t a)
+[; ;i2c.c: 59: {
+[e :U _I2C_Master_Read ]
+"58
+[v _a `uc ~T0 @X0 1 r1 ]
+"59
+[f ]
 "60
-[e :UE 288 ]
-}
+[v _temp `uc ~T0 @X0 1 a ]
+[; ;i2c.c: 60: uint8_t temp;
+[; ;i2c.c: 61: I2C_Master_Wait();
+"61
+[e ( _I2C_Master_Wait ..  ]
+[; ;i2c.c: 62: RCEN = 1;
+"62
+[e = _RCEN -> -> 1 `i `b ]
+[; ;i2c.c: 63: I2C_Master_Wait();
 "63
-[v _I2C_write `(uc ~T0 @X0 1 ef1`uc ]
+[e ( _I2C_Master_Wait ..  ]
+[; ;i2c.c: 64: temp = SSPBUF;
 "64
-{
-[; ;i2c.c: 63: uint8_t I2C_write (uint8_t data)
-[; ;i2c.c: 64: {
-[e :U _I2C_write ]
-"63
-[v _data `uc ~T0 @X0 1 r1 ]
-"64
-[f ]
-[; ;i2c.c: 65: I2C_idle();
+[e = _temp _SSPBUF ]
+[; ;i2c.c: 65: I2C_Master_Wait();
 "65
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 66: SSPBUF = data;
+[e ( _I2C_Master_Wait ..  ]
+[; ;i2c.c: 66: ACKDT = (a)?0:1;
 "66
-[e = _SSPBUF _data ]
-[; ;i2c.c: 67: SSPIF = 0;
+[e = _ACKDT -> ? != -> _a `i -> -> -> 0 `i `uc `i : -> 0 `i -> 1 `i `b ]
+[; ;i2c.c: 67: ACKEN = 1;
 "67
-[e = _SSPIF -> -> 0 `i `b ]
-[; ;i2c.c: 68: I2C_idle();
+[e = _ACKEN -> -> 1 `i `b ]
+[; ;i2c.c: 68: return temp;
 "68
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 69: if (ACKSTAT == 0) return 0;
+[e ) _temp ]
+[e $UE 284  ]
+[; ;i2c.c: 69: }
 "69
-[e $ ! == -> _ACKSTAT `i -> 0 `i 297  ]
-[e ) -> -> 0 `i `uc ]
-[e $UE 296  ]
-[e $U 298  ]
-"70
-[e :U 297 ]
-[; ;i2c.c: 70: else
-[; ;i2c.c: 71: { PEN = 1; while (PEN); return 1;}
-"71
-{
-[e = _PEN -> -> 1 `i `b ]
-[e $U 299  ]
-[e :U 300 ]
-[e :U 299 ]
-[e $ _PEN 300  ]
-[e :U 301 ]
-[e ) -> -> 1 `i `uc ]
-[e $UE 296  ]
-}
-[e :U 298 ]
-[; ;i2c.c: 72: }
-"72
-[e :UE 296 ]
-}
-"75
-[v _I2C_read_noack `(uc ~T0 @X0 1 ef ]
-"76
-{
-[; ;i2c.c: 75: uint8_t I2C_read_noack (void)
-[; ;i2c.c: 76: {
-[e :U _I2C_read_noack ]
-[f ]
-[; ;i2c.c: 77: I2C_idle();
-"77
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 78: RCEN = 1;
-"78
-[e = _RCEN -> -> 1 `i `b ]
-[; ;i2c.c: 79: I2C_idle();
-"79
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 80: ACKDT = 1;
-"80
-[e = _ACKDT -> -> 1 `i `b ]
-[; ;i2c.c: 81: ACKEN = 1;
-"81
-[e = _ACKEN -> -> 1 `i `b ]
-[; ;i2c.c: 83: return SSPBUF;
-"83
-[e ) _SSPBUF ]
-[e $UE 302  ]
-[; ;i2c.c: 84: }
-"84
-[e :UE 302 ]
-}
-"86
-[v _i2c_read_ack `(uc ~T0 @X0 1 ef ]
-"87
-{
-[; ;i2c.c: 86: uint8_t i2c_read_ack (void)
-[; ;i2c.c: 87: {
-[e :U _i2c_read_ack ]
-[f ]
-[; ;i2c.c: 88: I2C_idle();
-"88
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 89: RCEN=1;
-"89
-[e = _RCEN -> -> 1 `i `b ]
-[; ;i2c.c: 90: I2C_idle();
-"90
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 91: ACKDT=0;
-"91
-[e = _ACKDT -> -> 0 `i `b ]
-[; ;i2c.c: 92: ACKEN=1;
-"92
-[e = _ACKEN -> -> 1 `i `b ]
-[; ;i2c.c: 93: return SSPBUF;
-"93
-[e ) _SSPBUF ]
-[e $UE 303  ]
-[; ;i2c.c: 94: }
-"94
-[e :UE 303 ]
-}
-"97
-[v _I2C_stop `(v ~T0 @X0 1 ef ]
-"98
-{
-[; ;i2c.c: 97: void I2C_stop (void)
-[; ;i2c.c: 98: {
-[e :U _I2C_stop ]
-[f ]
-[; ;i2c.c: 99: I2C_idle();
-"99
-[e ( _I2C_idle ..  ]
-[; ;i2c.c: 100: PEN = 1;
-"100
-[e = _PEN -> -> 1 `i `b ]
-[; ;i2c.c: 101: while(PEN);
-"101
-[e $U 305  ]
-[e :U 306 ]
-[e :U 305 ]
-[e $ _PEN 306  ]
-[e :U 307 ]
-[; ;i2c.c: 102: }
-"102
-[e :UE 304 ]
+[e :UE 284 ]
 }

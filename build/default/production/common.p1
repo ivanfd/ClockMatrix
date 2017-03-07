@@ -2,23 +2,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 "20 display.h
 [s S270 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S270 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
-"55 ds3231.h
+"56 ds3231.h
 [v _getTime `(v ~T0 @X0 0 ef3`*uc`*uc`*uc ]
-"57
+"58
 [v _getDate `(v ~T0 @X0 0 ef4`*uc`*uc`*uc`*uc ]
-[v F3181 `(v ~T0 @X0 0 tf ]
+[v F3171 `(v ~T0 @X0 0 tf ]
 "27 dispatcher.h
-[v _RTOS_DeleteTask `(v ~T0 @X0 0 ef1`*F3181 ]
-[v F3175 `(v ~T0 @X0 0 tf ]
+[v _RTOS_DeleteTask `(v ~T0 @X0 0 ef1`*F3171 ]
+[v F3165 `(v ~T0 @X0 0 tf ]
 "26
-[v _RTOS_SetTask `(v ~T0 @X0 0 ef3`*F3175`ui`ui ]
+[v _RTOS_SetTask `(v ~T0 @X0 0 ef3`*F3165`ui`ui ]
 "44 common.h
 [v _time_set_hr `(v ~T0 @X0 0 ef ]
 "52
 [v _default_state `(v ~T0 @X0 0 ef ]
 "50
 [v _time_led `(v ~T0 @X0 0 ef ]
-"59 ds3231.h
+"60 ds3231.h
 [v _setTime `(v ~T0 @X0 0 ef3`uc`uc`uc ]
 "46 display.h
 [v _putchar_b_buf `(v ~T0 @X0 0 ef2`uc`uc ]
@@ -32,7 +32,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _clear_matrix `(v ~T0 @X0 0 ef ]
 "46 common.h
 [v _time_set_mt `(v ~T0 @X0 0 ef ]
-"60 ds3231.h
+"61 ds3231.h
 [v _setDate `(v ~T0 @X0 0 ef4`uc`uc`uc`uc ]
 "47 common.h
 [v _time_set_dt `(v ~T0 @X0 0 ef ]
@@ -5170,26 +5170,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;max7221.h: 23: void Cmd7221(uint8_t adr, uint8_t val );
 [; ;max7221.h: 24: void Update_Matrix(uint8_t *buf);
 [; ;max7221.h: 25: void Init7221();
-[; ;i2c.h: 9: void I2C_Init(void);
-[; ;i2c.h: 10: uint8_t I2C_start (uint8_t adress, uint8_t _R_W);
-[; ;i2c.h: 11: void I2C_idle (void);
-[; ;i2c.h: 12: uint8_t I2C_write (uint8_t data);
-[; ;i2c.h: 13: uint8_t I2C_read_noack (void);
-[; ;i2c.h: 14: uint8_t I2C_restart (uint8_t adres, uint8_t _R_W);
-[; ;i2c.h: 15: void I2C_stop (void);
-[; ;i2c.h: 16: uint8_t i2c_read_ack (void);
-[; ;ds3231.h: 38: uint8_t bcd_to_decimal(uint8_t d);
-[; ;ds3231.h: 39: uint8_t decimal_to_bcd(uint8_t d);
-[; ;ds3231.h: 43: uint8_t DS3231_Read(uint8_t address);
-[; ;ds3231.h: 48: void DS3231_Write(uint8_t address, uint8_t value);
-[; ;ds3231.h: 51: void DS3231_init();
-[; ;ds3231.h: 55: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1);
-[; ;ds3231.h: 57: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
-[; ;ds3231.h: 59: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
-[; ;ds3231.h: 60: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
-[v F3069 `Cuc ~T0 @X0 -> 3 `i t ]
+[; ;i2c.h: 10: void I2C_Master_Wait();
+[; ;i2c.h: 11: void I2C_Master_Start();
+[; ;i2c.h: 12: void I2C_Master_RepeatedStart();
+[; ;i2c.h: 13: void I2C_Master_Stop();
+[; ;i2c.h: 14: void I2C_Master_Write(uint8_t d);
+[; ;i2c.h: 15: uint8_t I2C_Master_Read(uint8_t a);
+[; ;ds3231.h: 39: uint8_t bcd_to_decimal(uint8_t d);
+[; ;ds3231.h: 40: uint8_t decimal_to_bcd(uint8_t d);
+[; ;ds3231.h: 44: uint8_t DS3231_Read(uint8_t address);
+[; ;ds3231.h: 49: void DS3231_Write(uint8_t address, uint8_t value);
+[; ;ds3231.h: 52: void DS3231_init();
+[; ;ds3231.h: 56: void getTime(uint8_t *p3, uint8_t *p2, uint8_t *p1);
+[; ;ds3231.h: 58: void getDate(uint8_t *p4, uint8_t *p3, uint8_t *p2, uint8_t *p1);
+[; ;ds3231.h: 60: void setTime(uint8_t hSet, uint8_t mSet, uint8_t sSet);
+[; ;ds3231.h: 61: void setDate(uint8_t daySet, uint8_t dateSet, uint8_t monthSet, uint8_t yearSet);
+[v F3059 `Cuc ~T0 @X0 -> 3 `i t ]
 "3 FontS.h
-[v _FontS `F3069 ~T0 @X0 -> 0 `x e ]
+[v _FontS `F3059 ~T0 @X0 -> 0 `x e ]
 [i _FontS
 :U ..
 :U ..
@@ -5273,9 +5271,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;FontS.h: 13: {0x7C,0x54,0x7C},
 [; ;FontS.h: 14: {0x5C,0x54,0x7C}
 [; ;FontS.h: 15: };
-[v F3071 `Cuc ~T0 @X0 -> 7 `i t ]
+[v F3061 `Cuc ~T0 @X0 -> 7 `i t ]
 "3 pict.h
-[v _pic7x8 `F3071 ~T0 @X0 -> 0 `x e ]
+[v _pic7x8 `F3061 ~T0 @X0 -> 0 `x e ]
 [i _pic7x8
 :U ..
 :U ..
@@ -5364,17 +5362,17 @@ Version 3.2 HI-TECH Software Intermediate Code
 "11 bmp180.h
 [v _OSS `Cuc ~T0 @X0 1 e ]
 [i _OSS
--> -> 0 `i `uc
+-> -> 3 `i `uc
 ]
-[; ;bmp180.h: 11: const uint8_t OSS = 0;
-[; ;bmp180.h: 14: int8_t BMP085ReadByte(uint8_t address);
+[; ;bmp180.h: 11: const uint8_t OSS = 3;
+[; ;bmp180.h: 14: uint8_t BMP085ReadByte(uint8_t address);
 [; ;bmp180.h: 15: int16_t bmp085ReadInt(uint8_t address);
 [; ;bmp180.h: 16: void BMP085WriteByte(uint8_t address, int8_t data);
 [; ;bmp180.h: 17: void bmp085Calibration();
 [; ;bmp180.h: 18: int32_t BMP085ReadUT();
 [; ;bmp180.h: 19: int32_t bmp085ReadUP();
 [; ;bmp180.h: 20: int32_t BMP085GetTemp(int32_t _tu);
-[; ;bmp180.h: 21: int32_t BMP085GetPressure(int32_t _pu);
+[; ;bmp180.h: 21: uint16_t BMP085GetPressure(int32_t _pu);
 [; ;bmp180.h: 22: uint32_t BMP085Pressure(uint8_t getTemp);
 [; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
 [; ;init.h: 15: void SYSTEM_Initialize(void);
@@ -6932,48 +6930,51 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.c: 501: BMP085Pressure(1);
 "501
 [e ( _BMP085Pressure (1 -> -> 1 `i `uc ]
-[; ;common.c: 507: break;
-"507
-[e $U 378  ]
-[; ;common.c: 508: case 3:
+[; ;common.c: 502: events = 5;
+"502
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 508: break;
 "508
+[e $U 378  ]
+[; ;common.c: 509: case 3:
+"509
 [e :U 385 ]
-[; ;common.c: 511: scroll_left();
-"511
-[e ( _scroll_left ..  ]
-[; ;common.c: 512: RTOS_DeleteTask(time_led);
+[; ;common.c: 512: scroll_left();
 "512
-[e ( _RTOS_DeleteTask (1 &U _time_led ]
-[; ;common.c: 513: RTOS_SetTask(home_temp, 0, 20);
+[e ( _scroll_left ..  ]
+[; ;common.c: 513: RTOS_DeleteTask(time_led);
 "513
-[e ( _RTOS_SetTask (3 , , &U _home_temp -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 514: events = 5;
+[e ( _RTOS_DeleteTask (1 &U _time_led ]
+[; ;common.c: 514: RTOS_SetTask(home_temp, 0, 20);
 "514
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 515: break;
+[e ( _RTOS_SetTask (3 , , &U _home_temp -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 515: events = 5;
 "515
-[e $U 378  ]
-[; ;common.c: 516: case 4:
-"516
-[e :U 386 ]
-[; ;common.c: 517: events = 5;
-"517
 [e = _events -> -> 5 `i `uc ]
-[; ;common.c: 518: RTOS_DeleteTask(default_state);
+[; ;common.c: 516: break;
+"516
+[e $U 378  ]
+[; ;common.c: 517: case 4:
+"517
+[e :U 386 ]
+[; ;common.c: 518: events = 5;
 "518
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 519: break;
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 519: RTOS_DeleteTask(default_state);
 "519
-[e $U 378  ]
-[; ;common.c: 520: case 6:
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 520: break;
 "520
-[e :U 387 ]
-[; ;common.c: 522: break;
-"522
 [e $U 378  ]
+[; ;common.c: 521: case 6:
+"521
+[e :U 387 ]
+[; ;common.c: 523: break;
 "523
+[e $U 378  ]
+"524
 }
-[; ;common.c: 523: }
+[; ;common.c: 524: }
 [e $U 378  ]
 "479
 [e :U 379 ]
@@ -6984,125 +6985,125 @@ Version 3.2 HI-TECH Software Intermediate Code
  , $ -> -> 4 `i `uc 386
  , $ -> -> 6 `i `uc 387
  378 ]
-"523
-[e :U 378 ]
-[; ;common.c: 524: Update_Matrix(Dis_Buff);
 "524
+[e :U 378 ]
+[; ;common.c: 525: Update_Matrix(Dis_Buff);
+"525
 [e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;common.c: 527: }
-"527
+[; ;common.c: 528: }
+"528
 [e :UE 377 ]
 }
-"531
-[v _version `(v ~T0 @X0 1 ef ]
 "532
+[v _version `(v ~T0 @X0 1 ef ]
+"533
 {
-[; ;common.c: 531: void version(void)
-[; ;common.c: 532: {
+[; ;common.c: 532: void version(void)
+[; ;common.c: 533: {
 [e :U _version ]
 [f ]
-"533
+"534
 [v _i `uc ~T0 @X0 1 a ]
-[; ;common.c: 533: uint8_t i;
-[; ;common.c: 535: sprintf(text_buf, "Clock v1.0 by Ivan_fd");
-"535
-[e ( _sprintf (1 , &U _text_buf :s 1C ]
-[; ;common.c: 536: while(scroll_text())
+[; ;common.c: 534: uint8_t i;
+[; ;common.c: 536: sprintf(text_buf, "Clock v1.0 by Ivan_fd");
 "536
+[e ( _sprintf (1 , &U _text_buf :s 1C ]
+[; ;common.c: 537: while(scroll_text())
+"537
 [e $U 389  ]
 [e :U 390 ]
-[; ;common.c: 537: {
-"537
-{
-[; ;common.c: 538: Update_Matrix(Dis_Buff);
+[; ;common.c: 538: {
 "538
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;common.c: 539: for(i=0; i<60; i++)
+{
+[; ;common.c: 539: Update_Matrix(Dis_Buff);
 "539
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 540: for(i=0; i<60; i++)
+"540
 {
 [e = _i -> -> 0 `i `uc ]
 [e $ < -> _i `i -> 60 `i 392  ]
 [e $U 393  ]
-"540
+"541
 [e :U 392 ]
-[; ;common.c: 540: _delay((unsigned long)((1)*(40000000/4000.0)));
+[; ;common.c: 541: _delay((unsigned long)((1)*(40000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-"539
+"540
 [e ++ _i -> -> 1 `i `uc ]
 [e $ < -> _i `i -> 60 `i 392  ]
 [e :U 393 ]
-"540
+"541
 }
-"542
+"543
 }
 [e :U 389 ]
-"536
+"537
 [e $ != -> ( _scroll_text ..  `i -> -> -> 0 `i `uc `i 390  ]
 [e :U 391 ]
-[; ;common.c: 542: };
-[; ;common.c: 543: }
-"543
+[; ;common.c: 543: };
+[; ;common.c: 544: }
+"544
 [e :UE 388 ]
 }
-"545
-[v _default_state `(v ~T0 @X0 1 ef ]
 "546
+[v _default_state `(v ~T0 @X0 1 ef ]
+"547
 {
-[; ;common.c: 545: void default_state(void)
-[; ;common.c: 546: {
+[; ;common.c: 546: void default_state(void)
+[; ;common.c: 547: {
 [e :U _default_state ]
 [f ]
-[; ;common.c: 547: events = 4;
-"547
-[e = _events -> -> 4 `i `uc ]
-[; ;common.c: 548: }
+[; ;common.c: 548: events = 4;
 "548
+[e = _events -> -> 4 `i `uc ]
+[; ;common.c: 549: }
+"549
 [e :UE 395 ]
 }
-"551
-[v _INT0_ISR `(v ~T0 @X0 1 ef ]
 "552
+[v _INT0_ISR `(v ~T0 @X0 1 ef ]
+"553
 {
-[; ;common.c: 551: void INT0_ISR(void)
-[; ;common.c: 552: {
+[; ;common.c: 552: void INT0_ISR(void)
+[; ;common.c: 553: {
 [e :U _INT0_ISR ]
 [f ]
-[; ;common.c: 560: RTOS_SetTask(GetTime, 0, 0);
-"560
+[; ;common.c: 561: RTOS_SetTask(GetTime, 0, 0);
+"561
 [e ( _RTOS_SetTask (3 , , &U _GetTime -> -> 0 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 563: }
-"563
+[; ;common.c: 564: }
+"564
 [e :UE 396 ]
 }
-"568
-[v _TMR1_ISR `(v ~T0 @X0 1 ef ]
 "569
+[v _TMR1_ISR `(v ~T0 @X0 1 ef ]
+"570
 {
-[; ;common.c: 568: void TMR1_ISR(void)
-[; ;common.c: 569: {
+[; ;common.c: 569: void TMR1_ISR(void)
+[; ;common.c: 570: {
 [e :U _TMR1_ISR ]
 [f ]
-[; ;common.c: 572: if(++timer_val >= 150)
-"572
-[e $ ! >= -> =+ _timer_val -> -> 1 `i `uc `i -> 150 `i 398  ]
-[; ;common.c: 573: {
+[; ;common.c: 573: if(++timer_val >= 150)
 "573
-{
-[; ;common.c: 574: timer_val = 0;
+[e $ ! >= -> =+ _timer_val -> -> 1 `i `uc `i -> 150 `i 398  ]
+[; ;common.c: 574: {
 "574
-[e = _timer_val -> -> 0 `i `uc ]
-[; ;common.c: 575: time_flag = 1;
+{
+[; ;common.c: 575: timer_val = 0;
 "575
-[e = _time_flag -> -> 1 `i `uc ]
-[; ;common.c: 576: T1CONbits.TMR1ON = 0;
+[e = _timer_val -> -> 0 `i `uc ]
+[; ;common.c: 576: time_flag = 1;
 "576
+[e = _time_flag -> -> 1 `i `uc ]
+[; ;common.c: 577: T1CONbits.TMR1ON = 0;
+"577
 [e = . . _T1CONbits 1 0 -> -> 0 `i `uc ]
-"578
+"579
 }
 [e :U 398 ]
-[; ;common.c: 578: }
-[; ;common.c: 590: }
-"590
+[; ;common.c: 579: }
+[; ;common.c: 591: }
+"591
 [e :UE 397 ]
 }
 [p f _sprintf 8388608 ]

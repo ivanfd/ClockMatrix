@@ -6,7 +6,8 @@
 #include "common.h"
 #include "i2c.h"
 
-#define DS3231_Address              0xD0
+#define DS3231_AddressW              0xD0
+#define DS3231_AddressR              0xD1
                                                  
                                            
 #define secondREG                   0x00

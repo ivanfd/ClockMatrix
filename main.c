@@ -13,13 +13,17 @@
 extern uint8_t TxtBuf[6];          // буфер дл¤ цифр
 extern uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
 
-
-
+//int8_t tst1 = -125, tst2 = 93;
+//int16_t tstr;
 
 void main(void) {
     __delay_ms(10);
-    SYSTEM_Initialize(); // ініціалізація контролера
 
+    SYSTEM_Initialize(); // ініціалізація контролера
+//    tstr = (tst1 << 8) | tst2;
+//    printf("AC1: %d\n\r", tstr);
+//    printf("AC1: %d\n\r", tst1);
+//    printf("AC1: %d\n\r", tst2);
     clear_matrix();
    // version();
     

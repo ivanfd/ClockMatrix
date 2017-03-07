@@ -499,7 +499,8 @@ void time_led()
  //           printf("AC1: %d\n\r", -1026);
 //            bmp085Calibration();
             BMP085Pressure(1);
-          //  scroll_left();
+            events = MAIN_EVENT;
+            //  scroll_left();
 //            clear_matrix();
 //            pic_to_led(0,1);
 //            pic_to_led(8,2);
