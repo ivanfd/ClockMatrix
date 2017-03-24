@@ -37,6 +37,8 @@
 #define cycle_main 20       // період виконання задачі, основна
 //#define NULL  0
 
+#define EE_FONT 0 // адреса в еепром типу шрифту
+
 
  void INT0_ISR(void);
  void GetTime(void);
@@ -51,7 +53,8 @@
  void version(void);
  void default_state(void);
  void home_temp(void);
-
+ void set_font();
+ void set_font_set(void);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

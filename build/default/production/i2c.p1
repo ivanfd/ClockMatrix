@@ -1,5 +1,5 @@
 Version 3.2 HI-TECH Software Intermediate Code
-"20 display.h
+"21 display.h
 [s S270 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S270 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
 "1809 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f4525.h
@@ -3191,83 +3191,83 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 :U ..
 "61
--> -> 127 `i `uc
--> -> 127 `i `uc
--> -> 65 `i `uc
--> -> 127 `i `uc
--> -> 127 `i `uc
+-> -> 62 `i `uc
+-> -> 81 `i `uc
+-> -> 73 `i `uc
+-> -> 69 `i `uc
+-> -> 62 `i `uc
 ..
 :U ..
 "62
 -> -> 0 `i `uc
--> -> 1 `i `uc
+-> -> 66 `i `uc
 -> -> 127 `i `uc
--> -> 127 `i `uc
+-> -> 64 `i `uc
 -> -> 0 `i `uc
 ..
 :U ..
 "63
--> -> 99 `i `uc
--> -> 115 `i `uc
--> -> 89 `i `uc
--> -> 79 `i `uc
--> -> 71 `i `uc
+-> -> 66 `i `uc
+-> -> 97 `i `uc
+-> -> 81 `i `uc
+-> -> 73 `i `uc
+-> -> 70 `i `uc
 ..
 :U ..
 "64
--> -> 99 `i `uc
--> -> 99 `i `uc
--> -> 73 `i `uc
--> -> 127 `i `uc
--> -> 119 `i `uc
+-> -> 33 `i `uc
+-> -> 65 `i `uc
+-> -> 69 `i `uc
+-> -> 75 `i `uc
+-> -> 49 `i `uc
 ..
 :U ..
 "65
--> -> 31 `i `uc
--> -> 31 `i `uc
+-> -> 24 `i `uc
+-> -> 20 `i `uc
+-> -> 18 `i `uc
+-> -> 127 `i `uc
 -> -> 16 `i `uc
--> -> 127 `i `uc
--> -> 127 `i `uc
 ..
 :U ..
 "66
--> -> 111 `i `uc
--> -> 111 `i `uc
--> -> 73 `i `uc
--> -> 121 `i `uc
--> -> 121 `i `uc
+-> -> 39 `i `uc
+-> -> 69 `i `uc
+-> -> 69 `i `uc
+-> -> 69 `i `uc
+-> -> 57 `i `uc
 ..
 :U ..
 "67
--> -> 127 `i `uc
--> -> 127 `i `uc
+-> -> 60 `i `uc
+-> -> 74 `i `uc
 -> -> 73 `i `uc
--> -> 123 `i `uc
--> -> 123 `i `uc
+-> -> 73 `i `uc
+-> -> 48 `i `uc
 ..
 :U ..
 "68
+-> -> 1 `i `uc
+-> -> 113 `i `uc
+-> -> 9 `i `uc
+-> -> 5 `i `uc
 -> -> 3 `i `uc
--> -> 115 `i `uc
--> -> 121 `i `uc
--> -> 15 `i `uc
--> -> 7 `i `uc
 ..
 :U ..
 "69
--> -> 119 `i `uc
--> -> 127 `i `uc
+-> -> 54 `i `uc
 -> -> 73 `i `uc
--> -> 127 `i `uc
--> -> 119 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 54 `i `uc
 ..
 :U ..
 "70
--> -> 111 `i `uc
--> -> 111 `i `uc
+-> -> 6 `i `uc
 -> -> 73 `i `uc
--> -> 127 `i `uc
--> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 41 `i `uc
+-> -> 30 `i `uc
 ..
 :U ..
 "71
@@ -4904,16 +4904,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;Font.h: 58: {0x08,0x08,0x08,0x08,0x08},
 [; ;Font.h: 59: {0x60,0x60,0x00,0x00,0x00},
 [; ;Font.h: 60: {0x20,0x10,0x08,0x04,0x02},
-[; ;Font.h: 61: {0x7F,0x7F,0x41,0x7F,0x7F},
-[; ;Font.h: 62: {0x00,0x01,0x7F,0x7F,0x00},
-[; ;Font.h: 63: {0x63,0x73,0x59,0x4F,0x47},
-[; ;Font.h: 64: {0x63,0x63,0x49,0x7F,0x77},
-[; ;Font.h: 65: {0x1F,0x1F,0x10,0x7F,0x7F},
-[; ;Font.h: 66: {0x6F,0x6F,0x49,0x79,0x79},
-[; ;Font.h: 67: {0x7F,0x7F,0x49,0x7B,0x7B},
-[; ;Font.h: 68: {0x03,0x73,0x79,0x0F,0x07},
-[; ;Font.h: 69: {0x77,0x7F,0x49,0x7F,0x77},
-[; ;Font.h: 70: {0x6F,0x6F,0x49,0x7F,0x7F},
+[; ;Font.h: 61: {0x3E,0x51,0x49,0x45,0x3E},
+[; ;Font.h: 62: {0x00,0x42,0x7F,0x40,0x00},
+[; ;Font.h: 63: {0x42,0x61,0x51,0x49,0x46},
+[; ;Font.h: 64: {0x21,0x41,0x45,0x4B,0x31},
+[; ;Font.h: 65: {0x18,0x14,0x12,0x7F,0x10},
+[; ;Font.h: 66: {0x27,0x45,0x45,0x45,0x39},
+[; ;Font.h: 67: {0x3C,0x4A,0x49,0x49,0x30},
+[; ;Font.h: 68: {0x01,0x71,0x09,0x05,0x03},
+[; ;Font.h: 69: {0x36,0x49,0x49,0x49,0x36},
+[; ;Font.h: 70: {0x06,0x49,0x49,0x29,0x1E},
 [; ;Font.h: 71: {0x00,0x00,0x36,0x36,0x00},
 [; ;Font.h: 72: {0x00,0x40,0x34,0x00,0x00},
 [; ;Font.h: 73: {0x00,0x08,0x14,0x22,0x41},
@@ -5266,31 +5266,427 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pict.h: 7: {0x04,0x26,0x47,0x3F,0x07,0x06,0x04},
 [; ;pict.h: 8: {0x20,0x3E,0x7F,0x7F,0x3F,0x3E,0x20}
 [; ;pict.h: 9: };
-"29 display.h
+[v F3055 `Cuc ~T0 @X0 -> 5 `i t ]
+"10 digits_f.h
+[v _dFont1 `F3055 ~T0 @X0 -> 0 `x e ]
+[i _dFont1
+:U ..
+:U ..
+"11
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 65 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"12
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+"13
+-> -> 97 `i `uc
+-> -> 113 `i `uc
+-> -> 89 `i `uc
+-> -> 79 `i `uc
+-> -> 71 `i `uc
+..
+:U ..
+"14
+-> -> 65 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"15
+-> -> 31 `i `uc
+-> -> 31 `i `uc
+-> -> 16 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"16
+-> -> 79 `i `uc
+-> -> 79 `i `uc
+-> -> 73 `i `uc
+-> -> 121 `i `uc
+-> -> 121 `i `uc
+..
+:U ..
+"17
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 121 `i `uc
+-> -> 121 `i `uc
+..
+:U ..
+"18
+-> -> 1 `i `uc
+-> -> 113 `i `uc
+-> -> 121 `i `uc
+-> -> 15 `i `uc
+-> -> 7 `i `uc
+..
+:U ..
+"19
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"20
+-> -> 95 `i `uc
+-> -> 95 `i `uc
+-> -> 81 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+..
+]
+[; ;digits_f.h: 10: const unsigned char dFont1[][5] = {
+[; ;digits_f.h: 11: {0x7F,0x7F,0x41,0x7F,0x7F},
+[; ;digits_f.h: 12: {0x00,0x00,0x7F,0x7F,0x00},
+[; ;digits_f.h: 13: {0x61,0x71,0x59,0x4F,0x47},
+[; ;digits_f.h: 14: {0x41,0x49,0x49,0x7F,0x7F},
+[; ;digits_f.h: 15: {0x1F,0x1F,0x10,0x7F,0x7F},
+[; ;digits_f.h: 16: {0x4F,0x4F,0x49,0x79,0x79},
+[; ;digits_f.h: 17: {0x7F,0x7F,0x49,0x79,0x79},
+[; ;digits_f.h: 18: {0x01,0x71,0x79,0x0F,0x07},
+[; ;digits_f.h: 19: {0x7F,0x7F,0x49,0x7F,0x7F},
+[; ;digits_f.h: 20: {0x5F,0x5F,0x51,0x7F,0x7F}
+[; ;digits_f.h: 21: };
+[v F3057 `Cuc ~T0 @X0 -> 5 `i t ]
+"23
+[v _dFont2 `F3057 ~T0 @X0 -> 0 `x e ]
+[i _dFont2
+:U ..
+:U ..
+"24
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 65 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"25
+-> -> 0 `i `uc
+-> -> 1 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+"26
+-> -> 99 `i `uc
+-> -> 115 `i `uc
+-> -> 89 `i `uc
+-> -> 79 `i `uc
+-> -> 71 `i `uc
+..
+:U ..
+"27
+-> -> 99 `i `uc
+-> -> 107 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"28
+-> -> 31 `i `uc
+-> -> 31 `i `uc
+-> -> 16 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"29
+-> -> 111 `i `uc
+-> -> 111 `i `uc
+-> -> 73 `i `uc
+-> -> 121 `i `uc
+-> -> 121 `i `uc
+..
+:U ..
+"30
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 123 `i `uc
+-> -> 123 `i `uc
+..
+:U ..
+"31
+-> -> 3 `i `uc
+-> -> 115 `i `uc
+-> -> 121 `i `uc
+-> -> 15 `i `uc
+-> -> 7 `i `uc
+..
+:U ..
+"32
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"33
+-> -> 111 `i `uc
+-> -> 111 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+..
+]
+[; ;digits_f.h: 23: const unsigned char dFont2[][5] = {
+[; ;digits_f.h: 24: {0x7F,0x7F,0x41,0x7F,0x7F},
+[; ;digits_f.h: 25: {0x00,0x01,0x7F,0x7F,0x00},
+[; ;digits_f.h: 26: {0x63,0x73,0x59,0x4F,0x47},
+[; ;digits_f.h: 27: {0x63,0x6B,0x49,0x7F,0x7F},
+[; ;digits_f.h: 28: {0x1F,0x1F,0x10,0x7F,0x7F},
+[; ;digits_f.h: 29: {0x6F,0x6F,0x49,0x79,0x79},
+[; ;digits_f.h: 30: {0x7F,0x7F,0x49,0x7B,0x7B},
+[; ;digits_f.h: 31: {0x03,0x73,0x79,0x0F,0x07},
+[; ;digits_f.h: 32: {0x7F,0x7F,0x49,0x7F,0x7F},
+[; ;digits_f.h: 33: {0x6F,0x6F,0x49,0x7F,0x7F}
+[; ;digits_f.h: 34: };
+[v F3059 `Cuc ~T0 @X0 -> 5 `i t ]
+"36
+[v _dFont3 `F3059 ~T0 @X0 -> 0 `x e ]
+[i _dFont3
+:U ..
+:U ..
+"37
+-> -> 127 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"38
+-> -> 0 `i `uc
+-> -> 0 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+"39
+-> -> 97 `i `uc
+-> -> 113 `i `uc
+-> -> 89 `i `uc
+-> -> 79 `i `uc
+-> -> 71 `i `uc
+..
+:U ..
+"40
+-> -> 65 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"41
+-> -> 31 `i `uc
+-> -> 16 `i `uc
+-> -> 16 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"42
+-> -> 79 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 121 `i `uc
+-> -> 121 `i `uc
+..
+:U ..
+"43
+-> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 121 `i `uc
+-> -> 121 `i `uc
+..
+:U ..
+"44
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+-> -> 1 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"45
+-> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"46
+-> -> 79 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+..
+]
+[; ;digits_f.h: 36: const unsigned char dFont3[][5] = {
+[; ;digits_f.h: 37: {0x7F,0x41,0x41,0x7F,0x7F},
+[; ;digits_f.h: 38: {0x00,0x00,0x7F,0x7F,0x00},
+[; ;digits_f.h: 39: {0x61,0x71,0x59,0x4F,0x47},
+[; ;digits_f.h: 40: {0x41,0x49,0x49,0x7F,0x7F},
+[; ;digits_f.h: 41: {0x1F,0x10,0x10,0x7F,0x7F},
+[; ;digits_f.h: 42: {0x4F,0x49,0x49,0x79,0x79},
+[; ;digits_f.h: 43: {0x7F,0x49,0x49,0x79,0x79},
+[; ;digits_f.h: 44: {0x01,0x01,0x01,0x7F,0x7F},
+[; ;digits_f.h: 45: {0x7F,0x49,0x49,0x7F,0x7F},
+[; ;digits_f.h: 46: {0x4F,0x49,0x49,0x7F,0x7F}
+[; ;digits_f.h: 47: };
+[v F3061 `Cuc ~T0 @X0 -> 5 `i t ]
+"49
+[v _dFont4 `F3061 ~T0 @X0 -> 0 `x e ]
+[i _dFont4
+:U ..
+:U ..
+"50
+-> -> 62 `i `uc
+-> -> 127 `i `uc
+-> -> 65 `i `uc
+-> -> 127 `i `uc
+-> -> 62 `i `uc
+..
+:U ..
+"51
+-> -> 0 `i `uc
+-> -> 2 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+"52
+-> -> 98 `i `uc
+-> -> 115 `i `uc
+-> -> 89 `i `uc
+-> -> 79 `i `uc
+-> -> 70 `i `uc
+..
+:U ..
+"53
+-> -> 34 `i `uc
+-> -> 99 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 54 `i `uc
+..
+:U ..
+"54
+-> -> 24 `i `uc
+-> -> 20 `i `uc
+-> -> 18 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"55
+-> -> 47 `i `uc
+-> -> 111 `i `uc
+-> -> 69 `i `uc
+-> -> 125 `i `uc
+-> -> 57 `i `uc
+..
+:U ..
+"56
+-> -> 62 `i `uc
+-> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 123 `i `uc
+-> -> 50 `i `uc
+..
+:U ..
+"57
+-> -> 3 `i `uc
+-> -> 115 `i `uc
+-> -> 121 `i `uc
+-> -> 15 `i `uc
+-> -> 7 `i `uc
+..
+:U ..
+"58
+-> -> 54 `i `uc
+-> -> 127 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 54 `i `uc
+..
+:U ..
+"59
+-> -> 38 `i `uc
+-> -> 111 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 62 `i `uc
+..
+..
+]
+[; ;digits_f.h: 49: const unsigned char dFont4[][5] = {
+[; ;digits_f.h: 50: {0x3E,0x7F,0x41,0x7F,0x3E},
+[; ;digits_f.h: 51: {0x00,0x02,0x7F,0x7F,0x00},
+[; ;digits_f.h: 52: {0x62,0x73,0x59,0x4F,0x46},
+[; ;digits_f.h: 53: {0x22,0x63,0x49,0x7F,0x36},
+[; ;digits_f.h: 54: {0x18,0x14,0x12,0x7F,0x7F},
+[; ;digits_f.h: 55: {0x2F,0x6F,0x45,0x7D,0x39},
+[; ;digits_f.h: 56: {0x3E,0x7F,0x49,0x7B,0x32},
+[; ;digits_f.h: 57: {0x03,0x73,0x79,0x0F,0x07},
+[; ;digits_f.h: 58: {0x36,0x7F,0x49,0x7F,0x36},
+[; ;digits_f.h: 59: {0x26,0x6F,0x49,0x7F,0x3E}
+[; ;digits_f.h: 60: };
+"30 display.h
 [v _TTime `S270 ~T0 @X0 1 e ]
 [v _TSTime `S270 ~T0 @X0 1 e ]
-[; ;display.h: 20: struct Time_Get
-[; ;display.h: 21: {
-[; ;display.h: 22: uint8_t Ts;
-[; ;display.h: 23: uint8_t Tmin;
-[; ;display.h: 24: uint8_t Thr;
-[; ;display.h: 25: uint8_t Tdy;
-[; ;display.h: 26: uint8_t Tdt;
-[; ;display.h: 27: uint8_t Tmt;
-[; ;display.h: 28: uint8_t Tyr;
-[; ;display.h: 29: } TTime,TSTime;
-[; ;display.h: 43: void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);
-[; ;display.h: 44: void FillBuf(void);
-[; ;display.h: 46: void putchar_b_buf(uint8_t x, uint8_t symbol);
-[; ;display.h: 47: void putchar_s_buf(uint8_t x, uint8_t symbol);
-[; ;display.h: 48: void pixel_on(uint8_t x, uint8_t y);
-[; ;display.h: 49: void pixel_off(uint8_t x, uint8_t y);
-[; ;display.h: 50: void clear_matrix(void);
-[; ;display.h: 51: uint8_t scroll_text(void);
-[; ;display.h: 52: void putchar_down(uint8_t x, uint8_t symbol);
-[; ;display.h: 53: void putchar_down_s(uint8_t x, uint8_t symbol);
-[; ;display.h: 54: void pic_to_led(uint8_t x, uint8_t pic);
-[; ;display.h: 55: void scroll_left(void);
+[; ;display.h: 21: struct Time_Get
+[; ;display.h: 22: {
+[; ;display.h: 23: uint8_t Ts;
+[; ;display.h: 24: uint8_t Tmin;
+[; ;display.h: 25: uint8_t Thr;
+[; ;display.h: 26: uint8_t Tdy;
+[; ;display.h: 27: uint8_t Tdt;
+[; ;display.h: 28: uint8_t Tmt;
+[; ;display.h: 29: uint8_t Tyr;
+[; ;display.h: 30: } TTime,TSTime;
+[; ;display.h: 44: void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);
+[; ;display.h: 45: void FillBuf(void);
+[; ;display.h: 47: void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
+[; ;display.h: 48: void putchar_s_buf(uint8_t x, uint8_t symbol);
+[; ;display.h: 49: void pixel_on(uint8_t x, uint8_t y);
+[; ;display.h: 50: void pixel_off(uint8_t x, uint8_t y);
+[; ;display.h: 51: void clear_matrix(void);
+[; ;display.h: 52: uint8_t scroll_text(void);
+[; ;display.h: 53: void putchar_down(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
+[; ;display.h: 54: void putchar_down_s(uint8_t x, uint8_t symbol);
+[; ;display.h: 55: void pic_to_led(uint8_t x, uint8_t pic);
+[; ;display.h: 56: void scroll_left(void);
 [; ;eusart.h: 8: void init_uart(void);
 [; ;eusart.h: 9: void putch(char data);
 [; ;key.h: 22: void key_press(void);
@@ -5316,9 +5712,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;bmp180.h: 21: uint16_t BMP085GetPressure(int32_t _pu);
 [; ;bmp180.h: 22: uint32_t BMP085Pressure(uint8_t getTemp);
 [; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
-[; ;init.h: 15: void SYSTEM_Initialize(void);
-[; ;init.h: 16: void Port_Init(void);
-[; ;init.h: 17: void Interrupt_Init(void);
+[; ;eeprom.h: 7: void write_eep( unsigned char address, unsigned char data );
+[; ;eeprom.h: 8: unsigned char read_eep( unsigned short address );
+[; ;init.h: 16: void SYSTEM_Initialize(void);
+[; ;init.h: 17: void Port_Init(void);
+[; ;init.h: 18: void Interrupt_Init(void);
 [; ;timer.h: 13: void TMR1Init(void);
 [; ;interrupt.h: 17: void interrupt InterruptManager(void);
 [; ;dispatcher.h: 13: typedef struct task
@@ -5358,19 +5756,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 [; ;ds18b20.h: 13: uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
 [; ;ds18b20.h: 14: void init_ds18b20(void);
-[; ;common.h: 41: void INT0_ISR(void);
-[; ;common.h: 42: void GetTime(void);
-[; ;common.h: 43: void time_set_min(void);
-[; ;common.h: 44: void time_set_hr(void);
-[; ;common.h: 45: void time_set_yr(void);
-[; ;common.h: 46: void time_set_mt(void);
-[; ;common.h: 47: void time_set_dt(void);
-[; ;common.h: 48: void time_set_dy(void);
-[; ;common.h: 49: void TMR1_ISR();
-[; ;common.h: 50: void time_led();
-[; ;common.h: 51: void version(void);
-[; ;common.h: 52: void default_state(void);
-[; ;common.h: 53: void home_temp(void);
+[; ;common.h: 43: void INT0_ISR(void);
+[; ;common.h: 44: void GetTime(void);
+[; ;common.h: 45: void time_set_min(void);
+[; ;common.h: 46: void time_set_hr(void);
+[; ;common.h: 47: void time_set_yr(void);
+[; ;common.h: 48: void time_set_mt(void);
+[; ;common.h: 49: void time_set_dt(void);
+[; ;common.h: 50: void time_set_dy(void);
+[; ;common.h: 51: void TMR1_ISR();
+[; ;common.h: 52: void time_led();
+[; ;common.h: 53: void version(void);
+[; ;common.h: 54: void default_state(void);
+[; ;common.h: 55: void home_temp(void);
+[; ;common.h: 56: void set_font();
+[; ;common.h: 57: void set_font_set(void);
 [; ;i2c.h: 10: void I2C_Master_Wait();
 [; ;i2c.h: 11: void I2C_Master_Start();
 [; ;i2c.h: 12: void I2C_Master_RepeatedStart();

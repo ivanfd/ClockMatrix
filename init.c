@@ -60,6 +60,7 @@
 
 #include "init.h"
 
+extern uint8_t type_font;
 
 void SYSTEM_Initialize(void)  // ініціалізація контролера
 {
@@ -74,7 +75,8 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     RTOS_Init();
     init_uart();
     bmp085Calibration();
-
+    type_font = read_eep(EE_FONT);
+    set_font();
 
 }
 

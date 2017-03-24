@@ -7,7 +7,6 @@
  * Version: 1.0
  */
 
-
 #include "main.h"
 
 extern uint8_t TxtBuf[6];          // буфер дл¤ цифр
@@ -17,8 +16,9 @@ extern uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
 //int16_t tstr;
 
 void main(void) {
-    __delay_ms(10);
 
+    __delay_ms(10);
+    
     SYSTEM_Initialize(); // ініціалізація контролера
 //    tstr = (tst1 << 8) | tst2;
 //    printf("AC1: %d\n\r", tstr);

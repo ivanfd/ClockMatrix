@@ -5,7 +5,21 @@ uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
 uint8_t TxtBuf[6];          // буфер дл¤ цифр
 uint8_t text_buf[100];      // буфер для біг строки
 uint8_t i_char, i_bchar;    // індекс літери та байтк в літері
+uint8_t (*pFont)[][5] = &dFont1;            // вказівник на шрифт цифр для показу годин      
 //uint8_t Hours, Min, Sec;
+
+unsigned char dtest[][5] = {
+    {0x7F,0x7F,0x41,0x7F,0x7F}, //48/ --> 0
+    {0x00,0x00,0x7F,0x7F,0x00}, //49/ --> 1
+    {0x61,0x71,0x59,0x4F,0x47}, //50/ --> 2
+    {0x41,0x49,0x49,0x7F,0x7F}, //51/ --> 3
+    {0x1F,0x1F,0x10,0x7F,0x7F}, //52/ --> 4
+    {0x4F,0x4F,0x49,0x79,0x79}, //53/ --> 5
+    {0x7F,0x7F,0x49,0x79,0x79}, //54/ --> 6
+    {0x01,0x71,0x79,0x0F,0x07}, //55/ --> 7
+    {0x7F,0x7F,0x49,0x7F,0x7F}, //56/ --> 8
+    {0x5F,0x5F,0x51,0x7F,0x7F}  //57/ --> 9
+};
 
 //*****************************************
 //       засвітити піксель на матриці
@@ -47,7 +61,7 @@ uint8_t i, j, mask=0x01;
 //***********************************************
 //вставити символ у відповідну позицію на матрицю
 //***********************************************
-void putchar_b_buf(uint8_t x, uint8_t symbol)
+void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[][5])
 {
 uint8_t i, j, mask=0x01;
 
@@ -56,7 +70,7 @@ uint8_t i, j, mask=0x01;
     {        
         for(j=0;j<8;j++)//перебір строк - 8біт
         {      
-            if(Font[symbol] [i] & mask) // якщо відповідний біт не = 0
+            if((*pF)[symbol] [i] & mask) // якщо відповідний біт не = 0
                 pixel_on(x+i,j);        //засвічуємо піксель
             else                        //якщо ні
                 pixel_off(x+i,j);       //гасимо
@@ -95,7 +109,7 @@ symbol -= 47;
 //*************************************************************
 //вставити символ у відповідну позицію на матрицю з зсувом вниз
 //*************************************************************
-void putchar_down(uint8_t x, uint8_t symbol)
+void putchar_down(uint8_t x, uint8_t symbol,uint8_t (*pF)[][5])
 {
 uint8_t i, j, k;
 
@@ -103,7 +117,7 @@ uint8_t i, j, k;
   {
     for(i=0;i<5;i++)    // сунемо вниз на 1 біт символ
     {
-        Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | (Font[symbol][i] >> (8-1-j));
+        Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | ((*pF)[symbol][i] >> (8-1-j));
     }
     
     for(k=0;k<DELAY_SHIFT_DOWN;k++)
@@ -156,17 +170,18 @@ void clear_matrix(void)
 void FillBuf(void)
    {
       uint8_t i;
- 
+
      for(i=0; i<5; ++i)
       {
         if((TTime.Thr/10) % 10)
-         Dis_Buff[i] = Font[(TTime.Thr/10) % 10 + 48][i];
+         Dis_Buff[i] = (*pFont)[(TTime.Thr/10) % 10][i];
         else
          Dis_Buff[i] = 0x00;
+         
 
-         Dis_Buff[i + 6] = Font[TTime.Thr % 10 + 48][i];
-         Dis_Buff[i + 13] = Font[(TTime.Tmin/10) % 10 + 48][i];
-         Dis_Buff[i + 19] = Font[TTime.Tmin % 10 + 48][i];
+         Dis_Buff[i + 6] = (*pFont)[TTime.Thr % 10 ][i];
+         Dis_Buff[i + 13] = (*pFont)[(TTime.Tmin/10) % 10 ][i];
+         Dis_Buff[i + 19] = (*pFont)[TTime.Tmin % 10 ][i];
 
       }
       

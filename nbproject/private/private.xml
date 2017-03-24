@@ -9,15 +9,18 @@
             <file>file:/D:/Ivan/Electro/XC8/18F4525/eusart.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/init.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/interrupt.h</file>
+            <file>file:/D:/Ivan/Electro/XC8/18F4525/eeprom.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/Font.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/interrupt.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/ds3231.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/init.c</file>
+            <file>file:/D:/Ivan/Electro/XC8/18F4525/eeprom.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/main.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/common.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/common.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/ds3231.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/events.h</file>
+            <file>file:/D:/Ivan/Electro/XC8/18F4525/digits_f.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/dispatcher.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/ds18b20.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/max7221.c</file>

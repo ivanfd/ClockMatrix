@@ -11,6 +11,7 @@
 #include "Font.h"
 #include "FontS.h"
 #include "pict.h"
+#include "digits_f.h"
 
 
 #define BUF_SIZE COUNT_MATRIX * 8
@@ -43,13 +44,13 @@ struct Time_Get             // структура для годин
  void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);       
  void FillBuf(void);
  
- void putchar_b_buf(uint8_t x, uint8_t symbol);
+ void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
  void putchar_s_buf(uint8_t x, uint8_t symbol);
  void pixel_on(uint8_t x, uint8_t y);
  void pixel_off(uint8_t x, uint8_t y);
  void clear_matrix(void);
  uint8_t scroll_text(void);
- void putchar_down(uint8_t x, uint8_t symbol);
+ void putchar_down(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
  void putchar_down_s(uint8_t x, uint8_t symbol);
  void pic_to_led(uint8_t x, uint8_t pic);
  void scroll_left(void);

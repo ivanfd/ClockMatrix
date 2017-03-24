@@ -7,12 +7,14 @@ main.h  \
 dispatcher.h  \
 FontS.h  \
 onewire.h  \
+digits_f.h  \
 i2c.h  \
 key.h  \
 pict.h  \
 ds3231.h  \
 interrupt.h  \
 Font.h  \
+eeprom.h  \
 common.h  \
 eusart.h  \
 max7221.h  \

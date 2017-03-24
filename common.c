@@ -10,6 +10,12 @@ bit show_digit;                     // чи показувати цифри, в нал. мигання
 bit en_put;                         // чи можна писати у буфер символи
 uint16_t temperature;               // температура з кімнатного датчика
 uint8_t timer_val = 0, time_flag = 0;  // для конвертування температури
+extern uint8_t (*pFont)[][5];
+uint8_t type_font = 0;                  // шрифт годин
+
+__EEPROM_DATA(1, 0, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, 
+                                       // 0 - тип шрифту (від 1 до 4)
+
 // читаємо з DS3231 години, хвилини, секунди та дату
 // 
 void GetTime(void)
@@ -60,13 +66,13 @@ void time_set_min(void)
    
        if(show_digit)      // чи показувати цифри
     {
-        putchar_b_buf(13,(TSTime.Tmin/10) % 10 + 48);
-        putchar_b_buf(19,TSTime.Tmin % 10 + 48);
+        putchar_b_buf(13,(TSTime.Tmin/10) % 10 , pFont);
+        putchar_b_buf(19,TSTime.Tmin % 10 , pFont);
     }
     else 
     {
-        putchar_b_buf(13,0);
-        putchar_b_buf(19,0);
+        putchar_b_buf(13,0, &Font);
+        putchar_b_buf(19,0, &Font);
     }
    Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
    en_put = 1;
@@ -118,20 +124,20 @@ void time_set_hr(void)
         if(show_digit)      // чи показувати цифри
         {
 
-            putchar_b_buf(13,(TSTime.Tmin/10) % 10 + 48);
-            putchar_b_buf(19,TSTime.Tmin % 10 + 48);
+            putchar_b_buf(13,(TSTime.Tmin/10) % 10, pFont);
+            putchar_b_buf(19,TSTime.Tmin % 10, pFont);
 
             if((TSTime.Thr/10) % 10)
-            putchar_b_buf(0,(TSTime.Thr/10) % 10 + 48);
+            putchar_b_buf(0,(TSTime.Thr/10) % 10, pFont);
             else
-            putchar_b_buf(0,0);
-            putchar_b_buf(6,TSTime.Thr % 10 + 48);
+            putchar_b_buf(0,0, pFont);
+            putchar_b_buf(6,TSTime.Thr % 10, pFont);
         }
         else 
         {
 
-            putchar_b_buf(0,0);
-            putchar_b_buf(6,0);
+            putchar_b_buf(0,0, &Font);
+            putchar_b_buf(6,0, &Font);
         }
    }
     Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
@@ -177,11 +183,11 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,'Р');
-    putchar_b_buf(6,'к');
-    putchar_b_buf(12,':');
-    putchar_b_buf(18,(TSTime.Tyr/10) % 10 + 48);
-    putchar_b_buf(24,TSTime.Tyr % 10 + 48);
+    putchar_b_buf(0,'Р', &Font);
+    putchar_b_buf(6,'к', &Font);
+    putchar_b_buf(12,':', &Font);
+    putchar_b_buf(18,(TSTime.Tyr/10) % 10, pFont);
+    putchar_b_buf(24,TSTime.Tyr % 10, pFont);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;
@@ -227,58 +233,58 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,'М');
-    putchar_b_buf(6,'с');
-    putchar_b_buf(12,':');
+    putchar_b_buf(0,'М', &Font);
+    putchar_b_buf(6,'с', &Font);
+    putchar_b_buf(12,':', &Font);
     switch(TSTime.Tmt)
     {
         case 1:
-        putchar_b_buf(18,'С');
-        putchar_b_buf(24,'ч');
+        putchar_b_buf(18,'С', &Font);
+        putchar_b_buf(24,'ч', &Font);
         break;
         case 2:
-        putchar_b_buf(18,'Л');
-        putchar_b_buf(24,'т');
+        putchar_b_buf(18,'Л', &Font);
+        putchar_b_buf(24,'т', &Font);
         break;
         case 3:
-        putchar_b_buf(18,'Б');
-        putchar_b_buf(24,'р');
+        putchar_b_buf(18,'Б', &Font);
+        putchar_b_buf(24,'р', &Font);
         break;
         case 4:
-        putchar_b_buf(18,'К');
-        putchar_b_buf(24,'в');
+        putchar_b_buf(18,'К', &Font);
+        putchar_b_buf(24,'в', &Font);
         break;
         case 5:
-        putchar_b_buf(18,'Т');
-        putchar_b_buf(24,'р');
+        putchar_b_buf(18,'Т', &Font);
+        putchar_b_buf(24,'р', &Font);
         break;
         case 6:
-        putchar_b_buf(18,'Ч');
-        putchar_b_buf(24,'р');
+        putchar_b_buf(18,'Ч', &Font);
+        putchar_b_buf(24,'р', &Font);
         break;        
         case 7:
-        putchar_b_buf(18,'Л');
-        putchar_b_buf(24,'п');
+        putchar_b_buf(18,'Л', &Font);
+        putchar_b_buf(24,'п', &Font);
         break;
         case 8:
-        putchar_b_buf(18,'С');
-        putchar_b_buf(24,'п');
+        putchar_b_buf(18,'С', &Font);
+        putchar_b_buf(24,'п', &Font);
         break;        
         case 9:
-        putchar_b_buf(18,'В');
-        putchar_b_buf(24,'р');
+        putchar_b_buf(18,'В', &Font);
+        putchar_b_buf(24,'р', &Font);
         break;
         case 10:
-        putchar_b_buf(18,'Ж');
-        putchar_b_buf(24,'т');
+        putchar_b_buf(18,'Ж', &Font);
+        putchar_b_buf(24,'т', &Font);
         break;        
         case 11:
-        putchar_b_buf(18,'Л');
-        putchar_b_buf(24,'с');
+        putchar_b_buf(18,'Л', &Font);
+        putchar_b_buf(24,'с', &Font);
         break;
         case 12:
-        putchar_b_buf(18,'Г');
-        putchar_b_buf(24,'р');
+        putchar_b_buf(18,'Г', &Font);
+        putchar_b_buf(24,'р', &Font);
         break;        
 
     }
@@ -327,11 +333,11 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,'Ч');
-    putchar_b_buf(6,'с');
-    putchar_b_buf(12,':');
-    putchar_b_buf(18,(TSTime.Tdt/10) % 10 + 48);
-    putchar_b_buf(24,TSTime.Tdt % 10 + 48);
+    putchar_b_buf(0,'Ч', &Font);
+    putchar_b_buf(6,'с', &Font);
+    putchar_b_buf(12,':', &Font);
+    putchar_b_buf(18,(TSTime.Tdt/10) % 10, pFont);
+    putchar_b_buf(24,TSTime.Tdt % 10 , pFont);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;
@@ -350,8 +356,8 @@ switch (events)
         break;
         case KEY_OK_EVENT:
             RTOS_DeleteTask(time_set_dy);
-            RTOS_SetTask(time_led, 0, cycle_main);
-            RTOS_DeleteTask(default_state);
+            RTOS_SetTask(set_font_set, 0, cycle_main);
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
             events = MAIN_EVENT;
             en_put=1;
             break;
@@ -378,40 +384,91 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,'Д');
-    putchar_b_buf(6,'н');
-    putchar_b_buf(12,':');
+    putchar_b_buf(0,'Д', &Font);
+    putchar_b_buf(6,'н', &Font);
+    putchar_b_buf(12,':', &Font);
     switch(TSTime.Tdy)
     {
         case 2:
-        putchar_b_buf(18,'П');
-        putchar_b_buf(24,'н');
+        putchar_b_buf(18,'П', &Font);
+        putchar_b_buf(24,'н', &Font);
         break;
         case 3:
-        putchar_b_buf(18,'В');
-        putchar_b_buf(24,'т');
+        putchar_b_buf(18,'В', &Font);
+        putchar_b_buf(24,'т', &Font);
         break;
         case 4:
-        putchar_b_buf(18,'С');
-        putchar_b_buf(24,'р');
+        putchar_b_buf(18,'С', &Font);
+        putchar_b_buf(24,'р', &Font);
         break;
         case 5:
-        putchar_b_buf(18,'Ч');
-        putchar_b_buf(24,'т');
+        putchar_b_buf(18,'Ч', &Font);
+        putchar_b_buf(24,'т', &Font);
         break;
         case 6:
-        putchar_b_buf(18,'П');
-        putchar_b_buf(24,'т');
+        putchar_b_buf(18,'П', &Font);
+        putchar_b_buf(24,'т', &Font);
         break;
         case 7:
-        putchar_b_buf(18,'С');
-        putchar_b_buf(24,'б');
+        putchar_b_buf(18,'С', &Font);
+        putchar_b_buf(24,'б', &Font);
         break;        
         case 1:
-        putchar_b_buf(18,'Н');
-        putchar_b_buf(24,'д');
+        putchar_b_buf(18,'Н', &Font);
+        putchar_b_buf(24,'д', &Font);
         break;
     }
+}    
+       Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+       en_put=1;
+}
+
+//***************************************************************
+//  встановлення року
+//***************************************************************
+void set_font_set(void)
+{
+switch (events)
+   {
+        case MAIN_EVENT:
+
+        break;
+        case KEY_OK_EVENT:
+            RTOS_DeleteTask(set_font_set);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state);     
+            events = MAIN_EVENT;
+            break;
+        case KEY_EXIT_EVENT:
+            RTOS_DeleteTask(set_font_set);
+            RTOS_DeleteTask(default_state);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            events = MAIN_EVENT;
+            break;
+        case KEY_UP_EVENT:
+            type_font++;
+            if(type_font > 4) type_font = 1;
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_FONT,type_font);
+            set_font();
+            break;
+        case KEY_DOWN_EVENT:
+            type_font--;
+            if(type_font == 0) type_font = 4;           
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_FONT,type_font);
+            set_font();
+            break;    
+    }
+if(en_put)
+{
+    putchar_b_buf(0,'Ш', &Font);
+    putchar_b_buf(6,'р', &Font);
+    putchar_b_buf(12,':', &Font);
+    putchar_b_buf(18,type_font % 10, pFont);
+    putchar_b_buf(24,0, &Font);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;
@@ -433,14 +490,14 @@ if(en_put)
                 {
                     pic_to_led(3,1);
                   //  putchar_down(13,(temperature/10) % 10 + 48);
-                    putchar_down(13,temperature % 10 + 48);
-                    putchar_down(19,176);
+                    putchar_down(13,temperature % 10, pFont);
+                    putchar_down(19,176, &Font);
                 }else
                 {
                     pic_to_led(3,1);
-                    putchar_down(13,(temperature/10) % 10 + 48);
-                    putchar_down(19,temperature % 10 + 48);
-                    putchar_down(25,176);
+                    putchar_down(13,(temperature/10) % 10, pFont);
+                    putchar_down(19,temperature % 10, pFont);
+                    putchar_down(25,176, &Font);
                     
                 }
                 events = TEMP_EVENT;
@@ -455,11 +512,11 @@ if(en_put)
             events = MAIN_EVENT;
             scroll_left();
             if((TTime.Thr/10) % 10)
-            putchar_down(0, (TTime.Thr/10) % 10 + 48);  
-            else putchar_down(0, 0);
-            putchar_down(6, TTime.Thr % 10 + 48);     
-            putchar_down(13, (TTime.Tmin/10) % 10 + 48);
-            putchar_down(19, TTime.Tmin % 10 + 48);
+            putchar_down(0, (TTime.Thr/10) % 10, pFont);  
+            else putchar_down(0, 0, pFont);
+            putchar_down(6, TTime.Thr % 10, pFont);     
+            putchar_down(13, (TTime.Tmin/10) % 10, pFont);
+            putchar_down(19, TTime.Tmin % 10, pFont);
             getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
             putchar_down_s(25, (TTime.Ts/10) % 10 + 1);
             putchar_down_s(29, TTime.Ts % 10 + 1);            
@@ -469,6 +526,30 @@ if(en_put)
             break;
     }
  }
+ 
+ //=====================================================
+ //   Заміна шрифту
+ //=====================================================
+ void set_font()
+ {
+     switch (type_font)
+     {
+         case 1:
+             pFont = &dFont1;
+            break;
+         case 2:
+             pFont = &dFont2;
+             break;
+         case 3:
+             pFont = &dFont3;
+             break;
+         case 4:
+             pFont = &dFont4;
+             break;
+     }
+ }
+ 
+ 
 //==================================================
 //  виводимо годину на дисплей -:)
 //==================================================
@@ -498,7 +579,8 @@ void time_led()
    //         asm("nop");
  //           printf("AC1: %d\n\r", -1026);
 //            bmp085Calibration();
-            BMP085Pressure(1);
+            pFont = &dFont4;
+            //   BMP085Pressure(1);
             events = MAIN_EVENT;
             //  scroll_left();
 //            clear_matrix();
