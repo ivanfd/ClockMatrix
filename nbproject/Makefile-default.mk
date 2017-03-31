@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c init.c i2c.c dispatcher.c interrupt.c max7221.c display.c ds3231.c timer.c common.c key.c ds18b20.c onewire.c bmp180.c eusart.c eeprom.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c init.c i2c.c dispatcher.c interrupt.c max7221.c display.c ds3231.c timer.c common.c key.c ds18b20.c onewire.c bmp180.c eusart.c eeprom.c sound.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/i2c.p1 ${OBJECTDIR}/dispatcher.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/max7221.p1 ${OBJECTDIR}/display.p1 ${OBJECTDIR}/ds3231.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/common.p1 ${OBJECTDIR}/key.p1 ${OBJECTDIR}/ds18b20.p1 ${OBJECTDIR}/onewire.p1 ${OBJECTDIR}/bmp180.p1 ${OBJECTDIR}/eusart.p1 ${OBJECTDIR}/eeprom.p1
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/init.p1.d ${OBJECTDIR}/i2c.p1.d ${OBJECTDIR}/dispatcher.p1.d ${OBJECTDIR}/interrupt.p1.d ${OBJECTDIR}/max7221.p1.d ${OBJECTDIR}/display.p1.d ${OBJECTDIR}/ds3231.p1.d ${OBJECTDIR}/timer.p1.d ${OBJECTDIR}/common.p1.d ${OBJECTDIR}/key.p1.d ${OBJECTDIR}/ds18b20.p1.d ${OBJECTDIR}/onewire.p1.d ${OBJECTDIR}/bmp180.p1.d ${OBJECTDIR}/eusart.p1.d ${OBJECTDIR}/eeprom.p1.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/i2c.p1 ${OBJECTDIR}/dispatcher.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/max7221.p1 ${OBJECTDIR}/display.p1 ${OBJECTDIR}/ds3231.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/common.p1 ${OBJECTDIR}/key.p1 ${OBJECTDIR}/ds18b20.p1 ${OBJECTDIR}/onewire.p1 ${OBJECTDIR}/bmp180.p1 ${OBJECTDIR}/eusart.p1 ${OBJECTDIR}/eeprom.p1 ${OBJECTDIR}/sound.p1
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.p1.d ${OBJECTDIR}/init.p1.d ${OBJECTDIR}/i2c.p1.d ${OBJECTDIR}/dispatcher.p1.d ${OBJECTDIR}/interrupt.p1.d ${OBJECTDIR}/max7221.p1.d ${OBJECTDIR}/display.p1.d ${OBJECTDIR}/ds3231.p1.d ${OBJECTDIR}/timer.p1.d ${OBJECTDIR}/common.p1.d ${OBJECTDIR}/key.p1.d ${OBJECTDIR}/ds18b20.p1.d ${OBJECTDIR}/onewire.p1.d ${OBJECTDIR}/bmp180.p1.d ${OBJECTDIR}/eusart.p1.d ${OBJECTDIR}/eeprom.p1.d ${OBJECTDIR}/sound.p1.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/i2c.p1 ${OBJECTDIR}/dispatcher.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/max7221.p1 ${OBJECTDIR}/display.p1 ${OBJECTDIR}/ds3231.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/common.p1 ${OBJECTDIR}/key.p1 ${OBJECTDIR}/ds18b20.p1 ${OBJECTDIR}/onewire.p1 ${OBJECTDIR}/bmp180.p1 ${OBJECTDIR}/eusart.p1 ${OBJECTDIR}/eeprom.p1
+OBJECTFILES=${OBJECTDIR}/main.p1 ${OBJECTDIR}/init.p1 ${OBJECTDIR}/i2c.p1 ${OBJECTDIR}/dispatcher.p1 ${OBJECTDIR}/interrupt.p1 ${OBJECTDIR}/max7221.p1 ${OBJECTDIR}/display.p1 ${OBJECTDIR}/ds3231.p1 ${OBJECTDIR}/timer.p1 ${OBJECTDIR}/common.p1 ${OBJECTDIR}/key.p1 ${OBJECTDIR}/ds18b20.p1 ${OBJECTDIR}/onewire.p1 ${OBJECTDIR}/bmp180.p1 ${OBJECTDIR}/eusart.p1 ${OBJECTDIR}/eeprom.p1 ${OBJECTDIR}/sound.p1
 
 # Source Files
-SOURCEFILES=main.c init.c i2c.c dispatcher.c interrupt.c max7221.c display.c ds3231.c timer.c common.c key.c ds18b20.c onewire.c bmp180.c eusart.c eeprom.c
+SOURCEFILES=main.c init.c i2c.c dispatcher.c interrupt.c max7221.c display.c ds3231.c timer.c common.c key.c ds18b20.c onewire.c bmp180.c eusart.c eeprom.c sound.c
 
 
 CFLAGS=
@@ -215,6 +215,14 @@ ${OBJECTDIR}/eeprom.p1: eeprom.c  nbproject/Makefile-${CND_CONF}.mk
 	@-${MV} ${OBJECTDIR}/eeprom.d ${OBJECTDIR}/eeprom.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/eeprom.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
+${OBJECTDIR}/sound.p1: sound.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/sound.p1.d 
+	@${RM} ${OBJECTDIR}/sound.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  -D__DEBUG=1 --debugger=pickit3  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=pro -P -N255 --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=+mcof,-elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/sound.p1  sound.c 
+	@-${MV} ${OBJECTDIR}/sound.d ${OBJECTDIR}/sound.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/sound.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
 else
 ${OBJECTDIR}/main.p1: main.c  nbproject/Makefile-${CND_CONF}.mk
 	@${MKDIR} "${OBJECTDIR}" 
@@ -343,6 +351,14 @@ ${OBJECTDIR}/eeprom.p1: eeprom.c  nbproject/Makefile-${CND_CONF}.mk
 	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=pro -P -N255 --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=+mcof,-elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/eeprom.p1  eeprom.c 
 	@-${MV} ${OBJECTDIR}/eeprom.d ${OBJECTDIR}/eeprom.p1.d 
 	@${FIXDEPS} ${OBJECTDIR}/eeprom.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
+	
+${OBJECTDIR}/sound.p1: sound.c  nbproject/Makefile-${CND_CONF}.mk
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/sound.p1.d 
+	@${RM} ${OBJECTDIR}/sound.p1 
+	${MP_CC} --pass1 $(MP_EXTRA_CC_PRE) --chip=$(MP_PROCESSOR_OPTION) -Q -G  --double=24 --float=24 --emi=wordwrite --opt=+asm,+asmfile,-speed,+space,-debug,-local --addrqual=ignore --mode=pro -P -N255 --warn=-3 --asmlist -DXPRJ_default=$(CND_CONF)  --summary=default,-psect,-class,+mem,-hex,-file --output=default,-inhx032 --runtime=default,+clear,+init,-keep,-no_startup,-download,+config,+clib,-plib $(COMPARISON_BUILD)  --output=+mcof,-elf:multilocs --stack=compiled:auto:auto:auto "--errformat=%f:%l: error: (%n) %s" "--warnformat=%f:%l: warning: (%n) %s" "--msgformat=%f:%l: advisory: (%n) %s"    -o${OBJECTDIR}/sound.p1  sound.c 
+	@-${MV} ${OBJECTDIR}/sound.d ${OBJECTDIR}/sound.p1.d 
+	@${FIXDEPS} ${OBJECTDIR}/sound.p1.d $(SILENT) -rsi ${MP_CC_DIR}../  
 	
 endif
 

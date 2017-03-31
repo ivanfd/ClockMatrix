@@ -34,6 +34,41 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S85 . . . ]
 "2500
 [v _PIE1bits `VS85 ~T0 @X0 0 e@3997 ]
+"3499
+[s S131 :2 `uc 1 :1 `uc 1 ]
+[n S131 . . NOT_T3SYNC ]
+"3503
+[s S132 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :2 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S132 . TMR3ON TMR3CS nT3SYNC T3CCP1 T3CKPS T3CCP2 RD16 ]
+"3512
+[s S133 :2 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S133 . . T3SYNC . T3CKPS0 T3CKPS1 ]
+"3519
+[s S134 :3 `uc 1 :1 `uc 1 :3 `uc 1 :1 `uc 1 ]
+[n S134 . . SOSCEN3 . RD163 ]
+"3525
+[s S135 :7 `uc 1 :1 `uc 1 ]
+[n S135 . . T3RD16 ]
+"3498
+[u S130 `S131 1 `S132 1 `S133 1 `S134 1 `S135 1 ]
+[n S130 . . . . . . ]
+"3530
+[v _T3CONbits `VS130 ~T0 @X0 0 e@4017 ]
+"2712
+[s S95 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S95 . CCP2IE TMR3IE HLVDIE BCLIE EEIE . CMIE OSCFIE ]
+"2722
+[s S96 :2 `uc 1 :1 `uc 1 ]
+[n S96 . . LVDIE ]
+"2711
+[u S94 `S95 1 `S96 1 ]
+[n S94 . . . ]
+"2727
+[v _PIE2bits `VS94 ~T0 @X0 0 e@4000 ]
+"3616
+[v _TMR3H `Vuc ~T0 @X0 0 e@4019 ]
+"3610
+[v _TMR3L `Vuc ~T0 @X0 0 e@4018 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -5271,6 +5306,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 62 `i `uc
 -> -> 32 `i `uc
 ..
+:U ..
+"9
+-> -> 126 `i `uc
+-> -> 18 `i `uc
+-> -> 30 `i `uc
+-> -> 0 `i `uc
+-> -> 112 `i `uc
+-> -> 16 `i `uc
+-> -> 0 `i `uc
+..
 ..
 ]
 [; ;pict.h: 3: const unsigned char pic7x8[][7]=
@@ -5278,8 +5323,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pict.h: 5: {0x00,0x00,0x00,0x00,0x00,0x00,0x00},
 [; ;pict.h: 6: {0x08,0x7C,0x4E,0x4F,0x4E,0x7C,0x08},
 [; ;pict.h: 7: {0x04,0x26,0x47,0x3F,0x07,0x06,0x04},
-[; ;pict.h: 8: {0x20,0x3E,0x7F,0x7F,0x3F,0x3E,0x20}
-[; ;pict.h: 9: };
+[; ;pict.h: 8: {0x20,0x3E,0x7F,0x7F,0x3F,0x3E,0x20},
+[; ;pict.h: 9: {0x7E,0x12,0x1E,0x00,0x70,0x10,0x00}
+[; ;pict.h: 10: };
 [v F3063 `Cuc ~T0 @X0 -> 5 `i t ]
 "10 digits_f.h
 [v _dFont1 `F3063 ~T0 @X0 -> 0 `x e ]
@@ -5296,7 +5342,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 :U ..
 "12
 -> -> 0 `i `uc
--> -> 0 `i `uc
+-> -> 1 `i `uc
 -> -> 127 `i `uc
 -> -> 127 `i `uc
 -> -> 0 `i `uc
@@ -5369,7 +5415,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;digits_f.h: 10: const unsigned char dFont1[][5] = {
 [; ;digits_f.h: 11: {0x7F,0x7F,0x41,0x7F,0x7F},
-[; ;digits_f.h: 12: {0x00,0x00,0x7F,0x7F,0x00},
+[; ;digits_f.h: 12: {0x00,0x01,0x7F,0x7F,0x00},
 [; ;digits_f.h: 13: {0x61,0x71,0x59,0x4F,0x47},
 [; ;digits_f.h: 14: {0x41,0x49,0x49,0x7F,0x7F},
 [; ;digits_f.h: 15: {0x1F,0x1F,0x10,0x7F,0x7F},
@@ -5402,11 +5448,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 :U ..
 "26
--> -> 99 `i `uc
 -> -> 115 `i `uc
--> -> 89 `i `uc
--> -> 79 `i `uc
--> -> 71 `i `uc
+-> -> 115 `i `uc
+-> -> 81 `i `uc
+-> -> 95 `i `uc
+-> -> 95 `i `uc
 ..
 :U ..
 "27
@@ -5469,7 +5515,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digits_f.h: 23: const unsigned char dFont2[][5] = {
 [; ;digits_f.h: 24: {0x7F,0x7F,0x41,0x7F,0x7F},
 [; ;digits_f.h: 25: {0x00,0x01,0x7F,0x7F,0x00},
-[; ;digits_f.h: 26: {0x63,0x73,0x59,0x4F,0x47},
+[; ;digits_f.h: 26: {0x73,0x73,0x51,0x5F,0x5F},
 [; ;digits_f.h: 27: {0x63,0x6B,0x49,0x7F,0x7F},
 [; ;digits_f.h: 28: {0x1F,0x1F,0x10,0x7F,0x7F},
 [; ;digits_f.h: 29: {0x6F,0x6F,0x49,0x79,0x79},
@@ -5494,18 +5540,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 :U ..
 "38
 -> -> 0 `i `uc
--> -> 0 `i `uc
+-> -> 1 `i `uc
 -> -> 127 `i `uc
 -> -> 127 `i `uc
 -> -> 0 `i `uc
 ..
 :U ..
 "39
--> -> 97 `i `uc
 -> -> 113 `i `uc
--> -> 89 `i `uc
--> -> 79 `i `uc
--> -> 71 `i `uc
+-> -> 81 `i `uc
+-> -> 81 `i `uc
+-> -> 95 `i `uc
+-> -> 95 `i `uc
 ..
 :U ..
 "40
@@ -5567,8 +5613,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;digits_f.h: 36: const unsigned char dFont3[][5] = {
 [; ;digits_f.h: 37: {0x7F,0x41,0x41,0x7F,0x7F},
-[; ;digits_f.h: 38: {0x00,0x00,0x7F,0x7F,0x00},
-[; ;digits_f.h: 39: {0x61,0x71,0x59,0x4F,0x47},
+[; ;digits_f.h: 38: {0x00,0x01,0x7F,0x7F,0x00},
+[; ;digits_f.h: 39: {0x71,0x51,0x51,0x5F,0x5F},
 [; ;digits_f.h: 40: {0x41,0x49,0x49,0x7F,0x7F},
 [; ;digits_f.h: 41: {0x1F,0x10,0x10,0x7F,0x7F},
 [; ;digits_f.h: 42: {0x4F,0x49,0x49,0x79,0x79},
@@ -5676,6 +5722,105 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digits_f.h: 58: {0x36,0x7F,0x49,0x7F,0x36},
 [; ;digits_f.h: 59: {0x26,0x6F,0x49,0x7F,0x3E}
 [; ;digits_f.h: 60: };
+[v F3071 `Cuc ~T0 @X0 -> 5 `i t ]
+"62
+[v _dFont5 `F3071 ~T0 @X0 -> 0 `x e ]
+[i _dFont5
+:U ..
+:U ..
+"63
+-> -> 62 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 127 `i `uc
+-> -> 62 `i `uc
+..
+:U ..
+"64
+-> -> 0 `i `uc
+-> -> 2 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+"65
+-> -> 98 `i `uc
+-> -> 115 `i `uc
+-> -> 89 `i `uc
+-> -> 79 `i `uc
+-> -> 70 `i `uc
+..
+:U ..
+"66
+-> -> 34 `i `uc
+-> -> 99 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 54 `i `uc
+..
+:U ..
+"67
+-> -> 24 `i `uc
+-> -> 20 `i `uc
+-> -> 18 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"68
+-> -> 47 `i `uc
+-> -> 69 `i `uc
+-> -> 69 `i `uc
+-> -> 125 `i `uc
+-> -> 57 `i `uc
+..
+:U ..
+"69
+-> -> 62 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 123 `i `uc
+-> -> 50 `i `uc
+..
+:U ..
+"70
+-> -> 3 `i `uc
+-> -> 113 `i `uc
+-> -> 121 `i `uc
+-> -> 15 `i `uc
+-> -> 7 `i `uc
+..
+:U ..
+"71
+-> -> 54 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 54 `i `uc
+..
+:U ..
+"72
+-> -> 38 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 62 `i `uc
+..
+..
+]
+[; ;digits_f.h: 62: const unsigned char dFont5[][5] = {
+[; ;digits_f.h: 63: {0x3E,0x41,0x41,0x7F,0x3E},
+[; ;digits_f.h: 64: {0x00,0x02,0x7F,0x7F,0x00},
+[; ;digits_f.h: 65: {0x62,0x73,0x59,0x4F,0x46},
+[; ;digits_f.h: 66: {0x22,0x63,0x49,0x7F,0x36},
+[; ;digits_f.h: 67: {0x18,0x14,0x12,0x7F,0x7F},
+[; ;digits_f.h: 68: {0x2F,0x45,0x45,0x7D,0x39},
+[; ;digits_f.h: 69: {0x3E,0x49,0x49,0x7B,0x32},
+[; ;digits_f.h: 70: {0x03,0x71,0x79,0x0F,0x07},
+[; ;digits_f.h: 71: {0x36,0x49,0x49,0x7F,0x36},
+[; ;digits_f.h: 72: {0x26,0x49,0x49,0x7F,0x3E}
+[; ;digits_f.h: 73: };
 "30 display.h
 [v _TTime `S270 ~T0 @X0 1 e ]
 [v _TSTime `S270 ~T0 @X0 1 e ]
@@ -5701,7 +5846,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 54: void putchar_down_s(uint8_t x, uint8_t symbol);
 [; ;display.h: 55: void pic_to_led(uint8_t x, uint8_t pic);
 [; ;display.h: 56: void scroll_left(void);
-[; ;interrupt.h: 17: void interrupt InterruptManager(void);
+[; ;display.h: 57: void interval_scroll_text();
+[; ;sound.h: 14: void sound_init();
+[; ;sound.h: 16: void TMR3_ISR();
+[; ;interrupt.h: 17: void interrupt INTERRUPT_InterruptManager(void);
 [; ;dispatcher.h: 13: typedef struct task
 [; ;dispatcher.h: 14: {
 [; ;dispatcher.h: 15: void (*pFunc) (void);
@@ -5731,7 +5879,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;bmp180.h: 19: int32_t bmp085ReadUP();
 [; ;bmp180.h: 20: int32_t BMP085GetTemp(int32_t _tu);
 [; ;bmp180.h: 21: uint16_t BMP085GetPressure(int32_t _pu);
-[; ;bmp180.h: 22: uint32_t BMP085Pressure(uint8_t getTemp);
+[; ;bmp180.h: 22: uint16_t BMP085Pressure(uint8_t getTemp);
 [; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
 [; ;eeprom.h: 7: void write_eep( unsigned char address, unsigned char data );
 [; ;eeprom.h: 8: unsigned char read_eep( unsigned short address );
@@ -5784,14 +5932,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 55: void home_temp(void);
 [; ;common.h: 56: void set_font();
 [; ;common.h: 57: void set_font_set(void);
-[; ;timer.h: 13: void TMR1Init(void);
+[; ;common.h: 58: void pressure(void);
+[; ;timer.h: 13: void TMRInit(void);
 "5 timer.c
-[v _TMR1Init `(v ~T0 @X0 1 ef ]
+[v _TMRInit `(v ~T0 @X0 1 ef ]
 "6
 {
-[; ;timer.c: 5: void TMR1Init(void)
+[; ;timer.c: 5: void TMRInit(void)
 [; ;timer.c: 6: {
-[e :U _TMR1Init ]
+[e :U _TMRInit ]
 [f ]
 [; ;timer.c: 7: T1CONbits.TMR1ON = 0;
 "7
@@ -5805,7 +5954,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;timer.c: 10: PIE1bits.TMR1IE = 1;
 "10
 [e = . . _PIE1bits 0 0 -> -> 1 `i `uc ]
-[; ;timer.c: 12: }
+[; ;timer.c: 12: T3CONbits.TMR3CS = 0;
 "12
+[e = . . _T3CONbits 1 1 -> -> 0 `i `uc ]
+[; ;timer.c: 13: T3CONbits.TMR3ON = 1;
+"13
+[e = . . _T3CONbits 1 0 -> -> 1 `i `uc ]
+[; ;timer.c: 14: PIE2bits.TMR3IE = 1;
+"14
+[e = . . _PIE2bits 0 1 -> -> 1 `i `uc ]
+[; ;timer.c: 15: TMR3H = ((unsigned char)(((60536)>>8)&0xFF));
+"15
+[e = _TMR3H -> & >> -> 60536 `l -> 8 `i -> -> 255 `i `l `uc ]
+[; ;timer.c: 16: TMR3L = ((unsigned char)((60536)&0xFF));
+"16
+[e = _TMR3L -> & -> 60536 `l -> -> 255 `i `l `uc ]
+[; ;timer.c: 17: }
+"17
 [e :UE 272 ]
 }

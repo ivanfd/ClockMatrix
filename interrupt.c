@@ -14,11 +14,19 @@ void interrupt INTERRUPT_InterruptManager (void)
         INTCON2bits.INTEDG0 = ~INTCON2bits.INTEDG0; // переводимо в переривання по задньому фронту
                                                     // щоб переривання було кожних 500мс
        INT0_ISR();
-    } if (PIE1bits.TMR1IE == 1 && PIR1bits.TMR1IF ==1)
+    } else if (PIE1bits.TMR1IE == 1 && PIR1bits.TMR1IF ==1)
     {
         PIR1bits.TMR1IF = 0; // скинути признак переривання від таймера 1
          TMR1H = HIGH_BYTE(TMR1Val);
          TMR1L = LOW_BYTE(TMR1Val);
         TMR1_ISR();
+        
+    } else if (PIE2bits.TMR3IE == 1 && PIR2bits.TMR3IF ==1)
+    {
+        PIR2bits.TMR3IF = 0;
+        TMR3H = HIGH_BYTE(TMR3Val);
+        TMR3L = LOW_BYTE(TMR3Val); 
+
+        TMR3_ISR();
     }
 }

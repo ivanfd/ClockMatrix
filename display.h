@@ -54,6 +54,7 @@ struct Time_Get             // структура для годин
  void putchar_down_s(uint8_t x, uint8_t symbol);
  void pic_to_led(uint8_t x, uint8_t pic);
  void scroll_left(void);
+ void interval_scroll_text();
  
 #endif	/* XC_HEADER_TEMPLATE_H */
 

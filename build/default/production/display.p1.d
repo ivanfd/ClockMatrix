@@ -9,6 +9,7 @@ FontS.h  \
 onewire.h  \
 digits_f.h  \
 i2c.h  \
+sound.h  \
 key.h  \
 pict.h  \
 ds3231.h  \

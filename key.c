@@ -1,6 +1,7 @@
 #include "key.h"
-uint8_t key_event = NULL;
+//uint8_t key_event = NULL;
 extern uint8_t events;
+extern uint8_t play_sound; //  чи можна програвати
 
 void key_press(void)
 {
@@ -28,6 +29,7 @@ void key_press(void)
                     //key_event = key;
                       events = key;
                       count = 0;
+                      play_sound = 1;
                 }
             };
     }

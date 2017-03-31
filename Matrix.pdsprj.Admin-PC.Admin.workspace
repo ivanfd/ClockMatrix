@@ -51,11 +51,11 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="600" x="589" flags="0000802b" y="273" h="400" pid="1" iid="9">
+   <POPUP w="775" x="515" flags="0000802b" y="132" h="535" pid="1" iid="9">
     <PROPERTIES>
-     <ITEM name="Breakpoint 0">"",0BD0,0000,0845,0C99,1
+     <ITEM name="Breakpoint 0">"",2410,0000,2599,0C99,-1
 </ITEM>
-     <ITEM name="Breakpoint 1">"",152C,0000,8B70,0C99,1
+     <ITEM name="Breakpoint 1">"",0F2A,0000,3EEA,4174,1
 </ITEM>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
@@ -66,7 +66,7 @@
      <ITEM name="nBreakpoints">1</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="459" x="45" flags="0000000b" y="58" h="639" pid="2" iid="9">
+   <POPUP w="459" x="16" flags="0000000b" y="54" h="639" pid="2" iid="9">
     <PROPERTIES>
      <ITEM name="Address Column Width">94</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -116,7 +116,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="8" x="288" flags="0000000a" y="348" h="32" pid="6" iid="9">
+   <POPUP w="8" x="148" flags="0000000a" y="200" h="32" pid="6" iid="9">
     <PROPERTIES>
      <ITEM name="DataType">2</ITEM>
      <ITEM name="DispChars">Yes</ITEM>

@@ -19,7 +19,7 @@ int32_t BMP085ReadUT();
 int32_t bmp085ReadUP();
 int32_t BMP085GetTemp(int32_t _tu);
 uint16_t BMP085GetPressure(int32_t _pu);
-uint32_t BMP085Pressure(uint8_t getTemp);
+uint16_t BMP085Pressure(uint8_t getTemp);
 uint32_t BMP085Temperature(void);
 
 

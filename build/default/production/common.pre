@@ -4153,13 +4153,14 @@ const unsigned char pic7x8[][7]=
 {0x00,0x00,0x00,0x00,0x00,0x00,0x00},
 {0x08,0x7C,0x4E,0x4F,0x4E,0x7C,0x08},
 {0x04,0x26,0x47,0x3F,0x07,0x06,0x04},
-{0x20,0x3E,0x7F,0x7F,0x3F,0x3E,0x20}
+{0x20,0x3E,0x7F,0x7F,0x3F,0x3E,0x20},
+{0x7E,0x12,0x1E,0x00,0x70,0x10,0x00}
 };
 
 # 10 "digits_f.h"
 const unsigned char dFont1[][5] = {
 {0x7F,0x7F,0x41,0x7F,0x7F},
-{0x00,0x00,0x7F,0x7F,0x00},
+{0x00,0x01,0x7F,0x7F,0x00},
 {0x61,0x71,0x59,0x4F,0x47},
 {0x41,0x49,0x49,0x7F,0x7F},
 {0x1F,0x1F,0x10,0x7F,0x7F},
@@ -4173,7 +4174,7 @@ const unsigned char dFont1[][5] = {
 const unsigned char dFont2[][5] = {
 {0x7F,0x7F,0x41,0x7F,0x7F},
 {0x00,0x01,0x7F,0x7F,0x00},
-{0x63,0x73,0x59,0x4F,0x47},
+{0x73,0x73,0x51,0x5F,0x5F},
 {0x63,0x6B,0x49,0x7F,0x7F},
 {0x1F,0x1F,0x10,0x7F,0x7F},
 {0x6F,0x6F,0x49,0x79,0x79},
@@ -4185,8 +4186,8 @@ const unsigned char dFont2[][5] = {
 
 const unsigned char dFont3[][5] = {
 {0x7F,0x41,0x41,0x7F,0x7F},
-{0x00,0x00,0x7F,0x7F,0x00},
-{0x61,0x71,0x59,0x4F,0x47},
+{0x00,0x01,0x7F,0x7F,0x00},
+{0x71,0x51,0x51,0x5F,0x5F},
 {0x41,0x49,0x49,0x7F,0x7F},
 {0x1F,0x10,0x10,0x7F,0x7F},
 {0x4F,0x49,0x49,0x79,0x79},
@@ -4207,6 +4208,19 @@ const unsigned char dFont4[][5] = {
 {0x03,0x73,0x79,0x0F,0x07},
 {0x36,0x7F,0x49,0x7F,0x36},
 {0x26,0x6F,0x49,0x7F,0x3E}
+};
+
+const unsigned char dFont5[][5] = {
+{0x3E,0x41,0x41,0x7F,0x3E},
+{0x00,0x02,0x7F,0x7F,0x00},
+{0x62,0x73,0x59,0x4F,0x46},
+{0x22,0x63,0x49,0x7F,0x36},
+{0x18,0x14,0x12,0x7F,0x7F},
+{0x2F,0x45,0x45,0x7D,0x39},
+{0x3E,0x49,0x49,0x7B,0x32},
+{0x03,0x71,0x79,0x0F,0x07},
+{0x36,0x49,0x49,0x7F,0x36},
+{0x26,0x49,0x49,0x7F,0x3E}
 };
 
 # 21 "display.h"
@@ -4235,6 +4249,7 @@ void putchar_down(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
 void putchar_down_s(uint8_t x, uint8_t symbol);
 void pic_to_led(uint8_t x, uint8_t pic);
 void scroll_left(void);
+void interval_scroll_text();
 
 # 8 "eusart.h"
 void init_uart(void);
@@ -4263,7 +4278,7 @@ int32_t BMP085ReadUT();
 int32_t bmp085ReadUP();
 int32_t BMP085GetTemp(int32_t _tu);
 uint16_t BMP085GetPressure(int32_t _pu);
-uint32_t BMP085Pressure(uint8_t getTemp);
+uint16_t BMP085Pressure(uint8_t getTemp);
 uint32_t BMP085Temperature(void);
 
 # 7 "eeprom.h"
@@ -4276,10 +4291,15 @@ void Port_Init(void);
 void Interrupt_Init(void);
 
 # 13 "timer.h"
-void TMR1Init(void);
+void TMRInit(void);
+
+# 14 "sound.h"
+void sound_init();
+
+void TMR3_ISR();
 
 # 17 "interrupt.h"
-void interrupt InterruptManager(void);
+void interrupt INTERRUPT_InterruptManager(void);
 
 # 13 "dispatcher.h"
 typedef struct task
@@ -4320,6 +4340,7 @@ void default_state(void);
 void home_temp(void);
 void set_font();
 void set_font_set(void);
+void pressure(void);
 
 # 3 "common.c"
 extern uint8_t TxtBuf[6];
@@ -4334,8 +4355,9 @@ uint16_t temperature;
 uint8_t timer_val = 0, time_flag = 0;
 extern uint8_t (*pFont)[][5];
 uint8_t type_font = 0;
-
-asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "1" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0");
+uint16_t press;
+extern uint8_t play_sound;
+asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "3" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0");
 
 
 
@@ -4665,7 +4687,7 @@ Update_Matrix(Dis_Buff);
 en_put=1;
 }
 
-# 350
+# 351
 void time_set_dy(void)
 {
 switch (events)
@@ -4766,7 +4788,7 @@ events = 5;
 break;
 case 2:
 type_font++;
-if(type_font > 4) type_font = 1;
+if(type_font > 5) type_font = 1;
 RTOS_SetTask(default_state, 2000, 0);
 events = 5;
 write_eep(0,type_font);
@@ -4774,7 +4796,7 @@ set_font();
 break;
 case 3:
 type_font--;
-if(type_font == 0) type_font = 4;
+if(type_font == 0) type_font = 5;
 RTOS_SetTask(default_state, 2000, 0);
 events = 5;
 write_eep(0,type_font);
@@ -4793,7 +4815,7 @@ Update_Matrix(Dis_Buff);
 en_put=1;
 }
 
-# 481
+# 482
 void home_temp(void)
 {
 switch (events)
@@ -4829,7 +4851,7 @@ events = 5;
 scroll_left();
 if((TTime.Thr/10) % 10)
 putchar_down(0, (TTime.Thr/10) % 10, pFont);
-else putchar_down(0, 0, pFont);
+else putchar_down(0, 0, &Font);
 putchar_down(6, TTime.Thr % 10, pFont);
 putchar_down(13, (TTime.Tmin/10) % 10, pFont);
 putchar_down(19, TTime.Tmin % 10, pFont);
@@ -4862,10 +4884,70 @@ break;
 case 4:
 pFont = &dFont4;
 break;
+case 5:
+pFont = &dFont5;
+break;
 }
 }
 
-# 556
+
+
+
+void pressure(void)
+{
+
+switch (events)
+{
+case 5:
+clear_matrix();
+if (press)
+{
+pic_to_led(3,4);
+putchar_down(11,(press / 100) % 10, pFont);
+putchar_down(17,(press / 10) % 10, pFont);
+putchar_down(23,press % 10, pFont);
+} else
+{
+pic_to_led(3,4);
+putchar_down(11,'E', &Font);
+putchar_down(17,'R', &Font);
+putchar_down(23,'R', &Font);
+
+}
+
+events = 6;
+RTOS_SetTask(default_state, 400, 0);
+
+
+
+break;
+case 6:
+break;
+case 4:
+events = 5;
+
+if (press)
+{
+sprintf(text_buf, "לל.נע.סע.");
+interval_scroll_text();
+}else scroll_left();
+if((TTime.Thr/10) % 10)
+putchar_down(0, (TTime.Thr/10) % 10, pFont);
+else putchar_down(0, 0, &Font);
+putchar_down(6, TTime.Thr % 10, pFont);
+putchar_down(13, (TTime.Tmin/10) % 10, pFont);
+putchar_down(19, TTime.Tmin % 10, pFont);
+getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
+putchar_down_s(25, (TTime.Ts/10) % 10 + 1);
+putchar_down_s(29, TTime.Ts % 10 + 1);
+RTOS_DeleteTask(default_state);
+RTOS_DeleteTask(pressure);
+RTOS_SetTask(time_led,0,20);
+break;
+}
+}
+
+# 617
 void time_led()
 {
 
@@ -4891,12 +4973,13 @@ break;
 case 2:
 
 
-
-pFont = &dFont4;
-
+press = BMP085Pressure(1);
+scroll_left();
+RTOS_DeleteTask(time_led);
+RTOS_SetTask(pressure, 0, 20);
 events = 5;
 
-# 590
+# 652
 break;
 case 3:
 
@@ -4926,13 +5009,9 @@ void version(void)
 uint8_t i;
 
 sprintf(text_buf, "Clock v1.0 by Ivan_fd");
-while(scroll_text())
-{
-Update_Matrix(Dis_Buff);
-for(i=0; i<60; i++)
-_delay((unsigned long)((1)*(40000000/4000.0)));
+interval_scroll_text();
 
-};
+# 689
 }
 
 void default_state(void)
@@ -4944,7 +5023,7 @@ events = 4;
 void INT0_ISR(void)
 {
 
-# 643
+# 706
 RTOS_SetTask(GetTime, 0, 0);
 
 
@@ -4965,6 +5044,6 @@ T1CONbits.TMR1ON = 0;
 
 }
 
-# 673
+# 736
 }
 

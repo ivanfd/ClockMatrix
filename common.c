@@ -12,9 +12,10 @@ uint16_t temperature;               // температура з кімнатного датчика
 uint8_t timer_val = 0, time_flag = 0;  // для конвертування температури
 extern uint8_t (*pFont)[][5];
 uint8_t type_font = 0;                  // шрифт годин
-
-__EEPROM_DATA(1, 0, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, 
-                                       // 0 - тип шрифту (від 1 до 4)
+uint16_t press;                      // атмосферний тиск
+extern uint8_t play_sound; //  чи можна програвати
+__EEPROM_DATA(3, 0, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, 
+                                       // 0 - тип шрифту (від 1 до 5)
 
 // читаємо з DS3231 години, хвилини, секунди та дату
 // 
@@ -447,7 +448,7 @@ switch (events)
             break;
         case KEY_UP_EVENT:
             type_font++;
-            if(type_font > 4) type_font = 1;
+            if(type_font > 5) type_font = 1;
             RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
             events = MAIN_EVENT;
             write_eep(EE_FONT,type_font);
@@ -455,7 +456,7 @@ switch (events)
             break;
         case KEY_DOWN_EVENT:
             type_font--;
-            if(type_font == 0) type_font = 4;           
+            if(type_font == 0) type_font = 5;           
             RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
             events = MAIN_EVENT;
             write_eep(EE_FONT,type_font);
@@ -513,7 +514,7 @@ if(en_put)
             scroll_left();
             if((TTime.Thr/10) % 10)
             putchar_down(0, (TTime.Thr/10) % 10, pFont);  
-            else putchar_down(0, 0, pFont);
+            else putchar_down(0, 0, &Font);
             putchar_down(6, TTime.Thr % 10, pFont);     
             putchar_down(13, (TTime.Tmin/10) % 10, pFont);
             putchar_down(19, TTime.Tmin % 10, pFont);
@@ -546,8 +547,68 @@ if(en_put)
          case 4:
              pFont = &dFont4;
              break;
+         case 5:
+             pFont = &dFont5;
+             break;
      }
  }
+
+//==================================================
+//  вивід атмосферного тиску
+// =================================================
+ void pressure(void)
+ {
+    
+    switch (events)
+    {
+        case MAIN_EVENT:
+            clear_matrix();
+            if (press)
+            {
+                    pic_to_led(3,4);
+                    putchar_down(11,(press / 100) % 10, pFont);
+                    putchar_down(17,(press / 10) % 10, pFont);
+                    putchar_down(23,press % 10, pFont);
+            } else
+            {
+                    pic_to_led(3,4);
+                    putchar_down(11,'E', &Font);
+                    putchar_down(17,'R', &Font);
+                    putchar_down(23,'R', &Font);
+                
+            }
+
+                events = TEMP_EVENT;
+                RTOS_SetTask(default_state, 400, 0);  // 3,5 секунд для виходу
+
+           // }
+                
+            break;
+        case TEMP_EVENT:
+            break;    
+        case KEY_EXIT_EVENT:  // повертаємось в показ часу
+            events = MAIN_EVENT;
+            //
+            if (press)
+            {
+                sprintf(text_buf, "мм.рт.ст.");  
+                interval_scroll_text();
+            }else scroll_left(); 
+            if((TTime.Thr/10) % 10)
+            putchar_down(0, (TTime.Thr/10) % 10, pFont);  
+            else putchar_down(0, 0, &Font);
+            putchar_down(6, TTime.Thr % 10, pFont);     
+            putchar_down(13, (TTime.Tmin/10) % 10, pFont);
+            putchar_down(19, TTime.Tmin % 10, pFont);
+            getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
+            putchar_down_s(25, (TTime.Ts/10) % 10 + 1);
+            putchar_down_s(29, TTime.Ts % 10 + 1);            
+            RTOS_DeleteTask(default_state);
+            RTOS_DeleteTask(pressure);
+            RTOS_SetTask(time_led,0,cycle_main);
+            break;
+    }
+ } 
  
  
 //==================================================
@@ -577,10 +638,11 @@ void time_led()
             break;
         case  KEY_UP_EVENT:
    //         asm("nop");
- //           printf("AC1: %d\n\r", -1026);
-//            bmp085Calibration();
-            pFont = &dFont4;
-            //   BMP085Pressure(1);
+
+            press = BMP085Pressure(1);
+            scroll_left();
+            RTOS_DeleteTask(time_led);      //видаляємо задачу
+            RTOS_SetTask(pressure, 0, cycle_main); //додаємо задачу 
             events = MAIN_EVENT;
             //  scroll_left();
 //            clear_matrix();
@@ -615,14 +677,15 @@ void version(void)
 {
     uint8_t i;
     
-    sprintf(text_buf, VERSION);  
-    while(scroll_text())
-    {
-        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
-        for(i=0; i<SPEED_STRING; i++)
-            __delay_ms(1);
-
-    };
+    sprintf(text_buf, VERSION); 
+    interval_scroll_text();
+//    while(scroll_text())
+//    {
+//        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+//        for(i=0; i<SPEED_STRING; i++)
+//            __delay_ms(1);
+//
+//    };
 }
 
 void default_state(void)

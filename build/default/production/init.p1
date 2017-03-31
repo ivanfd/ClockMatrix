@@ -9,7 +9,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "25 max7221.h
 [v _Init7221 `(v ~T0 @X0 0 ef ]
 "13 timer.h
-[v _TMR1Init `(v ~T0 @X0 0 ef ]
+[v _TMRInit `(v ~T0 @X0 0 ef ]
 "18 init.h
 [v _Interrupt_Init `(v ~T0 @X0 0 ef ]
 "52 ds3231.h
@@ -28,6 +28,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _read_eep `(uc ~T0 @X0 0 ef1`us ]
 "56 common.h
 [v _set_font `(v ~T0 @X0 0 ef ]
+"14 sound.h
+[v _sound_init `(v ~T0 @X0 0 ef ]
 "1094 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f4525.h
 [v _LATC `Vuc ~T0 @X0 0 e@3979 ]
 "1809
@@ -5381,6 +5383,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 62 `i `uc
 -> -> 32 `i `uc
 ..
+:U ..
+"9
+-> -> 126 `i `uc
+-> -> 18 `i `uc
+-> -> 30 `i `uc
+-> -> 0 `i `uc
+-> -> 112 `i `uc
+-> -> 16 `i `uc
+-> -> 0 `i `uc
+..
 ..
 ]
 [; ;pict.h: 3: const unsigned char pic7x8[][7]=
@@ -5388,8 +5400,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pict.h: 5: {0x00,0x00,0x00,0x00,0x00,0x00,0x00},
 [; ;pict.h: 6: {0x08,0x7C,0x4E,0x4F,0x4E,0x7C,0x08},
 [; ;pict.h: 7: {0x04,0x26,0x47,0x3F,0x07,0x06,0x04},
-[; ;pict.h: 8: {0x20,0x3E,0x7F,0x7F,0x3F,0x3E,0x20}
-[; ;pict.h: 9: };
+[; ;pict.h: 8: {0x20,0x3E,0x7F,0x7F,0x3F,0x3E,0x20},
+[; ;pict.h: 9: {0x7E,0x12,0x1E,0x00,0x70,0x10,0x00}
+[; ;pict.h: 10: };
 [v F3055 `Cuc ~T0 @X0 -> 5 `i t ]
 "10 digits_f.h
 [v _dFont1 `F3055 ~T0 @X0 -> 0 `x e ]
@@ -5406,7 +5419,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 :U ..
 "12
 -> -> 0 `i `uc
--> -> 0 `i `uc
+-> -> 1 `i `uc
 -> -> 127 `i `uc
 -> -> 127 `i `uc
 -> -> 0 `i `uc
@@ -5479,7 +5492,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;digits_f.h: 10: const unsigned char dFont1[][5] = {
 [; ;digits_f.h: 11: {0x7F,0x7F,0x41,0x7F,0x7F},
-[; ;digits_f.h: 12: {0x00,0x00,0x7F,0x7F,0x00},
+[; ;digits_f.h: 12: {0x00,0x01,0x7F,0x7F,0x00},
 [; ;digits_f.h: 13: {0x61,0x71,0x59,0x4F,0x47},
 [; ;digits_f.h: 14: {0x41,0x49,0x49,0x7F,0x7F},
 [; ;digits_f.h: 15: {0x1F,0x1F,0x10,0x7F,0x7F},
@@ -5512,11 +5525,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 ..
 :U ..
 "26
--> -> 99 `i `uc
 -> -> 115 `i `uc
--> -> 89 `i `uc
--> -> 79 `i `uc
--> -> 71 `i `uc
+-> -> 115 `i `uc
+-> -> 81 `i `uc
+-> -> 95 `i `uc
+-> -> 95 `i `uc
 ..
 :U ..
 "27
@@ -5579,7 +5592,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digits_f.h: 23: const unsigned char dFont2[][5] = {
 [; ;digits_f.h: 24: {0x7F,0x7F,0x41,0x7F,0x7F},
 [; ;digits_f.h: 25: {0x00,0x01,0x7F,0x7F,0x00},
-[; ;digits_f.h: 26: {0x63,0x73,0x59,0x4F,0x47},
+[; ;digits_f.h: 26: {0x73,0x73,0x51,0x5F,0x5F},
 [; ;digits_f.h: 27: {0x63,0x6B,0x49,0x7F,0x7F},
 [; ;digits_f.h: 28: {0x1F,0x1F,0x10,0x7F,0x7F},
 [; ;digits_f.h: 29: {0x6F,0x6F,0x49,0x79,0x79},
@@ -5604,18 +5617,18 @@ Version 3.2 HI-TECH Software Intermediate Code
 :U ..
 "38
 -> -> 0 `i `uc
--> -> 0 `i `uc
+-> -> 1 `i `uc
 -> -> 127 `i `uc
 -> -> 127 `i `uc
 -> -> 0 `i `uc
 ..
 :U ..
 "39
--> -> 97 `i `uc
 -> -> 113 `i `uc
--> -> 89 `i `uc
--> -> 79 `i `uc
--> -> 71 `i `uc
+-> -> 81 `i `uc
+-> -> 81 `i `uc
+-> -> 95 `i `uc
+-> -> 95 `i `uc
 ..
 :U ..
 "40
@@ -5677,8 +5690,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;digits_f.h: 36: const unsigned char dFont3[][5] = {
 [; ;digits_f.h: 37: {0x7F,0x41,0x41,0x7F,0x7F},
-[; ;digits_f.h: 38: {0x00,0x00,0x7F,0x7F,0x00},
-[; ;digits_f.h: 39: {0x61,0x71,0x59,0x4F,0x47},
+[; ;digits_f.h: 38: {0x00,0x01,0x7F,0x7F,0x00},
+[; ;digits_f.h: 39: {0x71,0x51,0x51,0x5F,0x5F},
 [; ;digits_f.h: 40: {0x41,0x49,0x49,0x7F,0x7F},
 [; ;digits_f.h: 41: {0x1F,0x10,0x10,0x7F,0x7F},
 [; ;digits_f.h: 42: {0x4F,0x49,0x49,0x79,0x79},
@@ -5786,6 +5799,105 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digits_f.h: 58: {0x36,0x7F,0x49,0x7F,0x36},
 [; ;digits_f.h: 59: {0x26,0x6F,0x49,0x7F,0x3E}
 [; ;digits_f.h: 60: };
+[v F3063 `Cuc ~T0 @X0 -> 5 `i t ]
+"62
+[v _dFont5 `F3063 ~T0 @X0 -> 0 `x e ]
+[i _dFont5
+:U ..
+:U ..
+"63
+-> -> 62 `i `uc
+-> -> 65 `i `uc
+-> -> 65 `i `uc
+-> -> 127 `i `uc
+-> -> 62 `i `uc
+..
+:U ..
+"64
+-> -> 0 `i `uc
+-> -> 2 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+-> -> 0 `i `uc
+..
+:U ..
+"65
+-> -> 98 `i `uc
+-> -> 115 `i `uc
+-> -> 89 `i `uc
+-> -> 79 `i `uc
+-> -> 70 `i `uc
+..
+:U ..
+"66
+-> -> 34 `i `uc
+-> -> 99 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 54 `i `uc
+..
+:U ..
+"67
+-> -> 24 `i `uc
+-> -> 20 `i `uc
+-> -> 18 `i `uc
+-> -> 127 `i `uc
+-> -> 127 `i `uc
+..
+:U ..
+"68
+-> -> 47 `i `uc
+-> -> 69 `i `uc
+-> -> 69 `i `uc
+-> -> 125 `i `uc
+-> -> 57 `i `uc
+..
+:U ..
+"69
+-> -> 62 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 123 `i `uc
+-> -> 50 `i `uc
+..
+:U ..
+"70
+-> -> 3 `i `uc
+-> -> 113 `i `uc
+-> -> 121 `i `uc
+-> -> 15 `i `uc
+-> -> 7 `i `uc
+..
+:U ..
+"71
+-> -> 54 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 54 `i `uc
+..
+:U ..
+"72
+-> -> 38 `i `uc
+-> -> 73 `i `uc
+-> -> 73 `i `uc
+-> -> 127 `i `uc
+-> -> 62 `i `uc
+..
+..
+]
+[; ;digits_f.h: 62: const unsigned char dFont5[][5] = {
+[; ;digits_f.h: 63: {0x3E,0x41,0x41,0x7F,0x3E},
+[; ;digits_f.h: 64: {0x00,0x02,0x7F,0x7F,0x00},
+[; ;digits_f.h: 65: {0x62,0x73,0x59,0x4F,0x46},
+[; ;digits_f.h: 66: {0x22,0x63,0x49,0x7F,0x36},
+[; ;digits_f.h: 67: {0x18,0x14,0x12,0x7F,0x7F},
+[; ;digits_f.h: 68: {0x2F,0x45,0x45,0x7D,0x39},
+[; ;digits_f.h: 69: {0x3E,0x49,0x49,0x7B,0x32},
+[; ;digits_f.h: 70: {0x03,0x71,0x79,0x0F,0x07},
+[; ;digits_f.h: 71: {0x36,0x49,0x49,0x7F,0x36},
+[; ;digits_f.h: 72: {0x26,0x49,0x49,0x7F,0x3E}
+[; ;digits_f.h: 73: };
 "30 display.h
 [v _TTime `S270 ~T0 @X0 1 e ]
 [v _TSTime `S270 ~T0 @X0 1 e ]
@@ -5811,8 +5923,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 54: void putchar_down_s(uint8_t x, uint8_t symbol);
 [; ;display.h: 55: void pic_to_led(uint8_t x, uint8_t pic);
 [; ;display.h: 56: void scroll_left(void);
-[; ;timer.h: 13: void TMR1Init(void);
-[; ;interrupt.h: 17: void interrupt InterruptManager(void);
+[; ;display.h: 57: void interval_scroll_text();
+[; ;timer.h: 13: void TMRInit(void);
+[; ;sound.h: 14: void sound_init();
+[; ;sound.h: 16: void TMR3_ISR();
+[; ;interrupt.h: 17: void interrupt INTERRUPT_InterruptManager(void);
 [; ;dispatcher.h: 13: typedef struct task
 [; ;dispatcher.h: 14: {
 [; ;dispatcher.h: 15: void (*pFunc) (void);
@@ -5871,7 +5986,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;bmp180.h: 19: int32_t bmp085ReadUP();
 [; ;bmp180.h: 20: int32_t BMP085GetTemp(int32_t _tu);
 [; ;bmp180.h: 21: uint16_t BMP085GetPressure(int32_t _pu);
-[; ;bmp180.h: 22: uint32_t BMP085Pressure(uint8_t getTemp);
+[; ;bmp180.h: 22: uint16_t BMP085Pressure(uint8_t getTemp);
 [; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
 [; ;eusart.h: 8: void init_uart(void);
 [; ;eusart.h: 9: void putch(char data);
@@ -5890,6 +6005,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.h: 55: void home_temp(void);
 [; ;common.h: 56: void set_font();
 [; ;common.h: 57: void set_font_set(void);
+[; ;common.h: 58: void pressure(void);
 [; ;i2c.h: 10: void I2C_Master_Wait();
 [; ;i2c.h: 11: void I2C_Master_Start();
 [; ;i2c.h: 12: void I2C_Master_RepeatedStart();
@@ -5919,9 +6035,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.c: 70: Init7221();
 "70
 [e ( _Init7221 ..  ]
-[; ;init.c: 71: TMR1Init();
+[; ;init.c: 71: TMRInit();
 "71
-[e ( _TMR1Init ..  ]
+[e ( _TMRInit ..  ]
 [; ;init.c: 72: Interrupt_Init();
 "72
 [e ( _Interrupt_Init ..  ]
@@ -5946,70 +6062,73 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.c: 79: set_font();
 "79
 [e ( _set_font ..  ]
-[; ;init.c: 81: }
-"81
+[; ;init.c: 80: sound_init();
+"80
+[e ( _sound_init ..  ]
+[; ;init.c: 82: }
+"82
 [e :UE 272 ]
 }
-"83
-[v _Port_Init `(v ~T0 @X0 1 ef ]
 "84
+[v _Port_Init `(v ~T0 @X0 1 ef ]
+"85
 {
-[; ;init.c: 83: void Port_Init(void)
-[; ;init.c: 84: {
+[; ;init.c: 84: void Port_Init(void)
+[; ;init.c: 85: {
 [e :U _Port_Init ]
 [f ]
-[; ;init.c: 85: LATC = 0x00;
-"85
-[e = _LATC -> -> 0 `i `uc ]
-[; ;init.c: 86: TRISC = 0b00011000;
+[; ;init.c: 86: LATC = 0x00;
 "86
-[e = _TRISC -> -> 24 `i `uc ]
-[; ;init.c: 87: LATB = 0x00;
+[e = _LATC -> -> 0 `i `uc ]
+[; ;init.c: 87: TRISC = 0b00011000;
 "87
-[e = _LATB -> -> 0 `i `uc ]
-[; ;init.c: 88: TRISB = 0b00011111;
+[e = _TRISC -> -> 24 `i `uc ]
+[; ;init.c: 88: LATB = 0x00;
 "88
-[e = _TRISB -> -> 31 `i `uc ]
-[; ;init.c: 89: INTCON2 &= (~(1<<7));
+[e = _LATB -> -> 0 `i `uc ]
+[; ;init.c: 89: TRISB = 0b00011111;
 "89
-[e =& _INTCON2 -> ~ << -> 1 `i -> 7 `i `uc ]
-[; ;init.c: 90: LATD = 0x00;
+[e = _TRISB -> -> 31 `i `uc ]
+[; ;init.c: 90: INTCON2 &= (~(1<<7));
 "90
-[e = _LATD -> -> 0 `i `uc ]
-[; ;init.c: 91: TRISD = 0x00;
+[e =& _INTCON2 -> ~ << -> 1 `i -> 7 `i `uc ]
+[; ;init.c: 91: LATD = 0x00;
 "91
-[e = _TRISD -> -> 0 `i `uc ]
-[; ;init.c: 92: INTCON2bits.INTEDG0 = 1;
+[e = _LATD -> -> 0 `i `uc ]
+[; ;init.c: 92: TRISD = 0x00;
 "92
-[e = . . _INTCON2bits 1 6 -> -> 1 `i `uc ]
-[; ;init.c: 93: INTCONbits.INT0IF = 0;
+[e = _TRISD -> -> 0 `i `uc ]
+[; ;init.c: 93: INTCON2bits.INTEDG0 = 1;
 "93
-[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-[; ;init.c: 94: INTCONbits.INT0IE = 1;
+[e = . . _INTCON2bits 1 6 -> -> 1 `i `uc ]
+[; ;init.c: 94: INTCONbits.INT0IF = 0;
 "94
-[e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
-[; ;init.c: 95: PORTCbits.RC0 = 1;
+[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
+[; ;init.c: 95: INTCONbits.INT0IE = 1;
 "95
-[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; ;init.c: 96: }
+[e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
+[; ;init.c: 96: PORTCbits.RC0 = 1;
 "96
+[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
+[; ;init.c: 97: }
+"97
 [e :UE 273 ]
 }
-"98
-[v _Interrupt_Init `(v ~T0 @X0 1 ef ]
 "99
+[v _Interrupt_Init `(v ~T0 @X0 1 ef ]
+"100
 {
-[; ;init.c: 98: void Interrupt_Init(void)
-[; ;init.c: 99: {
+[; ;init.c: 99: void Interrupt_Init(void)
+[; ;init.c: 100: {
 [e :U _Interrupt_Init ]
 [f ]
-[; ;init.c: 100: (INTCONbits.GIE = 1);
-"100
-[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;init.c: 101: (INTCONbits.PEIE = 1);
+[; ;init.c: 101: (INTCONbits.GIE = 1);
 "101
-[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;init.c: 102: }
+[e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
+[; ;init.c: 102: (INTCONbits.PEIE = 1);
 "102
+[e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
+[; ;init.c: 103: }
+"103
 [e :UE 274 ]
 }

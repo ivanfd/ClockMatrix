@@ -68,7 +68,7 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     Port_Init();  
     I2C_Init();
     Init7221();
-    TMR1Init();
+    TMRInit();
     Interrupt_Init();
     DS3231_init();
     init_ds18b20();
@@ -77,6 +77,7 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     bmp085Calibration();
     type_font = read_eep(EE_FONT);
     set_font();
+    sound_init();
 
 }
 

@@ -68,7 +68,7 @@ int16_t bmp085ReadInt(uint8_t address)
 //---------------------------------------------- 
 { 
 int16_t msb, lsb; 
-int16_t temp; 
+
 
      I2C_Master_Start();
      I2C_Master_Write(BMP180_ADDRESS);
@@ -192,8 +192,14 @@ int32_t p;
    msb  = BMP085ReadByte(0xF6); 
    lsb  = BMP085ReadByte(0xF7); 
    xlsb = BMP085ReadByte(0xF8); 
+   if ((msb == 0xff) && (lsb == 0xff) && (xlsb == 0xff) ) return FALSE;
    p = ((msb<<16) + (lsb<<8) + xlsb) >> (8-OSS); 
+   #ifdef DEBUG
+    __delay_ms(200);
+    printf("UncPress: %x\n\r", p);
+#endif
    return(p);
+   
  //  return 23843;
 }
 
@@ -320,12 +326,15 @@ int32_t Pp;
 //  Процедура визначення тиску
 //  getTemp: чи будемо читати спочатку температуру(потрібно якщо ми ще не читали температуру)
 //---------------------------------------------- 
-uint32_t BMP085Pressure(uint8_t getTemp) 
+uint16_t BMP085Pressure(uint8_t getTemp) 
 //---------------------------------------------- 
 { 
+   int32_t press; 
    if (getTemp) 
       T = BMP085GetTemp(BMP085ReadUT());  //  
-   return(BMP085GetPressure(bmp085ReadUP())); 
+   press = bmp085ReadUP();
+   if (press == 0) return FALSE;
+   return(BMP085GetPressure(press)); 
 } 
 
 

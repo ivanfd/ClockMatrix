@@ -55,6 +55,7 @@
  void home_temp(void);
  void set_font();
  void set_font_set(void);
+ void pressure(void);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 
