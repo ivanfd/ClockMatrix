@@ -18,8 +18,9 @@ Font.h  \
 eeprom.h  \
 common.h  \
 eusart.h  \
+bmp_280.h  \
 max7221.h  \
 display.h  \
 ds18b20.h  \
-bmp180.h  \
+BMP_280.h  \
 events.h 

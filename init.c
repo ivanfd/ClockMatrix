@@ -74,7 +74,8 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     init_ds18b20();
     RTOS_Init();
     init_uart();
-    bmp085Calibration();
+    //bmp085Calibration();
+    bmp280_Init();
     type_font = read_eep(EE_FONT);
     set_font();
     sound_init();

@@ -26,6 +26,7 @@
       <itemPath>digits_f.h</itemPath>
       <itemPath>eeprom.h</itemPath>
       <itemPath>sound.h</itemPath>
+      <itemPath>BMP_280.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -51,6 +52,7 @@
       <itemPath>eusart.c</itemPath>
       <itemPath>eeprom.c</itemPath>
       <itemPath>sound.c</itemPath>
+      <itemPath>BMP_280.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -171,9 +173,8 @@
         <property key="Freeze Peripherals" value="true"/>
         <property key="SecureSegment.SegmentProgramming" value="FullChipProgramming"/>
         <property key="ToolFirmwareFilePath"
-                  value="Press to browse for a specific firmware version"/>
+                  value="C:\Program Files (x86)/Microchip/MPLABX/v3.51/mplab_ide/mplablibs/modules/ext/PICKIT3.jar/PK3FW_014614.jam"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
-        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>
@@ -187,7 +188,8 @@
         <property key="memories.instruction.ram.ranges"
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
-        <property key="memories.programmemory.ranges" value="0-bfff"/>
+        <property key="memories.programmemory.ranges"
+                  value="${memories.programmemory.ranges.default}"/>
         <property key="poweroptions.powerenable" value="false"/>
         <property key="programmertogo.imagename" value=""/>
         <property key="programoptions.donoteraseauxmem" value="false"/>

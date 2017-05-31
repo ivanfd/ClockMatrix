@@ -4288,20 +4288,15 @@ const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val);
 void init_ds18b20(void);
 
-# 11 "bmp180.h"
-const uint8_t OSS = 3;
-
-
-uint8_t BMP085ReadByte(uint8_t address);
-int16_t bmp085ReadInt(uint8_t address);
-void BMP085WriteByte(uint8_t address, int8_t data);
-void bmp085Calibration();
-int32_t BMP085ReadUT();
-int32_t bmp085ReadUP();
-int32_t BMP085GetTemp(int32_t _tu);
-uint16_t BMP085GetPressure(int32_t _pu);
-uint16_t BMP085Pressure(uint8_t getTemp);
-uint32_t BMP085Temperature(void);
+# 52 "bmp_280.h"
+void bmp280_Init();
+uint16_t bmp280ReadInt16(uint8_t address);
+void bmp280WriteByte(uint8_t address, int8_t data);
+uint8_t bmp280ReadByte(uint8_t address) ;
+int32_t bmp280ReadTemp();
+uint32_t bmp280ReadInt32(uint8_t address);
+int32_t bmp280ReadPressure();
+void bmp280Convert(int32_t *temperature, int32_t *pressure);
 
 # 8 "eusart.h"
 void init_uart(void);
@@ -4337,7 +4332,7 @@ uint8_t I2C_Master_Read(uint8_t a);
 void write_eep( unsigned char address, unsigned char data );
 unsigned char read_eep( unsigned short address );
 
-# 16 "init.h"
+# 17 "init.h"
 void SYSTEM_Initialize(void);
 void Port_Init(void);
 void Interrupt_Init(void);

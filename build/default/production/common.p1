@@ -6,12 +6,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _getTime `(v ~T0 @X0 0 ef3`*uc`*uc`*uc ]
 "58
 [v _getDate `(v ~T0 @X0 0 ef4`*uc`*uc`*uc`*uc ]
-[v F3195 `(v ~T0 @X0 0 tf ]
+[v F3177 `(v ~T0 @X0 0 tf ]
 "27 dispatcher.h
-[v _RTOS_DeleteTask `(v ~T0 @X0 0 ef1`*F3195 ]
-[v F3189 `(v ~T0 @X0 0 tf ]
+[v _RTOS_DeleteTask `(v ~T0 @X0 0 ef1`*F3177 ]
+[v F3171 `(v ~T0 @X0 0 tf ]
 "26
-[v _RTOS_SetTask `(v ~T0 @X0 0 ef3`*F3189`ui`ui ]
+[v _RTOS_SetTask `(v ~T0 @X0 0 ef3`*F3171`ui`ui ]
 "46 common.h
 [v _time_set_hr `(v ~T0 @X0 0 ef ]
 "54
@@ -24,10 +24,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v F3092 `F3093 ~T0 @X0 -> 10 `i t ]
 "47 display.h
 [v _putchar_b_buf `(v ~T0 @X0 0 ef3`uc`uc`*F3092 ]
-[v F3248 `uc ~T0 @X0 -> 5 `i t ]
-[v F3247 `F3248 ~T0 @X0 -> 0 `x t ]
+[v F3244 `uc ~T0 @X0 -> 5 `i t ]
+[v F3243 `F3244 ~T0 @X0 -> 0 `x t ]
 "13 common.c
-[v _pFont `*F3247 ~T0 @X0 0 e ]
+[v _pFont `*F3243 ~T0 @X0 0 e ]
 "24 max7221.h
 [v _Update_Matrix `(v ~T0 @X0 0 ef1`*uc ]
 "4 common.c
@@ -70,8 +70,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _FillBuf `(v ~T0 @X0 0 ef ]
 "13 ds18b20.h
 [v _readTemp_Single `(uc ~T0 @X0 0 ef3`*ui`*uc`*uc ]
-"22 bmp180.h
-[v _BMP085Pressure `(ui ~T0 @X0 0 ef1`uc ]
+"59 BMP_280.h
+[v _bmp280Convert `(v ~T0 @X0 0 ef2`*l`*l ]
 "5270 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f4525.h
 [s S220 :2 `uc 1 :1 `uc 1 ]
 [n S220 . . NOT_T1SYNC ]
@@ -5869,34 +5869,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 57: void interval_scroll_text();
 [; ;eusart.h: 8: void init_uart(void);
 [; ;eusart.h: 9: void putch(char data);
-[; ;key.h: 22: void key_press(void);
-[; ;onewire.h: 12: uint8_t ow_reset(void);
-[; ;onewire.h: 13: uint8_t read_bit(void);
-[; ;onewire.h: 14: void write_bit(uint8_t bitval);
-[; ;onewire.h: 15: uint8_t read_byte(void);
-[; ;onewire.h: 16: void write_byte(uint8_t val);
-[; ;onewire.h: 17: void Waiting_WR (void);
-"11 bmp180.h
-[v _OSS `Cuc ~T0 @X0 1 e ]
-[i _OSS
--> -> 3 `i `uc
-]
-[; ;bmp180.h: 11: const uint8_t OSS = 3;
-[; ;bmp180.h: 14: uint8_t BMP085ReadByte(uint8_t address);
-[; ;bmp180.h: 15: int16_t bmp085ReadInt(uint8_t address);
-[; ;bmp180.h: 16: void BMP085WriteByte(uint8_t address, int8_t data);
-[; ;bmp180.h: 17: void bmp085Calibration();
-[; ;bmp180.h: 18: int32_t BMP085ReadUT();
-[; ;bmp180.h: 19: int32_t bmp085ReadUP();
-[; ;bmp180.h: 20: int32_t BMP085GetTemp(int32_t _tu);
-[; ;bmp180.h: 21: uint16_t BMP085GetPressure(int32_t _pu);
-[; ;bmp180.h: 22: uint16_t BMP085Pressure(uint8_t getTemp);
-[; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
+[; ;BMP_280.h: 52: void bmp280_Init();
+[; ;BMP_280.h: 53: uint16_t bmp280ReadInt16(uint8_t address);
+[; ;BMP_280.h: 54: void bmp280WriteByte(uint8_t address, int8_t data);
+[; ;BMP_280.h: 55: uint8_t bmp280ReadByte(uint8_t address) ;
+[; ;BMP_280.h: 56: int32_t bmp280ReadTemp();
+[; ;BMP_280.h: 57: uint32_t bmp280ReadInt32(uint8_t address);
+[; ;BMP_280.h: 58: int32_t bmp280ReadPressure();
+[; ;BMP_280.h: 59: void bmp280Convert(int32_t *temperature, int32_t *pressure);
 [; ;eeprom.h: 7: void write_eep( unsigned char address, unsigned char data );
 [; ;eeprom.h: 8: unsigned char read_eep( unsigned short address );
-[; ;init.h: 16: void SYSTEM_Initialize(void);
-[; ;init.h: 17: void Port_Init(void);
-[; ;init.h: 18: void Interrupt_Init(void);
+[; ;init.h: 17: void SYSTEM_Initialize(void);
+[; ;init.h: 18: void Port_Init(void);
+[; ;init.h: 19: void Interrupt_Init(void);
 [; ;timer.h: 13: void TMRInit(void);
 [; ;sound.h: 14: void sound_init();
 [; ;sound.h: 16: void TMR3_ISR();
@@ -5913,6 +5898,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dispatcher.h: 26: void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod);
 [; ;dispatcher.h: 27: void RTOS_DeleteTask (void (*taskFunc)(void));
 [; ;dispatcher.h: 28: void RTOS_DispatchTask (void);
+[; ;key.h: 22: void key_press(void);
+[; ;onewire.h: 12: uint8_t ow_reset(void);
+[; ;onewire.h: 13: uint8_t read_bit(void);
+[; ;onewire.h: 14: void write_bit(uint8_t bitval);
+[; ;onewire.h: 15: uint8_t read_byte(void);
+[; ;onewire.h: 16: void write_byte(uint8_t val);
+[; ;onewire.h: 17: void Waiting_WR (void);
 "10 ds18b20.h
 [v _fract `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fract
@@ -5998,7 +5990,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.c: 14: uint8_t type_font = 0;
 "15
 [v _press `ui ~T0 @X0 1 e ]
-[; ;common.c: 15: uint16_t press;
+[v _temperbmp280 `ui ~T0 @X0 1 e ]
+[; ;common.c: 15: uint16_t press, temperbmp280;
 [; ;common.c: 16: extern uint8_t play_sound;
 "17
 [; ;common.c: 17: asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "3" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0");
@@ -7575,7 +7568,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 391 ]
 [; ;common.c: 539: pFont = &dFont1;
 "539
-[e = _pFont -> &U _dFont1 `*F3247 ]
+[e = _pFont -> &U _dFont1 `*F3243 ]
 [; ;common.c: 540: break;
 "540
 [e $U 389  ]
@@ -7584,7 +7577,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 392 ]
 [; ;common.c: 542: pFont = &dFont2;
 "542
-[e = _pFont -> &U _dFont2 `*F3247 ]
+[e = _pFont -> &U _dFont2 `*F3243 ]
 [; ;common.c: 543: break;
 "543
 [e $U 389  ]
@@ -7593,7 +7586,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 393 ]
 [; ;common.c: 545: pFont = &dFont3;
 "545
-[e = _pFont -> &U _dFont3 `*F3247 ]
+[e = _pFont -> &U _dFont3 `*F3243 ]
 [; ;common.c: 546: break;
 "546
 [e $U 389  ]
@@ -7602,7 +7595,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 394 ]
 [; ;common.c: 548: pFont = &dFont4;
 "548
-[e = _pFont -> &U _dFont4 `*F3247 ]
+[e = _pFont -> &U _dFont4 `*F3243 ]
 [; ;common.c: 549: break;
 "549
 [e $U 389  ]
@@ -7611,7 +7604,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :U 395 ]
 [; ;common.c: 551: pFont = &dFont5;
 "551
-[e = _pFont -> &U _dFont5 `*F3247 ]
+[e = _pFont -> &U _dFont5 `*F3243 ]
 [; ;common.c: 552: break;
 "552
 [e $U 389  ]
@@ -7860,9 +7853,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.c: 639: case 2:
 "639
 [e :U 415 ]
-[; ;common.c: 642: press = BMP085Pressure(1);
-"642
-[e = _press ( _BMP085Pressure (1 -> -> 1 `i `uc ]
+[; ;common.c: 641: bmp280Convert(&temperbmp280, &press);
+"641
+[e ( _bmp280Convert (2 , -> &U _temperbmp280 `*l -> &U _press `*l ]
 [; ;common.c: 643: scroll_left();
 "643
 [e ( _scroll_left ..  ]

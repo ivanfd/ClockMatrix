@@ -5783,34 +5783,19 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c.h: 15: uint8_t I2C_Master_Read(uint8_t a);
 [; ;eusart.h: 8: void init_uart(void);
 [; ;eusart.h: 9: void putch(char data);
-[; ;key.h: 22: void key_press(void);
-[; ;onewire.h: 12: uint8_t ow_reset(void);
-[; ;onewire.h: 13: uint8_t read_bit(void);
-[; ;onewire.h: 14: void write_bit(uint8_t bitval);
-[; ;onewire.h: 15: uint8_t read_byte(void);
-[; ;onewire.h: 16: void write_byte(uint8_t val);
-[; ;onewire.h: 17: void Waiting_WR (void);
-"11 bmp180.h
-[v _OSS `Cuc ~T0 @X0 1 e ]
-[i _OSS
--> -> 3 `i `uc
-]
-[; ;bmp180.h: 11: const uint8_t OSS = 3;
-[; ;bmp180.h: 14: uint8_t BMP085ReadByte(uint8_t address);
-[; ;bmp180.h: 15: int16_t bmp085ReadInt(uint8_t address);
-[; ;bmp180.h: 16: void BMP085WriteByte(uint8_t address, int8_t data);
-[; ;bmp180.h: 17: void bmp085Calibration();
-[; ;bmp180.h: 18: int32_t BMP085ReadUT();
-[; ;bmp180.h: 19: int32_t bmp085ReadUP();
-[; ;bmp180.h: 20: int32_t BMP085GetTemp(int32_t _tu);
-[; ;bmp180.h: 21: uint16_t BMP085GetPressure(int32_t _pu);
-[; ;bmp180.h: 22: uint16_t BMP085Pressure(uint8_t getTemp);
-[; ;bmp180.h: 23: uint32_t BMP085Temperature(void);
+[; ;BMP_280.h: 52: void bmp280_Init();
+[; ;BMP_280.h: 53: uint16_t bmp280ReadInt16(uint8_t address);
+[; ;BMP_280.h: 54: void bmp280WriteByte(uint8_t address, int8_t data);
+[; ;BMP_280.h: 55: uint8_t bmp280ReadByte(uint8_t address) ;
+[; ;BMP_280.h: 56: int32_t bmp280ReadTemp();
+[; ;BMP_280.h: 57: uint32_t bmp280ReadInt32(uint8_t address);
+[; ;BMP_280.h: 58: int32_t bmp280ReadPressure();
+[; ;BMP_280.h: 59: void bmp280Convert(int32_t *temperature, int32_t *pressure);
 [; ;eeprom.h: 7: void write_eep( unsigned char address, unsigned char data );
 [; ;eeprom.h: 8: unsigned char read_eep( unsigned short address );
-[; ;init.h: 16: void SYSTEM_Initialize(void);
-[; ;init.h: 17: void Port_Init(void);
-[; ;init.h: 18: void Interrupt_Init(void);
+[; ;init.h: 17: void SYSTEM_Initialize(void);
+[; ;init.h: 18: void Port_Init(void);
+[; ;init.h: 19: void Interrupt_Init(void);
 [; ;timer.h: 13: void TMRInit(void);
 [; ;sound.h: 14: void sound_init();
 [; ;sound.h: 16: void TMR3_ISR();
@@ -5827,6 +5812,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dispatcher.h: 26: void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod);
 [; ;dispatcher.h: 27: void RTOS_DeleteTask (void (*taskFunc)(void));
 [; ;dispatcher.h: 28: void RTOS_DispatchTask (void);
+[; ;key.h: 22: void key_press(void);
+[; ;onewire.h: 12: uint8_t ow_reset(void);
+[; ;onewire.h: 13: uint8_t read_bit(void);
+[; ;onewire.h: 14: void write_bit(uint8_t bitval);
+[; ;onewire.h: 15: uint8_t read_byte(void);
+[; ;onewire.h: 16: void write_byte(uint8_t val);
+[; ;onewire.h: 17: void Waiting_WR (void);
 "10 ds18b20.h
 [v _fract `Cuc ~T0 @X0 -> 0 `x e ]
 [i _fract

@@ -10,7 +10,8 @@
 #include "timer.h"
 #include "dispatcher.h"
 #include "eusart.h"
-#include "bmp180.h"
+//#include "bmp180.h"
+#include "BMP_280.h"
 #include "eeprom.h"
 
 void SYSTEM_Initialize(void);  // ініціалізація контролера

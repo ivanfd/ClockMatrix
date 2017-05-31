@@ -14,7 +14,7 @@
 #include "main.h"
 #include "onewire.h"
 #include "ds18b20.h"
-#include "bmp180.h"
+#include "bmp_280.h"
 #include "eusart.h"
 
 

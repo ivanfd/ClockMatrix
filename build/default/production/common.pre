@@ -4255,37 +4255,21 @@ void interval_scroll_text();
 void init_uart(void);
 void putch(char data);
 
-# 22 "key.h"
-void key_press(void);
-
-# 12 "onewire.h"
-uint8_t ow_reset(void);
-uint8_t read_bit(void);
-void write_bit(uint8_t bitval);
-uint8_t read_byte(void);
-void write_byte(uint8_t val);
-void Waiting_WR (void);
-
-# 11 "bmp180.h"
-const uint8_t OSS = 3;
-
-
-uint8_t BMP085ReadByte(uint8_t address);
-int16_t bmp085ReadInt(uint8_t address);
-void BMP085WriteByte(uint8_t address, int8_t data);
-void bmp085Calibration();
-int32_t BMP085ReadUT();
-int32_t bmp085ReadUP();
-int32_t BMP085GetTemp(int32_t _tu);
-uint16_t BMP085GetPressure(int32_t _pu);
-uint16_t BMP085Pressure(uint8_t getTemp);
-uint32_t BMP085Temperature(void);
+# 52 "BMP_280.h"
+void bmp280_Init();
+uint16_t bmp280ReadInt16(uint8_t address);
+void bmp280WriteByte(uint8_t address, int8_t data);
+uint8_t bmp280ReadByte(uint8_t address) ;
+int32_t bmp280ReadTemp();
+uint32_t bmp280ReadInt32(uint8_t address);
+int32_t bmp280ReadPressure();
+void bmp280Convert(int32_t *temperature, int32_t *pressure);
 
 # 7 "eeprom.h"
 void write_eep( unsigned char address, unsigned char data );
 unsigned char read_eep( unsigned short address );
 
-# 16 "init.h"
+# 17 "init.h"
 void SYSTEM_Initialize(void);
 void Port_Init(void);
 void Interrupt_Init(void);
@@ -4316,6 +4300,17 @@ void RTOS_Init (void);
 void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod);
 void RTOS_DeleteTask (void (*taskFunc)(void));
 void RTOS_DispatchTask (void);
+
+# 22 "key.h"
+void key_press(void);
+
+# 12 "onewire.h"
+uint8_t ow_reset(void);
+uint8_t read_bit(void);
+void write_bit(uint8_t bitval);
+uint8_t read_byte(void);
+void write_byte(uint8_t val);
+void Waiting_WR (void);
 
 # 10 "ds18b20.h"
 const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
@@ -4355,7 +4350,7 @@ uint16_t temperature;
 uint8_t timer_val = 0, time_flag = 0;
 extern uint8_t (*pFont)[][5];
 uint8_t type_font = 0;
-uint16_t press;
+uint16_t press, temperbmp280;
 extern uint8_t play_sound;
 asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "3" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0");
 
@@ -4972,8 +4967,8 @@ events = 5;
 break;
 case 2:
 
+bmp280Convert(&temperbmp280, &press);
 
-press = BMP085Pressure(1);
 scroll_left();
 RTOS_DeleteTask(time_led);
 RTOS_SetTask(pressure, 0, 20);
