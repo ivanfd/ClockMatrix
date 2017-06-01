@@ -4113,7 +4113,7 @@ uint8_t bmp280ReadByte(uint8_t address) ;
 int32_t bmp280ReadTemp();
 uint32_t bmp280ReadInt32(uint8_t address);
 int32_t bmp280ReadPressure();
-void bmp280Convert(int32_t *temperature, int32_t *pressure);
+void bmp280Convert(int32_t *press, int32_t *temper);
 
 # 7 "eeprom.h"
 void write_eep( unsigned char address, unsigned char data );
@@ -4624,7 +4624,7 @@ uint8_t i;
 while(scroll_text())
 {
 Update_Matrix(Dis_Buff);
-for(i=0; i<60; i++)
+for(i=0; i<50; i++)
 _delay((unsigned long)((1)*(40000000/4000.0)));
 
 };

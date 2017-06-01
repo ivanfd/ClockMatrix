@@ -1,4 +1,5 @@
 #include "BMP_280.h"
+#include <stdlib.h>
 
 uint16_t dig_T1;
 int16_t dig_T2;
@@ -18,6 +19,7 @@ int16_t dig_H1;
 void bmp280_Init()
 {
 
+    
  dig_T1 = bmp280ReadInt16(0x88);
  dig_T2 = bmp280ReadInt16(0x8A);
  dig_T3 = bmp280ReadInt16(0x8C);
@@ -36,6 +38,21 @@ bmp280WriteByte(BMP280_REG_CONFIG,(BMP280_TSB_2000 | BMP280_FILTER_COEFFICIENT8 
 bmp280WriteByte(BMP280_REG_CONTROL,(BMP280_OVERSAMPLING_T16 | BMP280_OVERSAMPLING_P16 | BMP280_MODE_NORMAL)); 
 
 #ifdef DEBUG
+    dig_T1=27504;
+    dig_T2=26435;
+    dig_T3=-1000;
+    dig_P1=36477;
+    dig_P2=-10685;
+    dig_P3=3024;
+    dig_P4=2855;
+    dig_P5=140;
+    dig_P6=-7;
+    dig_P7=15500;
+    dig_P8=-14600;
+    dig_P9=6000;
+#endif
+
+#ifdef DEBUG
     __delay_ms(200);
     printf("dig_T1: %u\n\r", dig_T1);
     printf("dig_T2: %d\n\r", dig_T2);
@@ -46,7 +63,7 @@ bmp280WriteByte(BMP280_REG_CONTROL,(BMP280_OVERSAMPLING_T16 | BMP280_OVERSAMPLIN
     printf("dig_P4: %d\n\r", dig_P4);
     printf("dig_P5: %d\n\r", dig_P5);
     printf("dig_P6: %d\n\r", dig_P6);
-    printf("dig_P5: %d\n\r", dig_P7);
+    printf("dig_P7: %d\n\r", dig_P7);
     printf("dig_P8: %d\n\r", dig_P8);
     printf("dig_P9: %d\n\r", dig_P9);
 #endif
@@ -139,6 +156,7 @@ int32_t bmp280ReadTemp()
    #ifdef DEBUG
     __delay_ms(200);
     
+    temperature = 519888;
     printf("UncTemp: %ld\n\r", temperature);
 
 
@@ -162,7 +180,7 @@ int32_t bmp280ReadPressure()
    
    #ifdef DEBUG
     __delay_ms(200);
-    
+    pressure = 415148;
     printf("UncPress: %ld\n\r", pressure);
 
 
@@ -173,7 +191,7 @@ int32_t bmp280ReadPressure()
 }
 
 
-void bmp280Convert(int32_t *temperature, int32_t *pressure)
+void bmp280Convert(int32_t *press, int32_t *temper)
 {
     int32_t adc_T;
 	int32_t adc_P;
@@ -181,36 +199,84 @@ void bmp280Convert(int32_t *temperature, int32_t *pressure)
   //  int32_t pressure1;
     
     double var1, var2, T, P, tfine;
-    
+
     
     adc_T = bmp280ReadTemp();
     adc_P = bmp280ReadPressure();
     
     var1 = (((double)adc_T)/16384.0 - ((double)dig_T1)/1024.0) * ((double)dig_T2);
+    //var9=(double)45678.125;
+    #ifdef DEBUG
+        printf("var1 =  %f\r", var1);
+    #endif
 	var2 = ((((double)adc_T)/131072.0 - ((double)dig_T1)/8192.0) * (((double)adc_T)/131072.0 - ((double) dig_T1)/8192.0)) * ((double)dig_T3);
+    #ifdef DEBUG
+        printf("var2 =  %f\r", var2);
+    #endif
+
 	tfine = (var1 + var2);
-	*temperature = (int32_t) (tfine*10 / 5120.0);
+    #ifdef DEBUG
+        printf("tfine =  %f\r", tfine);
+    #endif
+    
+	*temper = (int32_t) (tfine*10 / 5120.0);
+    #ifdef DEBUG
+        printf("temper =  %u\r", *temper);
+    #endif
     
     var1 = ((double)tfine/2.0) - 64000.0;
+    #ifdef DEBUG
+        printf("var1 =  %f\r", var1);
+    #endif
 	var2 = var1 * var1 * ((double)dig_P6) / 32768.0;
+    #ifdef DEBUG
+        printf("var2 =  %f\r", var2);
+    #endif
 	var2 = var2 + var1 * ((double)dig_P5) * 2.0;
+    #ifdef DEBUG
+        printf("var2 =  %f\r", var2);
+    #endif
 	var2 = (var2/4.0)+(((double)dig_P4) * 65536.0);
+    #ifdef DEBUG
+        printf("var2 =  %f\r", var2);
+    #endif
 	var1 = (((double)dig_P3) * var1 * var1 / 524288.0 + ((double)dig_P2) * var1) / 524288.0;
+    #ifdef DEBUG
+        printf("var1 =  %f\r", var1);
+    #endif
 	var1 = (1.0 + var1 / 32768.0)*((double)dig_P1);
+    #ifdef DEBUG
+        printf("var1 =  %f\r", var1);
+    #endif
 
 	P = 1048576.0 - (double)adc_P;
+    #ifdef DEBUG
+        printf("P =  %f\r", P);
+    #endif
 	P = (P - (var2 / 4096.0)) * 6250.0 / var1;
+    #ifdef DEBUG
+        printf("P =  %f\r", P);
+    #endif
 	var1 = ((double)dig_P9) * P * P / 2147483648.0;
+    #ifdef DEBUG
+        printf("var1 =  %f\r", var1);
+    #endif
 	var2 = P * ((double)dig_P8) / 32768.0;
+    #ifdef DEBUG
+        printf("var2 =  %f\r", var2);
+    #endif
 	P = (P + (var1 + var2 + ((double)dig_P7)) / 16.0);
+    #ifdef DEBUG
+        printf("P =  %f\r", P);
+    #endif
 
-	*pressure = P;
-    *pressure = *pressure  * 100/13332;    
+	*press = ((uint32_t)P)*100/13332;
+    //*press = *press  * 100/13332;    
        #ifdef DEBUG
     __delay_ms(200);
     
-    printf("Temp280: %d\n\r", *temperature);
-    printf("Press280: %u\n\r", *pressure);
+    printf("Temp280: %d\n\r", *temper);
+    printf("Press280: %u\n\r", *press);
 #endif
     
 }

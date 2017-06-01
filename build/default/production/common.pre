@@ -4263,7 +4263,7 @@ uint8_t bmp280ReadByte(uint8_t address) ;
 int32_t bmp280ReadTemp();
 uint32_t bmp280ReadInt32(uint8_t address);
 int32_t bmp280ReadPressure();
-void bmp280Convert(int32_t *temperature, int32_t *pressure);
+void bmp280Convert(int32_t *press, int32_t *temper);
 
 # 7 "eeprom.h"
 void write_eep( unsigned char address, unsigned char data );
@@ -4350,7 +4350,7 @@ uint16_t temperature;
 uint8_t timer_val = 0, time_flag = 0;
 extern uint8_t (*pFont)[][5];
 uint8_t type_font = 0;
-uint16_t press, temperbmp280;
+uint32_t press, temperbmp280;
 extern uint8_t play_sound;
 asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "3" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0");
 
@@ -4967,7 +4967,7 @@ events = 5;
 break;
 case 2:
 
-bmp280Convert(&temperbmp280, &press);
+bmp280Convert(&press, &temperbmp280);
 
 scroll_left();
 RTOS_DeleteTask(time_led);

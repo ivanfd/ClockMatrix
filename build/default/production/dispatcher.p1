@@ -5815,7 +5815,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;BMP_280.h: 56: int32_t bmp280ReadTemp();
 [; ;BMP_280.h: 57: uint32_t bmp280ReadInt32(uint8_t address);
 [; ;BMP_280.h: 58: int32_t bmp280ReadPressure();
-[; ;BMP_280.h: 59: void bmp280Convert(int32_t *temperature, int32_t *pressure);
+[; ;BMP_280.h: 59: void bmp280Convert(int32_t *press, int32_t *temper);
 [; ;eeprom.h: 7: void write_eep( unsigned char address, unsigned char data );
 [; ;eeprom.h: 8: unsigned char read_eep( unsigned short address );
 [; ;init.h: 17: void SYSTEM_Initialize(void);

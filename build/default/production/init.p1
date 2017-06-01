@@ -5979,7 +5979,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;bmp_280.h: 56: int32_t bmp280ReadTemp();
 [; ;bmp_280.h: 57: uint32_t bmp280ReadInt32(uint8_t address);
 [; ;bmp_280.h: 58: int32_t bmp280ReadPressure();
-[; ;bmp_280.h: 59: void bmp280Convert(int32_t *temperature, int32_t *pressure);
+[; ;bmp_280.h: 59: void bmp280Convert(int32_t *press, int32_t *temper);
 [; ;eusart.h: 8: void init_uart(void);
 [; ;eusart.h: 9: void putch(char data);
 [; ;common.h: 43: void INT0_ISR(void);

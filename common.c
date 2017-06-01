@@ -12,7 +12,7 @@ uint16_t temperature;               // температура з кімнатного датчика
 uint8_t timer_val = 0, time_flag = 0;  // для конвертування температури
 extern uint8_t (*pFont)[][5];
 uint8_t type_font = 0;                  // шрифт годин
-uint16_t press, temperbmp280;                      // атмосферний тиск
+uint32_t press, temperbmp280;                      // атмосферний тиск
 extern uint8_t play_sound; //  чи можна програвати
 __EEPROM_DATA(3, 0, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, 
                                        // 0 - тип шрифту (від 1 до 5)
@@ -638,7 +638,7 @@ void time_led()
             break;
         case  KEY_UP_EVENT:
    //         asm("nop");
-            bmp280Convert(&temperbmp280, &press);
+            bmp280Convert(&press, &temperbmp280);
          ////  press = BMP085Pressure(1);
             scroll_left();
             RTOS_DeleteTask(time_led);      //видаляємо задачу

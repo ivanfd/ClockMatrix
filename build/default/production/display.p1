@@ -5114,7 +5114,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;BMP_280.h: 56: int32_t bmp280ReadTemp();
 [; ;BMP_280.h: 57: uint32_t bmp280ReadInt32(uint8_t address);
 [; ;BMP_280.h: 58: int32_t bmp280ReadPressure();
-[; ;BMP_280.h: 59: void bmp280Convert(int32_t *temperature, int32_t *pressure);
+[; ;BMP_280.h: 59: void bmp280Convert(int32_t *press, int32_t *temper);
 [; ;eeprom.h: 7: void write_eep( unsigned char address, unsigned char data );
 [; ;eeprom.h: 8: unsigned char read_eep( unsigned short address );
 [; ;init.h: 17: void SYSTEM_Initialize(void);
@@ -6809,11 +6809,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.c: 307: Update_Matrix(Dis_Buff);
 "307
 [e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;display.c: 308: for(i=0; i<60; i++)
+[; ;display.c: 308: for(i=0; i<50; i++)
 "308
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 60 `i 370  ]
+[e $ < -> _i `i -> 50 `i 370  ]
 [e $U 371  ]
 "309
 [e :U 370 ]
@@ -6821,7 +6821,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
 "308
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 60 `i 370  ]
+[e $ < -> _i `i -> 50 `i 370  ]
 [e :U 371 ]
 "309
 }

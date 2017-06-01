@@ -5876,7 +5876,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;BMP_280.h: 56: int32_t bmp280ReadTemp();
 [; ;BMP_280.h: 57: uint32_t bmp280ReadInt32(uint8_t address);
 [; ;BMP_280.h: 58: int32_t bmp280ReadPressure();
-[; ;BMP_280.h: 59: void bmp280Convert(int32_t *temperature, int32_t *pressure);
+[; ;BMP_280.h: 59: void bmp280Convert(int32_t *press, int32_t *temper);
 [; ;eeprom.h: 7: void write_eep( unsigned char address, unsigned char data );
 [; ;eeprom.h: 8: unsigned char read_eep( unsigned short address );
 [; ;init.h: 17: void SYSTEM_Initialize(void);
@@ -5989,9 +5989,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;common.c: 14: uint8_t type_font = 0;
 "15
-[v _press `ui ~T0 @X0 1 e ]
-[v _temperbmp280 `ui ~T0 @X0 1 e ]
-[; ;common.c: 15: uint16_t press, temperbmp280;
+[v _press `ul ~T0 @X0 1 e ]
+[v _temperbmp280 `ul ~T0 @X0 1 e ]
+[; ;common.c: 15: uint32_t press, temperbmp280;
 [; ;common.c: 16: extern uint8_t play_sound;
 "17
 [; ;common.c: 17: asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "3" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0");
@@ -7648,7 +7648,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _clear_matrix ..  ]
 [; ;common.c: 566: if (press)
 "566
-[e $ ! != _press -> -> 0 `i `ui 400  ]
+[e $ ! != _press -> -> 0 `i `ul 400  ]
 [; ;common.c: 567: {
 "567
 {
@@ -7657,13 +7657,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _pic_to_led (2 , -> -> 3 `i `uc -> -> 4 `i `uc ]
 [; ;common.c: 569: putchar_down(11,(press / 100) % 10, pFont);
 "569
-[e ( _putchar_down (3 , , -> -> 11 `i `uc -> % / _press -> -> 100 `i `ui -> -> 10 `i `ui `uc _pFont ]
+[e ( _putchar_down (3 , , -> -> 11 `i `uc -> % / _press -> -> -> 100 `i `l `ul -> -> -> 10 `i `l `ul `uc _pFont ]
 [; ;common.c: 570: putchar_down(17,(press / 10) % 10, pFont);
 "570
-[e ( _putchar_down (3 , , -> -> 17 `i `uc -> % / _press -> -> 10 `i `ui -> -> 10 `i `ui `uc _pFont ]
+[e ( _putchar_down (3 , , -> -> 17 `i `uc -> % / _press -> -> -> 10 `i `l `ul -> -> -> 10 `i `l `ul `uc _pFont ]
 [; ;common.c: 571: putchar_down(23,press % 10, pFont);
 "571
-[e ( _putchar_down (3 , , -> -> 23 `i `uc -> % _press -> -> 10 `i `ui `uc _pFont ]
+[e ( _putchar_down (3 , , -> -> 23 `i `uc -> % _press -> -> -> 10 `i `l `ul `uc _pFont ]
 "572
 }
 [; ;common.c: 572: } else
@@ -7711,7 +7711,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = _events -> -> 5 `i `uc ]
 [; ;common.c: 592: if (press)
 "592
-[e $ ! != _press -> -> 0 `i `ui 404  ]
+[e $ ! != _press -> -> 0 `i `ul 404  ]
 [; ;common.c: 593: {
 "593
 {
@@ -7853,9 +7853,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.c: 639: case 2:
 "639
 [e :U 415 ]
-[; ;common.c: 641: bmp280Convert(&temperbmp280, &press);
+[; ;common.c: 641: bmp280Convert(&press, &temperbmp280);
 "641
-[e ( _bmp280Convert (2 , -> &U _temperbmp280 `*l -> &U _press `*l ]
+[e ( _bmp280Convert (2 , -> &U _press `*l -> &U _temperbmp280 `*l ]
 [; ;common.c: 643: scroll_left();
 "643
 [e ( _scroll_left ..  ]

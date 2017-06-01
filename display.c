@@ -255,7 +255,7 @@ uint8_t scroll_text(void)
         {
             Dis_Buff[31] = 0;   // розділити букви
             i_bchar = 0;
-            i_char++;           // наступна строка
+            i_char++;           // наступний байт строки
         }
     }
      else

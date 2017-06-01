@@ -56,7 +56,7 @@ uint8_t bmp280ReadByte(uint8_t address) ;
 int32_t bmp280ReadTemp();
 uint32_t bmp280ReadInt32(uint8_t address);
 int32_t bmp280ReadPressure();
-void bmp280Convert(int32_t *temperature, int32_t *pressure);
+void bmp280Convert(int32_t *press, int32_t *temper);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

@@ -21,7 +21,6 @@
       <itemPath>pict.h</itemPath>
       <itemPath>ds18b20.h</itemPath>
       <itemPath>onewire.h</itemPath>
-      <itemPath>bmp180.h</itemPath>
       <itemPath>eusart.h</itemPath>
       <itemPath>digits_f.h</itemPath>
       <itemPath>eeprom.h</itemPath>
@@ -48,7 +47,6 @@
       <itemPath>key.c</itemPath>
       <itemPath>ds18b20.c</itemPath>
       <itemPath>onewire.c</itemPath>
-      <itemPath>bmp180.c</itemPath>
       <itemPath>eusart.c</itemPath>
       <itemPath>eeprom.c</itemPath>
       <itemPath>sound.c</itemPath>
@@ -71,7 +69,7 @@
         <targetDevice>PIC18F4525</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>PICkit3PlatformTool</platformTool>
+        <platformTool>Simulator</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>1.41</languageToolchainVersion>
         <platform>3</platform>
@@ -234,13 +232,6 @@
         <property key="periphComp6.gte" value="gt"/>
         <property key="reset.scl" value="false"/>
         <property key="reset.type" value="MCLR"/>
-        <property key="tracecontrol.include.timestamp" value="summarydataenabled"/>
-        <property key="tracecontrol.select" value="0"/>
-        <property key="tracecontrol.stallontracebufferfull" value="false"/>
-        <property key="tracecontrol.timestamp" value="0"/>
-        <property key="tracecontrol.tracebufmax" value="546000"/>
-        <property key="tracecontrol.tracefile" value="defmplabxtrace.log"/>
-        <property key="tracecontrol.traceresetonrun" value="false"/>
         <property key="uart10io.output" value="window"/>
         <property key="uart10io.outputfile" value=""/>
         <property key="uart10io.uartioenabled" value="false"/>

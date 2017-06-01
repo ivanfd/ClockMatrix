@@ -32,7 +32,7 @@
      <ITEM name="nItems">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="600" x="147" flags="00000023" y="254" h="400" pid="0" iid="23">
+   <POPUP w="600" x="147" flags="00000022" y="254" h="400" pid="0" iid="23">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>
@@ -51,13 +51,13 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="775" x="514" flags="0000802b" y="104" h="530" pid="1" iid="9">
+   <POPUP w="775" x="559" flags="0000002b" y="133" h="530" pid="1" iid="9">
     <PROPERTIES>
-     <ITEM name="Breakpoint 0">"",0432,0000,ACF4,5C57,-1
+     <ITEM name="Breakpoint 0">"",188E,0000,4908,4174,1
 </ITEM>
-     <ITEM name="Breakpoint 1">"",247C,0000,A31A,0C99,-1
+     <ITEM name="Breakpoint 1">"",1930,0000,FB13,4174,1
 </ITEM>
-     <ITEM name="Breakpoint 2">"",27D2,0000,ADF9,C42E,1
+     <ITEM name="Breakpoint 2">"",2676,0000,B1D9,5783,1
 </ITEM>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
@@ -68,7 +68,7 @@
      <ITEM name="nBreakpoints">1</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="459" x="40" flags="0000000b" y="10" h="639" pid="2" iid="9">
+   <POPUP w="459" x="40" flags="0000800b" y="10" h="639" pid="2" iid="9">
     <PROPERTIES>
      <ITEM name="Address Column Width">94</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -181,7 +181,7 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="481" x="76" flags="00000022" y="117" h="250" pid="0" iid="24">
+   <POPUP w="723" x="35" flags="00000022" y="107" h="250" pid="0" iid="24">
     <PROPERTIES>
      <ITEM name="ComboBox1000">S</ITEM>
      <ITEM name="ComboBox1001">Sr</ITEM>
@@ -193,7 +193,7 @@
      <ITEM name="ComboBox1007">P</ITEM>
      <ITEM name="ComboBox1008">A</ITEM>
      <ITEM name="ComboBox1009">N</ITEM>
-     <ITEM name="HSplitter1Pos">100</ITEM>
+     <ITEM name="HSplitter1Pos">70</ITEM>
      <ITEM name="VSplitter1Pos">6</ITEM>
     </PROPERTIES>
    </POPUP>
