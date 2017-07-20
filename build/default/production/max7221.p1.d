@@ -2,7 +2,9 @@
  build/default/production/max7221.p1:  \
  max7221.c  \
 init.h  \
+spi.h  \
 timer.h  \
+nrf24l01p.h  \
 main.h  \
 dispatcher.h  \
 FontS.h  \

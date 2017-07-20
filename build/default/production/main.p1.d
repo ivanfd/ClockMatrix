@@ -2,7 +2,9 @@
  build/default/production/main.p1:  \
  main.c  \
 init.h  \
+spi.h  \
 timer.h  \
+nrf24l01p.h  \
 main.h  \
 dispatcher.h  \
 FontS.h  \

@@ -5,7 +5,7 @@ extern uint8_t Dis_Buff[BUF_SIZE];  // буфер дисплея
 extern uint8_t key_event;           // стан кнопок
 extern uint8_t text_buf[100];       // буфер для біг строки
 uint8_t events = MAIN_EVENT;        // 
-uint8_t delay_digit = 0;            // для паузи мигання цифр
+//uint8_t delay_digit = 0;            // для паузи мигання цифр
 bit show_digit;                     // чи показувати цифри, в нал. мигання
 bit en_put;                         // чи можна писати у буфер символи
 uint16_t temperature;               // температура з кімнатного датчика
@@ -638,6 +638,7 @@ void time_led()
             break;
         case  KEY_UP_EVENT:
    //         asm("nop");
+            
             bmp280Convert(&press, &temperbmp280);
          ////  press = BMP085Pressure(1);
             scroll_left();

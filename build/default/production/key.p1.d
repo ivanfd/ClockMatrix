@@ -2,7 +2,9 @@
  build/default/production/key.p1:  \
  key.c  \
 init.h  \
+spi.h  \
 timer.h  \
+nrf24l01p.h  \
 main.h  \
 dispatcher.h  \
 FontS.h  \

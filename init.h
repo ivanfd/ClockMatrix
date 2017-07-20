@@ -13,6 +13,8 @@
 //#include "bmp180.h"
 #include "BMP_280.h"
 #include "eeprom.h"
+#include "spi.h"
+#include "nrf24l01p.h"
 
 void SYSTEM_Initialize(void);  // ініціалізація контролера
 void Port_Init(void);  // ініціалізація портів

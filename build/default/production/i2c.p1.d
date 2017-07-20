@@ -2,7 +2,9 @@
  build/default/production/i2c.p1:  \
  i2c.c  \
 init.h  \
+spi.h  \
 timer.h  \
+nrf24l01p.h  \
 main.h  \
 dispatcher.h  \
 FontS.h  \

@@ -2,7 +2,9 @@
  build/default/production/ds3231.p1:  \
  ds3231.c  \
 init.h  \
+spi.h  \
 timer.h  \
+nrf24l01p.h  \
 main.h  \
 dispatcher.h  \
 FontS.h  \

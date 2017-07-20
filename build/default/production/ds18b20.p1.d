@@ -2,7 +2,9 @@
  build/default/production/ds18b20.p1:  \
  ds18b20.c  \
 init.h  \
+spi.h  \
 timer.h  \
+nrf24l01p.h  \
 main.h  \
 dispatcher.h  \
 FontS.h  \

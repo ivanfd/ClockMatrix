@@ -2,7 +2,9 @@
  build/default/production/onewire.p1:  \
  onewire.c  \
 init.h  \
+spi.h  \
 timer.h  \
+nrf24l01p.h  \
 main.h  \
 dispatcher.h  \
 FontS.h  \

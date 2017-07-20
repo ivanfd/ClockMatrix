@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include "i2c.h"
 
-#define BMP280_ADDRESS 0xEC          // I2C адреса BMP180
+#define BMP280_ADDRESS 0xEC          // I2C адреса BMP280
 
 #define	BMP280_REG_CONTROL 0xF4
 #define	BMP280_REG_CONFIG 0xF5
@@ -56,7 +56,7 @@ uint8_t bmp280ReadByte(uint8_t address) ;
 int32_t bmp280ReadTemp();
 uint32_t bmp280ReadInt32(uint8_t address);
 int32_t bmp280ReadPressure();
-void bmp280Convert(int32_t *press, int32_t *temper);
+uint8_t bmp280Convert(int32_t *press, int32_t *temper);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

@@ -26,6 +26,8 @@
       <itemPath>eeprom.h</itemPath>
       <itemPath>sound.h</itemPath>
       <itemPath>BMP_280.h</itemPath>
+      <itemPath>nrf24l01p.h</itemPath>
+      <itemPath>spi.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -51,6 +53,8 @@
       <itemPath>eeprom.c</itemPath>
       <itemPath>sound.c</itemPath>
       <itemPath>BMP_280.c</itemPath>
+      <itemPath>spi.c</itemPath>
+      <itemPath>nrf24l01p.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

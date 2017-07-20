@@ -25,8 +25,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _T1CONbits `VS219 ~T0 @X0 0 e@4045 ]
 "15 onewire.h
 [v _read_byte `(uc ~T0 @X0 0 ef ]
-"195 C:\Program Files (x86)\Microchip\xc8\v1.41\include\stdio.h
-[v _printf `(i ~T0 @X0 0 ev`*Cuc ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -5814,12 +5812,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;BMP_280.h: 56: int32_t bmp280ReadTemp();
 [; ;BMP_280.h: 57: uint32_t bmp280ReadInt32(uint8_t address);
 [; ;BMP_280.h: 58: int32_t bmp280ReadPressure();
-[; ;BMP_280.h: 59: void bmp280Convert(int32_t *press, int32_t *temper);
+[; ;BMP_280.h: 59: uint8_t bmp280Convert(int32_t *press, int32_t *temper);
 [; ;eeprom.h: 7: void write_eep( unsigned char address, unsigned char data );
 [; ;eeprom.h: 8: unsigned char read_eep( unsigned short address );
-[; ;init.h: 17: void SYSTEM_Initialize(void);
-[; ;init.h: 18: void Port_Init(void);
-[; ;init.h: 19: void Interrupt_Init(void);
+[; ;spi.h: 25: void spi_init();
+[; ;spi.h: 26: uint8_t spi_rw(uint8_t value);
+[; ;key.h: 22: void key_press(void);
+[; ;onewire.h: 12: uint8_t ow_reset(void);
+[; ;onewire.h: 13: uint8_t read_bit(void);
+[; ;onewire.h: 14: void write_bit(uint8_t bitval);
+[; ;onewire.h: 15: uint8_t read_byte(void);
+[; ;onewire.h: 16: void write_byte(uint8_t val);
+[; ;onewire.h: 17: void Waiting_WR (void);
+[; ;nrf24l01p.h: 136: void nrf24_init(uint8_t channel, uint8_t pay_length);
+[; ;nrf24l01p.h: 137: void nrf24_write_reg(uint8_t reg, uint8_t value);
+[; ;nrf24l01p.h: 138: uint8_t nrf24_read_reg(uint8_t reg);
+[; ;nrf24l01p.h: 139: void nrf24_powerUpRx();
+[; ;nrf24l01p.h: 140: void nrf24_powerUpTx();
+[; ;nrf24l01p.h: 141: void nrf24_powerDown();
+[; ;nrf24l01p.h: 142: void nrf24_write_buf(uint8_t reg, uint8_t *pBuf, uint8_t length);
+[; ;nrf24l01p.h: 143: void nrf24_read_buf(uint8_t reg, uint8_t *pBuf, uint8_t length);
+[; ;nrf24l01p.h: 144: void nrf24_tx_address(uint8_t *adr);
+[; ;nrf24l01p.h: 145: void nrf24_rx_address(uint8_t *adr);
+[; ;nrf24l01p.h: 146: void nrf24_send(uint8_t *value);
+[; ;nrf24l01p.h: 147: uint8_t nrf24_isSending();
+[; ;nrf24l01p.h: 148: uint8_t nrf24_getStatus();
+[; ;nrf24l01p.h: 149: uint8_t nrf24_messageStatus();
+[; ;nrf24l01p.h: 150: uint8_t nrf24_retransmissionCount();
+[; ;nrf24l01p.h: 151: void nrf24_getData(uint8_t* data);
+[; ;init.h: 19: void SYSTEM_Initialize(void);
+[; ;init.h: 20: void Port_Init(void);
+[; ;init.h: 21: void Interrupt_Init(void);
 [; ;timer.h: 13: void TMRInit(void);
 [; ;sound.h: 14: void sound_init();
 [; ;sound.h: 16: void TMR3_ISR();
@@ -5836,13 +5859,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dispatcher.h: 26: void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod);
 [; ;dispatcher.h: 27: void RTOS_DeleteTask (void (*taskFunc)(void));
 [; ;dispatcher.h: 28: void RTOS_DispatchTask (void);
-[; ;key.h: 22: void key_press(void);
-[; ;onewire.h: 12: uint8_t ow_reset(void);
-[; ;onewire.h: 13: uint8_t read_bit(void);
-[; ;onewire.h: 14: void write_bit(uint8_t bitval);
-[; ;onewire.h: 15: uint8_t read_byte(void);
-[; ;onewire.h: 16: void write_byte(uint8_t val);
-[; ;onewire.h: 17: void Waiting_WR (void);
 [; ;common.h: 43: void INT0_ISR(void);
 [; ;common.h: 44: void GetTime(void);
 [; ;common.h: 45: void time_set_min(void);
@@ -6061,9 +6077,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds18b20.c: 93: temp = temp + tmp;
 "93
 [e = _temp + _temp -> _tmp `ui ]
-[; ;ds18b20.c: 96: printf("Temperature: %d\n\r ", temp);
-"96
-[e ( _printf , (. :s 1C _temp ]
 [; ;ds18b20.c: 99: fptmp = temp % 10;
 "99
 [e = _fptmp -> % _temp -> -> 10 `i `ui `uc ]
@@ -6114,6 +6127,3 @@ Version 3.2 HI-TECH Software Intermediate Code
 "114
 [e :UE 274 ]
 }
-[p f _printf 8388736 ]
-[a 1C 84 101 109 112 101 114 97 116 117 114 101 58 32 37 100 10 13 32 0 ]
-

@@ -4263,13 +4263,46 @@ uint8_t bmp280ReadByte(uint8_t address) ;
 int32_t bmp280ReadTemp();
 uint32_t bmp280ReadInt32(uint8_t address);
 int32_t bmp280ReadPressure();
-void bmp280Convert(int32_t *press, int32_t *temper);
+uint8_t bmp280Convert(int32_t *press, int32_t *temper);
 
 # 7 "eeprom.h"
 void write_eep( unsigned char address, unsigned char data );
 unsigned char read_eep( unsigned short address );
 
-# 17 "init.h"
+# 25 "spi.h"
+void spi_init();
+uint8_t spi_rw(uint8_t value);
+
+# 22 "key.h"
+void key_press(void);
+
+# 12 "onewire.h"
+uint8_t ow_reset(void);
+uint8_t read_bit(void);
+void write_bit(uint8_t bitval);
+uint8_t read_byte(void);
+void write_byte(uint8_t val);
+void Waiting_WR (void);
+
+# 136 "nrf24l01p.h"
+void nrf24_init(uint8_t channel, uint8_t pay_length);
+void nrf24_write_reg(uint8_t reg, uint8_t value);
+uint8_t nrf24_read_reg(uint8_t reg);
+void nrf24_powerUpRx();
+void nrf24_powerUpTx();
+void nrf24_powerDown();
+void nrf24_write_buf(uint8_t reg, uint8_t *pBuf, uint8_t length);
+void nrf24_read_buf(uint8_t reg, uint8_t *pBuf, uint8_t length);
+void nrf24_tx_address(uint8_t *adr);
+void nrf24_rx_address(uint8_t *adr);
+void nrf24_send(uint8_t *value);
+uint8_t nrf24_isSending();
+uint8_t nrf24_getStatus();
+uint8_t nrf24_messageStatus();
+uint8_t nrf24_retransmissionCount();
+void nrf24_getData(uint8_t* data);
+
+# 19 "init.h"
 void SYSTEM_Initialize(void);
 void Port_Init(void);
 void Interrupt_Init(void);
@@ -4300,17 +4333,6 @@ void RTOS_Init (void);
 void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod);
 void RTOS_DeleteTask (void (*taskFunc)(void));
 void RTOS_DispatchTask (void);
-
-# 22 "key.h"
-void key_press(void);
-
-# 12 "onewire.h"
-uint8_t ow_reset(void);
-uint8_t read_bit(void);
-void write_bit(uint8_t bitval);
-uint8_t read_byte(void);
-void write_byte(uint8_t val);
-void Waiting_WR (void);
 
 # 10 "ds18b20.h"
 const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
@@ -4343,7 +4365,7 @@ extern uint8_t Dis_Buff[4 * 8];
 extern uint8_t key_event;
 extern uint8_t text_buf[100];
 uint8_t events = 5;
-uint8_t delay_digit = 0;
+
 bit show_digit;
 bit en_put;
 uint16_t temperature;
@@ -4967,6 +4989,7 @@ events = 5;
 break;
 case 2:
 
+
 bmp280Convert(&press, &temperbmp280);
 
 scroll_left();
@@ -4974,7 +4997,7 @@ RTOS_DeleteTask(time_led);
 RTOS_SetTask(pressure, 0, 20);
 events = 5;
 
-# 652
+# 653
 break;
 case 3:
 
@@ -5003,10 +5026,10 @@ void version(void)
 {
 uint8_t i;
 
-sprintf(text_buf, "Clock v1.0 by Ivan_fd");
+sprintf(text_buf, "Clock v01.06.17 16.11.12 by Ivan_fd");
 interval_scroll_text();
 
-# 689
+# 690
 }
 
 void default_state(void)
@@ -5018,7 +5041,7 @@ events = 4;
 void INT0_ISR(void)
 {
 
-# 706
+# 707
 RTOS_SetTask(GetTime, 0, 0);
 
 
@@ -5039,6 +5062,6 @@ T1CONbits.TMR1ON = 0;
 
 }
 
-# 736
+# 737
 }
 

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <WORKSPACE>
  <FRAME activewindow="0">
-  <PLACEMENT>2c00000002000000030000000083ffff0083ffffffffffffffffffff8300000009000000d3040000cf020000</PLACEMENT>
+  <PLACEMENT>2c0000000200000003000000ffffffffffffffffffffffffffffffff8300000009000000d3040000cf020000</PLACEMENT>
   <WINDOW type="default" module="ISIS"/>
  </FRAME>
  <MODULE name="VSMDEBUG">
@@ -15,30 +15,32 @@
      <ITEM name="Version">100</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="350" x="88" flags="00000032" y="148" h="200" pid="1" iid="-1">
+   <POPUP w="633" x="98" flags="00000032" y="4" h="200" pid="1" iid="-1">
     <PROPERTIES>
      <ITEM name="Address Column Width">83</ITEM>
      <ITEM name="AutoResize">No</ITEM>
      <ITEM name="Gridlines">Yes</ITEM>
+     <ITEM name="Item 0">"var1","0x01c9",00000009,00000004,457,8,5,00000008,0,00000000,00000000</ITEM>
+     <ITEM name="Item 1">"var9","0x01b1",00000009,00000004,433,4,5,00000009,0,00000000,00000000</ITEM>
      <ITEM name="Name Column Width">83</ITEM>
      <ITEM name="ShowAddresses">Yes</ITEM>
      <ITEM name="ShowPreviousValues">No</ITEM>
      <ITEM name="ShowTypes">No</ITEM>
      <ITEM name="ShowWatchPoint">Yes</ITEM>
      <ITEM name="TriggerMode">0</ITEM>
-     <ITEM name="Value Column Width">83</ITEM>
+     <ITEM name="Value Column Width">336</ITEM>
      <ITEM name="Version">100</ITEM>
      <ITEM name="Watch Expression Column Width">83</ITEM>
-     <ITEM name="nItems">0</ITEM>
+     <ITEM name="nItems">2</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="600" x="147" flags="00000022" y="254" h="400" pid="0" iid="23">
+   <POPUP w="600" x="6" flags="00000022" y="158" h="400" pid="0" iid="23">
     <PROPERTIES>
      <ITEM name="AutoEcho">0</ITEM>
      <ITEM name="HexMode">0</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="20" x="110" flags="00000001" y="90" h="3" pid="1" iid="10">
+   <POPUP w="20" x="67" flags="00000001" y="102" h="3" pid="1" iid="10">
     <PROPERTIES/>
    </POPUP>
    <POPUP w="8" x="148" flags="00000008" y="208" h="32" pid="2" iid="10">
@@ -51,13 +53,13 @@
      <ITEM name="TopLineAddress">00000000</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="775" x="559" flags="0000002b" y="133" h="530" pid="1" iid="9">
+   <POPUP w="775" x="805" flags="0000802b" y="66" h="530" pid="1" iid="9">
     <PROPERTIES>
-     <ITEM name="Breakpoint 0">"",188E,0000,4908,4174,1
+     <ITEM name="Breakpoint 0">"",1458,0000,4908,4174,1
 </ITEM>
-     <ITEM name="Breakpoint 1">"",1930,0000,FB13,4174,1
+     <ITEM name="Breakpoint 1">"",23F2,0000,715D,5783,1
 </ITEM>
-     <ITEM name="Breakpoint 2">"",2676,0000,B1D9,5783,1
+     <ITEM name="Breakpoint 2">"",22CC,0000,4908,4174,1
 </ITEM>
      <ITEM name="CaseSensitive">No</ITEM>
      <ITEM name="DISPADDRS">Yes</ITEM>
@@ -65,10 +67,10 @@
      <ITEM name="DISPOPCODES">No</ITEM>
      <ITEM name="FIXUPBPTS">Yes</ITEM>
      <ITEM name="WordsOnly">No</ITEM>
-     <ITEM name="nBreakpoints">1</ITEM>
+     <ITEM name="nBreakpoints">2</ITEM>
     </PROPERTIES>
    </POPUP>
-   <POPUP w="459" x="40" flags="0000800b" y="10" h="639" pid="2" iid="9">
+   <POPUP w="450" x="0" flags="0000000b" y="74" h="639" pid="2" iid="9">
     <PROPERTIES>
      <ITEM name="Address Column Width">94</ITEM>
      <ITEM name="AutoResize">No</ITEM>
@@ -198,6 +200,15 @@
     </PROPERTIES>
    </POPUP>
    <POPUP w="695" x="160" flags="00000001" y="104" h="448" pid="0" iid="25">
+    <PROPERTIES/>
+   </POPUP>
+   <POPUP w="544" x="62" flags="00000023" y="359" h="319" pid="0" iid="34">
+    <PROPERTIES>
+     <ITEM name="HSplitter1Pos">100</ITEM>
+     <ITEM name="VSplitter1Pos">238</ITEM>
+    </PROPERTIES>
+   </POPUP>
+   <POPUP w="695" x="692" flags="00000001" y="387" h="448" pid="0" iid="35">
     <PROPERTIES/>
    </POPUP>
   </PWI>

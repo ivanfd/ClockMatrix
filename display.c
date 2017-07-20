@@ -2,7 +2,7 @@
 #include "display.h"
 
 uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
-uint8_t TxtBuf[6];          // буфер дл¤ цифр
+//uint8_t TxtBuf[6];          // буфер дл¤ цифр
 uint8_t text_buf[100];      // буфер для біг строки
 uint8_t i_char, i_bchar;    // індекс літери та байтк в літері
 uint8_t (*pFont)[][5] = &dFont1;            // вказівник на шрифт цифр для показу годин      

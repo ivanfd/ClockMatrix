@@ -79,6 +79,8 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     type_font = read_eep(EE_FONT);
     set_font();
     sound_init();
+    spi_init();
+    nrf24_init(100, 2);
 
 }
 
