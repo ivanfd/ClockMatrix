@@ -61,6 +61,7 @@
 #include "init.h"
 
 extern uint8_t type_font;
+extern uint8_t type_clk;
 
 void SYSTEM_Initialize(void)  // ініціалізація контролера
 {
@@ -77,10 +78,11 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     //bmp085Calibration();
     bmp280_Init();
     type_font = read_eep(EE_FONT);
+    type_clk = read_eep(EE_TYPE_CLK);
     set_font();
     sound_init();
     spi_init();
-    nrf24_init(100, 2);
+    nrf24_init(100, 4);
 
 }
 

@@ -2,7 +2,7 @@
 
 
 uint8_t scratch[9];
-bit minus = 0;      // знак температури
+//bit minus = 0;      // знак температури
 
 
 
@@ -29,12 +29,14 @@ void init_ds18b20(void)
 //  один датчик на шині!
 //====================================================
 
-uint8_t readTemp_Single(uint16_t *buf, uint8_t *time_flag, uint8_t *timer_val )
+uint8_t readTemp_Single(uint8_t *buf, uint8_t *minus, uint8_t *time_flag, uint8_t *timer_val )
 {
                                                         
    uint16_t temp = 0;  // температура
    uint8_t i, tmp, fptmp;
 
+   *minus = '+';
+   
 switch(*time_flag)
 {
         case 0:
@@ -74,25 +76,24 @@ switch(*time_flag)
             write_byte(0xBE); // Read scratch pad command
             for(i=0; i<2; i++)//  читаємо два байти температури
             {
-                 scratch[i]= read_byte();
-            }       
+                scratch[i] = read_byte();
+            }
 
-           temp =(((uint16_t)scratch[1])<<8)|((uint16_t)scratch[0]);
-          // temp |= scratch[0];
+            temp = (((uint16_t) scratch[1]) << 8) | ((uint16_t) scratch[0]);
+            // temp |= scratch[0];
 
-           if (temp & 0x8000)
-           {
-              temp = -temp; // якщо від`ємна 
-              minus=1;
-           }
+            if (temp & 0x8000) {
+                temp = -temp; // якщо від`ємна 
+                *minus = '-';
+            }
 
-           tmp = temp & 0x0f;  // десяті вибираємо
-           tmp = fract[tmp];    //  цифра після коми
-           temp = temp>>4;      //  формуємо кінцеву температуру
-           temp = (temp & 0x00ff) * 10; 
-           temp = temp + tmp;
-           
-            #ifdef DEBUG
+            tmp = temp & 0x0f; // десяті вибираємо
+            tmp = fract[tmp]; //  цифра після коми
+            temp = temp >> 4; //  формуємо кінцеву температуру
+            temp = (temp & 0x00ff) * 10;
+            temp = temp + tmp;
+
+#ifdef DEBUG
                 printf("Temperature: %d\n\r ", temp);
             #endif
 

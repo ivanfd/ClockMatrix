@@ -214,42 +214,51 @@ uint8_t bmp280Convert(int32_t *press, int32_t *temper) {
 
     var1 = ((((adc_T >> 3) - ((int32_t) dig_T1 << 1))) * ((int32_t) dig_T2)) >> 11;
 #ifdef DEBUG
-    printf("var1 =  %lu\r", var1);
+    __delay_ms(10);
+    printf("var1 =  %lu\n\r", var1);
 #endif
     var2 = (((((adc_T >> 4) - ((int32_t) dig_T1)) * ((adc_T >> 4) - ((int32_t) dig_T1))) >> 12) * ((int32_t) dig_T3)) >> 14;
 #ifdef DEBUG
-    printf("var2 =  %ld\r", var2);
+    __delay_ms(10);
+    printf("var2 =  %ld\n\r", var2);
 #endif
     t_fine = var1 + var2;
     T = (t_fine * 5 + 128) >> 8;
 #ifdef DEBUG
-    printf("T1 =  %ld\r", T);
+    __delay_ms(10);
+    printf("T1 =  %ld\n\r", T);
 #endif    
     *temper = T;
 
     var1 = (((int32_t) t_fine) >> 1) - (int32_t) 64000;
 #ifdef DEBUG
-    printf("var1 =  %ld\r", var1);
+    __delay_ms(10);
+    printf("var1 =  %ld\n\r", var1);
 #endif  
     var2 = (((var1 >> 2) * (var1 >> 2)) >> 11) * ((int32_t) dig_P6);
 #ifdef DEBUG
-    printf("var2 =  %ld\r", var2);
+    __delay_ms(10);
+    printf("var2 =  %ld\n\r", var2);
 #endif  
     var2 = var2 + ((var1 * ((int32_t) dig_P5)) << 1);
 #ifdef DEBUG
-    printf("var2 =  %ld\r", var2);
+    __delay_ms(10);
+    printf("var2 =  %ld\n\r", var2);
 #endif  
     var2 = (var2 >> 2)+(((int32_t) dig_P4) << 16);
 #ifdef DEBUG
-    printf("var2 =  %ld\r", var2);
+    __delay_ms(10);
+    printf("var2 =  %ld\n\r", var2);
 #endif  
     var1 = (((dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3) + ((((int32_t) dig_P2) * var1) >> 1)) >> 18;
 #ifdef DEBUG
-    printf("var1 =  %ld\r", var1);
+    __delay_ms(10);
+    printf("var1 =  %ld\n\r", var1);
 #endif  
     var1 = ((((32768 + var1))*((int32_t) dig_P1)) >> 15);
 #ifdef DEBUG
-    printf("var1 =  %ld\r", var1);
+    __delay_ms(10);
+    printf("var1 =  %ld\n\r", var1);
 #endif  
     if (var1 == 0) {
         return 0; // avoid exception caused by division by zero
@@ -261,25 +270,29 @@ uint8_t bmp280Convert(int32_t *press, int32_t *temper) {
         P = (P / (uint32_t) var1) * 2;
     }
 #ifdef DEBUG
-    printf("P =  %ld\r", P);
+    __delay_ms(10);
+    printf("P =  %ld\n\r", P);
 #endif  
 
     var1 = (((int32_t) dig_P9) * ((int32_t) (((P >> 3) * (P >> 3)) >> 13))) >> 12;
 #ifdef DEBUG
-    printf("var1 =  %ld\r", var1);
+    __delay_ms(10);
+    printf("var1 =  %ld\n\r", var1);
 #endif  
     var2 = (((int32_t) (P >> 2)) * ((int32_t) dig_P8)) >> 13;
 #ifdef DEBUG
-    printf("var2 =  %ld\r", var2);
+    __delay_ms(10);
+    printf("var2 =  %ld\n\r", var2);
 #endif  
     P = (uint32_t) ((int32_t) P + ((var1 + var2 + dig_P7) >> 4));
 #ifdef DEBUG
-    printf("P =  %lu\r", P);
+    __delay_ms(10);
+    printf("P =  %lu\n\r", P);
 #endif  
 
     //*press = P;
-    *press = P * 100 / 13332;
-
+    //*press = P * 100 / 13332;
+    *press = P * 0.7501;
     //    var1 = (((double)adc_T)/16384.0 - ((double)dig_T1)/1024.0) * ((double)dig_T2);
     //    //var9=(double)45678.125;
     //    #ifdef DEBUG

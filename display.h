@@ -16,7 +16,7 @@
 
 #define BUF_SIZE COUNT_MATRIX * 8
 #define SPEED_STRING 50     // швидкість бігучої строки, підібрати
-#define DELAY_SHIFT_DOWN 20 // швидкість ефекту зсуву вниз
+#define DELAY_SHIFT_DOWN 40 // швидкість ефекту зсуву вниз
 
 struct Time_Get             // структура для годин
 {
@@ -42,7 +42,7 @@ struct Time_Get             // структура для годин
 
         
  void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);       
- void FillBuf(void);
+ void FillBuf(uint8_t type);
  
  void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
  void putchar_s_buf(uint8_t x, uint8_t symbol);
@@ -55,6 +55,7 @@ struct Time_Get             // структура для годин
  void pic_to_led(uint8_t x, uint8_t pic);
  void scroll_left(void);
  void interval_scroll_text();
+ void scroll_right(void);
  
 #endif	/* XC_HEADER_TEMPLATE_H */
 

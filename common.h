@@ -38,6 +38,9 @@
 //#define NULL  0
 
 #define EE_FONT 0 // адреса в еепром типу шрифту
+#define EE_TYPE_CLK 1 // адреса в еепром типу годинника
+#define TYPE_CLK_1 1  // вигляд годинника
+#define TYPE_CLK_2 2  // вигляд годинника
 
 
  void INT0_ISR(void);
@@ -56,6 +59,9 @@
  void set_font();
  void set_font_set(void);
  void pressure(void);
+ void pre_ref_dis(void);
+ void set_type_clk(void);
+ void radio_temp(void);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

@@ -1,7 +1,8 @@
 #include "nrf24l01p.h"
 
 uint8_t pay_len;  // довжина посилки
-
+ const uint8_t nrf_tx_address[5] = {0x19, 0x79, 0x27, 0x09, 0x04};
+ const uint8_t nrf_rx_address[5] = {0x19, 0x79, 0x27, 0x09, 0x04};
 
 /**********************************************
  *      Ініціалізація модуля
@@ -11,7 +12,13 @@ uint8_t pay_len;  // довжина посилки
 
 void nrf24_init(uint8_t channel, uint8_t pay_length) {
 
+    SPI_CSN = 1;
+    SPI_CE = 0;
     pay_len = pay_length;
+    
+    nrf24_tx_address(&nrf_tx_address);
+    nrf24_rx_address(&nrf_rx_address);
+    
     nrf24_write_reg(NRF24_RF_CH, channel); // пишемо номер каналу
 
     nrf24_write_reg(NRF24_RX_PW_P0, 0x00);
@@ -38,6 +45,9 @@ void nrf24_init(uint8_t channel, uint8_t pay_length) {
 
 // Dynamic length configurations: No dynamic length
     nrf24_write_reg(NRF24_DYNPD,(0<<DPL_P0)|(0<<DPL_P1)|(0<<DPL_P2)|(0<<DPL_P3)|(0<<DPL_P4)|(0<<DPL_P5));
+    
+        // Start listening
+    nrf24_powerUpRx();
     
 }
 

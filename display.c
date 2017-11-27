@@ -5,7 +5,9 @@ uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
 //uint8_t TxtBuf[6];          // буфер дл¤ цифр
 uint8_t text_buf[100];      // буфер для біг строки
 uint8_t i_char, i_bchar;    // індекс літери та байтк в літері
-uint8_t (*pFont)[][5] = &dFont1;            // вказівник на шрифт цифр для показу годин      
+uint8_t(*pFont)[][5] = &dFont1; // вказівник на шрифт цифр для показу годин     
+extern uint8_t idx_pnt;
+uint8_t x1 = 0, x2 = 0, x3 = 0, x4 = 0, y1, y2, y3, y4; //Для зсуву стовбця вниз
 //uint8_t Hours, Min, Sec;
 
 //*****************************************
@@ -154,39 +156,91 @@ void clear_matrix(void)
 //***********************************
 // Заповнення буфера байтами шрифту
 //***********************************
-void FillBuf(void)
-   {
-      uint8_t i;
 
-     for(i=0; i<5; ++i)
-      {
-        if((TTime.Thr/10) % 10)
-         Dis_Buff[i] = (*pFont)[(TTime.Thr/10) % 10][i];
-        else
-         Dis_Buff[i] = 0x00;
-         
+void FillBuf(uint8_t type) {
+    uint8_t i;
+    switch (type) {
+        case TYPE_CLK_1:
+            for (i = 0; i < 5; ++i) {
+                if ((TTime.Thr / 10) % 10)
+                    Dis_Buff[i] = (*pFont)[(TTime.Thr / 10) % 10][i];
+                else
+                    Dis_Buff[i] = 0x00;
 
-         Dis_Buff[i + 6] = (*pFont)[TTime.Thr % 10 ][i];
-         Dis_Buff[i + 13] = (*pFont)[(TTime.Tmin/10) % 10 ][i];
-         Dis_Buff[i + 19] = (*pFont)[TTime.Tmin % 10 ][i];
 
-      }
-      
-      for (i=0; i<3; ++i)
-      {
-         Dis_Buff[i + 25] = FontS[(TTime.Ts/10) % 10 + 1][i];   
-         Dis_Buff[i + 29] = FontS[TTime.Ts % 10 + 1][i];   
-      }
+                Dis_Buff[i + 6] = (*pFont)[TTime.Thr % 10 ][i];
+                Dis_Buff[i + 13] = (*pFont)[(TTime.Tmin / 10) % 10 ][i];
+                Dis_Buff[i + 19] = (*pFont)[TTime.Tmin % 10 ][i];
 
-         Dis_Buff[5] = 0;
-         Dis_Buff[11] = 0x80;
-         Dis_Buff[12] = 0x80;
-         Dis_Buff[18] = 0;
-         Dis_Buff[24] = 0;
-         Dis_Buff[28] = 0;
-    
+            }
 
-   }
+            for (i = 0; i < 3; ++i) {
+                Dis_Buff[i + 25] = FontS[(TTime.Ts / 10) % 10 + 1][i];
+                Dis_Buff[i + 29] = FontS[TTime.Ts % 10 + 1][i];
+            }
+
+            Dis_Buff[5] = 0;
+            Dis_Buff[11] = 0x80;
+            Dis_Buff[12] = 0x80;
+            Dis_Buff[18] = 0;
+            Dis_Buff[24] = 0;
+            Dis_Buff[28] = 0;
+            break;
+        case TYPE_CLK_2:
+            
+            y1 = (TTime.Thr / 10) % 10;
+            y2 = TTime.Thr % 10;
+            y3 = (TTime.Tmin / 10) % 10;
+            y4 = TTime.Tmin % 10;
+                        //Якщо люба з цифр змінилася
+            if ((x1 != y1) || (x2 != y2) || (x3 != y3) || (x4 != y4)) {
+                if (x4 != y4)
+                    putchar_down(25, TTime.Tmin % 10, pFont);
+                else
+                    putchar_b_buf(25, TTime.Tmin % 10, pFont);
+
+                if (x3 != y3)
+                    putchar_down(19, (TTime.Tmin / 10) % 10, pFont);
+                else
+                    putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
+
+                if (x2 != y2)
+                    putchar_down(7, TTime.Thr % 10, pFont);
+                else
+                    putchar_b_buf(7, TTime.Thr % 10, pFont);
+
+                if ((TTime.Thr / 10) % 10) {
+                    if (x1 != y1)
+                        putchar_down(1, (TTime.Thr / 10) % 10, pFont);
+                    else
+                        putchar_b_buf(1, (TTime.Thr / 10) % 10, pFont);
+
+                } else
+                    putchar_down(1, 0, &Font);
+                putchar_b_buf(13, 23 + idx_pnt, &Font);
+
+
+
+                x1 = y1;
+                x2 = y2;
+                x3 = y3;
+                x4 = y4;
+
+            } else {
+                if ((TTime.Thr / 10) % 10)
+                    putchar_b_buf(1, (TTime.Thr / 10) % 10, pFont);
+                else
+                    putchar_b_buf(1, 0, &Font);
+                putchar_b_buf(7, TTime.Thr % 10, pFont);
+                putchar_b_buf(13, 23 + idx_pnt, &Font);
+                putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
+                putchar_b_buf(25, TTime.Tmin % 10, pFont);
+            }
+            break;
+    }
+
+
+}
 
 //================================================
 //           Заповнюємо буфер (5 байт) 
@@ -291,6 +345,30 @@ void scroll_left(void)
         if (speed > 10) speed -=10;   
 
     }     
+    
+    
+}
+
+//********************************************
+//  зсовуємо текст зліва направо
+//********************************************
+void scroll_right(void)
+{
+    uint8_t i,j,k,speed = 100;
+
+
+    for (k = 0; k <= 31; k++) {
+
+        for (i = 31; i > 0; i--)
+            Dis_Buff[i] = Dis_Buff[i - 1];
+
+        Dis_Buff[0] = 0;
+        Update_Matrix(Dis_Buff); // обновити дані на дисплеї
+        for (j = 0; j < speed; j++)
+            __delay_ms(1);
+        if (speed > 10) speed -= 10;
+
+    }
     
     
 }

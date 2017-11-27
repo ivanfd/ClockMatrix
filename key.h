@@ -7,7 +7,7 @@
 #include "dispatcher.h"
 #include "events.h" 
 
-#define DELAYKEY 30     // debounce
+#define DELAYKEY 40     // debounce
 
 #define KEY_PORT    PORTB
 //  входи до яких підключені кнопки

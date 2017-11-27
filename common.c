@@ -1,21 +1,28 @@
 #include "common.h"
 
-extern uint8_t TxtBuf[6];           // буфер дл¤ цифр
-extern uint8_t Dis_Buff[BUF_SIZE];  // буфер дисплея
-extern uint8_t key_event;           // стан кнопок
-extern uint8_t text_buf[100];       // буфер для біг строки
-uint8_t events = MAIN_EVENT;        // 
+extern uint8_t TxtBuf[6]; // буфер дл¤ цифр
+extern uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
+extern uint8_t key_event; // стан кнопок
+extern uint8_t text_buf[100]; // буфер для біг строки
+uint8_t events = MAIN_EVENT; // 
 //uint8_t delay_digit = 0;            // для паузи мигання цифр
-bit show_digit;                     // чи показувати цифри, в нал. мигання
-bit en_put;                         // чи можна писати у буфер символи
-uint16_t temperature;               // температура з кімнатного датчика
-uint8_t timer_val = 0, time_flag = 0;  // для конвертування температури
-extern uint8_t (*pFont)[][5];
-uint8_t type_font = 0;                  // шрифт годин
-uint32_t press, temperbmp280;                      // атмосферний тиск
+bit show_digit; // чи показувати цифри, в нал. мигання
+bit en_put; // чи можна писати у буфер символи
+uint8_t temperature; // температура з кімнатного датчика
+uint8_t temperature_radio; // температура з радіо датчика
+bit err_ds18 = 0;// помилка датчика радіо
+uint16_t err_ds_count = 0;
+uint8_t minus; // знак температури
+uint8_t timer_val = 0, time_flag = 0; // для конвертування температури
+extern uint8_t(*pFont)[][5];
+uint8_t type_font = 0; // шрифт годин
+uint32_t press, temperbmp280; // атмосферний тиск
 extern uint8_t play_sound; //  чи можна програвати
-__EEPROM_DATA(3, 0, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, 
-                                       // 0 - тип шрифту (від 1 до 5)
+uint8_t type_clk = TYPE_CLK_1; // вигляд годинника
+uint8_t idx_pnt = 0; // індекс, для вигляду мигаючих крапок
+extern uint8_t x1, x2, x3, x4, y1, y2, y3, y4; //Для зсуву стовбця вниз
+__EEPROM_DATA(3, 1, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, 
+// 0 - тип шрифту (від 1 до 5)
 
 // читаємо з DS3231 години, хвилини, секунди та дату
 // 
@@ -36,47 +43,66 @@ void time_set_min(void)
         case MAIN_EVENT:
 
             break;
-        case KEY_OK_EVENT:                      // якщо натиснули ок
-            //setTime(TSTime.Thr,TSTime.Tmin,0);  // записуємо дані в годинник
-            RTOS_DeleteTask(time_set_min);      // видаляємо задачу
-            RTOS_SetTask(time_set_hr, 0, 50);   // ставимо задачу, налаштування годин
-            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+        case KEY_OK_EVENT: // якщо натиснули ок
+
+                    RTOS_DeleteTask(time_set_min); // видаляємо задачу
+            RTOS_SetTask(time_set_hr, 0, 50); // ставимо задачу, налаштування годин
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            if (type_clk == TYPE_CLK_1) {
+                putchar_b_buf(13, (TSTime.Tmin / 10) % 10, pFont);
+                putchar_b_buf(19, TSTime.Tmin % 10, pFont);
+            } else {
+                putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
+                putchar_b_buf(25, TTime.Tmin % 10, pFont);
+            }
             events = MAIN_EVENT;
+            en_put = 0;
             break;
-        case KEY_EXIT_EVENT:                    // кнопка EXIT
-            RTOS_DeleteTask(time_set_min);      // переходимо в основний режим
+
+        case KEY_EXIT_EVENT: // кнопка EXIT
+            RTOS_DeleteTask(time_set_min); // переходимо в основний режим
             RTOS_DeleteTask(default_state);
             RTOS_SetTask(time_led, 0, cycle_main);
             events = MAIN_EVENT;
+            clear_matrix();
             break;
         case KEY_UP_EVENT:
             TSTime.Tmin++;
-            if(TSTime.Tmin > 59) TSTime.Tmin = 0;
-            RTOS_SetTask(default_state, 2000, 0);  // 5 секунд для виходу
-            setTime(TSTime.Thr,TSTime.Tmin,0);
+            if (TSTime.Tmin > 59) TSTime.Tmin = 0;
+            RTOS_SetTask(default_state, 2000, 0); // 5 секунд для виходу
+            setTime(TSTime.Thr, TSTime.Tmin, 0);
             events = MAIN_EVENT;
             break;
         case KEY_DOWN_EVENT:
             TSTime.Tmin--;
-            if(TSTime.Tmin == 255) TSTime.Tmin = 59;            
-            RTOS_SetTask(default_state, 2000, 0);  // 5 секунд для виходу
-            setTime(TSTime.Thr,TSTime.Tmin,0);
+            if (TSTime.Tmin == 255) TSTime.Tmin = 59;
+            RTOS_SetTask(default_state, 2000, 0); // 5 секунд для виходу
+            setTime(TSTime.Thr, TSTime.Tmin, 0);
             events = MAIN_EVENT;
-            break;            
-   }   
-   
-       if(show_digit)      // чи показувати цифри
-    {
-        putchar_b_buf(13,(TSTime.Tmin/10) % 10 , pFont);
-        putchar_b_buf(19,TSTime.Tmin % 10 , pFont);
+            break;
     }
-    else 
-    {
-        putchar_b_buf(13,0, &Font);
-        putchar_b_buf(19,0, &Font);
+    if (en_put) {
+        if (show_digit) // чи показувати цифри
+        {
+            if (type_clk == TYPE_CLK_1) {
+                putchar_b_buf(13, (TSTime.Tmin / 10) % 10, pFont);
+                putchar_b_buf(19, TSTime.Tmin % 10, pFont);
+            } else {
+                putchar_b_buf(19, (TSTime.Tmin / 10) % 10, pFont);
+                putchar_b_buf(25, TSTime.Tmin % 10, pFont);
+            }
+        } else {
+            if (type_clk == TYPE_CLK_1) {
+                putchar_b_buf(13, 0, &Font);
+                putchar_b_buf(19, 0, &Font);
+            } else {
+                putchar_b_buf(19, 0, &Font);
+                putchar_b_buf(25, 0, &Font);
+            }
+        }
     }
-   Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
-   en_put = 1;
+    Update_Matrix(Dis_Buff); // обновити дані на дисплеї
+    en_put = 1;
 }
 
 //****************************************
@@ -97,13 +123,14 @@ void time_set_hr(void)
             //RTOS_DeleteTask(default_state);
             events = MAIN_EVENT;
             clear_matrix();
-            en_put = 0;     // заборонити малювати
+            en_put = 0; // заборонити малювати
             break;
         case KEY_EXIT_EVENT:
             RTOS_DeleteTask(time_set_hr);
             RTOS_DeleteTask(default_state);
             RTOS_SetTask(time_led, 0, cycle_main);
             events = MAIN_EVENT;
+            clear_matrix();
             break;
         case KEY_UP_EVENT:
             TSTime.Thr++;
@@ -125,22 +152,32 @@ void time_set_hr(void)
         if(show_digit)      // чи показувати цифри
         {
 
-            putchar_b_buf(13,(TSTime.Tmin/10) % 10, pFont);
-            putchar_b_buf(19,TSTime.Tmin % 10, pFont);
+           // putchar_b_buf(13,(TSTime.Tmin/10) % 10, pFont);
+            // putchar_b_buf(19,TSTime.Tmin % 10, pFont);
+            if (type_clk == TYPE_CLK_1) {
+                if ((TSTime.Thr / 10) % 10)
+                    putchar_b_buf(0, (TSTime.Thr / 10) % 10, pFont);
+                else
+                    putchar_b_buf(0, 0, &Font);
+                putchar_b_buf(6, TSTime.Thr % 10, pFont);
+            } else {
+                if ((TSTime.Thr / 10) % 10)
+                    putchar_b_buf(1, (TSTime.Thr / 10) % 10, pFont);
+                else
+                    putchar_b_buf(1, 0, &Font);
+                putchar_b_buf(7, TSTime.Thr % 10, pFont);
+            }
+        } else {
+            if (type_clk == TYPE_CLK_1) {
+                putchar_b_buf(0, 0, &Font);
+                putchar_b_buf(6, 0, &Font);
+            } else {
 
-            if((TSTime.Thr/10) % 10)
-            putchar_b_buf(0,(TSTime.Thr/10) % 10, pFont);
-            else
-            putchar_b_buf(0,0, pFont);
-            putchar_b_buf(6,TSTime.Thr % 10, pFont);
+                putchar_b_buf(1, 0, &Font);
+                putchar_b_buf(7, 0, &Font);
+            }
         }
-        else 
-        {
-
-            putchar_b_buf(0,0, &Font);
-            putchar_b_buf(6,0, &Font);
-        }
-   }
+    }
     Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
     en_put = 1;                         // дозволити малювати символи
 }
@@ -166,6 +203,8 @@ switch (events)
             RTOS_DeleteTask(default_state);
             RTOS_SetTask(time_led, 0, cycle_main);
             events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
             break;
         case KEY_UP_EVENT:
             TSTime.Tyr++;
@@ -216,6 +255,8 @@ switch (events)
             RTOS_DeleteTask(default_state);
             RTOS_SetTask(time_led, 0, cycle_main);
             events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
             break;
         case KEY_UP_EVENT:
             TSTime.Tmt++;
@@ -316,6 +357,8 @@ switch (events)
             RTOS_DeleteTask(default_state);
             RTOS_SetTask(time_led, 0, cycle_main);
             events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
             break;
         case KEY_UP_EVENT:
             TSTime.Tdt++;
@@ -367,6 +410,8 @@ switch (events)
             RTOS_DeleteTask(default_state);
             RTOS_SetTask(time_led, 0, cycle_main);
             events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
             break;
         case KEY_UP_EVENT:
             TSTime.Tdy++;
@@ -425,7 +470,7 @@ if(en_put)
 }
 
 //***************************************************************
-//  встановлення року
+//  встановлення шрифту
 //***************************************************************
 void set_font_set(void)
 {
@@ -436,15 +481,19 @@ switch (events)
         break;
         case KEY_OK_EVENT:
             RTOS_DeleteTask(set_font_set);
-            RTOS_SetTask(time_led, 0, cycle_main);
-            RTOS_DeleteTask(default_state);     
+            RTOS_SetTask(set_type_clk, 0, cycle_main);
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
             events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
             break;
         case KEY_EXIT_EVENT:
             RTOS_DeleteTask(set_font_set);
             RTOS_DeleteTask(default_state);
             RTOS_SetTask(time_led, 0, cycle_main);
             events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
             break;
         case KEY_UP_EVENT:
             type_font++;
@@ -476,6 +525,60 @@ if(en_put)
 }
 
 
+//***************************************************************
+//  встановлення вигляду годинника
+//***************************************************************
+void set_type_clk(void)
+{
+switch (events)
+   {
+        case MAIN_EVENT:
+
+        break;
+        case KEY_OK_EVENT:
+            RTOS_DeleteTask(set_type_clk);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state);
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_EXIT_EVENT:
+            RTOS_DeleteTask(set_type_clk);
+            RTOS_DeleteTask(default_state);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_UP_EVENT:
+            type_clk++;
+            if(type_clk > 2) type_clk = 1;
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_TYPE_CLK,type_clk);
+            break;
+        case KEY_DOWN_EVENT:
+            type_clk--;
+            if(type_clk == 0) type_clk = 2;           
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_TYPE_CLK,type_clk);
+            break;    
+    }
+if(en_put)
+{
+    putchar_b_buf(0,'Т', &Font);
+    putchar_b_buf(6,'п', &Font);
+    putchar_b_buf(12,':', &Font);
+    putchar_b_buf(18,type_clk % 10, pFont);
+    putchar_b_buf(24,0, &Font);
+}    
+       Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+       en_put=1;
+}
+
+
 //**************************************************
 //      температура з кімнатного датчика
 //*************************************************
@@ -493,16 +596,68 @@ if(en_put)
                   //  putchar_down(13,(temperature/10) % 10 + 48);
                     putchar_down(13,temperature % 10, pFont);
                     putchar_down(19,176, &Font);
-                }else
+                } else {
+                pic_to_led(3, 1);
+                putchar_down(13, (temperature / 10) % 10, pFont);
+                putchar_down(19, temperature % 10, pFont);
+                putchar_down(25, 176, &Font);
+
+            }
+            events = TEMP_EVENT;
+            RTOS_SetTask(default_state, 650, 0); // 3,5 секунд для виходу
+
+            // }
+
+            break;
+        case TEMP_EVENT:
+            break;
+        case KEY_EXIT_EVENT: // повертаємось в показ часу
+            events = MAIN_EVENT;
+            scroll_right();
+            //pre_ref_dis();
+            RTOS_DeleteTask(default_state);
+            RTOS_DeleteTask(home_temp);
+            RTOS_SetTask(radio_temp, 0, cycle_main);
+            // clear_matrix();
+            break;
+    }
+}
+
+//**************************************************
+//      температура з радіо датчика
+//*************************************************
+
+void radio_temp(void) {
+    switch (events) {
+        case MAIN_EVENT:
+            clear_matrix();
+            if (err_ds18) {
+                pic_to_led(0, 2);
+                putchar_down(9, 'E', &Font);
+                putchar_down(15, 'r', &Font);
+                putchar_down(21, 'r', &Font);
+            } else {
+
+
+                if (!((temperature_radio / 10) % 10)) // якщо перша цифра 0
                 {
-                    pic_to_led(3,1);
-                    putchar_down(13,(temperature/10) % 10, pFont);
-                    putchar_down(19,temperature % 10, pFont);
-                    putchar_down(25,176, &Font);
-                    
+                    pic_to_led(0, 2);
+                    //  putchar_down(13,(temperature/10) % 10 + 48);
+                    putchar_down(9, minus, &Font);
+                    putchar_down(15, temperature_radio % 10, pFont);
+                    putchar_down(21, 176, &Font);
+
+                } else {
+                    pic_to_led(0, 2);
+                    putchar_down(9, minus, &Font);
+                    putchar_down(15, (temperature_radio / 10) % 10, pFont);
+                    putchar_down(22, temperature_radio % 10, pFont);
+                    putchar_down(27, 176, &Font);
+
                 }
+            }
                 events = TEMP_EVENT;
-                RTOS_SetTask(default_state, 750, 0);  // 3,5 секунд для виходу
+                RTOS_SetTask(default_state, 650, 0);  // 3,5 секунд для виходу
 
            // }
                 
@@ -512,21 +667,14 @@ if(en_put)
         case KEY_EXIT_EVENT:  // повертаємось в показ часу
             events = MAIN_EVENT;
             scroll_left();
-            if((TTime.Thr/10) % 10)
-            putchar_down(0, (TTime.Thr/10) % 10, pFont);  
-            else putchar_down(0, 0, &Font);
-            putchar_down(6, TTime.Thr % 10, pFont);     
-            putchar_down(13, (TTime.Tmin/10) % 10, pFont);
-            putchar_down(19, TTime.Tmin % 10, pFont);
-            getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
-            putchar_down_s(25, (TTime.Ts/10) % 10 + 1);
-            putchar_down_s(29, TTime.Ts % 10 + 1);            
+            pre_ref_dis();
             RTOS_DeleteTask(default_state);
-            RTOS_DeleteTask(home_temp);
-            RTOS_SetTask(time_led,0,cycle_main);
+            RTOS_DeleteTask(radio_temp);
+            RTOS_SetTask(time_led, 0, cycle_main);
+           // clear_matrix();
             break;
     }
- }
+}
  
  //=====================================================
  //   Заміна шрифту
@@ -558,117 +706,208 @@ if(en_put)
 // =================================================
  void pressure(void)
  {
+     uint16_t pr;
     
     switch (events)
     {
         case MAIN_EVENT:
             clear_matrix();
-            if (press)
-            {
-                    pic_to_led(3,4);
-                    putchar_down(11,(press / 100) % 10, pFont);
-                    putchar_down(17,(press / 10) % 10, pFont);
-                    putchar_down(23,press % 10, pFont);
-            } else
-            {
-                    pic_to_led(3,4);
-                    putchar_down(11,'E', &Font);
-                    putchar_down(17,'R', &Font);
-                    putchar_down(23,'R', &Font);
+            if (press) {
+//                pic_to_led(3, 4);
+//                putchar_down(11, (press / 100) % 10, pFont);
+//                putchar_down(17, (press / 10) % 10, pFont);
+                //                putchar_down(23, press % 10, pFont);
+                pr = press / 100;
+                pic_to_led(3, 4);
+                putchar_down(11, (pr / 100) % 10, pFont);
+                putchar_down(17, (pr / 10) % 10, pFont);
+                putchar_down(23, pr % 10, pFont);
+                //putchar_down(25, '.', &Font);
                 
+            } else {
+                pic_to_led(3, 4);
+                putchar_down(11, 'E', &Font);
+                putchar_down(17, 'R', &Font);
+                putchar_down(23, 'R', &Font);
+
             }
 
-                events = TEMP_EVENT;
-                RTOS_SetTask(default_state, 400, 0);  // 3,5 секунд для виходу
+            events = TEMP_EVENT;
+            RTOS_SetTask(default_state, 400, 0); // 3,5 секунд для виходу
 
-           // }
-                
+            // }
+
             break;
         case TEMP_EVENT:
-            break;    
-        case KEY_EXIT_EVENT:  // повертаємось в показ часу
+            break;
+        case KEY_EXIT_EVENT: // повертаємось в показ часу
             events = MAIN_EVENT;
             //
-            if (press)
-            {
-                sprintf(text_buf, "мм.рт.ст.");  
+            if (press) {
+                sprintf(text_buf, "мм.рт.ст.");
                 interval_scroll_text();
-            }else scroll_left(); 
-            if((TTime.Thr/10) % 10)
-            putchar_down(0, (TTime.Thr/10) % 10, pFont);  
-            else putchar_down(0, 0, &Font);
-            putchar_down(6, TTime.Thr % 10, pFont);     
-            putchar_down(13, (TTime.Tmin/10) % 10, pFont);
-            putchar_down(19, TTime.Tmin % 10, pFont);
-            getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
-            putchar_down_s(25, (TTime.Ts/10) % 10 + 1);
-            putchar_down_s(29, TTime.Ts % 10 + 1);            
+            } else
+                scroll_left();
+            pre_ref_dis();
             RTOS_DeleteTask(default_state);
             RTOS_DeleteTask(pressure);
-            RTOS_SetTask(time_led,0,cycle_main);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            //clear_matrix();
             break;
     }
- } 
- 
- 
+}
+
+void pre_ref_dis(void) {
+
+
+    clear_matrix();
+    switch (type_clk) {
+        case TYPE_CLK_1:
+            if ((TTime.Thr / 10) % 10)
+                putchar_down(0, (TTime.Thr / 10) % 10, pFont);
+            else putchar_down(0, 0, &Font);
+            putchar_down(6, TTime.Thr % 10, pFont);
+            putchar_down(13, (TTime.Tmin / 10) % 10, pFont);
+            putchar_down(19, TTime.Tmin % 10, pFont);
+            getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
+            putchar_down_s(25, (TTime.Ts / 10) % 10 + 1);
+            putchar_down_s(29, TTime.Ts % 10 + 1);
+            break;
+        case TYPE_CLK_2:
+            if ((TTime.Thr / 10) % 10)
+                putchar_down(1, (TTime.Thr / 10) % 10, pFont);
+            else putchar_down(1, 0, &Font);
+            putchar_down(7, TTime.Thr % 10, pFont);
+            putchar_down(13, ':', &Font);
+            putchar_down(19, (TTime.Tmin / 10) % 10, pFont);
+            putchar_down(25, TTime.Tmin % 10, pFont);
+            break;
+    }
+    idx_pnt = 0;
+    x1 = y1;
+    x2 = y2;
+    x3 = y3;
+    x4 = y4;
+}
+
+
 //==================================================
 //  виводимо годину на дисплей -:)
 //==================================================
 void time_led()
 {
-    
+    uint8_t data_array[4];
+    static uint16_t test = 0;
 
    switch (events)
    {
         case MAIN_EVENT:
-            FillBuf();
-            if((TTime.Ts>5)&&(TTime.Ts<7))
+            FillBuf(type_clk);
+            if((TTime.Ts>5)&&(TTime.Ts<7))          //прочитаємо температуру
             {
-                readTemp_Single(&temperature, &time_flag, &timer_val);
+                readTemp_Single(&temperature, &minus, &time_flag, &timer_val);
             }
-            if(((TTime.Ts>14)&&(TTime.Ts<16))||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо температуру
+            if(((TTime.Ts>14)&&(TTime.Ts<16)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо температуру
                 events = KEY_DOWN_EVENT;
+            if(((TTime.Ts>39)&&(TTime.Ts<41)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо температуру
+                events = KEY_UP_EVENT;
             break;
-        case  KEY_OK_EVENT:     // якщо натиснули кнопку ОК
-            RTOS_DeleteTask(time_led);  // видаяляємо задачу в якій сидимо
+        case KEY_OK_EVENT: // якщо натиснули кнопку ОК
+            RTOS_DeleteTask(time_led); // видаяляємо задачу в якій сидимо
             RTOS_SetTask(time_set_min, 0, 50); //  ставимо задачу налаштування годинника
-            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
             TSTime = TTime;
             events = MAIN_EVENT;
+            en_put = 0;
+            if (type_clk == TYPE_CLK_2)
+                putchar_b_buf(13, 23, &Font);
+            //clear_matrix();
             break;
         case  KEY_UP_EVENT:
    //         asm("nop");
             
             bmp280Convert(&press, &temperbmp280);
          ////  press = BMP085Pressure(1);
-            scroll_left();
-            RTOS_DeleteTask(time_led);      //видаляємо задачу
+            //scroll_left();
+            if (type_clk == TYPE_CLK_2)
+                putchar_b_buf(13, 23, &Font);
+            scroll_right();
+            RTOS_DeleteTask(time_led); //видаляємо задачу
             RTOS_SetTask(pressure, 0, cycle_main); //додаємо задачу 
             events = MAIN_EVENT;
+            en_put = 0;
+
             //  scroll_left();
-//            clear_matrix();
-//            pic_to_led(0,1);
+            //            clear_matrix();
+            //            pic_to_led(0,1);
 //            pic_to_led(8,2);
 //            pic_to_led(16,3);
             break;
         case  KEY_DOWN_EVENT:
             //ow_reset();
-        //    init_ds18b20();
+            //    init_ds18b20();
+            if (type_clk == TYPE_CLK_2)
+                putchar_b_buf(13, 23, &Font);
             scroll_left();
-            RTOS_DeleteTask(time_led);      //видаляємо задачу
+            RTOS_DeleteTask(time_led); //видаляємо задачу
             RTOS_SetTask(home_temp, 0, cycle_main); //додаємо задачу 
             events = MAIN_EVENT;
+            en_put = 0;
             break;
         case KEY_EXIT_EVENT:
             events = MAIN_EVENT;
             RTOS_DeleteTask(default_state);
-            break; 
+#ifdef DEBUG
+            __delay_ms(10);
+            //printf("Test_NRF =  %u\n\r", nrf24_read_reg(NRF24_RX_ADDR_P0));
+            //printf("Test_NRF_Chan =  %u\n\r", nrf24_read_reg(NRF24_RF_CH));
+
+            if (nrf24_dataReady()) {
+                test++;
+                nrf24_getData(&data_array);
+                printf("%u > ", test);
+                printf("%u ", data_array[0]);
+                printf("%c ", data_array[1]);
+                printf("%2X ", data_array[2]);
+                printf("%2X\r\n", data_array[3]);
+            }
+#endif  
+            break;
         case TEMP_EVENT:
             
             break;
-   }           
-            Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
-               
+    }
+    if (en_put)
+        Update_Matrix(Dis_Buff); // обновити дані на дисплеї
+    en_put = 1;
+    // читаємо радіодатчик
+    if (nrf24_dataReady()) {
+        nrf24_getData(&data_array);
+        spi_rw(FLUSH_RX);   // очистити прийомний буфер
+
+        temperature_radio = data_array[0];
+        minus = data_array[1];
+        err_ds_count = 0;
+        err_ds18 = 0;
+    } else
+        err_ds_count++;
+
+    if (err_ds_count > 600) // чекаємо хвилину. Якщо не було ні одного зчитування
+        err_ds18 = 1;       // то ставимо признак помилки радіодатчика
+    
+
+#ifdef DEBUG
+            if (nrf24_dataReady()) {
+                test++;
+                nrf24_getData(&data_array);
+                printf("%u > ", test);
+                printf("%u ", data_array[0]);
+                printf("%c ", data_array[1]);
+                printf("%2X ", data_array[2]);
+                printf("%2X\r\n", data_array[3]);
+            }
+#endif  
+    
 
 }
 
@@ -692,6 +931,7 @@ void version(void)
 void default_state(void)
 {
     events = KEY_EXIT_EVENT;
+
 }
 
 // функція переривання по входу RB0
@@ -706,7 +946,8 @@ void default_state(void)
      
      RTOS_SetTask(GetTime, 0, 0); // додаємо одноразовий запуск задачі в диспетчер
                                         // кожні 500мс.
-
+     idx_pnt++;
+     if (idx_pnt == 8) idx_pnt = 0;
 }
  
  
