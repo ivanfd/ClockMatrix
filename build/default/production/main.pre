@@ -4319,7 +4319,17 @@ void sound_init();
 
 void TMR3_ISR();
 
-# 17 "interrupt.h"
+# 13 "eusart.h"
+extern volatile uint8_t eusartRxCount;
+
+void init_uart(void);
+void putch(char data);
+void EUSART_Receive_ISR(void);
+uint8_t EUSART_Read(void);
+void EUSART_Write(uint8_t txData);
+void reinit_rx();
+
+# 18 "interrupt.h"
 void interrupt INTERRUPT_InterruptManager(void);
 
 # 13 "dispatcher.h"
@@ -4366,11 +4376,7 @@ uint32_t bmp280ReadInt32(uint8_t address);
 int32_t bmp280ReadPressure();
 uint8_t bmp280Convert(int32_t *press, int32_t *temper);
 
-# 8 "eusart.h"
-void init_uart(void);
-void putch(char data);
-
-# 46 "common.h"
+# 49 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 void time_set_min(void);
@@ -4390,6 +4396,11 @@ void pressure(void);
 void pre_ref_dis(void);
 void set_type_clk(void);
 void radio_temp(void);
+void read_adc();
+void adj_brig();
+void brg_set();
+void set_brg_manual();
+void usart_r();
 
 # 10 "i2c.h"
 void I2C_Master_Wait();

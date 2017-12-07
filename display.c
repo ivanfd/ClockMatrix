@@ -187,13 +187,14 @@ void FillBuf(uint8_t type) {
             Dis_Buff[28] = 0;
             break;
         case TYPE_CLK_2:
-            
+
             y1 = (TTime.Thr / 10) % 10;
             y2 = TTime.Thr % 10;
             y3 = (TTime.Tmin / 10) % 10;
             y4 = TTime.Tmin % 10;
-                        //Якщо люба з цифр змінилася
+            //Якщо люба з цифр змінилася
             if ((x1 != y1) || (x2 != y2) || (x3 != y3) || (x4 != y4)) {
+                putchar_b_buf(13, ':', &Font);
                 if (x4 != y4)
                     putchar_down(25, TTime.Tmin % 10, pFont);
                 else
@@ -217,8 +218,8 @@ void FillBuf(uint8_t type) {
 
                 } else
                     putchar_down(1, 0, &Font);
-                putchar_b_buf(13, 23 + idx_pnt, &Font);
-
+                // putchar_b_buf(13, 23 + idx_pnt, &Font);
+                idx_pnt = 0;
 
 
                 x1 = y1;

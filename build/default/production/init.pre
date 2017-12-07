@@ -4372,7 +4372,17 @@ void sound_init();
 
 void TMR3_ISR();
 
-# 17 "interrupt.h"
+# 13 "eusart.h"
+extern volatile uint8_t eusartRxCount;
+
+void init_uart(void);
+void putch(char data);
+void EUSART_Receive_ISR(void);
+uint8_t EUSART_Read(void);
+void EUSART_Write(uint8_t txData);
+void reinit_rx();
+
+# 18 "interrupt.h"
 void interrupt INTERRUPT_InterruptManager(void);
 
 # 13 "dispatcher.h"
@@ -4419,11 +4429,7 @@ uint32_t bmp280ReadInt32(uint8_t address);
 int32_t bmp280ReadPressure();
 uint8_t bmp280Convert(int32_t *press, int32_t *temper);
 
-# 8 "eusart.h"
-void init_uart(void);
-void putch(char data);
-
-# 46 "common.h"
+# 49 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 void time_set_min(void);
@@ -4443,6 +4449,11 @@ void pressure(void);
 void pre_ref_dis(void);
 void set_type_clk(void);
 void radio_temp(void);
+void read_adc();
+void adj_brig();
+void brg_set();
+void set_brg_manual();
+void usart_r();
 
 # 10 "i2c.h"
 void I2C_Master_Wait();
@@ -4490,6 +4501,8 @@ void Interrupt_Init(void);
 # 63 "init.c"
 extern uint8_t type_font;
 extern uint8_t type_clk;
+extern uint8_t brg_type;
+extern uint8_t brig;
 
 void SYSTEM_Initialize(void)
 {
@@ -4507,10 +4520,14 @@ init_uart();
 bmp280_Init();
 type_font = read_eep(0);
 type_clk = read_eep(1);
+brg_type = read_eep(2);
+brig = read_eep(3);
+Cmd7221(0x0A, brig);
 set_font();
 sound_init();
 spi_init();
 nrf24_init(100, 4);
+RTOS_SetTask(usart_r, 40, 20);
 
 }
 
@@ -4523,6 +4540,14 @@ TRISB = 0b00011111;
 INTCON2 &= (~(1<<7));
 LATD = 0x00;
 TRISD = 0x00;
+LATA = 0;
+TRISA = 0b00000001;
+ADCON0bits.CHS = 0b0000;
+ADCON1bits.PCFG = 0b1110;
+ADCON1bits.VCFG = 0b00;
+ADCON2bits.ADCS = 0b010;
+ADCON2bits.ADFM = 1;
+ADCON0bits.ADON = 1;
 INTCON2bits.INTEDG0 = 1;
 INTCONbits.INT0IF = 0;
 INTCONbits.INT0IE = 1;

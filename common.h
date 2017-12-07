@@ -39,9 +39,12 @@
 
 #define EE_FONT 0 // адреса в еепром типу шрифту
 #define EE_TYPE_CLK 1 // адреса в еепром типу годинника
+#define EE_TYPE_BRG 2 // адреса в еепром типу яскравості
+#define EE_DAT_BRG 3 // адреса в еепром значення яскравості
+
 #define TYPE_CLK_1 1  // вигляд годинника
 #define TYPE_CLK_2 2  // вигляд годинника
-
+#define MAX_BRIG 10 // максимальна яскравість
 
  void INT0_ISR(void);
  void GetTime(void);
@@ -62,6 +65,11 @@
  void pre_ref_dis(void);
  void set_type_clk(void);
  void radio_temp(void);
+ void read_adc();
+ void adj_brig();
+ void brg_set();
+ void set_brg_manual();
+ void usart_r();
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

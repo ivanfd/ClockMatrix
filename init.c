@@ -62,6 +62,8 @@
 
 extern uint8_t type_font;
 extern uint8_t type_clk;
+extern uint8_t brg_type;
+extern uint8_t brig;// значення яскравості
 
 void SYSTEM_Initialize(void)  // ініціалізація контролера
 {
@@ -79,10 +81,14 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     bmp280_Init();
     type_font = read_eep(EE_FONT);
     type_clk = read_eep(EE_TYPE_CLK);
+    brg_type = read_eep(EE_TYPE_BRG);
+    brig = read_eep(EE_DAT_BRG);
+    Cmd7221(INTENSITY_R, brig); //Intensity Register
     set_font();
     sound_init();
     spi_init();
     nrf24_init(100, 4);
+    RTOS_SetTask(usart_r, 40, cycle_main); // ЗАДАЧА ОПИТУВАННЯ КОМ ПОРТА
 
 }
 
@@ -95,6 +101,14 @@ void Port_Init(void)  // ініціалізація портів
     INTCON2 &= (~(1<<7));      // підтягуючі резистори
     LATD = 0x00;
     TRISD = 0x00;
+    LATA = 0;
+    TRISA = 0b00000001;
+    ADCON0bits.CHS = 0b0000; // аналоговий вхід - 0
+    ADCON1bits.PCFG = 0b1110; // порт RA0 - аналоговий
+    ADCON1bits.VCFG = 0b00; // Voltage Reference - до VSS, VDD
+    ADCON2bits.ADCS = 0b010; //FOSC/32
+    ADCON2bits.ADFM = 1; // праве вирівнювання
+    ADCON0bits.ADON = 1; // вмк. модуль АЦП
     INTCON2bits.INTEDG0 = 1;    // переривання по передньому фронту
     INTCONbits.INT0IF = 0;      // скинути признак переривання по зовнішньому входу
     INTCONbits.INT0IE = 1;      // вмк. переривання по входу RB0

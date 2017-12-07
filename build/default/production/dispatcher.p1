@@ -2,9 +2,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "21 display.h
 [s S270 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S270 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
-[v F3261 `(v ~T0 @X0 0 tf ]
+[v F3274 `(v ~T0 @X0 0 tf ]
 "13 dispatcher.h
-[s S271 `*F3261 1 `ui 1 `ui 1 `ui 1 ]
+[s S271 `*F3274 1 `ui 1 `ui 1 `ui 1 ]
 [n S271 task pFunc delay period run ]
 "5967 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
 [v _T0CON `Vuc ~T0 @X0 0 e@4053 ]
@@ -24,8 +24,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _INTCONbits `VS261 ~T0 @X0 0 e@4082 ]
 "6044
 [v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
-[v F3273 `(v ~T0 @X0 0 tf ]
-[v F3279 `(v ~T0 @X0 0 tf ]
+[v F3286 `(v ~T0 @X0 0 tf ]
+[v F3292 `(v ~T0 @X0 0 tf ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -5810,8 +5810,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 58: void scroll_right(void);
 [; ;key.h: 22: void key_press(void);
 [; ;timer.h: 13: void TMRInit(void);
-[; ;eusart.h: 8: void init_uart(void);
-[; ;eusart.h: 9: void putch(char data);
+[; ;eusart.h: 13: extern volatile uint8_t eusartRxCount;
+[; ;eusart.h: 15: void init_uart(void);
+[; ;eusart.h: 16: void putch(char data);
+[; ;eusart.h: 17: void EUSART_Receive_ISR(void);
+[; ;eusart.h: 18: uint8_t EUSART_Read(void);
+[; ;eusart.h: 19: void EUSART_Write(uint8_t txData);
+[; ;eusart.h: 20: void reinit_rx();
 [; ;BMP_280.h: 52: void bmp280_Init();
 [; ;BMP_280.h: 53: uint16_t bmp280ReadInt16(uint8_t address);
 [; ;BMP_280.h: 54: void bmp280WriteByte(uint8_t address, int8_t data);
@@ -5877,28 +5882,33 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 [; ;ds18b20.h: 13: uint8_t readTemp_Single(uint8_t *buf, uint8_t *minus, uint8_t *time_flag, uint8_t *timer_val);
 [; ;ds18b20.h: 14: void init_ds18b20(void);
-[; ;common.h: 46: void INT0_ISR(void);
-[; ;common.h: 47: void GetTime(void);
-[; ;common.h: 48: void time_set_min(void);
-[; ;common.h: 49: void time_set_hr(void);
-[; ;common.h: 50: void time_set_yr(void);
-[; ;common.h: 51: void time_set_mt(void);
-[; ;common.h: 52: void time_set_dt(void);
-[; ;common.h: 53: void time_set_dy(void);
-[; ;common.h: 54: void TMR1_ISR();
-[; ;common.h: 55: void time_led();
-[; ;common.h: 56: void version(void);
-[; ;common.h: 57: void default_state(void);
-[; ;common.h: 58: void home_temp(void);
-[; ;common.h: 59: void set_font();
-[; ;common.h: 60: void set_font_set(void);
-[; ;common.h: 61: void pressure(void);
-[; ;common.h: 62: void pre_ref_dis(void);
-[; ;common.h: 63: void set_type_clk(void);
-[; ;common.h: 64: void radio_temp(void);
+[; ;common.h: 49: void INT0_ISR(void);
+[; ;common.h: 50: void GetTime(void);
+[; ;common.h: 51: void time_set_min(void);
+[; ;common.h: 52: void time_set_hr(void);
+[; ;common.h: 53: void time_set_yr(void);
+[; ;common.h: 54: void time_set_mt(void);
+[; ;common.h: 55: void time_set_dt(void);
+[; ;common.h: 56: void time_set_dy(void);
+[; ;common.h: 57: void TMR1_ISR();
+[; ;common.h: 58: void time_led();
+[; ;common.h: 59: void version(void);
+[; ;common.h: 60: void default_state(void);
+[; ;common.h: 61: void home_temp(void);
+[; ;common.h: 62: void set_font();
+[; ;common.h: 63: void set_font_set(void);
+[; ;common.h: 64: void pressure(void);
+[; ;common.h: 65: void pre_ref_dis(void);
+[; ;common.h: 66: void set_type_clk(void);
+[; ;common.h: 67: void radio_temp(void);
+[; ;common.h: 68: void read_adc();
+[; ;common.h: 69: void adj_brig();
+[; ;common.h: 70: void brg_set();
+[; ;common.h: 71: void set_brg_manual();
+[; ;common.h: 72: void usart_r();
 [; ;sound.h: 14: void sound_init();
 [; ;sound.h: 16: void TMR3_ISR();
-[; ;interrupt.h: 17: void interrupt INTERRUPT_InterruptManager(void);
+[; ;interrupt.h: 18: void interrupt INTERRUPT_InterruptManager(void);
 [; ;dispatcher.h: 13: typedef struct task
 [; ;dispatcher.h: 14: {
 [; ;dispatcher.h: 15: void (*pFunc) (void);
@@ -5945,15 +5955,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 272 ]
 }
 "22
-[v _RTOS_SetTask `(v ~T0 @X0 1 ef3`*F3273`ui`ui ]
+[v _RTOS_SetTask `(v ~T0 @X0 1 ef3`*F3286`ui`ui ]
 "23
 {
 [; ;dispatcher.c: 22: void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod)
 [; ;dispatcher.c: 23: {
 [e :U _RTOS_SetTask ]
-[v F3287 `(v ~T0 @X0 0 tf ]
+[v F3300 `(v ~T0 @X0 0 tf ]
 "22
-[v _taskFunc `*F3287 ~T0 @X0 1 r1 ]
+[v _taskFunc `*F3300 ~T0 @X0 1 r1 ]
 [v _taskDelay `ui ~T0 @X0 1 r2 ]
 [v _taskPeriod `ui ~T0 @X0 1 r3 ]
 "23
@@ -5963,7 +5973,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dispatcher.c: 24: uint8_t i;
 [; ;dispatcher.c: 26: if(!taskFunc) return;
 "26
-[e $ ! ! != _taskFunc -> -> 0 `i `*F3287 274  ]
+[e $ ! ! != _taskFunc -> -> 0 `i `*F3300 274  ]
 [e $UE 273  ]
 [e :U 274 ]
 [; ;dispatcher.c: 27: for(i = 0; i < arrayTail; i++)
@@ -5976,9 +5986,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dispatcher.c: 28: {
 {
 [; ;dispatcher.c: 29: if(TaskArray[i].pFunc == taskFunc)
-[v F3292 `*F3261 ~T0 @X0 1 t ]
+[v F3305 `*F3274 ~T0 @X0 1 t ]
 "29
-[e $ ! == . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3261 279  ]
+[e $ ! == . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3274 279  ]
 [; ;dispatcher.c: 30: {
 "30
 {
@@ -6024,9 +6034,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "44
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
 [; ;dispatcher.c: 46: TaskArray[arrayTail].pFunc = taskFunc;
-[v F3293 `*F3261 ~T0 @X0 1 t ]
+[v F3306 `*F3274 ~T0 @X0 1 t ]
 "46
-[e = . *U + &U _TaskArray * -> _arrayTail `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3261 ]
+[e = . *U + &U _TaskArray * -> _arrayTail `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3274 ]
 [; ;dispatcher.c: 47: TaskArray[arrayTail].delay = taskDelay;
 "47
 [e = . *U + &U _TaskArray * -> _arrayTail `ux -> -> # *U &U _TaskArray `ui `ux 1 _taskDelay ]
@@ -6051,15 +6061,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 273 ]
 }
 "59
-[v _RTOS_DeleteTask `(v ~T0 @X0 1 ef1`*F3279 ]
+[v _RTOS_DeleteTask `(v ~T0 @X0 1 ef1`*F3292 ]
 "60
 {
 [; ;dispatcher.c: 59: void RTOS_DeleteTask (void (*taskFunc)(void))
 [; ;dispatcher.c: 60: {
 [e :U _RTOS_DeleteTask ]
-[v F3295 `(v ~T0 @X0 0 tf ]
+[v F3308 `(v ~T0 @X0 0 tf ]
 "59
-[v _taskFunc `*F3295 ~T0 @X0 1 r1 ]
+[v _taskFunc `*F3308 ~T0 @X0 1 r1 ]
 "60
 [f ]
 "61
@@ -6075,9 +6085,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dispatcher.c: 64: {
 {
 [; ;dispatcher.c: 65: if(TaskArray[i].pFunc == taskFunc)
-[v F3298 `*F3261 ~T0 @X0 1 t ]
+[v F3311 `*F3274 ~T0 @X0 1 t ]
 "65
-[e $ ! == . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3261 286  ]
+[e $ ! == . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3274 286  ]
 [; ;dispatcher.c: 66: {
 "66
 {
@@ -6135,9 +6145,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "86
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
-[v F3302 `(v ~T0 @X0 0 tf ]
+[v F3315 `(v ~T0 @X0 0 tf ]
 "87
-[v _function `*F3302 ~T0 @X0 1 a ]
+[v _function `*F3315 ~T0 @X0 1 a ]
 [; ;dispatcher.c: 86: uint8_t i, j;
 [; ;dispatcher.c: 87: void (*function) (void);
 [; ;dispatcher.c: 89: if (Timer0Interrupt)
@@ -6201,7 +6211,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;dispatcher.c: 104: function = TaskArray[i].pFunc;
 "104
-[e = _function -> . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 `*F3302 ]
+[e = _function -> . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 `*F3315 ]
 [; ;dispatcher.c: 106: if(TaskArray[i].period == 0)
 "106
 [e $ ! == . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 2 -> -> 0 `i `ui 301  ]
@@ -6210,7 +6220,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;dispatcher.c: 108: RTOS_DeleteTask(TaskArray[i].pFunc);
 "108
-[e ( _RTOS_DeleteTask (1 -> . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 `*F3279 ]
+[e ( _RTOS_DeleteTask (1 -> . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 `*F3292 ]
 "110
 }
 [; ;dispatcher.c: 110: }

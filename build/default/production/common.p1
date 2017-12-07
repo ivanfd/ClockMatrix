@@ -6,25 +6,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _getTime `(v ~T0 @X0 0 ef3`*uc`*uc`*uc ]
 "58
 [v _getDate `(v ~T0 @X0 0 ef4`*uc`*uc`*uc`*uc ]
-[v F3236 `(v ~T0 @X0 0 tf ]
+[v F3244 `(v ~T0 @X0 0 tf ]
 "27 dispatcher.h
-[v _RTOS_DeleteTask `(v ~T0 @X0 0 ef1`*F3236 ]
-[v F3230 `(v ~T0 @X0 0 tf ]
+[v _RTOS_DeleteTask `(v ~T0 @X0 0 ef1`*F3244 ]
+[v F3238 `(v ~T0 @X0 0 tf ]
 "26
-[v _RTOS_SetTask `(v ~T0 @X0 0 ef3`*F3230`ui`ui ]
-"49 common.h
+[v _RTOS_SetTask `(v ~T0 @X0 0 ef3`*F3238`ui`ui ]
+"52 common.h
 [v _time_set_hr `(v ~T0 @X0 0 ef ]
-"57
+"60
 [v _default_state `(v ~T0 @X0 0 ef ]
 [v F3099 `uc ~T0 @X0 -> 5 `i t ]
 [v F3098 `F3099 ~T0 @X0 -> 10 `i t ]
 "47 display.h
 [v _putchar_b_buf `(v ~T0 @X0 0 ef3`uc`uc`*F3098 ]
-[v F3299 `uc ~T0 @X0 -> 5 `i t ]
-[v F3298 `F3299 ~T0 @X0 -> 0 `x t ]
+[v F3312 `uc ~T0 @X0 -> 5 `i t ]
+[v F3311 `F3312 ~T0 @X0 -> 0 `x t ]
 "17 common.c
-[v _pFont `*F3298 ~T0 @X0 0 e ]
-"55 common.h
+[v _pFont `*F3311 ~T0 @X0 0 e ]
+"58 common.h
 [v _time_led `(v ~T0 @X0 0 ef ]
 "51 display.h
 [v _clear_matrix `(v ~T0 @X0 0 ef ]
@@ -34,24 +34,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Update_Matrix `(v ~T0 @X0 0 ef1`*uc ]
 "4 common.c
 [v _Dis_Buff `uc ~T0 @X0 -> 0 `x e ]
-"50 common.h
+"53 common.h
 [v _time_set_yr `(v ~T0 @X0 0 ef ]
-"51
+"54
 [v _time_set_mt `(v ~T0 @X0 0 ef ]
 "61 ds3231.h
 [v _setDate `(v ~T0 @X0 0 ef4`uc`uc`uc`uc ]
-"52 common.h
+"55 common.h
 [v _time_set_dt `(v ~T0 @X0 0 ef ]
-"53
+"56
 [v _time_set_dy `(v ~T0 @X0 0 ef ]
-"60
-[v _set_font_set `(v ~T0 @X0 0 ef ]
 "63
+[v _set_font_set `(v ~T0 @X0 0 ef ]
+"66
 [v _set_type_clk `(v ~T0 @X0 0 ef ]
 "7 eeprom.h
 [v _write_eep `(v ~T0 @X0 0 ef2`uc`uc ]
-"59 common.h
+"62 common.h
 [v _set_font `(v ~T0 @X0 0 ef ]
+"70
+[v _brg_set `(v ~T0 @X0 0 ef ]
+"71
+[v _set_brg_manual `(v ~T0 @X0 0 ef ]
+"23 max7221.h
+[v _Cmd7221 `(v ~T0 @X0 0 ef2`uc`uc ]
 "55 display.h
 [v _pic_to_led `(v ~T0 @X0 0 ef2`uc`uc ]
 [v F3118 `uc ~T0 @X0 -> 5 `i t ]
@@ -60,11 +66,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _putchar_down `(v ~T0 @X0 0 ef3`uc`uc`*F3117 ]
 "58
 [v _scroll_right `(v ~T0 @X0 0 ef ]
-"64 common.h
+"67 common.h
 [v _radio_temp `(v ~T0 @X0 0 ef ]
 "56 display.h
 [v _scroll_left `(v ~T0 @X0 0 ef ]
-"62 common.h
+"65 common.h
 [v _pre_ref_dis `(v ~T0 @X0 0 ef ]
 "194 C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdio.h
 [v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
@@ -89,13 +95,64 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _readTemp_Single `(uc ~T0 @X0 0 ef4`*uc`*uc`*uc`*uc ]
 "59 BMP_280.h
 [v _bmp280Convert `(uc ~T0 @X0 0 ef2`*l`*l ]
+[v F2919 `(v ~T0 @X0 1 tf1`ul ]
+"164 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18.h
+[v __delay `JF2919 ~T0 @X0 0 e ]
+[p i __delay ]
 "154 nrf24l01p.h
 [v _nrf24_dataReady `(uc ~T0 @X0 0 ef ]
 "151
 [v _nrf24_getData `(v ~T0 @X0 0 ef1`*uc ]
+"195 C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdio.h
+[v _printf `(i ~T0 @X0 0 ev`*Cuc ]
+"68 common.h
+[v _read_adc `(v ~T0 @X0 0 ef ]
+"69
+[v _adj_brig `(v ~T0 @X0 0 ef ]
 "26 spi.h
 [v _spi_rw `(uc ~T0 @X0 0 ef1`uc ]
-"5335 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
+"13 eusart.h
+[v _eusartRxCount `Vuc ~T0 @X0 0 e ]
+"18
+[v _EUSART_Read `(uc ~T0 @X0 0 ef ]
+"19
+[v _EUSART_Write `(v ~T0 @X0 0 ef1`uc ]
+"20
+[v _reinit_rx `(v ~T0 @X0 0 ef ]
+"4613 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
+[s S177 :1 `uc 1 :1 `uc 1 ]
+[n S177 . . GO_NOT_DONE ]
+"4617
+[s S178 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S178 . ADON GO_nDONE CHS ]
+"4622
+[s S179 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S179 . . GO CHS0 CHS1 CHS2 CHS3 ]
+"4630
+[s S180 :1 `uc 1 :1 `uc 1 ]
+[n S180 . . DONE ]
+"4634
+[s S181 :1 `uc 1 :1 `uc 1 ]
+[n S181 . . NOT_DONE ]
+"4638
+[s S182 :1 `uc 1 :1 `uc 1 ]
+[n S182 . . nDONE ]
+"4642
+[s S183 :1 `uc 1 :1 `uc 1 ]
+[n S183 . . GO_DONE ]
+"4646
+[s S184 :1 `uc 1 :1 `uc 1 ]
+[n S184 . . GODONE ]
+"4612
+[u S176 `S177 1 `S178 1 `S179 1 `S180 1 `S181 1 `S182 1 `S183 1 `S184 1 ]
+[n S176 . . . . . . . . . ]
+"4651
+[v _ADCON0bits `VS176 ~T0 @X0 0 e@4034 ]
+"4740
+[v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
+"4733
+[v _ADRESL `Vuc ~T0 @X0 0 e@4035 ]
+"5335
 [s S220 :2 `uc 1 :1 `uc 1 ]
 [n S220 . . NOT_T1SYNC ]
 "5339
@@ -5894,8 +5951,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 56: void scroll_left(void);
 [; ;display.h: 57: void interval_scroll_text();
 [; ;display.h: 58: void scroll_right(void);
-[; ;eusart.h: 8: void init_uart(void);
-[; ;eusart.h: 9: void putch(char data);
+[; ;eusart.h: 13: extern volatile uint8_t eusartRxCount;
+[; ;eusart.h: 15: void init_uart(void);
+[; ;eusart.h: 16: void putch(char data);
+[; ;eusart.h: 17: void EUSART_Receive_ISR(void);
+[; ;eusart.h: 18: uint8_t EUSART_Read(void);
+[; ;eusart.h: 19: void EUSART_Write(uint8_t txData);
+[; ;eusart.h: 20: void reinit_rx();
 [; ;BMP_280.h: 52: void bmp280_Init();
 [; ;BMP_280.h: 53: uint16_t bmp280ReadInt16(uint8_t address);
 [; ;BMP_280.h: 54: void bmp280WriteByte(uint8_t address, int8_t data);
@@ -5940,7 +6002,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;timer.h: 13: void TMRInit(void);
 [; ;sound.h: 14: void sound_init();
 [; ;sound.h: 16: void TMR3_ISR();
-[; ;interrupt.h: 17: void interrupt INTERRUPT_InterruptManager(void);
+[; ;interrupt.h: 18: void interrupt INTERRUPT_InterruptManager(void);
 [; ;dispatcher.h: 13: typedef struct task
 [; ;dispatcher.h: 14: {
 [; ;dispatcher.h: 15: void (*pFunc) (void);
@@ -5978,25 +6040,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 [; ;ds18b20.h: 13: uint8_t readTemp_Single(uint8_t *buf, uint8_t *minus, uint8_t *time_flag, uint8_t *timer_val);
 [; ;ds18b20.h: 14: void init_ds18b20(void);
-[; ;common.h: 46: void INT0_ISR(void);
-[; ;common.h: 47: void GetTime(void);
-[; ;common.h: 48: void time_set_min(void);
-[; ;common.h: 49: void time_set_hr(void);
-[; ;common.h: 50: void time_set_yr(void);
-[; ;common.h: 51: void time_set_mt(void);
-[; ;common.h: 52: void time_set_dt(void);
-[; ;common.h: 53: void time_set_dy(void);
-[; ;common.h: 54: void TMR1_ISR();
-[; ;common.h: 55: void time_led();
-[; ;common.h: 56: void version(void);
-[; ;common.h: 57: void default_state(void);
-[; ;common.h: 58: void home_temp(void);
-[; ;common.h: 59: void set_font();
-[; ;common.h: 60: void set_font_set(void);
-[; ;common.h: 61: void pressure(void);
-[; ;common.h: 62: void pre_ref_dis(void);
-[; ;common.h: 63: void set_type_clk(void);
-[; ;common.h: 64: void radio_temp(void);
+[; ;common.h: 49: void INT0_ISR(void);
+[; ;common.h: 50: void GetTime(void);
+[; ;common.h: 51: void time_set_min(void);
+[; ;common.h: 52: void time_set_hr(void);
+[; ;common.h: 53: void time_set_yr(void);
+[; ;common.h: 54: void time_set_mt(void);
+[; ;common.h: 55: void time_set_dt(void);
+[; ;common.h: 56: void time_set_dy(void);
+[; ;common.h: 57: void TMR1_ISR();
+[; ;common.h: 58: void time_led();
+[; ;common.h: 59: void version(void);
+[; ;common.h: 60: void default_state(void);
+[; ;common.h: 61: void home_temp(void);
+[; ;common.h: 62: void set_font();
+[; ;common.h: 63: void set_font_set(void);
+[; ;common.h: 64: void pressure(void);
+[; ;common.h: 65: void pre_ref_dis(void);
+[; ;common.h: 66: void set_type_clk(void);
+[; ;common.h: 67: void radio_temp(void);
+[; ;common.h: 68: void read_adc();
+[; ;common.h: 69: void adj_brig();
+[; ;common.h: 70: void brg_set();
+[; ;common.h: 71: void set_brg_manual();
+[; ;common.h: 72: void usart_r();
 [; ;common.c: 3: extern uint8_t TxtBuf[6];
 [; ;common.c: 4: extern uint8_t Dis_Buff[4 * 8];
 [; ;common.c: 5: extern uint8_t key_event;
@@ -6070,2633 +6137,3298 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;common.c: 22: uint8_t idx_pnt = 0;
 [; ;common.c: 23: extern uint8_t x1, x2, x3, x4, y1, y2, y3, y4;
 "24
-[; ;common.c: 24: asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "3" "," "1" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0");
+[v _adc_res `ui ~T0 @X0 1 e ]
+[i _adc_res
+-> -> 500 `i `ui
+]
+[; ;common.c: 24: uint16_t adc_res = 500;
+"25
+[v _oldsec `uc ~T0 @X0 1 e ]
+[; ;common.c: 25: uint8_t oldsec;
+"26
+[v _oldsec_flag `b ~T0 @X0 1 e ]
+[; ;common.c: 26: bit oldsec_flag;
+"27
+[v _brg_type `uc ~T0 @X0 1 e ]
+[; ;common.c: 27: uint8_t brg_type;
+"28
+[v _brig `uc ~T0 @X0 1 e ]
+[; ;common.c: 28: uint8_t brig;
+"30
+[; ;common.c: 30: asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "3" "," "1" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0");
 [; <" 	psect eeprom_data,class=EEDATA,noexec ;# ">
 [; <" 	db	3,1,0,0,0,0,0,0 ;# ">
-"29
+"35
 [v _GetTime `(v ~T0 @X0 1 ef ]
-"30
+"36
 {
-[; ;common.c: 29: void GetTime(void)
-[; ;common.c: 30: {
+[; ;common.c: 35: void GetTime(void)
+[; ;common.c: 36: {
 [e :U _GetTime ]
 [f ]
-[; ;common.c: 31: getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
-"31
+[; ;common.c: 37: oldsec = TTime.Ts;
+"37
+[e = _oldsec . _TTime 0 ]
+[; ;common.c: 38: getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
+"38
 [e ( _getTime (3 , , &U . _TTime 2 &U . _TTime 1 &U . _TTime 0 ]
-[; ;common.c: 32: getDate(&TTime.Tdy,&TTime.Tdt,&TTime.Tmt,&TTime.Tyr);
-"32
+[; ;common.c: 39: getDate(&TTime.Tdy,&TTime.Tdt,&TTime.Tmt,&TTime.Tyr);
+"39
 [e ( _getDate (4 , , , &U . _TTime 3 &U . _TTime 4 &U . _TTime 5 &U . _TTime 6 ]
-[; ;common.c: 33: }
-"33
+[; ;common.c: 40: if (oldsec != TTime.Ts)
+"40
+[e $ ! != -> _oldsec `i -> . _TTime 0 `i 273  ]
+[; ;common.c: 41: oldsec_flag = 1;
+"41
+[e = _oldsec_flag -> -> 1 `i `b ]
+[e :U 273 ]
+[; ;common.c: 42: }
+"42
 [e :UE 272 ]
 }
-"38
+"47
 [v _time_set_min `(v ~T0 @X0 1 ef ]
-"39
+"48
 {
-[; ;common.c: 38: void time_set_min(void)
-[; ;common.c: 39: {
+[; ;common.c: 47: void time_set_min(void)
+[; ;common.c: 48: {
 [e :U _time_set_min ]
 [f ]
-[; ;common.c: 40: show_digit = ~show_digit;
-"40
-[e = _show_digit -> ~ -> _show_digit `ui `b ]
-[; ;common.c: 41: switch (events)
-"41
-[e $U 275  ]
-[; ;common.c: 42: {
-"42
-{
-[; ;common.c: 43: case 5:
-"43
-[e :U 276 ]
-[; ;common.c: 45: break;
-"45
-[e $U 274  ]
-[; ;common.c: 46: case 1:
-"46
-[e :U 277 ]
-[; ;common.c: 48: RTOS_DeleteTask(time_set_min);
-"48
-[e ( _RTOS_DeleteTask (1 &U _time_set_min ]
-[; ;common.c: 49: RTOS_SetTask(time_set_hr, 0, 50);
+[; ;common.c: 49: show_digit = ~show_digit;
 "49
-[e ( _RTOS_SetTask (3 , , &U _time_set_hr -> -> 0 `i `ui -> -> 50 `i `ui ]
-[; ;common.c: 50: RTOS_SetTask(default_state, 2000, 0);
+[e = _show_digit -> ~ -> _show_digit `ui `b ]
+[; ;common.c: 50: switch (events)
 "50
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 51: if (type_clk == 1) {
+[e $U 276  ]
+[; ;common.c: 51: {
 "51
-[e $ ! == -> _type_clk `i -> 1 `i 278  ]
 {
-[; ;common.c: 52: putchar_b_buf(13, (TSTime.Tmin / 10) % 10, pFont);
+[; ;common.c: 52: case 5:
 "52
-[e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> % / -> . _TSTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 53: putchar_b_buf(19, TSTime.Tmin % 10, pFont);
-"53
-[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % -> . _TSTime 1 `i -> 10 `i `uc _pFont ]
+[e :U 277 ]
+[; ;common.c: 54: break;
 "54
-}
-[; ;common.c: 54: } else {
-[e $U 279  ]
-[e :U 278 ]
-{
-[; ;common.c: 55: putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
+[e $U 275  ]
+[; ;common.c: 55: case 1:
 "55
-[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 56: putchar_b_buf(25, TTime.Tmin % 10, pFont);
-"56
-[e ( _putchar_b_buf (3 , , -> -> 25 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
+[e :U 278 ]
+[; ;common.c: 57: RTOS_DeleteTask(time_set_min);
 "57
-}
-[e :U 279 ]
-[; ;common.c: 57: }
-[; ;common.c: 58: events = 5;
-"58
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 59: en_put = 0;
-"59
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 60: break;
-"60
-[e $U 274  ]
-[; ;common.c: 62: case 4:
-"62
-[e :U 280 ]
-[; ;common.c: 63: RTOS_DeleteTask(time_set_min);
-"63
 [e ( _RTOS_DeleteTask (1 &U _time_set_min ]
-[; ;common.c: 64: RTOS_DeleteTask(default_state);
-"64
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 65: RTOS_SetTask(time_led, 0, 20);
-"65
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 66: events = 5;
-"66
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 67: clear_matrix();
-"67
-[e ( _clear_matrix ..  ]
-[; ;common.c: 68: break;
-"68
-[e $U 274  ]
-[; ;common.c: 69: case 2:
-"69
-[e :U 281 ]
-[; ;common.c: 70: TSTime.Tmin++;
-"70
-[e ++ . _TSTime 1 -> -> 1 `i `uc ]
-[; ;common.c: 71: if (TSTime.Tmin > 59) TSTime.Tmin = 0;
-"71
-[e $ ! > -> . _TSTime 1 `i -> 59 `i 282  ]
-[e = . _TSTime 1 -> -> 0 `i `uc ]
-[e :U 282 ]
-[; ;common.c: 72: RTOS_SetTask(default_state, 2000, 0);
-"72
+[; ;common.c: 58: RTOS_SetTask(time_set_hr, 0, 50);
+"58
+[e ( _RTOS_SetTask (3 , , &U _time_set_hr -> -> 0 `i `ui -> -> 50 `i `ui ]
+[; ;common.c: 59: RTOS_SetTask(default_state, 2000, 0);
+"59
 [e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 73: setTime(TSTime.Thr, TSTime.Tmin, 0);
-"73
-[e ( _setTime (3 , , . _TSTime 2 . _TSTime 1 -> -> 0 `i `uc ]
-[; ;common.c: 74: events = 5;
-"74
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 75: break;
-"75
-[e $U 274  ]
-[; ;common.c: 76: case 3:
-"76
-[e :U 283 ]
-[; ;common.c: 77: TSTime.Tmin--;
-"77
-[e -- . _TSTime 1 -> -> 1 `i `uc ]
-[; ;common.c: 78: if (TSTime.Tmin == 255) TSTime.Tmin = 59;
-"78
-[e $ ! == -> . _TSTime 1 `i -> 255 `i 284  ]
-[e = . _TSTime 1 -> -> 59 `i `uc ]
-[e :U 284 ]
-[; ;common.c: 79: RTOS_SetTask(default_state, 2000, 0);
-"79
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 80: setTime(TSTime.Thr, TSTime.Tmin, 0);
-"80
-[e ( _setTime (3 , , . _TSTime 2 . _TSTime 1 -> -> 0 `i `uc ]
-[; ;common.c: 81: events = 5;
-"81
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 82: break;
-"82
-[e $U 274  ]
-"83
-}
-[; ;common.c: 83: }
-[e $U 274  ]
-"41
-[e :U 275 ]
-[e [\ _events , $ -> -> 5 `i `uc 276
- , $ -> -> 1 `i `uc 277
- , $ -> -> 4 `i `uc 280
- , $ -> -> 2 `i `uc 281
- , $ -> -> 3 `i `uc 283
- 274 ]
-"83
-[e :U 274 ]
-[; ;common.c: 84: if (en_put) {
-"84
-[e $ ! _en_put 285  ]
+[; ;common.c: 60: if (type_clk == 1) {
+"60
+[e $ ! == -> _type_clk `i -> 1 `i 279  ]
 {
-[; ;common.c: 85: if (show_digit)
-"85
-[e $ ! _show_digit 286  ]
-[; ;common.c: 86: {
-"86
-{
-[; ;common.c: 87: if (type_clk == 1) {
-"87
-[e $ ! == -> _type_clk `i -> 1 `i 287  ]
-{
-[; ;common.c: 88: putchar_b_buf(13, (TSTime.Tmin / 10) % 10, pFont);
-"88
+[; ;common.c: 61: putchar_b_buf(13, (TSTime.Tmin / 10) % 10, pFont);
+"61
 [e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> % / -> . _TSTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 89: putchar_b_buf(19, TSTime.Tmin % 10, pFont);
-"89
+[; ;common.c: 62: putchar_b_buf(19, TSTime.Tmin % 10, pFont);
+"62
 [e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % -> . _TSTime 1 `i -> 10 `i `uc _pFont ]
+"63
+}
+[; ;common.c: 63: } else {
+[e $U 280  ]
+[e :U 279 ]
+{
+[; ;common.c: 64: putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
+"64
+[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 65: putchar_b_buf(25, TTime.Tmin % 10, pFont);
+"65
+[e ( _putchar_b_buf (3 , , -> -> 25 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
+"66
+}
+[e :U 280 ]
+[; ;common.c: 66: }
+[; ;common.c: 67: events = 5;
+"67
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 68: en_put = 0;
+"68
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 69: break;
+"69
+[e $U 275  ]
+[; ;common.c: 71: case 4:
+"71
+[e :U 281 ]
+[; ;common.c: 72: RTOS_DeleteTask(time_set_min);
+"72
+[e ( _RTOS_DeleteTask (1 &U _time_set_min ]
+[; ;common.c: 73: RTOS_DeleteTask(default_state);
+"73
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 74: RTOS_SetTask(time_led, 0, 20);
+"74
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 75: events = 5;
+"75
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 76: clear_matrix();
+"76
+[e ( _clear_matrix ..  ]
+[; ;common.c: 77: break;
+"77
+[e $U 275  ]
+[; ;common.c: 78: case 2:
+"78
+[e :U 282 ]
+[; ;common.c: 79: TSTime.Tmin++;
+"79
+[e ++ . _TSTime 1 -> -> 1 `i `uc ]
+[; ;common.c: 80: if (TSTime.Tmin > 59) TSTime.Tmin = 0;
+"80
+[e $ ! > -> . _TSTime 1 `i -> 59 `i 283  ]
+[e = . _TSTime 1 -> -> 0 `i `uc ]
+[e :U 283 ]
+[; ;common.c: 81: RTOS_SetTask(default_state, 2000, 0);
+"81
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 82: setTime(TSTime.Thr, TSTime.Tmin, 0);
+"82
+[e ( _setTime (3 , , . _TSTime 2 . _TSTime 1 -> -> 0 `i `uc ]
+[; ;common.c: 83: events = 5;
+"83
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 84: break;
+"84
+[e $U 275  ]
+[; ;common.c: 85: case 3:
+"85
+[e :U 284 ]
+[; ;common.c: 86: TSTime.Tmin--;
+"86
+[e -- . _TSTime 1 -> -> 1 `i `uc ]
+[; ;common.c: 87: if (TSTime.Tmin == 255) TSTime.Tmin = 59;
+"87
+[e $ ! == -> . _TSTime 1 `i -> 255 `i 285  ]
+[e = . _TSTime 1 -> -> 59 `i `uc ]
+[e :U 285 ]
+[; ;common.c: 88: RTOS_SetTask(default_state, 2000, 0);
+"88
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 89: setTime(TSTime.Thr, TSTime.Tmin, 0);
+"89
+[e ( _setTime (3 , , . _TSTime 2 . _TSTime 1 -> -> 0 `i `uc ]
+[; ;common.c: 90: events = 5;
 "90
-}
-[; ;common.c: 90: } else {
-[e $U 288  ]
-[e :U 287 ]
-{
-[; ;common.c: 91: putchar_b_buf(19, (TSTime.Tmin / 10) % 10, pFont);
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 91: break;
 "91
-[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % / -> . _TSTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 92: putchar_b_buf(25, TSTime.Tmin % 10, pFont);
+[e $U 275  ]
 "92
-[e ( _putchar_b_buf (3 , , -> -> 25 `i `uc -> % -> . _TSTime 1 `i -> 10 `i `uc _pFont ]
+}
+[; ;common.c: 92: }
+[e $U 275  ]
+"50
+[e :U 276 ]
+[e [\ _events , $ -> -> 5 `i `uc 277
+ , $ -> -> 1 `i `uc 278
+ , $ -> -> 4 `i `uc 281
+ , $ -> -> 2 `i `uc 282
+ , $ -> -> 3 `i `uc 284
+ 275 ]
+"92
+[e :U 275 ]
+[; ;common.c: 93: if (en_put) {
 "93
-}
-[e :U 288 ]
+[e $ ! _en_put 286  ]
+{
+[; ;common.c: 94: if (show_digit)
 "94
-}
-[; ;common.c: 93: }
-[; ;common.c: 94: } else {
-[e $U 289  ]
-[e :U 286 ]
-{
-[; ;common.c: 95: if (type_clk == 1) {
+[e $ ! _show_digit 287  ]
+[; ;common.c: 95: {
 "95
-[e $ ! == -> _type_clk `i -> 1 `i 290  ]
 {
-[; ;common.c: 96: putchar_b_buf(13, 0, &Font);
+[; ;common.c: 96: if (type_clk == 1) {
 "96
-[e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-[; ;common.c: 97: putchar_b_buf(19, 0, &Font);
-"97
-[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-"98
-}
-[; ;common.c: 98: } else {
-[e $U 291  ]
-[e :U 290 ]
+[e $ ! == -> _type_clk `i -> 1 `i 288  ]
 {
-[; ;common.c: 99: putchar_b_buf(19, 0, &Font);
+[; ;common.c: 97: putchar_b_buf(13, (TSTime.Tmin / 10) % 10, pFont);
+"97
+[e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> % / -> . _TSTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 98: putchar_b_buf(19, TSTime.Tmin % 10, pFont);
+"98
+[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % -> . _TSTime 1 `i -> 10 `i `uc _pFont ]
 "99
-[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-[; ;common.c: 100: putchar_b_buf(25, 0, &Font);
-"100
-[e ( _putchar_b_buf (3 , , -> -> 25 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-"101
 }
-[e :U 291 ]
+[; ;common.c: 99: } else {
+[e $U 289  ]
+[e :U 288 ]
+{
+[; ;common.c: 100: putchar_b_buf(19, (TSTime.Tmin / 10) % 10, pFont);
+"100
+[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % / -> . _TSTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 101: putchar_b_buf(25, TSTime.Tmin % 10, pFont);
+"101
+[e ( _putchar_b_buf (3 , , -> -> 25 `i `uc -> % -> . _TSTime 1 `i -> 10 `i `uc _pFont ]
 "102
 }
 [e :U 289 ]
 "103
 }
-[e :U 285 ]
-[; ;common.c: 101: }
 [; ;common.c: 102: }
-[; ;common.c: 103: }
-[; ;common.c: 104: Update_Matrix(Dis_Buff);
-"104
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;common.c: 105: en_put = 1;
-"105
-[e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 106: }
-"106
-[e :UE 273 ]
-}
-"111
-[v _time_set_hr `(v ~T0 @X0 1 ef ]
-"112
+[; ;common.c: 103: } else {
+[e $U 290  ]
+[e :U 287 ]
 {
-[; ;common.c: 111: void time_set_hr(void)
-[; ;common.c: 112: {
+[; ;common.c: 104: if (type_clk == 1) {
+"104
+[e $ ! == -> _type_clk `i -> 1 `i 291  ]
+{
+[; ;common.c: 105: putchar_b_buf(13, 0, &Font);
+"105
+[e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+[; ;common.c: 106: putchar_b_buf(19, 0, &Font);
+"106
+[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+"107
+}
+[; ;common.c: 107: } else {
+[e $U 292  ]
+[e :U 291 ]
+{
+[; ;common.c: 108: putchar_b_buf(19, 0, &Font);
+"108
+[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+[; ;common.c: 109: putchar_b_buf(25, 0, &Font);
+"109
+[e ( _putchar_b_buf (3 , , -> -> 25 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+"110
+}
+[e :U 292 ]
+"111
+}
+[e :U 290 ]
+"112
+}
+[e :U 286 ]
+[; ;common.c: 110: }
+[; ;common.c: 111: }
+[; ;common.c: 112: }
+[; ;common.c: 113: Update_Matrix(Dis_Buff);
+"113
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 114: en_put = 1;
+"114
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 115: }
+"115
+[e :UE 274 ]
+}
+"120
+[v _time_set_hr `(v ~T0 @X0 1 ef ]
+"121
+{
+[; ;common.c: 120: void time_set_hr(void)
+[; ;common.c: 121: {
 [e :U _time_set_hr ]
 [f ]
-[; ;common.c: 113: show_digit = ~show_digit;
-"113
-[e = _show_digit -> ~ -> _show_digit `ui `b ]
-[; ;common.c: 114: switch (events)
-"114
-[e $U 294  ]
-[; ;common.c: 115: {
-"115
-{
-[; ;common.c: 116: case 5:
-"116
-[e :U 295 ]
-[; ;common.c: 118: break;
-"118
-[e $U 293  ]
-[; ;common.c: 119: case 1:
-"119
-[e :U 296 ]
-[; ;common.c: 120: RTOS_DeleteTask(time_set_hr);
-"120
-[e ( _RTOS_DeleteTask (1 &U _time_set_hr ]
-[; ;common.c: 121: RTOS_SetTask(time_set_yr, 0, 20);
-"121
-[e ( _RTOS_SetTask (3 , , &U _time_set_yr -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 122: RTOS_SetTask(default_state, 2000, 0);
+[; ;common.c: 122: show_digit = ~show_digit;
 "122
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 124: events = 5;
+[e = _show_digit -> ~ -> _show_digit `ui `b ]
+[; ;common.c: 123: switch (events)
+"123
+[e $U 295  ]
+[; ;common.c: 124: {
 "124
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 125: clear_matrix();
+{
+[; ;common.c: 125: case 5:
 "125
-[e ( _clear_matrix ..  ]
-[; ;common.c: 126: en_put = 0;
-"126
-[e = _en_put -> -> 0 `i `b ]
+[e :U 296 ]
 [; ;common.c: 127: break;
 "127
-[e $U 293  ]
-[; ;common.c: 128: case 4:
+[e $U 294  ]
+[; ;common.c: 128: case 1:
 "128
 [e :U 297 ]
 [; ;common.c: 129: RTOS_DeleteTask(time_set_hr);
 "129
 [e ( _RTOS_DeleteTask (1 &U _time_set_hr ]
-[; ;common.c: 130: RTOS_DeleteTask(default_state);
+[; ;common.c: 130: RTOS_SetTask(time_set_yr, 0, 20);
 "130
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 131: RTOS_SetTask(time_led, 0, 20);
+[e ( _RTOS_SetTask (3 , , &U _time_set_yr -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 131: RTOS_SetTask(default_state, 2000, 0);
 "131
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 132: events = 5;
-"132
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 133: clear_matrix();
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 133: events = 5;
 "133
-[e ( _clear_matrix ..  ]
-[; ;common.c: 134: break;
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 134: clear_matrix();
 "134
-[e $U 293  ]
-[; ;common.c: 135: case 2:
+[e ( _clear_matrix ..  ]
+[; ;common.c: 135: en_put = 0;
 "135
-[e :U 298 ]
-[; ;common.c: 136: TSTime.Thr++;
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 136: break;
 "136
-[e ++ . _TSTime 2 -> -> 1 `i `uc ]
-[; ;common.c: 137: if(TSTime.Thr > 23) TSTime.Thr = 0;
+[e $U 294  ]
+[; ;common.c: 137: case 4:
 "137
-[e $ ! > -> . _TSTime 2 `i -> 23 `i 299  ]
-[e = . _TSTime 2 -> -> 0 `i `uc ]
-[e :U 299 ]
-[; ;common.c: 138: RTOS_SetTask(default_state, 2000, 0);
+[e :U 298 ]
+[; ;common.c: 138: RTOS_DeleteTask(time_set_hr);
 "138
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 139: events = 5;
+[e ( _RTOS_DeleteTask (1 &U _time_set_hr ]
+[; ;common.c: 139: RTOS_DeleteTask(default_state);
 "139
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 140: setTime(TSTime.Thr,TSTime.Tmin,0);
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 140: RTOS_SetTask(time_led, 0, 20);
 "140
-[e ( _setTime (3 , , . _TSTime 2 . _TSTime 1 -> -> 0 `i `uc ]
-[; ;common.c: 141: break;
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 141: events = 5;
 "141
-[e $U 293  ]
-[; ;common.c: 142: case 3:
-"142
-[e :U 300 ]
-[; ;common.c: 143: TSTime.Thr--;
-"143
-[e -- . _TSTime 2 -> -> 1 `i `uc ]
-[; ;common.c: 144: if(TSTime.Thr == 255) TSTime.Thr = 23;
-"144
-[e $ ! == -> . _TSTime 2 `i -> 255 `i 301  ]
-[e = . _TSTime 2 -> -> 23 `i `uc ]
-[e :U 301 ]
-[; ;common.c: 145: RTOS_SetTask(default_state, 2000, 0);
-"145
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 146: events = 5;
-"146
 [e = _events -> -> 5 `i `uc ]
-[; ;common.c: 147: setTime(TSTime.Thr,TSTime.Tmin,0);
+[; ;common.c: 142: clear_matrix();
+"142
+[e ( _clear_matrix ..  ]
+[; ;common.c: 143: break;
+"143
+[e $U 294  ]
+[; ;common.c: 144: case 2:
+"144
+[e :U 299 ]
+[; ;common.c: 145: TSTime.Thr++;
+"145
+[e ++ . _TSTime 2 -> -> 1 `i `uc ]
+[; ;common.c: 146: if(TSTime.Thr > 23) TSTime.Thr = 0;
+"146
+[e $ ! > -> . _TSTime 2 `i -> 23 `i 300  ]
+[e = . _TSTime 2 -> -> 0 `i `uc ]
+[e :U 300 ]
+[; ;common.c: 147: RTOS_SetTask(default_state, 2000, 0);
 "147
-[e ( _setTime (3 , , . _TSTime 2 . _TSTime 1 -> -> 0 `i `uc ]
-[; ;common.c: 148: break;
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 148: events = 5;
 "148
-[e $U 293  ]
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 149: setTime(TSTime.Thr,TSTime.Tmin,0);
 "149
-}
-[; ;common.c: 149: }
-[e $U 293  ]
-"114
-[e :U 294 ]
-[e [\ _events , $ -> -> 5 `i `uc 295
- , $ -> -> 1 `i `uc 296
- , $ -> -> 4 `i `uc 297
- , $ -> -> 2 `i `uc 298
- , $ -> -> 3 `i `uc 300
- 293 ]
-"149
-[e :U 293 ]
-[; ;common.c: 150: if(en_put)
+[e ( _setTime (3 , , . _TSTime 2 . _TSTime 1 -> -> 0 `i `uc ]
+[; ;common.c: 150: break;
 "150
-[e $ ! _en_put 302  ]
-[; ;common.c: 151: {
+[e $U 294  ]
+[; ;common.c: 151: case 3:
 "151
-{
-[; ;common.c: 152: if(show_digit)
+[e :U 301 ]
+[; ;common.c: 152: TSTime.Thr--;
 "152
-[e $ ! _show_digit 303  ]
-[; ;common.c: 153: {
+[e -- . _TSTime 2 -> -> 1 `i `uc ]
+[; ;common.c: 153: if(TSTime.Thr == 255) TSTime.Thr = 23;
 "153
-{
-[; ;common.c: 157: if (type_clk == 1) {
+[e $ ! == -> . _TSTime 2 `i -> 255 `i 302  ]
+[e = . _TSTime 2 -> -> 23 `i `uc ]
+[e :U 302 ]
+[; ;common.c: 154: RTOS_SetTask(default_state, 2000, 0);
+"154
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 155: events = 5;
+"155
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 156: setTime(TSTime.Thr,TSTime.Tmin,0);
+"156
+[e ( _setTime (3 , , . _TSTime 2 . _TSTime 1 -> -> 0 `i `uc ]
+[; ;common.c: 157: break;
 "157
-[e $ ! == -> _type_clk `i -> 1 `i 304  ]
-{
-[; ;common.c: 158: if ((TSTime.Thr / 10) % 10)
+[e $U 294  ]
 "158
-[e $ ! != % / -> . _TSTime 2 `i -> 10 `i -> 10 `i -> 0 `i 305  ]
-[; ;common.c: 159: putchar_b_buf(0, (TSTime.Thr / 10) % 10, pFont);
+}
+[; ;common.c: 158: }
+[e $U 294  ]
+"123
+[e :U 295 ]
+[e [\ _events , $ -> -> 5 `i `uc 296
+ , $ -> -> 1 `i `uc 297
+ , $ -> -> 4 `i `uc 298
+ , $ -> -> 2 `i `uc 299
+ , $ -> -> 3 `i `uc 301
+ 294 ]
+"158
+[e :U 294 ]
+[; ;common.c: 159: if(en_put)
 "159
-[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> % / -> . _TSTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
-[e $U 306  ]
+[e $ ! _en_put 303  ]
+[; ;common.c: 160: {
 "160
-[e :U 305 ]
-[; ;common.c: 160: else
-[; ;common.c: 161: putchar_b_buf(0, 0, &Font);
+{
+[; ;common.c: 161: if(show_digit)
 "161
-[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-[e :U 306 ]
-[; ;common.c: 162: putchar_b_buf(6, TSTime.Thr % 10, pFont);
+[e $ ! _show_digit 304  ]
+[; ;common.c: 162: {
 "162
-[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> % -> . _TSTime 2 `i -> 10 `i `uc _pFont ]
-"163
-}
-[; ;common.c: 163: } else {
-[e $U 307  ]
-[e :U 304 ]
 {
-[; ;common.c: 164: if ((TSTime.Thr / 10) % 10)
-"164
-[e $ ! != % / -> . _TSTime 2 `i -> 10 `i -> 10 `i -> 0 `i 308  ]
-[; ;common.c: 165: putchar_b_buf(1, (TSTime.Thr / 10) % 10, pFont);
-"165
-[e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> % / -> . _TSTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
-[e $U 309  ]
+[; ;common.c: 166: if (type_clk == 1) {
 "166
-[e :U 308 ]
-[; ;common.c: 166: else
-[; ;common.c: 167: putchar_b_buf(1, 0, &Font);
+[e $ ! == -> _type_clk `i -> 1 `i 305  ]
+{
+[; ;common.c: 167: if ((TSTime.Thr / 10) % 10)
 "167
-[e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-[e :U 309 ]
-[; ;common.c: 168: putchar_b_buf(7, TSTime.Thr % 10, pFont);
+[e $ ! != % / -> . _TSTime 2 `i -> 10 `i -> 10 `i -> 0 `i 306  ]
+[; ;common.c: 168: putchar_b_buf(0, (TSTime.Thr / 10) % 10, pFont);
 "168
-[e ( _putchar_b_buf (3 , , -> -> 7 `i `uc -> % -> . _TSTime 2 `i -> 10 `i `uc _pFont ]
+[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> % / -> . _TSTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
+[e $U 307  ]
 "169
-}
-[e :U 307 ]
+[e :U 306 ]
+[; ;common.c: 169: else
+[; ;common.c: 170: putchar_b_buf(0, 0, &Font);
 "170
-}
-[; ;common.c: 169: }
-[; ;common.c: 170: } else {
-[e $U 310  ]
-[e :U 303 ]
-{
-[; ;common.c: 171: if (type_clk == 1) {
-"171
-[e $ ! == -> _type_clk `i -> 1 `i 311  ]
-{
-[; ;common.c: 172: putchar_b_buf(0, 0, &Font);
-"172
 [e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-[; ;common.c: 173: putchar_b_buf(6, 0, &Font);
-"173
-[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-"174
+[e :U 307 ]
+[; ;common.c: 171: putchar_b_buf(6, TSTime.Thr % 10, pFont);
+"171
+[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> % -> . _TSTime 2 `i -> 10 `i `uc _pFont ]
+"172
 }
-[; ;common.c: 174: } else {
-[e $U 312  ]
-[e :U 311 ]
+[; ;common.c: 172: } else {
+[e $U 308  ]
+[e :U 305 ]
 {
+[; ;common.c: 173: if ((TSTime.Thr / 10) % 10)
+"173
+[e $ ! != % / -> . _TSTime 2 `i -> 10 `i -> 10 `i -> 0 `i 309  ]
+[; ;common.c: 174: putchar_b_buf(1, (TSTime.Thr / 10) % 10, pFont);
+"174
+[e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> % / -> . _TSTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
+[e $U 310  ]
+"175
+[e :U 309 ]
+[; ;common.c: 175: else
 [; ;common.c: 176: putchar_b_buf(1, 0, &Font);
 "176
 [e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-[; ;common.c: 177: putchar_b_buf(7, 0, &Font);
+[e :U 310 ]
+[; ;common.c: 177: putchar_b_buf(7, TSTime.Thr % 10, pFont);
 "177
-[e ( _putchar_b_buf (3 , , -> -> 7 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+[e ( _putchar_b_buf (3 , , -> -> 7 `i `uc -> % -> . _TSTime 2 `i -> 10 `i `uc _pFont ]
 "178
 }
-[e :U 312 ]
+[e :U 308 ]
 "179
 }
-[e :U 310 ]
-"180
-}
-[e :U 302 ]
 [; ;common.c: 178: }
-[; ;common.c: 179: }
-[; ;common.c: 180: }
-[; ;common.c: 181: Update_Matrix(Dis_Buff);
-"181
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;common.c: 182: en_put = 1;
-"182
-[e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 183: }
-"183
-[e :UE 292 ]
-}
-"187
-[v _time_set_yr `(v ~T0 @X0 1 ef ]
-"188
+[; ;common.c: 179: } else {
+[e $U 311  ]
+[e :U 304 ]
 {
-[; ;common.c: 187: void time_set_yr(void)
-[; ;common.c: 188: {
+[; ;common.c: 180: if (type_clk == 1) {
+"180
+[e $ ! == -> _type_clk `i -> 1 `i 312  ]
+{
+[; ;common.c: 181: putchar_b_buf(0, 0, &Font);
+"181
+[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+[; ;common.c: 182: putchar_b_buf(6, 0, &Font);
+"182
+[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+"183
+}
+[; ;common.c: 183: } else {
+[e $U 313  ]
+[e :U 312 ]
+{
+[; ;common.c: 185: putchar_b_buf(1, 0, &Font);
+"185
+[e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+[; ;common.c: 186: putchar_b_buf(7, 0, &Font);
+"186
+[e ( _putchar_b_buf (3 , , -> -> 7 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+"187
+}
+[e :U 313 ]
+"188
+}
+[e :U 311 ]
+"189
+}
+[e :U 303 ]
+[; ;common.c: 187: }
+[; ;common.c: 188: }
+[; ;common.c: 189: }
+[; ;common.c: 190: Update_Matrix(Dis_Buff);
+"190
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 191: en_put = 1;
+"191
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 192: }
+"192
+[e :UE 293 ]
+}
+"196
+[v _time_set_yr `(v ~T0 @X0 1 ef ]
+"197
+{
+[; ;common.c: 196: void time_set_yr(void)
+[; ;common.c: 197: {
 [e :U _time_set_yr ]
 [f ]
-[; ;common.c: 189: switch (events)
-"189
-[e $U 315  ]
-[; ;common.c: 190: {
-"190
-{
-[; ;common.c: 191: case 5:
-"191
-[e :U 316 ]
-[; ;common.c: 193: break;
-"193
-[e $U 314  ]
-[; ;common.c: 194: case 1:
-"194
-[e :U 317 ]
-[; ;common.c: 195: RTOS_DeleteTask(time_set_yr);
-"195
-[e ( _RTOS_DeleteTask (1 &U _time_set_yr ]
-[; ;common.c: 196: RTOS_SetTask(time_set_mt, 0, 20);
-"196
-[e ( _RTOS_SetTask (3 , , &U _time_set_mt -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 197: RTOS_SetTask(default_state, 2000, 0);
-"197
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 198: events = 5;
+[; ;common.c: 198: switch (events)
 "198
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 199: en_put=0;
+[e $U 316  ]
+[; ;common.c: 199: {
 "199
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 200: break;
+{
+[; ;common.c: 200: case 5:
 "200
-[e $U 314  ]
-[; ;common.c: 201: case 4:
-"201
-[e :U 318 ]
-[; ;common.c: 202: RTOS_DeleteTask(time_set_yr);
+[e :U 317 ]
+[; ;common.c: 202: break;
 "202
-[e ( _RTOS_DeleteTask (1 &U _time_set_yr ]
-[; ;common.c: 203: RTOS_DeleteTask(default_state);
+[e $U 315  ]
+[; ;common.c: 203: case 1:
 "203
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 204: RTOS_SetTask(time_led, 0, 20);
+[e :U 318 ]
+[; ;common.c: 204: RTOS_DeleteTask(time_set_yr);
 "204
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 205: events = 5;
+[e ( _RTOS_DeleteTask (1 &U _time_set_yr ]
+[; ;common.c: 205: RTOS_SetTask(time_set_mt, 0, 20);
 "205
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 206: en_put = 0;
+[e ( _RTOS_SetTask (3 , , &U _time_set_mt -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 206: RTOS_SetTask(default_state, 2000, 0);
 "206
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 207: clear_matrix();
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 207: events = 5;
 "207
-[e ( _clear_matrix ..  ]
-[; ;common.c: 208: break;
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 208: en_put=0;
 "208
-[e $U 314  ]
-[; ;common.c: 209: case 2:
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 209: break;
 "209
-[e :U 319 ]
-[; ;common.c: 210: TSTime.Tyr++;
+[e $U 315  ]
+[; ;common.c: 210: case 4:
 "210
-[e ++ . _TSTime 6 -> -> 1 `i `uc ]
-[; ;common.c: 211: if(TSTime.Tyr > 99) TSTime.Tyr = 0;
+[e :U 319 ]
+[; ;common.c: 211: RTOS_DeleteTask(time_set_yr);
 "211
-[e $ ! > -> . _TSTime 6 `i -> 99 `i 320  ]
-[e = . _TSTime 6 -> -> 0 `i `uc ]
-[e :U 320 ]
-[; ;common.c: 212: RTOS_SetTask(default_state, 2000, 0);
+[e ( _RTOS_DeleteTask (1 &U _time_set_yr ]
+[; ;common.c: 212: RTOS_DeleteTask(default_state);
 "212
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 213: events = 5;
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 213: RTOS_SetTask(time_led, 0, 20);
 "213
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 214: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 214: events = 5;
 "214
-[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
-[; ;common.c: 215: break;
-"215
-[e $U 314  ]
-[; ;common.c: 216: case 3:
-"216
-[e :U 321 ]
-[; ;common.c: 217: TSTime.Tyr--;
-"217
-[e -- . _TSTime 6 -> -> 1 `i `uc ]
-[; ;common.c: 218: if(TSTime.Tyr == 255) TSTime.Tyr = 99;
-"218
-[e $ ! == -> . _TSTime 6 `i -> 255 `i 322  ]
-[e = . _TSTime 6 -> -> 99 `i `uc ]
-[e :U 322 ]
-[; ;common.c: 219: RTOS_SetTask(default_state, 2000, 0);
-"219
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 220: events = 5;
-"220
 [e = _events -> -> 5 `i `uc ]
-[; ;common.c: 221: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
+[; ;common.c: 215: en_put = 0;
+"215
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 216: clear_matrix();
+"216
+[e ( _clear_matrix ..  ]
+[; ;common.c: 217: break;
+"217
+[e $U 315  ]
+[; ;common.c: 218: case 2:
+"218
+[e :U 320 ]
+[; ;common.c: 219: TSTime.Tyr++;
+"219
+[e ++ . _TSTime 6 -> -> 1 `i `uc ]
+[; ;common.c: 220: if(TSTime.Tyr > 99) TSTime.Tyr = 0;
+"220
+[e $ ! > -> . _TSTime 6 `i -> 99 `i 321  ]
+[e = . _TSTime 6 -> -> 0 `i `uc ]
+[e :U 321 ]
+[; ;common.c: 221: RTOS_SetTask(default_state, 2000, 0);
 "221
-[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
-[; ;common.c: 222: break;
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 222: events = 5;
 "222
-[e $U 314  ]
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 223: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
 "223
-}
-[; ;common.c: 223: }
-[e $U 314  ]
-"189
-[e :U 315 ]
-[e [\ _events , $ -> -> 5 `i `uc 316
- , $ -> -> 1 `i `uc 317
- , $ -> -> 4 `i `uc 318
- , $ -> -> 2 `i `uc 319
- , $ -> -> 3 `i `uc 321
- 314 ]
-"223
-[e :U 314 ]
-[; ;common.c: 224: if(en_put)
+[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
+[; ;common.c: 224: break;
 "224
-[e $ ! _en_put 323  ]
-[; ;common.c: 225: {
+[e $U 315  ]
+[; ;common.c: 225: case 3:
 "225
-{
-[; ;common.c: 226: putchar_b_buf(0,'׀', &Font);
+[e :U 322 ]
+[; ;common.c: 226: TSTime.Tyr--;
 "226
-[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 208 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 227: putchar_b_buf(6,'ך', &Font);
+[e -- . _TSTime 6 -> -> 1 `i `uc ]
+[; ;common.c: 227: if(TSTime.Tyr == 255) TSTime.Tyr = 99;
 "227
-[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 234 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 228: putchar_b_buf(12,':', &Font);
-"228
-[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 229: putchar_b_buf(18,(TSTime.Tyr/10) % 10, pFont);
-"229
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> % / -> . _TSTime 6 `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 230: putchar_b_buf(24,TSTime.Tyr % 10, pFont);
-"230
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> % -> . _TSTime 6 `i -> 10 `i `uc _pFont ]
-"231
-}
+[e $ ! == -> . _TSTime 6 `i -> 255 `i 323  ]
+[e = . _TSTime 6 -> -> 99 `i `uc ]
 [e :U 323 ]
-[; ;common.c: 231: }
-[; ;common.c: 232: Update_Matrix(Dis_Buff);
+[; ;common.c: 228: RTOS_SetTask(default_state, 2000, 0);
+"228
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 229: events = 5;
+"229
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 230: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
+"230
+[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
+[; ;common.c: 231: break;
+"231
+[e $U 315  ]
 "232
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;common.c: 233: en_put=1;
-"233
-[e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 234: }
-"234
-[e :UE 313 ]
 }
-"239
-[v _time_set_mt `(v ~T0 @X0 1 ef ]
-"240
+[; ;common.c: 232: }
+[e $U 315  ]
+"198
+[e :U 316 ]
+[e [\ _events , $ -> -> 5 `i `uc 317
+ , $ -> -> 1 `i `uc 318
+ , $ -> -> 4 `i `uc 319
+ , $ -> -> 2 `i `uc 320
+ , $ -> -> 3 `i `uc 322
+ 315 ]
+"232
+[e :U 315 ]
+[; ;common.c: 233: if(en_put)
+"233
+[e $ ! _en_put 324  ]
+[; ;common.c: 234: {
+"234
 {
-[; ;common.c: 239: void time_set_mt(void)
-[; ;common.c: 240: {
+[; ;common.c: 235: putchar_b_buf(0,'׀', &Font);
+"235
+[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 208 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 236: putchar_b_buf(6,'ך', &Font);
+"236
+[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 234 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 237: putchar_b_buf(12,':', &Font);
+"237
+[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 238: putchar_b_buf(18,(TSTime.Tyr/10) % 10, pFont);
+"238
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> % / -> . _TSTime 6 `i -> 10 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 239: putchar_b_buf(24,TSTime.Tyr % 10, pFont);
+"239
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> % -> . _TSTime 6 `i -> 10 `i `uc _pFont ]
+"240
+}
+[e :U 324 ]
+[; ;common.c: 240: }
+[; ;common.c: 241: Update_Matrix(Dis_Buff);
+"241
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 242: en_put=1;
+"242
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 243: }
+"243
+[e :UE 314 ]
+}
+"248
+[v _time_set_mt `(v ~T0 @X0 1 ef ]
+"249
+{
+[; ;common.c: 248: void time_set_mt(void)
+[; ;common.c: 249: {
 [e :U _time_set_mt ]
 [f ]
-[; ;common.c: 241: switch (events)
-"241
-[e $U 326  ]
-[; ;common.c: 242: {
-"242
-{
-[; ;common.c: 243: case 5:
-"243
-[e :U 327 ]
-[; ;common.c: 245: break;
-"245
-[e $U 325  ]
-[; ;common.c: 246: case 1:
-"246
-[e :U 328 ]
-[; ;common.c: 247: RTOS_DeleteTask(time_set_mt);
-"247
-[e ( _RTOS_DeleteTask (1 &U _time_set_mt ]
-[; ;common.c: 248: RTOS_SetTask(time_set_dt, 0, 20);
-"248
-[e ( _RTOS_SetTask (3 , , &U _time_set_dt -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 249: RTOS_SetTask(default_state, 2000, 0);
-"249
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 250: events = 5;
+[; ;common.c: 250: switch (events)
 "250
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 251: en_put=1;
+[e $U 327  ]
+[; ;common.c: 251: {
 "251
-[e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 252: break;
+{
+[; ;common.c: 252: case 5:
 "252
-[e $U 325  ]
-[; ;common.c: 253: case 4:
-"253
-[e :U 329 ]
-[; ;common.c: 254: RTOS_DeleteTask(time_set_mt);
+[e :U 328 ]
+[; ;common.c: 254: break;
 "254
-[e ( _RTOS_DeleteTask (1 &U _time_set_mt ]
-[; ;common.c: 255: RTOS_DeleteTask(default_state);
+[e $U 326  ]
+[; ;common.c: 255: case 1:
 "255
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 256: RTOS_SetTask(time_led, 0, 20);
+[e :U 329 ]
+[; ;common.c: 256: RTOS_DeleteTask(time_set_mt);
 "256
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 257: events = 5;
+[e ( _RTOS_DeleteTask (1 &U _time_set_mt ]
+[; ;common.c: 257: RTOS_SetTask(time_set_dt, 0, 20);
 "257
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 258: en_put = 0;
+[e ( _RTOS_SetTask (3 , , &U _time_set_dt -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 258: RTOS_SetTask(default_state, 2000, 0);
 "258
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 259: clear_matrix();
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 259: events = 5;
 "259
-[e ( _clear_matrix ..  ]
-[; ;common.c: 260: break;
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 260: en_put=1;
 "260
-[e $U 325  ]
-[; ;common.c: 261: case 2:
-"261
-[e :U 330 ]
-[; ;common.c: 262: TSTime.Tmt++;
-"262
-[e ++ . _TSTime 5 -> -> 1 `i `uc ]
-[; ;common.c: 263: if(TSTime.Tmt > 12) TSTime.Tmt = 1;
-"263
-[e $ ! > -> . _TSTime 5 `i -> 12 `i 331  ]
-[e = . _TSTime 5 -> -> 1 `i `uc ]
-[e :U 331 ]
-[; ;common.c: 264: RTOS_SetTask(default_state, 2000, 0);
-"264
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 265: events = 5;
-"265
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 266: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
-"266
-[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
-[; ;common.c: 267: break;
-"267
-[e $U 325  ]
-[; ;common.c: 268: case 3:
-"268
-[e :U 332 ]
-[; ;common.c: 269: TSTime.Tmt--;
-"269
-[e -- . _TSTime 5 -> -> 1 `i `uc ]
-[; ;common.c: 270: if(TSTime.Tmt == 0) TSTime.Tmt = 12;
-"270
-[e $ ! == -> . _TSTime 5 `i -> 0 `i 333  ]
-[e = . _TSTime 5 -> -> 12 `i `uc ]
-[e :U 333 ]
-[; ;common.c: 271: RTOS_SetTask(default_state, 2000, 0);
-"271
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 272: events = 5;
-"272
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 273: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
-"273
-[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
-[; ;common.c: 274: break;
-"274
-[e $U 325  ]
-"275
-}
-[; ;common.c: 275: }
-[e $U 325  ]
-"241
-[e :U 326 ]
-[e [\ _events , $ -> -> 5 `i `uc 327
- , $ -> -> 1 `i `uc 328
- , $ -> -> 4 `i `uc 329
- , $ -> -> 2 `i `uc 330
- , $ -> -> 3 `i `uc 332
- 325 ]
-"275
-[e :U 325 ]
-[; ;common.c: 276: if(en_put)
-"276
-[e $ ! _en_put 334  ]
-[; ;common.c: 277: {
-"277
-{
-[; ;common.c: 278: putchar_b_buf(0,'ּ', &Font);
-"278
-[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 204 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 279: putchar_b_buf(6,'ס', &Font);
-"279
-[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 241 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 280: putchar_b_buf(12,':', &Font);
-"280
-[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 281: switch(TSTime.Tmt)
-"281
-[e $U 336  ]
-[; ;common.c: 282: {
-"282
-{
-[; ;common.c: 283: case 1:
-"283
-[e :U 337 ]
-[; ;common.c: 284: putchar_b_buf(18,'ׁ', &Font);
-"284
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 209 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 285: putchar_b_buf(24,'ק', &Font);
-"285
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 247 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 286: break;
-"286
-[e $U 335  ]
-[; ;common.c: 287: case 2:
-"287
-[e :U 338 ]
-[; ;common.c: 288: putchar_b_buf(18,'ֻ', &Font);
-"288
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 203 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 289: putchar_b_buf(24,'ע', &Font);
-"289
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 242 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 290: break;
-"290
-[e $U 335  ]
-[; ;common.c: 291: case 3:
-"291
-[e :U 339 ]
-[; ;common.c: 292: putchar_b_buf(18,'ֱ', &Font);
-"292
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 193 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 293: putchar_b_buf(24,'נ', &Font);
-"293
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 294: break;
-"294
-[e $U 335  ]
-[; ;common.c: 295: case 4:
-"295
-[e :U 340 ]
-[; ;common.c: 296: putchar_b_buf(18,'Ê', &Font);
-"296
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 202 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 297: putchar_b_buf(24,'ג', &Font);
-"297
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 226 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 298: break;
-"298
-[e $U 335  ]
-[; ;common.c: 299: case 5:
-"299
-[e :U 341 ]
-[; ;common.c: 300: putchar_b_buf(18,'ׂ', &Font);
-"300
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 210 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 301: putchar_b_buf(24,'נ', &Font);
-"301
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 302: break;
-"302
-[e $U 335  ]
-[; ;common.c: 303: case 6:
-"303
-[e :U 342 ]
-[; ;common.c: 304: putchar_b_buf(18,'׳', &Font);
-"304
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 215 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 305: putchar_b_buf(24,'נ', &Font);
-"305
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 306: break;
-"306
-[e $U 335  ]
-[; ;common.c: 307: case 7:
-"307
-[e :U 343 ]
-[; ;common.c: 308: putchar_b_buf(18,'ֻ', &Font);
-"308
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 203 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 309: putchar_b_buf(24,'ן', &Font);
-"309
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 239 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 310: break;
-"310
-[e $U 335  ]
-[; ;common.c: 311: case 8:
-"311
-[e :U 344 ]
-[; ;common.c: 312: putchar_b_buf(18,'ׁ', &Font);
-"312
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 209 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 313: putchar_b_buf(24,'ן', &Font);
-"313
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 239 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 314: break;
-"314
-[e $U 335  ]
-[; ;common.c: 315: case 9:
-"315
-[e :U 345 ]
-[; ;common.c: 316: putchar_b_buf(18,'ֲ', &Font);
-"316
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 194 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 317: putchar_b_buf(24,'נ', &Font);
-"317
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 318: break;
-"318
-[e $U 335  ]
-[; ;common.c: 319: case 10:
-"319
-[e :U 346 ]
-[; ;common.c: 320: putchar_b_buf(18,'ֶ', &Font);
-"320
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 198 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 321: putchar_b_buf(24,'ע', &Font);
-"321
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 242 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 322: break;
-"322
-[e $U 335  ]
-[; ;common.c: 323: case 11:
-"323
-[e :U 347 ]
-[; ;common.c: 324: putchar_b_buf(18,'ֻ', &Font);
-"324
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 203 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 325: putchar_b_buf(24,'ס', &Font);
-"325
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 241 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 326: break;
-"326
-[e $U 335  ]
-[; ;common.c: 327: case 12:
-"327
-[e :U 348 ]
-[; ;common.c: 328: putchar_b_buf(18,'ֳ', &Font);
-"328
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 195 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 329: putchar_b_buf(24,'נ', &Font);
-"329
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 330: break;
-"330
-[e $U 335  ]
-"332
-}
-[; ;common.c: 332: }
-[e $U 335  ]
-"281
-[e :U 336 ]
-[e [\ . _TSTime 5 , $ -> -> 1 `i `uc 337
- , $ -> -> 2 `i `uc 338
- , $ -> -> 3 `i `uc 339
- , $ -> -> 4 `i `uc 340
- , $ -> -> 5 `i `uc 341
- , $ -> -> 6 `i `uc 342
- , $ -> -> 7 `i `uc 343
- , $ -> -> 8 `i `uc 344
- , $ -> -> 9 `i `uc 345
- , $ -> -> 10 `i `uc 346
- , $ -> -> 11 `i `uc 347
- , $ -> -> 12 `i `uc 348
- 335 ]
-"332
-[e :U 335 ]
-"333
-}
-[e :U 334 ]
-[; ;common.c: 333: }
-[; ;common.c: 334: Update_Matrix(Dis_Buff);
-"334
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;common.c: 335: en_put=1;
-"335
 [e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 336: }
-"336
-[e :UE 324 ]
+[; ;common.c: 261: break;
+"261
+[e $U 326  ]
+[; ;common.c: 262: case 4:
+"262
+[e :U 330 ]
+[; ;common.c: 263: RTOS_DeleteTask(time_set_mt);
+"263
+[e ( _RTOS_DeleteTask (1 &U _time_set_mt ]
+[; ;common.c: 264: RTOS_DeleteTask(default_state);
+"264
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 265: RTOS_SetTask(time_led, 0, 20);
+"265
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 266: events = 5;
+"266
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 267: en_put = 0;
+"267
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 268: clear_matrix();
+"268
+[e ( _clear_matrix ..  ]
+[; ;common.c: 269: break;
+"269
+[e $U 326  ]
+[; ;common.c: 270: case 2:
+"270
+[e :U 331 ]
+[; ;common.c: 271: TSTime.Tmt++;
+"271
+[e ++ . _TSTime 5 -> -> 1 `i `uc ]
+[; ;common.c: 272: if(TSTime.Tmt > 12) TSTime.Tmt = 1;
+"272
+[e $ ! > -> . _TSTime 5 `i -> 12 `i 332  ]
+[e = . _TSTime 5 -> -> 1 `i `uc ]
+[e :U 332 ]
+[; ;common.c: 273: RTOS_SetTask(default_state, 2000, 0);
+"273
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 274: events = 5;
+"274
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 275: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
+"275
+[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
+[; ;common.c: 276: break;
+"276
+[e $U 326  ]
+[; ;common.c: 277: case 3:
+"277
+[e :U 333 ]
+[; ;common.c: 278: TSTime.Tmt--;
+"278
+[e -- . _TSTime 5 -> -> 1 `i `uc ]
+[; ;common.c: 279: if(TSTime.Tmt == 0) TSTime.Tmt = 12;
+"279
+[e $ ! == -> . _TSTime 5 `i -> 0 `i 334  ]
+[e = . _TSTime 5 -> -> 12 `i `uc ]
+[e :U 334 ]
+[; ;common.c: 280: RTOS_SetTask(default_state, 2000, 0);
+"280
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 281: events = 5;
+"281
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 282: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
+"282
+[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
+[; ;common.c: 283: break;
+"283
+[e $U 326  ]
+"284
 }
-"341
-[v _time_set_dt `(v ~T0 @X0 1 ef ]
-"342
+[; ;common.c: 284: }
+[e $U 326  ]
+"250
+[e :U 327 ]
+[e [\ _events , $ -> -> 5 `i `uc 328
+ , $ -> -> 1 `i `uc 329
+ , $ -> -> 4 `i `uc 330
+ , $ -> -> 2 `i `uc 331
+ , $ -> -> 3 `i `uc 333
+ 326 ]
+"284
+[e :U 326 ]
+[; ;common.c: 285: if(en_put)
+"285
+[e $ ! _en_put 335  ]
+[; ;common.c: 286: {
+"286
 {
-[; ;common.c: 341: void time_set_dt(void)
-[; ;common.c: 342: {
+[; ;common.c: 287: putchar_b_buf(0,'ּ', &Font);
+"287
+[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 204 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 288: putchar_b_buf(6,'ס', &Font);
+"288
+[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 241 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 289: putchar_b_buf(12,':', &Font);
+"289
+[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 290: switch(TSTime.Tmt)
+"290
+[e $U 337  ]
+[; ;common.c: 291: {
+"291
+{
+[; ;common.c: 292: case 1:
+"292
+[e :U 338 ]
+[; ;common.c: 293: putchar_b_buf(18,'ׁ', &Font);
+"293
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 209 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 294: putchar_b_buf(24,'ק', &Font);
+"294
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 247 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 295: break;
+"295
+[e $U 336  ]
+[; ;common.c: 296: case 2:
+"296
+[e :U 339 ]
+[; ;common.c: 297: putchar_b_buf(18,'ֻ', &Font);
+"297
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 203 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 298: putchar_b_buf(24,'ע', &Font);
+"298
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 242 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 299: break;
+"299
+[e $U 336  ]
+[; ;common.c: 300: case 3:
+"300
+[e :U 340 ]
+[; ;common.c: 301: putchar_b_buf(18,'ֱ', &Font);
+"301
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 193 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 302: putchar_b_buf(24,'נ', &Font);
+"302
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 303: break;
+"303
+[e $U 336  ]
+[; ;common.c: 304: case 4:
+"304
+[e :U 341 ]
+[; ;common.c: 305: putchar_b_buf(18,'Ê', &Font);
+"305
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 202 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 306: putchar_b_buf(24,'ג', &Font);
+"306
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 226 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 307: break;
+"307
+[e $U 336  ]
+[; ;common.c: 308: case 5:
+"308
+[e :U 342 ]
+[; ;common.c: 309: putchar_b_buf(18,'ׂ', &Font);
+"309
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 210 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 310: putchar_b_buf(24,'נ', &Font);
+"310
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 311: break;
+"311
+[e $U 336  ]
+[; ;common.c: 312: case 6:
+"312
+[e :U 343 ]
+[; ;common.c: 313: putchar_b_buf(18,'׳', &Font);
+"313
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 215 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 314: putchar_b_buf(24,'נ', &Font);
+"314
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 315: break;
+"315
+[e $U 336  ]
+[; ;common.c: 316: case 7:
+"316
+[e :U 344 ]
+[; ;common.c: 317: putchar_b_buf(18,'ֻ', &Font);
+"317
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 203 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 318: putchar_b_buf(24,'ן', &Font);
+"318
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 239 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 319: break;
+"319
+[e $U 336  ]
+[; ;common.c: 320: case 8:
+"320
+[e :U 345 ]
+[; ;common.c: 321: putchar_b_buf(18,'ׁ', &Font);
+"321
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 209 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 322: putchar_b_buf(24,'ן', &Font);
+"322
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 239 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 323: break;
+"323
+[e $U 336  ]
+[; ;common.c: 324: case 9:
+"324
+[e :U 346 ]
+[; ;common.c: 325: putchar_b_buf(18,'ֲ', &Font);
+"325
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 194 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 326: putchar_b_buf(24,'נ', &Font);
+"326
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 327: break;
+"327
+[e $U 336  ]
+[; ;common.c: 328: case 10:
+"328
+[e :U 347 ]
+[; ;common.c: 329: putchar_b_buf(18,'ֶ', &Font);
+"329
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 198 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 330: putchar_b_buf(24,'ע', &Font);
+"330
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 242 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 331: break;
+"331
+[e $U 336  ]
+[; ;common.c: 332: case 11:
+"332
+[e :U 348 ]
+[; ;common.c: 333: putchar_b_buf(18,'ֻ', &Font);
+"333
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 203 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 334: putchar_b_buf(24,'ס', &Font);
+"334
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 241 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 335: break;
+"335
+[e $U 336  ]
+[; ;common.c: 336: case 12:
+"336
+[e :U 349 ]
+[; ;common.c: 337: putchar_b_buf(18,'ֳ', &Font);
+"337
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 195 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 338: putchar_b_buf(24,'נ', &Font);
+"338
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 339: break;
+"339
+[e $U 336  ]
+"341
+}
+[; ;common.c: 341: }
+[e $U 336  ]
+"290
+[e :U 337 ]
+[e [\ . _TSTime 5 , $ -> -> 1 `i `uc 338
+ , $ -> -> 2 `i `uc 339
+ , $ -> -> 3 `i `uc 340
+ , $ -> -> 4 `i `uc 341
+ , $ -> -> 5 `i `uc 342
+ , $ -> -> 6 `i `uc 343
+ , $ -> -> 7 `i `uc 344
+ , $ -> -> 8 `i `uc 345
+ , $ -> -> 9 `i `uc 346
+ , $ -> -> 10 `i `uc 347
+ , $ -> -> 11 `i `uc 348
+ , $ -> -> 12 `i `uc 349
+ 336 ]
+"341
+[e :U 336 ]
+"342
+}
+[e :U 335 ]
+[; ;common.c: 342: }
+[; ;common.c: 343: Update_Matrix(Dis_Buff);
+"343
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 344: en_put=1;
+"344
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 345: }
+"345
+[e :UE 325 ]
+}
+"350
+[v _time_set_dt `(v ~T0 @X0 1 ef ]
+"351
+{
+[; ;common.c: 350: void time_set_dt(void)
+[; ;common.c: 351: {
 [e :U _time_set_dt ]
 [f ]
-[; ;common.c: 343: switch (events)
-"343
-[e $U 351  ]
-[; ;common.c: 344: {
-"344
-{
-[; ;common.c: 345: case 5:
-"345
-[e :U 352 ]
-[; ;common.c: 347: break;
-"347
-[e $U 350  ]
-[; ;common.c: 348: case 1:
-"348
-[e :U 353 ]
-[; ;common.c: 349: RTOS_DeleteTask(time_set_dt);
-"349
-[e ( _RTOS_DeleteTask (1 &U _time_set_dt ]
-[; ;common.c: 350: RTOS_SetTask(time_set_dy, 0, 20);
-"350
-[e ( _RTOS_SetTask (3 , , &U _time_set_dy -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 351: RTOS_SetTask(default_state, 2000, 0);
-"351
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 352: events = 5;
+[; ;common.c: 352: switch (events)
 "352
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 353: en_put=1;
+[e $U 352  ]
+[; ;common.c: 353: {
 "353
-[e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 354: break;
+{
+[; ;common.c: 354: case 5:
 "354
-[e $U 350  ]
-[; ;common.c: 355: case 4:
-"355
-[e :U 354 ]
-[; ;common.c: 356: RTOS_DeleteTask(time_set_dt);
+[e :U 353 ]
+[; ;common.c: 356: break;
 "356
-[e ( _RTOS_DeleteTask (1 &U _time_set_dt ]
-[; ;common.c: 357: RTOS_DeleteTask(default_state);
+[e $U 351  ]
+[; ;common.c: 357: case 1:
 "357
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 358: RTOS_SetTask(time_led, 0, 20);
+[e :U 354 ]
+[; ;common.c: 358: RTOS_DeleteTask(time_set_dt);
 "358
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 359: events = 5;
+[e ( _RTOS_DeleteTask (1 &U _time_set_dt ]
+[; ;common.c: 359: RTOS_SetTask(time_set_dy, 0, 20);
 "359
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 360: en_put = 0;
+[e ( _RTOS_SetTask (3 , , &U _time_set_dy -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 360: RTOS_SetTask(default_state, 2000, 0);
 "360
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 361: clear_matrix();
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 361: events = 5;
 "361
-[e ( _clear_matrix ..  ]
-[; ;common.c: 362: break;
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 362: en_put=1;
 "362
-[e $U 350  ]
-[; ;common.c: 363: case 2:
-"363
-[e :U 355 ]
-[; ;common.c: 364: TSTime.Tdt++;
-"364
-[e ++ . _TSTime 4 -> -> 1 `i `uc ]
-[; ;common.c: 365: if(TSTime.Tdt > 31) TSTime.Tdt = 1;
-"365
-[e $ ! > -> . _TSTime 4 `i -> 31 `i 356  ]
-[e = . _TSTime 4 -> -> 1 `i `uc ]
-[e :U 356 ]
-[; ;common.c: 366: RTOS_SetTask(default_state, 2000, 0);
-"366
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 367: events = 5;
-"367
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 368: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
-"368
-[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
-[; ;common.c: 369: break;
-"369
-[e $U 350  ]
-[; ;common.c: 370: case 3:
-"370
-[e :U 357 ]
-[; ;common.c: 371: TSTime.Tdt--;
-"371
-[e -- . _TSTime 4 -> -> 1 `i `uc ]
-[; ;common.c: 372: if(TSTime.Tdt == 0) TSTime.Tdt = 31;
-"372
-[e $ ! == -> . _TSTime 4 `i -> 0 `i 358  ]
-[e = . _TSTime 4 -> -> 31 `i `uc ]
-[e :U 358 ]
-[; ;common.c: 373: RTOS_SetTask(default_state, 2000, 0);
-"373
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 374: events = 5;
-"374
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 375: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
-"375
-[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
-[; ;common.c: 376: break;
-"376
-[e $U 350  ]
-"377
-}
-[; ;common.c: 377: }
-[e $U 350  ]
-"343
-[e :U 351 ]
-[e [\ _events , $ -> -> 5 `i `uc 352
- , $ -> -> 1 `i `uc 353
- , $ -> -> 4 `i `uc 354
- , $ -> -> 2 `i `uc 355
- , $ -> -> 3 `i `uc 357
- 350 ]
-"377
-[e :U 350 ]
-[; ;common.c: 378: if(en_put)
-"378
-[e $ ! _en_put 359  ]
-[; ;common.c: 379: {
-"379
-{
-[; ;common.c: 380: putchar_b_buf(0,'׳', &Font);
-"380
-[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 215 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 381: putchar_b_buf(6,'ס', &Font);
-"381
-[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 241 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 382: putchar_b_buf(12,':', &Font);
-"382
-[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 383: putchar_b_buf(18,(TSTime.Tdt/10) % 10, pFont);
-"383
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> % / -> . _TSTime 4 `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 384: putchar_b_buf(24,TSTime.Tdt % 10 , pFont);
-"384
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> % -> . _TSTime 4 `i -> 10 `i `uc _pFont ]
-"385
-}
-[e :U 359 ]
-[; ;common.c: 385: }
-[; ;common.c: 386: Update_Matrix(Dis_Buff);
-"386
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;common.c: 387: en_put=1;
-"387
 [e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 388: }
-"388
-[e :UE 349 ]
+[; ;common.c: 363: break;
+"363
+[e $U 351  ]
+[; ;common.c: 364: case 4:
+"364
+[e :U 355 ]
+[; ;common.c: 365: RTOS_DeleteTask(time_set_dt);
+"365
+[e ( _RTOS_DeleteTask (1 &U _time_set_dt ]
+[; ;common.c: 366: RTOS_DeleteTask(default_state);
+"366
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 367: RTOS_SetTask(time_led, 0, 20);
+"367
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 368: events = 5;
+"368
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 369: en_put = 0;
+"369
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 370: clear_matrix();
+"370
+[e ( _clear_matrix ..  ]
+[; ;common.c: 371: break;
+"371
+[e $U 351  ]
+[; ;common.c: 372: case 2:
+"372
+[e :U 356 ]
+[; ;common.c: 373: TSTime.Tdt++;
+"373
+[e ++ . _TSTime 4 -> -> 1 `i `uc ]
+[; ;common.c: 374: if(TSTime.Tdt > 31) TSTime.Tdt = 1;
+"374
+[e $ ! > -> . _TSTime 4 `i -> 31 `i 357  ]
+[e = . _TSTime 4 -> -> 1 `i `uc ]
+[e :U 357 ]
+[; ;common.c: 375: RTOS_SetTask(default_state, 2000, 0);
+"375
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 376: events = 5;
+"376
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 377: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
+"377
+[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
+[; ;common.c: 378: break;
+"378
+[e $U 351  ]
+[; ;common.c: 379: case 3:
+"379
+[e :U 358 ]
+[; ;common.c: 380: TSTime.Tdt--;
+"380
+[e -- . _TSTime 4 -> -> 1 `i `uc ]
+[; ;common.c: 381: if(TSTime.Tdt == 0) TSTime.Tdt = 31;
+"381
+[e $ ! == -> . _TSTime 4 `i -> 0 `i 359  ]
+[e = . _TSTime 4 -> -> 31 `i `uc ]
+[e :U 359 ]
+[; ;common.c: 382: RTOS_SetTask(default_state, 2000, 0);
+"382
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 383: events = 5;
+"383
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 384: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
+"384
+[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
+[; ;common.c: 385: break;
+"385
+[e $U 351  ]
+"386
 }
-"394
-[v _time_set_dy `(v ~T0 @X0 1 ef ]
-"395
+[; ;common.c: 386: }
+[e $U 351  ]
+"352
+[e :U 352 ]
+[e [\ _events , $ -> -> 5 `i `uc 353
+ , $ -> -> 1 `i `uc 354
+ , $ -> -> 4 `i `uc 355
+ , $ -> -> 2 `i `uc 356
+ , $ -> -> 3 `i `uc 358
+ 351 ]
+"386
+[e :U 351 ]
+[; ;common.c: 387: if(en_put)
+"387
+[e $ ! _en_put 360  ]
+[; ;common.c: 388: {
+"388
 {
-[; ;common.c: 394: void time_set_dy(void)
-[; ;common.c: 395: {
+[; ;common.c: 389: putchar_b_buf(0,'׳', &Font);
+"389
+[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 215 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 390: putchar_b_buf(6,'ס', &Font);
+"390
+[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 241 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 391: putchar_b_buf(12,':', &Font);
+"391
+[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 392: putchar_b_buf(18,(TSTime.Tdt/10) % 10, pFont);
+"392
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> % / -> . _TSTime 4 `i -> 10 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 393: putchar_b_buf(24,TSTime.Tdt % 10 , pFont);
+"393
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> % -> . _TSTime 4 `i -> 10 `i `uc _pFont ]
+"394
+}
+[e :U 360 ]
+[; ;common.c: 394: }
+[; ;common.c: 395: Update_Matrix(Dis_Buff);
+"395
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 396: en_put=1;
+"396
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 397: }
+"397
+[e :UE 350 ]
+}
+"403
+[v _time_set_dy `(v ~T0 @X0 1 ef ]
+"404
+{
+[; ;common.c: 403: void time_set_dy(void)
+[; ;common.c: 404: {
 [e :U _time_set_dy ]
 [f ]
-[; ;common.c: 396: switch (events)
-"396
-[e $U 362  ]
-[; ;common.c: 397: {
-"397
-{
-[; ;common.c: 398: case 5:
-"398
-[e :U 363 ]
-[; ;common.c: 400: break;
-"400
-[e $U 361  ]
-[; ;common.c: 401: case 1:
-"401
-[e :U 364 ]
-[; ;common.c: 402: RTOS_DeleteTask(time_set_dy);
-"402
-[e ( _RTOS_DeleteTask (1 &U _time_set_dy ]
-[; ;common.c: 403: RTOS_SetTask(set_font_set, 0, 20);
-"403
-[e ( _RTOS_SetTask (3 , , &U _set_font_set -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 404: RTOS_SetTask(default_state, 2000, 0);
-"404
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 405: events = 5;
+[; ;common.c: 405: switch (events)
 "405
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 406: en_put=1;
+[e $U 363  ]
+[; ;common.c: 406: {
 "406
-[e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 407: break;
+{
+[; ;common.c: 407: case 5:
 "407
-[e $U 361  ]
-[; ;common.c: 408: case 4:
-"408
-[e :U 365 ]
-[; ;common.c: 409: RTOS_DeleteTask(time_set_dy);
+[e :U 364 ]
+[; ;common.c: 409: break;
 "409
-[e ( _RTOS_DeleteTask (1 &U _time_set_dy ]
-[; ;common.c: 410: RTOS_DeleteTask(default_state);
+[e $U 362  ]
+[; ;common.c: 410: case 1:
 "410
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 411: RTOS_SetTask(time_led, 0, 20);
+[e :U 365 ]
+[; ;common.c: 411: RTOS_DeleteTask(time_set_dy);
 "411
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 412: events = 5;
+[e ( _RTOS_DeleteTask (1 &U _time_set_dy ]
+[; ;common.c: 412: RTOS_SetTask(set_font_set, 0, 20);
 "412
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 413: en_put = 0;
+[e ( _RTOS_SetTask (3 , , &U _set_font_set -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 413: RTOS_SetTask(default_state, 2000, 0);
 "413
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 414: clear_matrix();
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 414: events = 5;
 "414
-[e ( _clear_matrix ..  ]
-[; ;common.c: 415: break;
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 415: en_put=1;
 "415
-[e $U 361  ]
-[; ;common.c: 416: case 2:
-"416
-[e :U 366 ]
-[; ;common.c: 417: TSTime.Tdy++;
-"417
-[e ++ . _TSTime 3 -> -> 1 `i `uc ]
-[; ;common.c: 418: if(TSTime.Tdy > 7) TSTime.Tdy = 1;
-"418
-[e $ ! > -> . _TSTime 3 `i -> 7 `i 367  ]
-[e = . _TSTime 3 -> -> 1 `i `uc ]
-[e :U 367 ]
-[; ;common.c: 419: RTOS_SetTask(default_state, 2000, 0);
-"419
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 420: events = 5;
-"420
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 421: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
-"421
-[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
-[; ;common.c: 422: break;
-"422
-[e $U 361  ]
-[; ;common.c: 423: case 3:
-"423
-[e :U 368 ]
-[; ;common.c: 424: TSTime.Tdy--;
-"424
-[e -- . _TSTime 3 -> -> 1 `i `uc ]
-[; ;common.c: 425: if(TSTime.Tdy == 0) TSTime.Tdy = 7;
-"425
-[e $ ! == -> . _TSTime 3 `i -> 0 `i 369  ]
-[e = . _TSTime 3 -> -> 7 `i `uc ]
-[e :U 369 ]
-[; ;common.c: 426: RTOS_SetTask(default_state, 2000, 0);
-"426
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 427: events = 5;
-"427
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 428: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
-"428
-[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
-[; ;common.c: 429: break;
-"429
-[e $U 361  ]
-"430
-}
-[; ;common.c: 430: }
-[e $U 361  ]
-"396
-[e :U 362 ]
-[e [\ _events , $ -> -> 5 `i `uc 363
- , $ -> -> 1 `i `uc 364
- , $ -> -> 4 `i `uc 365
- , $ -> -> 2 `i `uc 366
- , $ -> -> 3 `i `uc 368
- 361 ]
-"430
-[e :U 361 ]
-[; ;common.c: 431: if(en_put)
-"431
-[e $ ! _en_put 370  ]
-[; ;common.c: 432: {
-"432
-{
-[; ;common.c: 433: putchar_b_buf(0,'ִ', &Font);
-"433
-[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 196 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 434: putchar_b_buf(6,'ם', &Font);
-"434
-[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 237 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 435: putchar_b_buf(12,':', &Font);
-"435
-[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 436: switch(TSTime.Tdy)
-"436
-[e $U 372  ]
-[; ;common.c: 437: {
-"437
-{
-[; ;common.c: 438: case 2:
-"438
-[e :U 373 ]
-[; ;common.c: 439: putchar_b_buf(18,'ֿ', &Font);
-"439
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 207 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 440: putchar_b_buf(24,'ם', &Font);
-"440
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 237 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 441: break;
-"441
-[e $U 371  ]
-[; ;common.c: 442: case 3:
-"442
-[e :U 374 ]
-[; ;common.c: 443: putchar_b_buf(18,'ֲ', &Font);
-"443
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 194 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 444: putchar_b_buf(24,'ע', &Font);
-"444
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 242 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 445: break;
-"445
-[e $U 371  ]
-[; ;common.c: 446: case 4:
-"446
-[e :U 375 ]
-[; ;common.c: 447: putchar_b_buf(18,'ׁ', &Font);
-"447
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 209 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 448: putchar_b_buf(24,'נ', &Font);
-"448
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 449: break;
-"449
-[e $U 371  ]
-[; ;common.c: 450: case 5:
-"450
-[e :U 376 ]
-[; ;common.c: 451: putchar_b_buf(18,'׳', &Font);
-"451
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 215 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 452: putchar_b_buf(24,'ע', &Font);
-"452
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 242 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 453: break;
-"453
-[e $U 371  ]
-[; ;common.c: 454: case 6:
-"454
-[e :U 377 ]
-[; ;common.c: 455: putchar_b_buf(18,'ֿ', &Font);
-"455
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 207 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 456: putchar_b_buf(24,'ע', &Font);
-"456
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 242 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 457: break;
-"457
-[e $U 371  ]
-[; ;common.c: 458: case 7:
-"458
-[e :U 378 ]
-[; ;common.c: 459: putchar_b_buf(18,'ׁ', &Font);
-"459
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 209 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 460: putchar_b_buf(24,'ב', &Font);
-"460
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 225 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 461: break;
-"461
-[e $U 371  ]
-[; ;common.c: 462: case 1:
-"462
-[e :U 379 ]
-[; ;common.c: 463: putchar_b_buf(18,'ֽ', &Font);
-"463
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 205 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 464: putchar_b_buf(24,'ה', &Font);
-"464
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 228 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 465: break;
-"465
-[e $U 371  ]
-"466
-}
-[; ;common.c: 466: }
-[e $U 371  ]
-"436
-[e :U 372 ]
-[e [\ . _TSTime 3 , $ -> -> 2 `i `uc 373
- , $ -> -> 3 `i `uc 374
- , $ -> -> 4 `i `uc 375
- , $ -> -> 5 `i `uc 376
- , $ -> -> 6 `i `uc 377
- , $ -> -> 7 `i `uc 378
- , $ -> -> 1 `i `uc 379
- 371 ]
-"466
-[e :U 371 ]
-"467
-}
-[e :U 370 ]
-[; ;common.c: 467: }
-[; ;common.c: 468: Update_Matrix(Dis_Buff);
-"468
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;common.c: 469: en_put=1;
-"469
 [e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 470: }
-"470
-[e :UE 360 ]
+[; ;common.c: 416: break;
+"416
+[e $U 362  ]
+[; ;common.c: 417: case 4:
+"417
+[e :U 366 ]
+[; ;common.c: 418: RTOS_DeleteTask(time_set_dy);
+"418
+[e ( _RTOS_DeleteTask (1 &U _time_set_dy ]
+[; ;common.c: 419: RTOS_DeleteTask(default_state);
+"419
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 420: RTOS_SetTask(time_led, 0, 20);
+"420
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 421: events = 5;
+"421
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 422: en_put = 0;
+"422
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 423: clear_matrix();
+"423
+[e ( _clear_matrix ..  ]
+[; ;common.c: 424: break;
+"424
+[e $U 362  ]
+[; ;common.c: 425: case 2:
+"425
+[e :U 367 ]
+[; ;common.c: 426: TSTime.Tdy++;
+"426
+[e ++ . _TSTime 3 -> -> 1 `i `uc ]
+[; ;common.c: 427: if(TSTime.Tdy > 7) TSTime.Tdy = 1;
+"427
+[e $ ! > -> . _TSTime 3 `i -> 7 `i 368  ]
+[e = . _TSTime 3 -> -> 1 `i `uc ]
+[e :U 368 ]
+[; ;common.c: 428: RTOS_SetTask(default_state, 2000, 0);
+"428
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 429: events = 5;
+"429
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 430: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
+"430
+[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
+[; ;common.c: 431: break;
+"431
+[e $U 362  ]
+[; ;common.c: 432: case 3:
+"432
+[e :U 369 ]
+[; ;common.c: 433: TSTime.Tdy--;
+"433
+[e -- . _TSTime 3 -> -> 1 `i `uc ]
+[; ;common.c: 434: if(TSTime.Tdy == 0) TSTime.Tdy = 7;
+"434
+[e $ ! == -> . _TSTime 3 `i -> 0 `i 370  ]
+[e = . _TSTime 3 -> -> 7 `i `uc ]
+[e :U 370 ]
+[; ;common.c: 435: RTOS_SetTask(default_state, 2000, 0);
+"435
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 436: events = 5;
+"436
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 437: setDate(TSTime.Tdy,TSTime.Tdt,TSTime.Tmt,TSTime.Tyr);
+"437
+[e ( _setDate (4 , , , . _TSTime 3 . _TSTime 4 . _TSTime 5 . _TSTime 6 ]
+[; ;common.c: 438: break;
+"438
+[e $U 362  ]
+"439
 }
-"475
-[v _set_font_set `(v ~T0 @X0 1 ef ]
-"476
+[; ;common.c: 439: }
+[e $U 362  ]
+"405
+[e :U 363 ]
+[e [\ _events , $ -> -> 5 `i `uc 364
+ , $ -> -> 1 `i `uc 365
+ , $ -> -> 4 `i `uc 366
+ , $ -> -> 2 `i `uc 367
+ , $ -> -> 3 `i `uc 369
+ 362 ]
+"439
+[e :U 362 ]
+[; ;common.c: 440: if(en_put)
+"440
+[e $ ! _en_put 371  ]
+[; ;common.c: 441: {
+"441
 {
-[; ;common.c: 475: void set_font_set(void)
-[; ;common.c: 476: {
+[; ;common.c: 442: putchar_b_buf(0,'ִ', &Font);
+"442
+[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 196 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 443: putchar_b_buf(6,'ם', &Font);
+"443
+[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 237 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 444: putchar_b_buf(12,':', &Font);
+"444
+[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 445: switch(TSTime.Tdy)
+"445
+[e $U 373  ]
+[; ;common.c: 446: {
+"446
+{
+[; ;common.c: 447: case 2:
+"447
+[e :U 374 ]
+[; ;common.c: 448: putchar_b_buf(18,'ֿ', &Font);
+"448
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 207 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 449: putchar_b_buf(24,'ם', &Font);
+"449
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 237 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 450: break;
+"450
+[e $U 372  ]
+[; ;common.c: 451: case 3:
+"451
+[e :U 375 ]
+[; ;common.c: 452: putchar_b_buf(18,'ֲ', &Font);
+"452
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 194 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 453: putchar_b_buf(24,'ע', &Font);
+"453
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 242 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 454: break;
+"454
+[e $U 372  ]
+[; ;common.c: 455: case 4:
+"455
+[e :U 376 ]
+[; ;common.c: 456: putchar_b_buf(18,'ׁ', &Font);
+"456
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 209 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 457: putchar_b_buf(24,'נ', &Font);
+"457
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 458: break;
+"458
+[e $U 372  ]
+[; ;common.c: 459: case 5:
+"459
+[e :U 377 ]
+[; ;common.c: 460: putchar_b_buf(18,'׳', &Font);
+"460
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 215 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 461: putchar_b_buf(24,'ע', &Font);
+"461
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 242 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 462: break;
+"462
+[e $U 372  ]
+[; ;common.c: 463: case 6:
+"463
+[e :U 378 ]
+[; ;common.c: 464: putchar_b_buf(18,'ֿ', &Font);
+"464
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 207 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 465: putchar_b_buf(24,'ע', &Font);
+"465
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 242 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 466: break;
+"466
+[e $U 372  ]
+[; ;common.c: 467: case 7:
+"467
+[e :U 379 ]
+[; ;common.c: 468: putchar_b_buf(18,'ׁ', &Font);
+"468
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 209 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 469: putchar_b_buf(24,'ב', &Font);
+"469
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 225 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 470: break;
+"470
+[e $U 372  ]
+[; ;common.c: 471: case 1:
+"471
+[e :U 380 ]
+[; ;common.c: 472: putchar_b_buf(18,'ֽ', &Font);
+"472
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 205 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 473: putchar_b_buf(24,'ה', &Font);
+"473
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 228 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 474: break;
+"474
+[e $U 372  ]
+"475
+}
+[; ;common.c: 475: }
+[e $U 372  ]
+"445
+[e :U 373 ]
+[e [\ . _TSTime 3 , $ -> -> 2 `i `uc 374
+ , $ -> -> 3 `i `uc 375
+ , $ -> -> 4 `i `uc 376
+ , $ -> -> 5 `i `uc 377
+ , $ -> -> 6 `i `uc 378
+ , $ -> -> 7 `i `uc 379
+ , $ -> -> 1 `i `uc 380
+ 372 ]
+"475
+[e :U 372 ]
+"476
+}
+[e :U 371 ]
+[; ;common.c: 476: }
+[; ;common.c: 477: Update_Matrix(Dis_Buff);
+"477
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 478: en_put=1;
+"478
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 479: }
+"479
+[e :UE 361 ]
+}
+"484
+[v _set_font_set `(v ~T0 @X0 1 ef ]
+"485
+{
+[; ;common.c: 484: void set_font_set(void)
+[; ;common.c: 485: {
 [e :U _set_font_set ]
 [f ]
-[; ;common.c: 477: switch (events)
-"477
-[e $U 382  ]
-[; ;common.c: 478: {
-"478
-{
-[; ;common.c: 479: case 5:
-"479
-[e :U 383 ]
-[; ;common.c: 481: break;
-"481
-[e $U 381  ]
-[; ;common.c: 482: case 1:
-"482
-[e :U 384 ]
-[; ;common.c: 483: RTOS_DeleteTask(set_font_set);
-"483
-[e ( _RTOS_DeleteTask (1 &U _set_font_set ]
-[; ;common.c: 484: RTOS_SetTask(set_type_clk, 0, 20);
-"484
-[e ( _RTOS_SetTask (3 , , &U _set_type_clk -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 485: RTOS_SetTask(default_state, 2000, 0);
-"485
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 486: events = 5;
+[; ;common.c: 486: switch (events)
 "486
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 487: en_put = 0;
+[e $U 383  ]
+[; ;common.c: 487: {
 "487
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 488: clear_matrix();
+{
+[; ;common.c: 488: case 5:
 "488
-[e ( _clear_matrix ..  ]
-[; ;common.c: 489: break;
-"489
-[e $U 381  ]
-[; ;common.c: 490: case 4:
+[e :U 384 ]
+[; ;common.c: 490: break;
 "490
-[e :U 385 ]
-[; ;common.c: 491: RTOS_DeleteTask(set_font_set);
+[e $U 382  ]
+[; ;common.c: 491: case 1:
 "491
-[e ( _RTOS_DeleteTask (1 &U _set_font_set ]
-[; ;common.c: 492: RTOS_DeleteTask(default_state);
+[e :U 385 ]
+[; ;common.c: 492: RTOS_DeleteTask(set_font_set);
 "492
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 493: RTOS_SetTask(time_led, 0, 20);
+[e ( _RTOS_DeleteTask (1 &U _set_font_set ]
+[; ;common.c: 493: RTOS_SetTask(set_type_clk, 0, 20);
 "493
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 494: events = 5;
+[e ( _RTOS_SetTask (3 , , &U _set_type_clk -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 494: RTOS_SetTask(default_state, 2000, 0);
 "494
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 495: en_put = 0;
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 495: events = 5;
 "495
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 496: clear_matrix();
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 496: en_put = 0;
 "496
-[e ( _clear_matrix ..  ]
-[; ;common.c: 497: break;
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 497: clear_matrix();
 "497
-[e $U 381  ]
-[; ;common.c: 498: case 2:
+[e ( _clear_matrix ..  ]
+[; ;common.c: 498: break;
 "498
-[e :U 386 ]
-[; ;common.c: 499: type_font++;
+[e $U 382  ]
+[; ;common.c: 499: case 4:
 "499
-[e ++ _type_font -> -> 1 `i `uc ]
-[; ;common.c: 500: if(type_font > 5) type_font = 1;
+[e :U 386 ]
+[; ;common.c: 500: RTOS_DeleteTask(set_font_set);
 "500
-[e $ ! > -> _type_font `i -> 5 `i 387  ]
-[e = _type_font -> -> 1 `i `uc ]
-[e :U 387 ]
-[; ;common.c: 501: RTOS_SetTask(default_state, 2000, 0);
+[e ( _RTOS_DeleteTask (1 &U _set_font_set ]
+[; ;common.c: 501: RTOS_DeleteTask(default_state);
 "501
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 502: events = 5;
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 502: RTOS_SetTask(time_led, 0, 20);
 "502
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 503: write_eep(0,type_font);
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 503: events = 5;
 "503
-[e ( _write_eep (2 , -> -> 0 `i `uc _type_font ]
-[; ;common.c: 504: set_font();
-"504
-[e ( _set_font ..  ]
-[; ;common.c: 505: break;
-"505
-[e $U 381  ]
-[; ;common.c: 506: case 3:
-"506
-[e :U 388 ]
-[; ;common.c: 507: type_font--;
-"507
-[e -- _type_font -> -> 1 `i `uc ]
-[; ;common.c: 508: if(type_font == 0) type_font = 5;
-"508
-[e $ ! == -> _type_font `i -> 0 `i 389  ]
-[e = _type_font -> -> 5 `i `uc ]
-[e :U 389 ]
-[; ;common.c: 509: RTOS_SetTask(default_state, 2000, 0);
-"509
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 510: events = 5;
-"510
 [e = _events -> -> 5 `i `uc ]
-[; ;common.c: 511: write_eep(0,type_font);
+[; ;common.c: 504: en_put = 0;
+"504
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 505: clear_matrix();
+"505
+[e ( _clear_matrix ..  ]
+[; ;common.c: 506: break;
+"506
+[e $U 382  ]
+[; ;common.c: 507: case 2:
+"507
+[e :U 387 ]
+[; ;common.c: 508: type_font++;
+"508
+[e ++ _type_font -> -> 1 `i `uc ]
+[; ;common.c: 509: if(type_font > 5) type_font = 1;
+"509
+[e $ ! > -> _type_font `i -> 5 `i 388  ]
+[e = _type_font -> -> 1 `i `uc ]
+[e :U 388 ]
+[; ;common.c: 510: RTOS_SetTask(default_state, 2000, 0);
+"510
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 511: events = 5;
 "511
-[e ( _write_eep (2 , -> -> 0 `i `uc _type_font ]
-[; ;common.c: 512: set_font();
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 512: write_eep(0,type_font);
 "512
-[e ( _set_font ..  ]
-[; ;common.c: 513: break;
+[e ( _write_eep (2 , -> -> 0 `i `uc _type_font ]
+[; ;common.c: 513: set_font();
 "513
-[e $U 381  ]
+[e ( _set_font ..  ]
+[; ;common.c: 514: break;
 "514
-}
-[; ;common.c: 514: }
-[e $U 381  ]
-"477
-[e :U 382 ]
-[e [\ _events , $ -> -> 5 `i `uc 383
- , $ -> -> 1 `i `uc 384
- , $ -> -> 4 `i `uc 385
- , $ -> -> 2 `i `uc 386
- , $ -> -> 3 `i `uc 388
- 381 ]
-"514
-[e :U 381 ]
-[; ;common.c: 515: if(en_put)
+[e $U 382  ]
+[; ;common.c: 515: case 3:
 "515
-[e $ ! _en_put 390  ]
-[; ;common.c: 516: {
+[e :U 389 ]
+[; ;common.c: 516: type_font--;
 "516
-{
-[; ;common.c: 517: putchar_b_buf(0,'״', &Font);
+[e -- _type_font -> -> 1 `i `uc ]
+[; ;common.c: 517: if(type_font == 0) type_font = 5;
 "517
-[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 216 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 518: putchar_b_buf(6,'נ', &Font);
-"518
-[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 519: putchar_b_buf(12,':', &Font);
-"519
-[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 520: putchar_b_buf(18,type_font % 10, pFont);
-"520
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> % -> _type_font `i -> 10 `i `uc _pFont ]
-[; ;common.c: 521: putchar_b_buf(24,0, &Font);
-"521
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-"522
-}
+[e $ ! == -> _type_font `i -> 0 `i 390  ]
+[e = _type_font -> -> 5 `i `uc ]
 [e :U 390 ]
-[; ;common.c: 522: }
-[; ;common.c: 523: Update_Matrix(Dis_Buff);
+[; ;common.c: 518: RTOS_SetTask(default_state, 2000, 0);
+"518
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 519: events = 5;
+"519
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 520: write_eep(0,type_font);
+"520
+[e ( _write_eep (2 , -> -> 0 `i `uc _type_font ]
+[; ;common.c: 521: set_font();
+"521
+[e ( _set_font ..  ]
+[; ;common.c: 522: break;
+"522
+[e $U 382  ]
 "523
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;common.c: 524: en_put=1;
-"524
-[e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 525: }
-"525
-[e :UE 380 ]
 }
-"531
-[v _set_type_clk `(v ~T0 @X0 1 ef ]
-"532
+[; ;common.c: 523: }
+[e $U 382  ]
+"486
+[e :U 383 ]
+[e [\ _events , $ -> -> 5 `i `uc 384
+ , $ -> -> 1 `i `uc 385
+ , $ -> -> 4 `i `uc 386
+ , $ -> -> 2 `i `uc 387
+ , $ -> -> 3 `i `uc 389
+ 382 ]
+"523
+[e :U 382 ]
+[; ;common.c: 524: if(en_put)
+"524
+[e $ ! _en_put 391  ]
+[; ;common.c: 525: {
+"525
 {
-[; ;common.c: 531: void set_type_clk(void)
-[; ;common.c: 532: {
+[; ;common.c: 526: putchar_b_buf(0,'״', &Font);
+"526
+[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 216 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 527: putchar_b_buf(6,'נ', &Font);
+"527
+[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 240 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 528: putchar_b_buf(12,':', &Font);
+"528
+[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 529: putchar_b_buf(18,type_font % 10, pFont);
+"529
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> % -> _type_font `i -> 10 `i `uc _pFont ]
+[; ;common.c: 530: putchar_b_buf(24,0, &Font);
+"530
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+"531
+}
+[e :U 391 ]
+[; ;common.c: 531: }
+[; ;common.c: 532: Update_Matrix(Dis_Buff);
+"532
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 533: en_put=1;
+"533
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 534: }
+"534
+[e :UE 381 ]
+}
+"540
+[v _set_type_clk `(v ~T0 @X0 1 ef ]
+"541
+{
+[; ;common.c: 540: void set_type_clk(void)
+[; ;common.c: 541: {
 [e :U _set_type_clk ]
 [f ]
-[; ;common.c: 533: switch (events)
-"533
-[e $U 393  ]
-[; ;common.c: 534: {
-"534
-{
-[; ;common.c: 535: case 5:
-"535
-[e :U 394 ]
-[; ;common.c: 537: break;
-"537
-[e $U 392  ]
-[; ;common.c: 538: case 1:
-"538
-[e :U 395 ]
-[; ;common.c: 539: RTOS_DeleteTask(set_type_clk);
-"539
-[e ( _RTOS_DeleteTask (1 &U _set_type_clk ]
-[; ;common.c: 540: RTOS_SetTask(time_led, 0, 20);
-"540
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 541: RTOS_DeleteTask(default_state);
-"541
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 542: events = 5;
+[; ;common.c: 542: switch (events)
 "542
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 543: en_put = 0;
+[e $U 394  ]
+[; ;common.c: 543: {
 "543
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 544: clear_matrix();
+{
+[; ;common.c: 544: case 5:
 "544
-[e ( _clear_matrix ..  ]
-[; ;common.c: 545: break;
-"545
-[e $U 392  ]
-[; ;common.c: 546: case 4:
+[e :U 395 ]
+[; ;common.c: 546: break;
 "546
-[e :U 396 ]
-[; ;common.c: 547: RTOS_DeleteTask(set_type_clk);
+[e $U 393  ]
+[; ;common.c: 547: case 1:
 "547
-[e ( _RTOS_DeleteTask (1 &U _set_type_clk ]
-[; ;common.c: 548: RTOS_DeleteTask(default_state);
+[e :U 396 ]
+[; ;common.c: 548: RTOS_DeleteTask(set_type_clk);
 "548
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 549: RTOS_SetTask(time_led, 0, 20);
+[e ( _RTOS_DeleteTask (1 &U _set_type_clk ]
+[; ;common.c: 549: RTOS_SetTask(brg_set, 0, 20);
 "549
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 550: events = 5;
+[e ( _RTOS_SetTask (3 , , &U _brg_set -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 550: RTOS_SetTask(default_state, 2000, 0);
 "550
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 551: en_put = 0;
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 551: events = 5;
 "551
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 552: clear_matrix();
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 552: en_put = 0;
 "552
-[e ( _clear_matrix ..  ]
-[; ;common.c: 553: break;
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 553: clear_matrix();
 "553
-[e $U 392  ]
-[; ;common.c: 554: case 2:
+[e ( _clear_matrix ..  ]
+[; ;common.c: 554: break;
 "554
-[e :U 397 ]
-[; ;common.c: 555: type_clk++;
+[e $U 393  ]
+[; ;common.c: 555: case 4:
 "555
-[e ++ _type_clk -> -> 1 `i `uc ]
-[; ;common.c: 556: if(type_clk > 2) type_clk = 1;
+[e :U 397 ]
+[; ;common.c: 556: RTOS_DeleteTask(set_type_clk);
 "556
-[e $ ! > -> _type_clk `i -> 2 `i 398  ]
-[e = _type_clk -> -> 1 `i `uc ]
-[e :U 398 ]
-[; ;common.c: 557: RTOS_SetTask(default_state, 2000, 0);
+[e ( _RTOS_DeleteTask (1 &U _set_type_clk ]
+[; ;common.c: 557: RTOS_DeleteTask(default_state);
 "557
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 558: events = 5;
-"558
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 559: write_eep(1,type_clk);
-"559
-[e ( _write_eep (2 , -> -> 1 `i `uc _type_clk ]
-[; ;common.c: 560: break;
-"560
-[e $U 392  ]
-[; ;common.c: 561: case 3:
-"561
-[e :U 399 ]
-[; ;common.c: 562: type_clk--;
-"562
-[e -- _type_clk -> -> 1 `i `uc ]
-[; ;common.c: 563: if(type_clk == 0) type_clk = 2;
-"563
-[e $ ! == -> _type_clk `i -> 0 `i 400  ]
-[e = _type_clk -> -> 2 `i `uc ]
-[e :U 400 ]
-[; ;common.c: 564: RTOS_SetTask(default_state, 2000, 0);
-"564
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 565: events = 5;
-"565
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 566: write_eep(1,type_clk);
-"566
-[e ( _write_eep (2 , -> -> 1 `i `uc _type_clk ]
-[; ;common.c: 567: break;
-"567
-[e $U 392  ]
-"568
-}
-[; ;common.c: 568: }
-[e $U 392  ]
-"533
-[e :U 393 ]
-[e [\ _events , $ -> -> 5 `i `uc 394
- , $ -> -> 1 `i `uc 395
- , $ -> -> 4 `i `uc 396
- , $ -> -> 2 `i `uc 397
- , $ -> -> 3 `i `uc 399
- 392 ]
-"568
-[e :U 392 ]
-[; ;common.c: 569: if(en_put)
-"569
-[e $ ! _en_put 401  ]
-[; ;common.c: 570: {
-"570
-{
-[; ;common.c: 571: putchar_b_buf(0,'ׂ', &Font);
-"571
-[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 210 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 572: putchar_b_buf(6,'ן', &Font);
-"572
-[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 239 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 573: putchar_b_buf(12,':', &Font);
-"573
-[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
-[; ;common.c: 574: putchar_b_buf(18,type_clk % 10, pFont);
-"574
-[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> % -> _type_clk `i -> 10 `i `uc _pFont ]
-[; ;common.c: 575: putchar_b_buf(24,0, &Font);
-"575
-[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
-"576
-}
-[e :U 401 ]
-[; ;common.c: 576: }
-[; ;common.c: 577: Update_Matrix(Dis_Buff);
-"577
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;common.c: 578: en_put=1;
-"578
-[e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 579: }
-"579
-[e :UE 391 ]
-}
-"585
-[v _home_temp `(v ~T0 @X0 1 ef ]
-"586
-{
-[; ;common.c: 585: void home_temp(void)
-[; ;common.c: 586: {
-[e :U _home_temp ]
-[f ]
-[; ;common.c: 587: switch (events)
-"587
-[e $U 404  ]
-[; ;common.c: 588: {
-"588
-{
-[; ;common.c: 589: case 5:
-"589
-[e :U 405 ]
-[; ;common.c: 592: clear_matrix();
-"592
-[e ( _clear_matrix ..  ]
-[; ;common.c: 593: if (!((temperature/10) % 10))
-"593
-[e $ ! ! != % / -> _temperature `i -> 10 `i -> 10 `i -> 0 `i 406  ]
-[; ;common.c: 594: {
-"594
-{
-[; ;common.c: 595: pic_to_led(3,1);
-"595
-[e ( _pic_to_led (2 , -> -> 3 `i `uc -> -> 1 `i `uc ]
-[; ;common.c: 597: putchar_down(13,temperature % 10, pFont);
-"597
-[e ( _putchar_down (3 , , -> -> 13 `i `uc -> % -> _temperature `i -> 10 `i `uc _pFont ]
-[; ;common.c: 598: putchar_down(19,176, &Font);
-"598
-[e ( _putchar_down (3 , , -> -> 19 `i `uc -> -> 176 `i `uc -> &U _Font `*F3117 ]
-"599
-}
-[; ;common.c: 599: } else {
-[e $U 407  ]
-[e :U 406 ]
-{
-[; ;common.c: 600: pic_to_led(3, 1);
-"600
-[e ( _pic_to_led (2 , -> -> 3 `i `uc -> -> 1 `i `uc ]
-[; ;common.c: 601: putchar_down(13, (temperature / 10) % 10, pFont);
-"601
-[e ( _putchar_down (3 , , -> -> 13 `i `uc -> % / -> _temperature `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 602: putchar_down(19, temperature % 10, pFont);
-"602
-[e ( _putchar_down (3 , , -> -> 19 `i `uc -> % -> _temperature `i -> 10 `i `uc _pFont ]
-[; ;common.c: 603: putchar_down(25, 176, &Font);
-"603
-[e ( _putchar_down (3 , , -> -> 25 `i `uc -> -> 176 `i `uc -> &U _Font `*F3117 ]
-"605
-}
-[e :U 407 ]
-[; ;common.c: 605: }
-[; ;common.c: 606: events = 6;
-"606
-[e = _events -> -> 6 `i `uc ]
-[; ;common.c: 607: RTOS_SetTask(default_state, 650, 0);
-"607
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 650 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 611: break;
-"611
-[e $U 403  ]
-[; ;common.c: 612: case 6:
-"612
-[e :U 408 ]
-[; ;common.c: 613: break;
-"613
-[e $U 403  ]
-[; ;common.c: 614: case 4:
-"614
-[e :U 409 ]
-[; ;common.c: 615: events = 5;
-"615
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 616: scroll_right();
-"616
-[e ( _scroll_right ..  ]
-[; ;common.c: 618: RTOS_DeleteTask(default_state);
-"618
 [e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 619: RTOS_DeleteTask(home_temp);
-"619
-[e ( _RTOS_DeleteTask (1 &U _home_temp ]
-[; ;common.c: 620: RTOS_SetTask(radio_temp, 0, 20);
-"620
-[e ( _RTOS_SetTask (3 , , &U _radio_temp -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 622: break;
-"622
-[e $U 403  ]
-"623
-}
-[; ;common.c: 623: }
-[e $U 403  ]
-"587
-[e :U 404 ]
-[e [\ _events , $ -> -> 5 `i `uc 405
- , $ -> -> 6 `i `uc 408
- , $ -> -> 4 `i `uc 409
- 403 ]
-"623
-[e :U 403 ]
-[; ;common.c: 624: }
-"624
-[e :UE 402 ]
-}
-"630
-[v _radio_temp `(v ~T0 @X0 1 ef ]
-{
-[; ;common.c: 630: void radio_temp(void) {
-[e :U _radio_temp ]
-[f ]
-[; ;common.c: 631: switch (events) {
-"631
-[e $U 412  ]
-{
-[; ;common.c: 632: case 5:
-"632
-[e :U 413 ]
-[; ;common.c: 633: clear_matrix();
-"633
+[; ;common.c: 558: RTOS_SetTask(time_led, 0, 20);
+"558
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 559: events = 5;
+"559
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 560: en_put = 0;
+"560
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 561: clear_matrix();
+"561
 [e ( _clear_matrix ..  ]
-[; ;common.c: 634: if (err_ds18) {
-"634
-[e $ ! _err_ds18 414  ]
-{
-[; ;common.c: 635: pic_to_led(0, 2);
-"635
-[e ( _pic_to_led (2 , -> -> 0 `i `uc -> -> 2 `i `uc ]
-[; ;common.c: 636: putchar_down(9, 'E', &Font);
-"636
-[e ( _putchar_down (3 , , -> -> 9 `i `uc -> -> 69 `ui `uc -> &U _Font `*F3117 ]
-[; ;common.c: 637: putchar_down(15, 'r', &Font);
-"637
-[e ( _putchar_down (3 , , -> -> 15 `i `uc -> -> 114 `ui `uc -> &U _Font `*F3117 ]
-[; ;common.c: 638: putchar_down(21, 'r', &Font);
-"638
-[e ( _putchar_down (3 , , -> -> 21 `i `uc -> -> 114 `ui `uc -> &U _Font `*F3117 ]
-"639
+[; ;common.c: 562: break;
+"562
+[e $U 393  ]
+[; ;common.c: 563: case 2:
+"563
+[e :U 398 ]
+[; ;common.c: 564: type_clk++;
+"564
+[e ++ _type_clk -> -> 1 `i `uc ]
+[; ;common.c: 565: if(type_clk > 2) type_clk = 1;
+"565
+[e $ ! > -> _type_clk `i -> 2 `i 399  ]
+[e = _type_clk -> -> 1 `i `uc ]
+[e :U 399 ]
+[; ;common.c: 566: RTOS_SetTask(default_state, 2000, 0);
+"566
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 567: events = 5;
+"567
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 568: write_eep(1,type_clk);
+"568
+[e ( _write_eep (2 , -> -> 1 `i `uc _type_clk ]
+[; ;common.c: 569: break;
+"569
+[e $U 393  ]
+[; ;common.c: 570: case 3:
+"570
+[e :U 400 ]
+[; ;common.c: 571: type_clk--;
+"571
+[e -- _type_clk -> -> 1 `i `uc ]
+[; ;common.c: 572: if(type_clk == 0) type_clk = 2;
+"572
+[e $ ! == -> _type_clk `i -> 0 `i 401  ]
+[e = _type_clk -> -> 2 `i `uc ]
+[e :U 401 ]
+[; ;common.c: 573: RTOS_SetTask(default_state, 2000, 0);
+"573
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 574: events = 5;
+"574
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 575: write_eep(1,type_clk);
+"575
+[e ( _write_eep (2 , -> -> 1 `i `uc _type_clk ]
+[; ;common.c: 576: break;
+"576
+[e $U 393  ]
+"577
 }
-[; ;common.c: 639: } else {
+[; ;common.c: 577: }
+[e $U 393  ]
+"542
+[e :U 394 ]
+[e [\ _events , $ -> -> 5 `i `uc 395
+ , $ -> -> 1 `i `uc 396
+ , $ -> -> 4 `i `uc 397
+ , $ -> -> 2 `i `uc 398
+ , $ -> -> 3 `i `uc 400
+ 393 ]
+"577
+[e :U 393 ]
+[; ;common.c: 578: if(en_put)
+"578
+[e $ ! _en_put 402  ]
+[; ;common.c: 579: {
+"579
+{
+[; ;common.c: 580: putchar_b_buf(0,'ׂ', &Font);
+"580
+[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 210 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 581: putchar_b_buf(6,'ן', &Font);
+"581
+[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 239 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 582: putchar_b_buf(12,':', &Font);
+"582
+[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 583: putchar_b_buf(18,type_clk % 10, pFont);
+"583
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> % -> _type_clk `i -> 10 `i `uc _pFont ]
+[; ;common.c: 584: putchar_b_buf(24,0, &Font);
+"584
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+"585
+}
+[e :U 402 ]
+[; ;common.c: 585: }
+[; ;common.c: 586: Update_Matrix(Dis_Buff);
+"586
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 587: en_put=1;
+"587
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 588: }
+"588
+[e :UE 392 ]
+}
+"594
+[v _brg_set `(v ~T0 @X0 1 ef ]
+{
+[; ;common.c: 594: void brg_set() {
+[e :U _brg_set ]
+[f ]
+[; ;common.c: 595: switch (events) {
+"595
+[e $U 405  ]
+{
+[; ;common.c: 596: case 5:
+"596
+[e :U 406 ]
+[; ;common.c: 598: break;
+"598
+[e $U 404  ]
+[; ;common.c: 599: case 1:
+"599
+[e :U 407 ]
+[; ;common.c: 600: if (brg_type) {
+"600
+[e $ ! != -> _brg_type `i -> -> -> 0 `i `uc `i 408  ]
+{
+[; ;common.c: 601: RTOS_DeleteTask(brg_set);
+"601
+[e ( _RTOS_DeleteTask (1 &U _brg_set ]
+[; ;common.c: 602: RTOS_SetTask(time_led, 0, 20);
+"602
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 603: RTOS_DeleteTask(default_state);
+"603
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 604: events = 5;
+"604
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 605: en_put = 0;
+"605
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 606: clear_matrix();
+"606
+[e ( _clear_matrix ..  ]
+"607
+}
+[; ;common.c: 607: } else {
+[e $U 409  ]
+[e :U 408 ]
+{
+[; ;common.c: 608: RTOS_DeleteTask(brg_set);
+"608
+[e ( _RTOS_DeleteTask (1 &U _brg_set ]
+[; ;common.c: 609: RTOS_SetTask(set_brg_manual, 0, 20);
+"609
+[e ( _RTOS_SetTask (3 , , &U _set_brg_manual -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 610: RTOS_SetTask(default_state, 2000, 0);
+"610
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 611: events = 5;
+"611
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 612: en_put = 0;
+"612
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 613: clear_matrix();
+"613
+[e ( _clear_matrix ..  ]
+"614
+}
+[e :U 409 ]
+[; ;common.c: 614: }
+[; ;common.c: 616: break;
+"616
+[e $U 404  ]
+[; ;common.c: 617: case 4:
+"617
+[e :U 410 ]
+[; ;common.c: 618: RTOS_DeleteTask(brg_set);
+"618
+[e ( _RTOS_DeleteTask (1 &U _brg_set ]
+[; ;common.c: 619: RTOS_DeleteTask(default_state);
+"619
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 620: RTOS_SetTask(time_led, 0, 20);
+"620
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 621: events = 5;
+"621
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 622: en_put = 0;
+"622
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 623: clear_matrix();
+"623
+[e ( _clear_matrix ..  ]
+[; ;common.c: 624: break;
+"624
+[e $U 404  ]
+[; ;common.c: 625: case 2:
+"625
+[e :U 411 ]
+[; ;common.c: 626: brg_type = !brg_type;
+"626
+[e = _brg_type -> -> ! != -> _brg_type `i -> -> -> 0 `i `uc `i `i `uc ]
+[; ;common.c: 627: RTOS_SetTask(default_state, 2000, 0);
+"627
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 628: events = 5;
+"628
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 629: write_eep(2,brg_type);
+"629
+[e ( _write_eep (2 , -> -> 2 `i `uc _brg_type ]
+[; ;common.c: 630: break;
+"630
+[e $U 404  ]
+[; ;common.c: 631: case 3:
+"631
+[e :U 412 ]
+[; ;common.c: 632: brg_type = !brg_type;
+"632
+[e = _brg_type -> -> ! != -> _brg_type `i -> -> -> 0 `i `uc `i `i `uc ]
+[; ;common.c: 633: RTOS_SetTask(default_state, 2000, 0);
+"633
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 634: events = 5;
+"634
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 635: write_eep(2,brg_type);
+"635
+[e ( _write_eep (2 , -> -> 2 `i `uc _brg_type ]
+[; ;common.c: 636: break;
+"636
+[e $U 404  ]
+"637
+}
+[; ;common.c: 637: }
+[e $U 404  ]
+"595
+[e :U 405 ]
+[e [\ _events , $ -> -> 5 `i `uc 406
+ , $ -> -> 1 `i `uc 407
+ , $ -> -> 4 `i `uc 410
+ , $ -> -> 2 `i `uc 411
+ , $ -> -> 3 `i `uc 412
+ 404 ]
+"637
+[e :U 404 ]
+[; ;common.c: 638: if (en_put) {
+"638
+[e $ ! _en_put 413  ]
+{
+[; ;common.c: 639: putchar_b_buf(0, 'ß', &Font);
+"639
+[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 223 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 640: putchar_b_buf(6, 'ס', &Font);
+"640
+[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 241 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 641: putchar_b_buf(12, ':', &Font);
+"641
+[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 642: if (brg_type) {
+"642
+[e $ ! != -> _brg_type `i -> -> -> 0 `i `uc `i 414  ]
+{
+[; ;common.c: 643: putchar_b_buf(18, 'ְ', &Font);
+"643
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 192 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 644: putchar_b_buf(24, 'ג', &Font);
+"644
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 226 `ui `uc -> &U _Font `*F3098 ]
+"645
+}
+[; ;common.c: 645: } else {
 [e $U 415  ]
 [e :U 414 ]
 {
-[; ;common.c: 642: if (!((temperature_radio / 10) % 10))
-"642
-[e $ ! ! != % / -> _temperature_radio `i -> 10 `i -> 10 `i -> 0 `i 416  ]
-[; ;common.c: 643: {
-"643
-{
-[; ;common.c: 644: pic_to_led(0, 2);
-"644
-[e ( _pic_to_led (2 , -> -> 0 `i `uc -> -> 2 `i `uc ]
-[; ;common.c: 646: putchar_down(9, minus, &Font);
+[; ;common.c: 646: putchar_b_buf(18, 'ֿ', &Font);
 "646
-[e ( _putchar_down (3 , , -> -> 9 `i `uc _minus -> &U _Font `*F3117 ]
-[; ;common.c: 647: putchar_down(15, temperature_radio % 10, pFont);
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> -> 207 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 647: putchar_b_buf(24, 'ס', &Font);
 "647
-[e ( _putchar_down (3 , , -> -> 15 `i `uc -> % -> _temperature_radio `i -> 10 `i `uc _pFont ]
-[; ;common.c: 648: putchar_down(21, 176, &Font);
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 241 `ui `uc -> &U _Font `*F3098 ]
 "648
-[e ( _putchar_down (3 , , -> -> 21 `i `uc -> -> 176 `i `uc -> &U _Font `*F3117 ]
-"650
-}
-[; ;common.c: 650: } else {
-[e $U 417  ]
-[e :U 416 ]
-{
-[; ;common.c: 651: pic_to_led(0, 2);
-"651
-[e ( _pic_to_led (2 , -> -> 0 `i `uc -> -> 2 `i `uc ]
-[; ;common.c: 652: putchar_down(9, minus, &Font);
-"652
-[e ( _putchar_down (3 , , -> -> 9 `i `uc _minus -> &U _Font `*F3117 ]
-[; ;common.c: 653: putchar_down(15, (temperature_radio / 10) % 10, pFont);
-"653
-[e ( _putchar_down (3 , , -> -> 15 `i `uc -> % / -> _temperature_radio `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 654: putchar_down(22, temperature_radio % 10, pFont);
-"654
-[e ( _putchar_down (3 , , -> -> 22 `i `uc -> % -> _temperature_radio `i -> 10 `i `uc _pFont ]
-[; ;common.c: 655: putchar_down(27, 176, &Font);
-"655
-[e ( _putchar_down (3 , , -> -> 27 `i `uc -> -> 176 `i `uc -> &U _Font `*F3117 ]
-"657
-}
-[e :U 417 ]
-"658
 }
 [e :U 415 ]
-[; ;common.c: 657: }
-[; ;common.c: 658: }
-[; ;common.c: 659: events = 6;
-"659
-[e = _events -> -> 6 `i `uc ]
-[; ;common.c: 660: RTOS_SetTask(default_state, 650, 0);
+"650
+}
+[e :U 413 ]
+[; ;common.c: 648: }
+[; ;common.c: 650: }
+[; ;common.c: 651: Update_Matrix(Dis_Buff);
+"651
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 652: en_put = 1;
+"652
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 654: }
+"654
+[e :UE 403 ]
+}
 "660
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 650 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 664: break;
-"664
-[e $U 411  ]
-[; ;common.c: 665: case 6:
-"665
-[e :U 418 ]
-[; ;common.c: 666: break;
-"666
-[e $U 411  ]
-[; ;common.c: 667: case 4:
-"667
-[e :U 419 ]
-[; ;common.c: 668: events = 5;
-"668
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 669: scroll_left();
-"669
-[e ( _scroll_left ..  ]
-[; ;common.c: 670: pre_ref_dis();
-"670
-[e ( _pre_ref_dis ..  ]
-[; ;common.c: 671: RTOS_DeleteTask(default_state);
-"671
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 672: RTOS_DeleteTask(radio_temp);
-"672
-[e ( _RTOS_DeleteTask (1 &U _radio_temp ]
-[; ;common.c: 673: RTOS_SetTask(time_led, 0, 20);
-"673
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 675: break;
-"675
-[e $U 411  ]
-"676
-}
-[; ;common.c: 676: }
-[e $U 411  ]
-"631
-[e :U 412 ]
-[e [\ _events , $ -> -> 5 `i `uc 413
- , $ -> -> 6 `i `uc 418
- , $ -> -> 4 `i `uc 419
- 411 ]
-"676
-[e :U 411 ]
-[; ;common.c: 677: }
-"677
-[e :UE 410 ]
-}
-"682
-[v _set_font `(v ~T0 @X0 1 ef ]
-"683
+[v _set_brg_manual `(v ~T0 @X0 1 ef ]
 {
-[; ;common.c: 682: void set_font()
-[; ;common.c: 683: {
-[e :U _set_font ]
+[; ;common.c: 660: void set_brg_manual(){
+[e :U _set_brg_manual ]
 [f ]
-[; ;common.c: 684: switch (type_font)
-"684
-[e $U 422  ]
-[; ;common.c: 685: {
-"685
+[; ;common.c: 661: switch (events)
+"661
+[e $U 418  ]
+[; ;common.c: 662: {
+"662
 {
-[; ;common.c: 686: case 1:
-"686
+[; ;common.c: 663: case 5:
+"663
+[e :U 419 ]
+[; ;common.c: 665: break;
+"665
+[e $U 417  ]
+[; ;common.c: 666: case 1:
+"666
+[e :U 420 ]
+[; ;common.c: 667: RTOS_DeleteTask(set_brg_manual);
+"667
+[e ( _RTOS_DeleteTask (1 &U _set_brg_manual ]
+[; ;common.c: 668: RTOS_SetTask(time_led, 0, 20);
+"668
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 669: RTOS_DeleteTask(default_state);
+"669
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 670: events = 5;
+"670
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 671: en_put = 0;
+"671
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 672: clear_matrix();
+"672
+[e ( _clear_matrix ..  ]
+[; ;common.c: 673: break;
+"673
+[e $U 417  ]
+[; ;common.c: 674: case 4:
+"674
+[e :U 421 ]
+[; ;common.c: 675: RTOS_DeleteTask(set_brg_manual);
+"675
+[e ( _RTOS_DeleteTask (1 &U _set_brg_manual ]
+[; ;common.c: 676: RTOS_DeleteTask(default_state);
+"676
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 677: RTOS_SetTask(time_led, 0, 20);
+"677
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 678: events = 5;
+"678
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 679: en_put = 0;
+"679
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 680: clear_matrix();
+"680
+[e ( _clear_matrix ..  ]
+[; ;common.c: 681: break;
+"681
+[e $U 417  ]
+[; ;common.c: 682: case 2:
+"682
+[e :U 422 ]
+[; ;common.c: 683: brig++;
+"683
+[e ++ _brig -> -> 1 `i `uc ]
+[; ;common.c: 684: if(brig > 8) brig = 0;
+"684
+[e $ ! > -> _brig `i -> 8 `i 423  ]
+[e = _brig -> -> 0 `i `uc ]
 [e :U 423 ]
-[; ;common.c: 687: pFont = &dFont1;
+[; ;common.c: 685: RTOS_SetTask(default_state, 2000, 0);
+"685
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 686: events = 5;
+"686
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 687: write_eep(3,brig);
 "687
-[e = _pFont -> &U _dFont1 `*F3298 ]
-[; ;common.c: 688: break;
+[e ( _write_eep (2 , -> -> 3 `i `uc _brig ]
+[; ;common.c: 688: Cmd7221(0x0A, brig);
 "688
-[e $U 421  ]
-[; ;common.c: 689: case 2:
+[e ( _Cmd7221 (2 , -> -> 10 `i `uc _brig ]
+[; ;common.c: 689: break;
 "689
-[e :U 424 ]
-[; ;common.c: 690: pFont = &dFont2;
+[e $U 417  ]
+[; ;common.c: 690: case 3:
 "690
-[e = _pFont -> &U _dFont2 `*F3298 ]
-[; ;common.c: 691: break;
+[e :U 424 ]
+[; ;common.c: 691: brig--;
 "691
-[e $U 421  ]
-[; ;common.c: 692: case 3:
+[e -- _brig -> -> 1 `i `uc ]
+[; ;common.c: 692: if(brig == 255) brig = 8;
 "692
+[e $ ! == -> _brig `i -> 255 `i 425  ]
+[e = _brig -> -> 8 `i `uc ]
 [e :U 425 ]
-[; ;common.c: 693: pFont = &dFont3;
+[; ;common.c: 693: RTOS_SetTask(default_state, 2000, 0);
 "693
-[e = _pFont -> &U _dFont3 `*F3298 ]
-[; ;common.c: 694: break;
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 694: events = 5;
 "694
-[e $U 421  ]
-[; ;common.c: 695: case 4:
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 695: write_eep(3,brig);
 "695
-[e :U 426 ]
-[; ;common.c: 696: pFont = &dFont4;
+[e ( _write_eep (2 , -> -> 3 `i `uc _brig ]
+[; ;common.c: 696: Cmd7221(0x0A, brig);
 "696
-[e = _pFont -> &U _dFont4 `*F3298 ]
+[e ( _Cmd7221 (2 , -> -> 10 `i `uc _brig ]
 [; ;common.c: 697: break;
 "697
-[e $U 421  ]
-[; ;common.c: 698: case 5:
+[e $U 417  ]
 "698
-[e :U 427 ]
-[; ;common.c: 699: pFont = &dFont5;
+}
+[; ;common.c: 698: }
+[e $U 417  ]
+"661
+[e :U 418 ]
+[e [\ _events , $ -> -> 5 `i `uc 419
+ , $ -> -> 1 `i `uc 420
+ , $ -> -> 4 `i `uc 421
+ , $ -> -> 2 `i `uc 422
+ , $ -> -> 3 `i `uc 424
+ 417 ]
+"698
+[e :U 417 ]
+[; ;common.c: 699: if(en_put)
 "699
-[e = _pFont -> &U _dFont5 `*F3298 ]
-[; ;common.c: 700: break;
+[e $ ! _en_put 426  ]
+[; ;common.c: 700: {
 "700
-[e $U 421  ]
+{
+[; ;common.c: 701: putchar_b_buf(0,'ß', &Font);
 "701
-}
-[; ;common.c: 701: }
-[e $U 421  ]
-"684
-[e :U 422 ]
-[e [\ _type_font , $ -> -> 1 `i `uc 423
- , $ -> -> 2 `i `uc 424
- , $ -> -> 3 `i `uc 425
- , $ -> -> 4 `i `uc 426
- , $ -> -> 5 `i `uc 427
- 421 ]
-"701
-[e :U 421 ]
-[; ;common.c: 702: }
+[e ( _putchar_b_buf (3 , , -> -> 0 `i `uc -> -> 223 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 702: putchar_b_buf(6,'ס', &Font);
 "702
-[e :UE 420 ]
+[e ( _putchar_b_buf (3 , , -> -> 6 `i `uc -> -> 241 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 703: putchar_b_buf(12,':', &Font);
+"703
+[e ( _putchar_b_buf (3 , , -> -> 12 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3098 ]
+[; ;common.c: 704: putchar_b_buf(18,brig % 10, pFont);
+"704
+[e ( _putchar_b_buf (3 , , -> -> 18 `i `uc -> % -> _brig `i -> 10 `i `uc _pFont ]
+[; ;common.c: 705: putchar_b_buf(24,0, &Font);
+"705
+[e ( _putchar_b_buf (3 , , -> -> 24 `i `uc -> -> 0 `i `uc -> &U _Font `*F3098 ]
+"706
 }
+[e :U 426 ]
+[; ;common.c: 706: }
+[; ;common.c: 707: Update_Matrix(Dis_Buff);
 "707
-[v _pressure `(v ~T0 @X0 1 ef ]
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;common.c: 708: en_put=1;
 "708
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 710: }
+"710
+[e :UE 416 ]
+}
+"716
+[v _home_temp `(v ~T0 @X0 1 ef ]
+"717
 {
-[; ;common.c: 707: void pressure(void)
-[; ;common.c: 708: {
-[e :U _pressure ]
+[; ;common.c: 716: void home_temp(void)
+[; ;common.c: 717: {
+[e :U _home_temp ]
 [f ]
-"709
-[v _pr `ui ~T0 @X0 1 a ]
-[; ;common.c: 709: uint16_t pr;
-[; ;common.c: 711: switch (events)
-"711
-[e $U 430  ]
-[; ;common.c: 712: {
-"712
-{
-[; ;common.c: 713: case 5:
-"713
-[e :U 431 ]
-[; ;common.c: 714: clear_matrix();
-"714
-[e ( _clear_matrix ..  ]
-[; ;common.c: 715: if (press) {
-"715
-[e $ ! != _press -> -> 0 `i `ul 432  ]
-{
-[; ;common.c: 720: pr = press / 100;
-"720
-[e = _pr -> / _press -> -> -> 100 `i `l `ul `ui ]
-[; ;common.c: 721: pic_to_led(3, 4);
-"721
-[e ( _pic_to_led (2 , -> -> 3 `i `uc -> -> 4 `i `uc ]
-[; ;common.c: 722: putchar_down(11, (pr / 100) % 10, pFont);
-"722
-[e ( _putchar_down (3 , , -> -> 11 `i `uc -> % / _pr -> -> 100 `i `ui -> -> 10 `i `ui `uc _pFont ]
-[; ;common.c: 723: putchar_down(17, (pr / 10) % 10, pFont);
-"723
-[e ( _putchar_down (3 , , -> -> 17 `i `uc -> % / _pr -> -> 10 `i `ui -> -> 10 `i `ui `uc _pFont ]
-[; ;common.c: 724: putchar_down(23, pr % 10, pFont);
-"724
-[e ( _putchar_down (3 , , -> -> 23 `i `uc -> % _pr -> -> 10 `i `ui `uc _pFont ]
-"727
-}
-[; ;common.c: 727: } else {
-[e $U 433  ]
-[e :U 432 ]
-{
-[; ;common.c: 728: pic_to_led(3, 4);
-"728
-[e ( _pic_to_led (2 , -> -> 3 `i `uc -> -> 4 `i `uc ]
-[; ;common.c: 729: putchar_down(11, 'E', &Font);
-"729
-[e ( _putchar_down (3 , , -> -> 11 `i `uc -> -> 69 `ui `uc -> &U _Font `*F3117 ]
-[; ;common.c: 730: putchar_down(17, 'R', &Font);
-"730
-[e ( _putchar_down (3 , , -> -> 17 `i `uc -> -> 82 `ui `uc -> &U _Font `*F3117 ]
-[; ;common.c: 731: putchar_down(23, 'R', &Font);
-"731
-[e ( _putchar_down (3 , , -> -> 23 `i `uc -> -> 82 `ui `uc -> &U _Font `*F3117 ]
-"733
-}
-[e :U 433 ]
-[; ;common.c: 733: }
-[; ;common.c: 735: events = 6;
-"735
-[e = _events -> -> 6 `i `uc ]
-[; ;common.c: 736: RTOS_SetTask(default_state, 400, 0);
-"736
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 400 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 740: break;
-"740
+[; ;common.c: 718: switch (events)
+"718
 [e $U 429  ]
-[; ;common.c: 741: case 6:
-"741
-[e :U 434 ]
+[; ;common.c: 719: {
+"719
+{
+[; ;common.c: 720: case 5:
+"720
+[e :U 430 ]
+[; ;common.c: 723: clear_matrix();
+"723
+[e ( _clear_matrix ..  ]
+[; ;common.c: 724: if (!((temperature/10) % 10))
+"724
+[e $ ! ! != % / -> _temperature `i -> 10 `i -> 10 `i -> 0 `i 431  ]
+[; ;common.c: 725: {
+"725
+{
+[; ;common.c: 726: pic_to_led(3,1);
+"726
+[e ( _pic_to_led (2 , -> -> 3 `i `uc -> -> 1 `i `uc ]
+[; ;common.c: 728: putchar_down(13,temperature % 10, pFont);
+"728
+[e ( _putchar_down (3 , , -> -> 13 `i `uc -> % -> _temperature `i -> 10 `i `uc _pFont ]
+[; ;common.c: 729: putchar_down(19,176, &Font);
+"729
+[e ( _putchar_down (3 , , -> -> 19 `i `uc -> -> 176 `i `uc -> &U _Font `*F3117 ]
+"730
+}
+[; ;common.c: 730: } else {
+[e $U 432  ]
+[e :U 431 ]
+{
+[; ;common.c: 731: pic_to_led(3, 1);
+"731
+[e ( _pic_to_led (2 , -> -> 3 `i `uc -> -> 1 `i `uc ]
+[; ;common.c: 732: putchar_down(13, (temperature / 10) % 10, pFont);
+"732
+[e ( _putchar_down (3 , , -> -> 13 `i `uc -> % / -> _temperature `i -> 10 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 733: putchar_down(19, temperature % 10, pFont);
+"733
+[e ( _putchar_down (3 , , -> -> 19 `i `uc -> % -> _temperature `i -> 10 `i `uc _pFont ]
+[; ;common.c: 734: putchar_down(25, 176, &Font);
+"734
+[e ( _putchar_down (3 , , -> -> 25 `i `uc -> -> 176 `i `uc -> &U _Font `*F3117 ]
+"736
+}
+[e :U 432 ]
+[; ;common.c: 736: }
+[; ;common.c: 737: events = 6;
+"737
+[e = _events -> -> 6 `i `uc ]
+[; ;common.c: 738: RTOS_SetTask(default_state, 650, 0);
+"738
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 650 `i `ui -> -> 0 `i `ui ]
 [; ;common.c: 742: break;
 "742
-[e $U 429  ]
-[; ;common.c: 743: case 4:
+[e $U 428  ]
+[; ;common.c: 743: case 6:
 "743
-[e :U 435 ]
-[; ;common.c: 744: events = 5;
+[e :U 433 ]
+[; ;common.c: 744: break;
 "744
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 746: if (press) {
+[e $U 428  ]
+[; ;common.c: 745: case 4:
+"745
+[e :U 434 ]
+[; ;common.c: 746: events = 5;
 "746
-[e $ ! != _press -> -> 0 `i `ul 436  ]
-{
-[; ;common.c: 747: sprintf(text_buf, "לל.נע.סע.");
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 747: scroll_right();
 "747
-[e ( _sprintf (1 , &U _text_buf :s 1C ]
-[; ;common.c: 748: interval_scroll_text();
-"748
-[e ( _interval_scroll_text ..  ]
-"749
-}
-[; ;common.c: 749: } else
-[e $U 437  ]
-[e :U 436 ]
-[; ;common.c: 750: scroll_left();
-"750
-[e ( _scroll_left ..  ]
-[e :U 437 ]
-[; ;common.c: 751: pre_ref_dis();
-"751
-[e ( _pre_ref_dis ..  ]
-[; ;common.c: 752: RTOS_DeleteTask(default_state);
-"752
-[e ( _RTOS_DeleteTask (1 &U _default_state ]
-[; ;common.c: 753: RTOS_DeleteTask(pressure);
-"753
-[e ( _RTOS_DeleteTask (1 &U _pressure ]
-[; ;common.c: 754: RTOS_SetTask(time_led, 0, 20);
-"754
-[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 756: break;
-"756
-[e $U 429  ]
-"757
-}
-[; ;common.c: 757: }
-[e $U 429  ]
-"711
-[e :U 430 ]
-[e [\ _events , $ -> -> 5 `i `uc 431
- , $ -> -> 6 `i `uc 434
- , $ -> -> 4 `i `uc 435
- 429 ]
-"757
-[e :U 429 ]
-[; ;common.c: 758: }
-"758
-[e :UE 428 ]
-}
-"760
-[v _pre_ref_dis `(v ~T0 @X0 1 ef ]
-{
-[; ;common.c: 760: void pre_ref_dis(void) {
-[e :U _pre_ref_dis ]
-[f ]
-[; ;common.c: 763: clear_matrix();
-"763
-[e ( _clear_matrix ..  ]
-[; ;common.c: 764: switch (type_clk) {
-"764
-[e $U 440  ]
-{
-[; ;common.c: 765: case 1:
-"765
-[e :U 441 ]
-[; ;common.c: 766: if ((TTime.Thr / 10) % 10)
-"766
-[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 442  ]
-[; ;common.c: 767: putchar_down(0, (TTime.Thr / 10) % 10, pFont);
-"767
-[e ( _putchar_down (3 , , -> -> 0 `i `uc -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
-[e $U 443  ]
-"768
-[e :U 442 ]
-[; ;common.c: 768: else putchar_down(0, 0, &Font);
-[e ( _putchar_down (3 , , -> -> 0 `i `uc -> -> 0 `i `uc -> &U _Font `*F3117 ]
-[e :U 443 ]
-[; ;common.c: 769: putchar_down(6, TTime.Thr % 10, pFont);
-"769
-[e ( _putchar_down (3 , , -> -> 6 `i `uc -> % -> . _TTime 2 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 770: putchar_down(13, (TTime.Tmin / 10) % 10, pFont);
-"770
-[e ( _putchar_down (3 , , -> -> 13 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 771: putchar_down(19, TTime.Tmin % 10, pFont);
-"771
-[e ( _putchar_down (3 , , -> -> 19 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 772: getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
-"772
-[e ( _getTime (3 , , &U . _TTime 2 &U . _TTime 1 &U . _TTime 0 ]
-[; ;common.c: 773: putchar_down_s(25, (TTime.Ts / 10) % 10 + 1);
-"773
-[e ( _putchar_down_s (2 , -> -> 25 `i `uc -> + % / -> . _TTime 0 `i -> 10 `i -> 10 `i -> 1 `i `uc ]
-[; ;common.c: 774: putchar_down_s(29, TTime.Ts % 10 + 1);
-"774
-[e ( _putchar_down_s (2 , -> -> 29 `i `uc -> + % -> . _TTime 0 `i -> 10 `i -> 1 `i `uc ]
-[; ;common.c: 775: break;
-"775
-[e $U 439  ]
-[; ;common.c: 776: case 2:
-"776
-[e :U 444 ]
-[; ;common.c: 777: if ((TTime.Thr / 10) % 10)
-"777
-[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 445  ]
-[; ;common.c: 778: putchar_down(1, (TTime.Thr / 10) % 10, pFont);
-"778
-[e ( _putchar_down (3 , , -> -> 1 `i `uc -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
-[e $U 446  ]
-"779
-[e :U 445 ]
-[; ;common.c: 779: else putchar_down(1, 0, &Font);
-[e ( _putchar_down (3 , , -> -> 1 `i `uc -> -> 0 `i `uc -> &U _Font `*F3117 ]
-[e :U 446 ]
-[; ;common.c: 780: putchar_down(7, TTime.Thr % 10, pFont);
-"780
-[e ( _putchar_down (3 , , -> -> 7 `i `uc -> % -> . _TTime 2 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 781: putchar_down(13, ':', &Font);
-"781
-[e ( _putchar_down (3 , , -> -> 13 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3117 ]
-[; ;common.c: 782: putchar_down(19, (TTime.Tmin / 10) % 10, pFont);
-"782
-[e ( _putchar_down (3 , , -> -> 19 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 783: putchar_down(25, TTime.Tmin % 10, pFont);
-"783
-[e ( _putchar_down (3 , , -> -> 25 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
-[; ;common.c: 784: break;
-"784
-[e $U 439  ]
-"785
-}
-[; ;common.c: 785: }
-[e $U 439  ]
-"764
-[e :U 440 ]
-[e [\ _type_clk , $ -> -> 1 `i `uc 441
- , $ -> -> 2 `i `uc 444
- 439 ]
-"785
-[e :U 439 ]
-[; ;common.c: 786: idx_pnt = 0;
-"786
-[e = _idx_pnt -> -> 0 `i `uc ]
-[; ;common.c: 787: x1 = y1;
-"787
-[e = _x1 _y1 ]
-[; ;common.c: 788: x2 = y2;
-"788
-[e = _x2 _y2 ]
-[; ;common.c: 789: x3 = y3;
-"789
-[e = _x3 _y3 ]
-[; ;common.c: 790: x4 = y4;
-"790
-[e = _x4 _y4 ]
-[; ;common.c: 791: }
-"791
-[e :UE 438 ]
-}
-"797
-[v _time_led `(v ~T0 @X0 1 ef ]
-"798
-{
-[; ;common.c: 797: void time_led()
-[; ;common.c: 798: {
-[e :U _time_led ]
-[f ]
-"799
-[v _data_array `uc ~T0 @X0 -> 4 `i a ]
-"800
-[v F3405 `ui ~T0 @X0 1 s test ]
-[i F3405
--> -> 0 `i `ui
-]
-[; ;common.c: 799: uint8_t data_array[4];
-[; ;common.c: 800: static uint16_t test = 0;
-[; ;common.c: 802: switch (events)
-"802
-[e $U 449  ]
-[; ;common.c: 803: {
-"803
-{
-[; ;common.c: 804: case 5:
-"804
-[e :U 450 ]
-[; ;common.c: 805: FillBuf(type_clk);
-"805
-[e ( _FillBuf (1 _type_clk ]
-[; ;common.c: 806: if((TTime.Ts>5)&&(TTime.Ts<7))
-"806
-[e $ ! && > -> . _TTime 0 `i -> 5 `i < -> . _TTime 0 `i -> 7 `i 451  ]
-[; ;common.c: 807: {
-"807
-{
-[; ;common.c: 808: readTemp_Single(&temperature, &minus, &time_flag, &timer_val);
-"808
-[e ( _readTemp_Single (4 , , , &U _temperature &U _minus &U _time_flag &U _timer_val ]
-"809
-}
-[e :U 451 ]
-[; ;common.c: 809: }
-[; ;common.c: 810: if(((TTime.Ts>14)&&(TTime.Ts<16)))
-"810
-[e $ ! && > -> . _TTime 0 `i -> 14 `i < -> . _TTime 0 `i -> 16 `i 452  ]
-[; ;common.c: 811: events = 3;
-"811
-[e = _events -> -> 3 `i `uc ]
-[e :U 452 ]
-[; ;common.c: 812: if(((TTime.Ts>39)&&(TTime.Ts<41)))
-"812
-[e $ ! && > -> . _TTime 0 `i -> 39 `i < -> . _TTime 0 `i -> 41 `i 453  ]
-[; ;common.c: 813: events = 2;
-"813
-[e = _events -> -> 2 `i `uc ]
-[e :U 453 ]
-[; ;common.c: 814: break;
-"814
-[e $U 448  ]
-[; ;common.c: 815: case 1:
-"815
-[e :U 454 ]
-[; ;common.c: 816: RTOS_DeleteTask(time_led);
-"816
-[e ( _RTOS_DeleteTask (1 &U _time_led ]
-[; ;common.c: 817: RTOS_SetTask(time_set_min, 0, 50);
-"817
-[e ( _RTOS_SetTask (3 , , &U _time_set_min -> -> 0 `i `ui -> -> 50 `i `ui ]
-[; ;common.c: 818: RTOS_SetTask(default_state, 2000, 0);
-"818
-[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 819: TSTime = TTime;
-"819
-[e = _TSTime _TTime ]
-[; ;common.c: 820: events = 5;
-"820
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 821: en_put = 0;
-"821
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 822: if (type_clk == 2)
-"822
-[e $ ! == -> _type_clk `i -> 2 `i 455  ]
-[; ;common.c: 823: putchar_b_buf(13, 23, &Font);
-"823
-[e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> -> 23 `i `uc -> &U _Font `*F3098 ]
-[e :U 455 ]
-[; ;common.c: 825: break;
-"825
-[e $U 448  ]
-[; ;common.c: 826: case 2:
-"826
-[e :U 456 ]
-[; ;common.c: 829: bmp280Convert(&press, &temperbmp280);
-"829
-[e ( _bmp280Convert (2 , -> &U _press `*l -> &U _temperbmp280 `*l ]
-[; ;common.c: 832: if (type_clk == 2)
-"832
-[e $ ! == -> _type_clk `i -> 2 `i 457  ]
-[; ;common.c: 833: putchar_b_buf(13, 23, &Font);
-"833
-[e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> -> 23 `i `uc -> &U _Font `*F3098 ]
-[e :U 457 ]
-[; ;common.c: 834: scroll_right();
-"834
 [e ( _scroll_right ..  ]
-[; ;common.c: 835: RTOS_DeleteTask(time_led);
-"835
-[e ( _RTOS_DeleteTask (1 &U _time_led ]
-[; ;common.c: 836: RTOS_SetTask(pressure, 0, 20);
-"836
-[e ( _RTOS_SetTask (3 , , &U _pressure -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 837: events = 5;
-"837
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 838: en_put = 0;
-"838
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 845: break;
-"845
-[e $U 448  ]
-[; ;common.c: 846: case 3:
-"846
-[e :U 458 ]
-[; ;common.c: 849: if (type_clk == 2)
-"849
-[e $ ! == -> _type_clk `i -> 2 `i 459  ]
-[; ;common.c: 850: putchar_b_buf(13, 23, &Font);
-"850
-[e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> -> 23 `i `uc -> &U _Font `*F3098 ]
-[e :U 459 ]
-[; ;common.c: 851: scroll_left();
-"851
-[e ( _scroll_left ..  ]
-[; ;common.c: 852: RTOS_DeleteTask(time_led);
-"852
-[e ( _RTOS_DeleteTask (1 &U _time_led ]
-[; ;common.c: 853: RTOS_SetTask(home_temp, 0, 20);
-"853
-[e ( _RTOS_SetTask (3 , , &U _home_temp -> -> 0 `i `ui -> -> 20 `i `ui ]
-[; ;common.c: 854: events = 5;
-"854
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 855: en_put = 0;
-"855
-[e = _en_put -> -> 0 `i `b ]
-[; ;common.c: 856: break;
-"856
-[e $U 448  ]
-[; ;common.c: 857: case 4:
-"857
-[e :U 460 ]
-[; ;common.c: 858: events = 5;
-"858
-[e = _events -> -> 5 `i `uc ]
-[; ;common.c: 859: RTOS_DeleteTask(default_state);
-"859
+[; ;common.c: 749: RTOS_DeleteTask(default_state);
+"749
 [e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 750: RTOS_DeleteTask(home_temp);
+"750
+[e ( _RTOS_DeleteTask (1 &U _home_temp ]
+[; ;common.c: 751: RTOS_SetTask(radio_temp, 0, 20);
+"751
+[e ( _RTOS_SetTask (3 , , &U _radio_temp -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 753: break;
+"753
+[e $U 428  ]
+"754
+}
+[; ;common.c: 754: }
+[e $U 428  ]
+"718
+[e :U 429 ]
+[e [\ _events , $ -> -> 5 `i `uc 430
+ , $ -> -> 6 `i `uc 433
+ , $ -> -> 4 `i `uc 434
+ 428 ]
+"754
+[e :U 428 ]
+[; ;common.c: 755: }
+"755
+[e :UE 427 ]
+}
+"761
+[v _radio_temp `(v ~T0 @X0 1 ef ]
+{
+[; ;common.c: 761: void radio_temp(void) {
+[e :U _radio_temp ]
+[f ]
+[; ;common.c: 762: switch (events) {
+"762
+[e $U 437  ]
+{
+[; ;common.c: 763: case 5:
+"763
+[e :U 438 ]
+[; ;common.c: 764: clear_matrix();
+"764
+[e ( _clear_matrix ..  ]
+[; ;common.c: 765: if (err_ds18) {
+"765
+[e $ ! _err_ds18 439  ]
+{
+[; ;common.c: 766: pic_to_led(0, 2);
+"766
+[e ( _pic_to_led (2 , -> -> 0 `i `uc -> -> 2 `i `uc ]
+[; ;common.c: 767: putchar_down(9, 'E', &Font);
+"767
+[e ( _putchar_down (3 , , -> -> 9 `i `uc -> -> 69 `ui `uc -> &U _Font `*F3117 ]
+[; ;common.c: 768: putchar_down(15, 'r', &Font);
+"768
+[e ( _putchar_down (3 , , -> -> 15 `i `uc -> -> 114 `ui `uc -> &U _Font `*F3117 ]
+[; ;common.c: 769: putchar_down(21, 'r', &Font);
+"769
+[e ( _putchar_down (3 , , -> -> 21 `i `uc -> -> 114 `ui `uc -> &U _Font `*F3117 ]
+"770
+}
+[; ;common.c: 770: } else {
+[e $U 440  ]
+[e :U 439 ]
+{
+[; ;common.c: 773: if (!((temperature_radio / 10) % 10))
+"773
+[e $ ! ! != % / -> _temperature_radio `i -> 10 `i -> 10 `i -> 0 `i 441  ]
+[; ;common.c: 774: {
+"774
+{
+[; ;common.c: 775: pic_to_led(0, 2);
+"775
+[e ( _pic_to_led (2 , -> -> 0 `i `uc -> -> 2 `i `uc ]
+[; ;common.c: 777: putchar_down(9, minus, &Font);
+"777
+[e ( _putchar_down (3 , , -> -> 9 `i `uc _minus -> &U _Font `*F3117 ]
+[; ;common.c: 778: putchar_down(15, temperature_radio % 10, pFont);
+"778
+[e ( _putchar_down (3 , , -> -> 15 `i `uc -> % -> _temperature_radio `i -> 10 `i `uc _pFont ]
+[; ;common.c: 779: putchar_down(21, 176, &Font);
+"779
+[e ( _putchar_down (3 , , -> -> 21 `i `uc -> -> 176 `i `uc -> &U _Font `*F3117 ]
+"781
+}
+[; ;common.c: 781: } else {
+[e $U 442  ]
+[e :U 441 ]
+{
+[; ;common.c: 782: pic_to_led(0, 2);
+"782
+[e ( _pic_to_led (2 , -> -> 0 `i `uc -> -> 2 `i `uc ]
+[; ;common.c: 783: putchar_down(9, minus, &Font);
+"783
+[e ( _putchar_down (3 , , -> -> 9 `i `uc _minus -> &U _Font `*F3117 ]
+[; ;common.c: 784: putchar_down(15, (temperature_radio / 10) % 10, pFont);
+"784
+[e ( _putchar_down (3 , , -> -> 15 `i `uc -> % / -> _temperature_radio `i -> 10 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 785: putchar_down(22, temperature_radio % 10, pFont);
+"785
+[e ( _putchar_down (3 , , -> -> 22 `i `uc -> % -> _temperature_radio `i -> 10 `i `uc _pFont ]
+[; ;common.c: 786: putchar_down(27, 176, &Font);
+"786
+[e ( _putchar_down (3 , , -> -> 27 `i `uc -> -> 176 `i `uc -> &U _Font `*F3117 ]
+"788
+}
+[e :U 442 ]
+"789
+}
+[e :U 440 ]
+[; ;common.c: 788: }
+[; ;common.c: 789: }
+[; ;common.c: 790: events = 6;
+"790
+[e = _events -> -> 6 `i `uc ]
+[; ;common.c: 791: RTOS_SetTask(default_state, 650, 0);
+"791
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 650 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 795: break;
+"795
+[e $U 436  ]
+[; ;common.c: 796: case 6:
+"796
+[e :U 443 ]
+[; ;common.c: 797: break;
+"797
+[e $U 436  ]
+[; ;common.c: 798: case 4:
+"798
+[e :U 444 ]
+[; ;common.c: 799: events = 5;
+"799
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 800: scroll_left();
+"800
+[e ( _scroll_left ..  ]
+[; ;common.c: 801: pre_ref_dis();
+"801
+[e ( _pre_ref_dis ..  ]
+[; ;common.c: 802: RTOS_DeleteTask(default_state);
+"802
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 803: RTOS_DeleteTask(radio_temp);
+"803
+[e ( _RTOS_DeleteTask (1 &U _radio_temp ]
+[; ;common.c: 804: RTOS_SetTask(time_led, 0, 20);
+"804
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 806: break;
+"806
+[e $U 436  ]
+"807
+}
+[; ;common.c: 807: }
+[e $U 436  ]
+"762
+[e :U 437 ]
+[e [\ _events , $ -> -> 5 `i `uc 438
+ , $ -> -> 6 `i `uc 443
+ , $ -> -> 4 `i `uc 444
+ 436 ]
+"807
+[e :U 436 ]
+[; ;common.c: 808: }
+"808
+[e :UE 435 ]
+}
+"817
+[v _set_font `(v ~T0 @X0 1 ef ]
+"818
+{
+[; ;common.c: 817: void set_font()
+[; ;common.c: 818: {
+[e :U _set_font ]
+[f ]
+[; ;common.c: 819: switch (type_font)
+"819
+[e $U 447  ]
+[; ;common.c: 820: {
+"820
+{
+[; ;common.c: 821: case 1:
+"821
+[e :U 448 ]
+[; ;common.c: 822: pFont = &dFont1;
+"822
+[e = _pFont -> &U _dFont1 `*F3311 ]
+[; ;common.c: 823: break;
+"823
+[e $U 446  ]
+[; ;common.c: 824: case 2:
+"824
+[e :U 449 ]
+[; ;common.c: 825: pFont = &dFont2;
+"825
+[e = _pFont -> &U _dFont2 `*F3311 ]
+[; ;common.c: 826: break;
+"826
+[e $U 446  ]
+[; ;common.c: 827: case 3:
+"827
+[e :U 450 ]
+[; ;common.c: 828: pFont = &dFont3;
+"828
+[e = _pFont -> &U _dFont3 `*F3311 ]
+[; ;common.c: 829: break;
+"829
+[e $U 446  ]
+[; ;common.c: 830: case 4:
+"830
+[e :U 451 ]
+[; ;common.c: 831: pFont = &dFont4;
+"831
+[e = _pFont -> &U _dFont4 `*F3311 ]
+[; ;common.c: 832: break;
+"832
+[e $U 446  ]
+[; ;common.c: 833: case 5:
+"833
+[e :U 452 ]
+[; ;common.c: 834: pFont = &dFont5;
+"834
+[e = _pFont -> &U _dFont5 `*F3311 ]
+[; ;common.c: 835: break;
+"835
+[e $U 446  ]
+"836
+}
+[; ;common.c: 836: }
+[e $U 446  ]
+"819
+[e :U 447 ]
+[e [\ _type_font , $ -> -> 1 `i `uc 448
+ , $ -> -> 2 `i `uc 449
+ , $ -> -> 3 `i `uc 450
+ , $ -> -> 4 `i `uc 451
+ , $ -> -> 5 `i `uc 452
+ 446 ]
+"836
+[e :U 446 ]
+[; ;common.c: 837: }
+"837
+[e :UE 445 ]
+}
+"842
+[v _pressure `(v ~T0 @X0 1 ef ]
+"843
+{
+[; ;common.c: 842: void pressure(void)
+[; ;common.c: 843: {
+[e :U _pressure ]
+[f ]
+"844
+[v _pr `ui ~T0 @X0 1 a ]
+[; ;common.c: 844: uint16_t pr;
+[; ;common.c: 846: switch (events)
+"846
+[e $U 455  ]
+[; ;common.c: 847: {
+"847
+{
+[; ;common.c: 848: case 5:
+"848
+[e :U 456 ]
+[; ;common.c: 849: clear_matrix();
+"849
+[e ( _clear_matrix ..  ]
+[; ;common.c: 850: if (press) {
+"850
+[e $ ! != _press -> -> 0 `i `ul 457  ]
+{
+[; ;common.c: 855: pr = press / 100;
+"855
+[e = _pr -> / _press -> -> -> 100 `i `l `ul `ui ]
+[; ;common.c: 856: pic_to_led(3, 4);
+"856
+[e ( _pic_to_led (2 , -> -> 3 `i `uc -> -> 4 `i `uc ]
+[; ;common.c: 857: putchar_down(11, (pr / 100) % 10, pFont);
+"857
+[e ( _putchar_down (3 , , -> -> 11 `i `uc -> % / _pr -> -> 100 `i `ui -> -> 10 `i `ui `uc _pFont ]
+[; ;common.c: 858: putchar_down(17, (pr / 10) % 10, pFont);
+"858
+[e ( _putchar_down (3 , , -> -> 17 `i `uc -> % / _pr -> -> 10 `i `ui -> -> 10 `i `ui `uc _pFont ]
+[; ;common.c: 859: putchar_down(23, pr % 10, pFont);
+"859
+[e ( _putchar_down (3 , , -> -> 23 `i `uc -> % _pr -> -> 10 `i `ui `uc _pFont ]
+"862
+}
+[; ;common.c: 862: } else {
+[e $U 458  ]
+[e :U 457 ]
+{
+[; ;common.c: 863: pic_to_led(3, 4);
+"863
+[e ( _pic_to_led (2 , -> -> 3 `i `uc -> -> 4 `i `uc ]
+[; ;common.c: 864: putchar_down(11, 'E', &Font);
+"864
+[e ( _putchar_down (3 , , -> -> 11 `i `uc -> -> 69 `ui `uc -> &U _Font `*F3117 ]
+[; ;common.c: 865: putchar_down(17, 'R', &Font);
+"865
+[e ( _putchar_down (3 , , -> -> 17 `i `uc -> -> 82 `ui `uc -> &U _Font `*F3117 ]
+[; ;common.c: 866: putchar_down(23, 'R', &Font);
+"866
+[e ( _putchar_down (3 , , -> -> 23 `i `uc -> -> 82 `ui `uc -> &U _Font `*F3117 ]
+"868
+}
+[e :U 458 ]
+[; ;common.c: 868: }
+[; ;common.c: 870: events = 6;
+"870
+[e = _events -> -> 6 `i `uc ]
+[; ;common.c: 871: RTOS_SetTask(default_state, 400, 0);
+"871
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 400 `i `ui -> -> 0 `i `ui ]
 [; ;common.c: 875: break;
 "875
-[e $U 448  ]
+[e $U 454  ]
 [; ;common.c: 876: case 6:
 "876
-[e :U 461 ]
-[; ;common.c: 878: break;
+[e :U 459 ]
+[; ;common.c: 877: break;
+"877
+[e $U 454  ]
+[; ;common.c: 878: case 4:
 "878
-[e $U 448  ]
+[e :U 460 ]
+[; ;common.c: 879: events = 5;
 "879
-}
-[; ;common.c: 879: }
-[e $U 448  ]
-"802
-[e :U 449 ]
-[e [\ _events , $ -> -> 5 `i `uc 450
- , $ -> -> 1 `i `uc 454
- , $ -> -> 2 `i `uc 456
- , $ -> -> 3 `i `uc 458
- , $ -> -> 4 `i `uc 460
- , $ -> -> 6 `i `uc 461
- 448 ]
-"879
-[e :U 448 ]
-[; ;common.c: 880: if (en_put)
-"880
-[e $ ! _en_put 462  ]
-[; ;common.c: 881: Update_Matrix(Dis_Buff);
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 881: if (press) {
 "881
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[e :U 462 ]
-[; ;common.c: 882: en_put = 1;
-"882
-[e = _en_put -> -> 1 `i `b ]
-[; ;common.c: 884: if (nrf24_dataReady()) {
-"884
-[e $ ! != -> ( _nrf24_dataReady ..  `i -> -> -> 0 `i `uc `i 463  ]
+[e $ ! != _press -> -> 0 `i `ul 461  ]
 {
-[; ;common.c: 885: nrf24_getData(&data_array);
+[; ;common.c: 882: sprintf(text_buf, "לל.נע.סע.");
+"882
+[e ( _sprintf (1 , &U _text_buf :s 1C ]
+[; ;common.c: 883: interval_scroll_text();
+"883
+[e ( _interval_scroll_text ..  ]
+"884
+}
+[; ;common.c: 884: } else
+[e $U 462  ]
+[e :U 461 ]
+[; ;common.c: 885: scroll_left();
 "885
-[e ( _nrf24_getData (1 &U _data_array ]
-[; ;common.c: 886: spi_rw(0b11100010);
+[e ( _scroll_left ..  ]
+[e :U 462 ]
+[; ;common.c: 886: pre_ref_dis();
 "886
-[e ( _spi_rw (1 -> -> 226 `i `uc ]
-[; ;common.c: 888: temperature_radio = data_array[0];
+[e ( _pre_ref_dis ..  ]
+[; ;common.c: 887: RTOS_DeleteTask(default_state);
+"887
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 888: RTOS_DeleteTask(pressure);
 "888
-[e = _temperature_radio *U + &U _data_array * -> -> -> 0 `i `ui `ux -> -> # *U &U _data_array `ui `ux ]
-[; ;common.c: 889: minus = data_array[1];
+[e ( _RTOS_DeleteTask (1 &U _pressure ]
+[; ;common.c: 889: RTOS_SetTask(time_led, 0, 20);
 "889
-[e = _minus *U + &U _data_array * -> -> -> 1 `i `ui `ux -> -> # *U &U _data_array `ui `ux ]
-[; ;common.c: 890: err_ds_count = 0;
-"890
-[e = _err_ds_count -> -> 0 `i `ui ]
-[; ;common.c: 891: err_ds18 = 0;
+[e ( _RTOS_SetTask (3 , , &U _time_led -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 891: break;
 "891
-[e = _err_ds18 -> -> 0 `i `b ]
+[e $U 454  ]
 "892
 }
-[; ;common.c: 892: } else
-[e $U 464  ]
-[e :U 463 ]
-[; ;common.c: 893: err_ds_count++;
+[; ;common.c: 892: }
+[e $U 454  ]
+"846
+[e :U 455 ]
+[e [\ _events , $ -> -> 5 `i `uc 456
+ , $ -> -> 6 `i `uc 459
+ , $ -> -> 4 `i `uc 460
+ 454 ]
+"892
+[e :U 454 ]
+[; ;common.c: 893: }
 "893
-[e ++ _err_ds_count -> -> 1 `i `ui ]
-[e :U 464 ]
-[; ;common.c: 895: if (err_ds_count > 600)
+[e :UE 453 ]
+}
 "895
-[e $ ! > _err_ds_count -> -> 600 `i `ui 465  ]
-[; ;common.c: 896: err_ds18 = 1;
-"896
-[e = _err_ds18 -> -> 1 `i `b ]
-[e :U 465 ]
-[; ;common.c: 912: }
+[v _pre_ref_dis `(v ~T0 @X0 1 ef ]
+{
+[; ;common.c: 895: void pre_ref_dis(void) {
+[e :U _pre_ref_dis ]
+[f ]
+[; ;common.c: 898: clear_matrix();
+"898
+[e ( _clear_matrix ..  ]
+[; ;common.c: 899: switch (type_clk) {
+"899
+[e $U 465  ]
+{
+[; ;common.c: 900: case 1:
+"900
+[e :U 466 ]
+[; ;common.c: 901: if ((TTime.Thr / 10) % 10)
+"901
+[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 467  ]
+[; ;common.c: 902: putchar_down(0, (TTime.Thr / 10) % 10, pFont);
+"902
+[e ( _putchar_down (3 , , -> -> 0 `i `uc -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
+[e $U 468  ]
+"903
+[e :U 467 ]
+[; ;common.c: 903: else putchar_down(0, 0, &Font);
+[e ( _putchar_down (3 , , -> -> 0 `i `uc -> -> 0 `i `uc -> &U _Font `*F3117 ]
+[e :U 468 ]
+[; ;common.c: 904: putchar_down(6, TTime.Thr % 10, pFont);
+"904
+[e ( _putchar_down (3 , , -> -> 6 `i `uc -> % -> . _TTime 2 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 905: putchar_down(13, (TTime.Tmin / 10) % 10, pFont);
+"905
+[e ( _putchar_down (3 , , -> -> 13 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 906: putchar_down(19, TTime.Tmin % 10, pFont);
+"906
+[e ( _putchar_down (3 , , -> -> 19 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 907: getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
+"907
+[e ( _getTime (3 , , &U . _TTime 2 &U . _TTime 1 &U . _TTime 0 ]
+[; ;common.c: 908: putchar_down_s(25, (TTime.Ts / 10) % 10 + 1);
+"908
+[e ( _putchar_down_s (2 , -> -> 25 `i `uc -> + % / -> . _TTime 0 `i -> 10 `i -> 10 `i -> 1 `i `uc ]
+[; ;common.c: 909: putchar_down_s(29, TTime.Ts % 10 + 1);
+"909
+[e ( _putchar_down_s (2 , -> -> 29 `i `uc -> + % -> . _TTime 0 `i -> 10 `i -> 1 `i `uc ]
+[; ;common.c: 910: break;
+"910
+[e $U 464  ]
+[; ;common.c: 911: case 2:
+"911
+[e :U 469 ]
+[; ;common.c: 912: if ((TTime.Thr / 10) % 10)
 "912
-[e :UE 447 ]
-}
+[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 470  ]
+[; ;common.c: 913: putchar_down(1, (TTime.Thr / 10) % 10, pFont);
+"913
+[e ( _putchar_down (3 , , -> -> 1 `i `uc -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
+[e $U 471  ]
+"914
+[e :U 470 ]
+[; ;common.c: 914: else putchar_down(1, 0, &Font);
+[e ( _putchar_down (3 , , -> -> 1 `i `uc -> -> 0 `i `uc -> &U _Font `*F3117 ]
+[e :U 471 ]
+[; ;common.c: 915: putchar_down(7, TTime.Thr % 10, pFont);
+"915
+[e ( _putchar_down (3 , , -> -> 7 `i `uc -> % -> . _TTime 2 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 916: putchar_down(13, ':', &Font);
 "916
-[v _version `(v ~T0 @X0 1 ef ]
+[e ( _putchar_down (3 , , -> -> 13 `i `uc -> -> 58 `ui `uc -> &U _Font `*F3117 ]
+[; ;common.c: 917: putchar_down(19, (TTime.Tmin / 10) % 10, pFont);
 "917
-{
-[; ;common.c: 916: void version(void)
-[; ;common.c: 917: {
-[e :U _version ]
-[f ]
+[e ( _putchar_down (3 , , -> -> 19 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 918: putchar_down(25, TTime.Tmin % 10, pFont);
 "918
-[v _i `uc ~T0 @X0 1 a ]
-[; ;common.c: 918: uint8_t i;
-[; ;common.c: 920: sprintf(text_buf, "Clock v11.10.17 by Ivan_fd");
+[e ( _putchar_down (3 , , -> -> 25 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
+[; ;common.c: 919: break;
+"919
+[e $U 464  ]
 "920
-[e ( _sprintf (1 , &U _text_buf :s 2C ]
-[; ;common.c: 921: interval_scroll_text();
+}
+[; ;common.c: 920: }
+[e $U 464  ]
+"899
+[e :U 465 ]
+[e [\ _type_clk , $ -> -> 1 `i `uc 466
+ , $ -> -> 2 `i `uc 469
+ 464 ]
+"920
+[e :U 464 ]
+[; ;common.c: 921: idx_pnt = 0;
 "921
-[e ( _interval_scroll_text ..  ]
-[; ;common.c: 929: }
-"929
-[e :UE 466 ]
+[e = _idx_pnt -> -> 0 `i `uc ]
+[; ;common.c: 922: x1 = y1;
+"922
+[e = _x1 _y1 ]
+[; ;common.c: 923: x2 = y2;
+"923
+[e = _x2 _y2 ]
+[; ;common.c: 924: x3 = y3;
+"924
+[e = _x3 _y3 ]
+[; ;common.c: 925: x4 = y4;
+"925
+[e = _x4 _y4 ]
+[; ;common.c: 926: }
+"926
+[e :UE 463 ]
 }
-"931
-[v _default_state `(v ~T0 @X0 1 ef ]
 "932
-{
-[; ;common.c: 931: void default_state(void)
-[; ;common.c: 932: {
-[e :U _default_state ]
-[f ]
-[; ;common.c: 933: events = 4;
+[v _time_led `(v ~T0 @X0 1 ef ]
 "933
-[e = _events -> -> 4 `i `uc ]
-[; ;common.c: 935: }
-"935
-[e :UE 467 ]
-}
+{
+[; ;common.c: 932: void time_led()
+[; ;common.c: 933: {
+[e :U _time_led ]
+[f ]
+"934
+[v _data_array `uc ~T0 @X0 -> 4 `i a ]
+"936
+[v F3442 `ui ~T0 @X0 1 s test ]
+[i F3442
+-> -> 0 `i `ui
+]
+[; ;common.c: 934: uint8_t data_array[4];
+[; ;common.c: 936: static uint16_t test = 0;
+[; ;common.c: 938: switch (events)
 "938
-[v _INT0_ISR `(v ~T0 @X0 1 ef ]
+[e $U 474  ]
+[; ;common.c: 939: {
 "939
 {
-[; ;common.c: 938: void INT0_ISR(void)
-[; ;common.c: 939: {
+[; ;common.c: 940: case 5:
+"940
+[e :U 475 ]
+[; ;common.c: 941: FillBuf(type_clk);
+"941
+[e ( _FillBuf (1 _type_clk ]
+[; ;common.c: 942: if((TTime.Ts>5)&&(TTime.Ts<7))
+"942
+[e $ ! && > -> . _TTime 0 `i -> 5 `i < -> . _TTime 0 `i -> 7 `i 476  ]
+[; ;common.c: 943: {
+"943
+{
+[; ;common.c: 944: readTemp_Single(&temperature, &minus, &time_flag, &timer_val);
+"944
+[e ( _readTemp_Single (4 , , , &U _temperature &U _minus &U _time_flag &U _timer_val ]
+"945
+}
+[e :U 476 ]
+[; ;common.c: 945: }
+[; ;common.c: 946: if(((TTime.Ts>14)&&(TTime.Ts<16)))
+"946
+[e $ ! && > -> . _TTime 0 `i -> 14 `i < -> . _TTime 0 `i -> 16 `i 477  ]
+[; ;common.c: 947: events = 3;
+"947
+[e = _events -> -> 3 `i `uc ]
+[e :U 477 ]
+[; ;common.c: 948: if(((TTime.Ts>39)&&(TTime.Ts<41)))
+"948
+[e $ ! && > -> . _TTime 0 `i -> 39 `i < -> . _TTime 0 `i -> 41 `i 478  ]
+[; ;common.c: 949: events = 2;
+"949
+[e = _events -> -> 2 `i `uc ]
+[e :U 478 ]
+[; ;common.c: 950: break;
+"950
+[e $U 473  ]
+[; ;common.c: 951: case 1:
+"951
+[e :U 479 ]
+[; ;common.c: 952: RTOS_DeleteTask(time_led);
+"952
+[e ( _RTOS_DeleteTask (1 &U _time_led ]
+[; ;common.c: 953: RTOS_SetTask(time_set_min, 0, 50);
+"953
+[e ( _RTOS_SetTask (3 , , &U _time_set_min -> -> 0 `i `ui -> -> 50 `i `ui ]
+[; ;common.c: 954: RTOS_SetTask(default_state, 2000, 0);
+"954
+[e ( _RTOS_SetTask (3 , , &U _default_state -> -> 2000 `i `ui -> -> 0 `i `ui ]
+[; ;common.c: 955: TSTime = TTime;
+"955
+[e = _TSTime _TTime ]
+[; ;common.c: 956: events = 5;
+"956
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 957: en_put = 0;
+"957
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 958: if (type_clk == 2)
+"958
+[e $ ! == -> _type_clk `i -> 2 `i 480  ]
+[; ;common.c: 959: putchar_b_buf(13, 23, &Font);
+"959
+[e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> -> 23 `i `uc -> &U _Font `*F3098 ]
+[e :U 480 ]
+[; ;common.c: 961: break;
+"961
+[e $U 473  ]
+[; ;common.c: 962: case 2:
+"962
+[e :U 481 ]
+[; ;common.c: 965: bmp280Convert(&press, &temperbmp280);
+"965
+[e ( _bmp280Convert (2 , -> &U _press `*l -> &U _temperbmp280 `*l ]
+[; ;common.c: 968: if (type_clk == 2)
+"968
+[e $ ! == -> _type_clk `i -> 2 `i 482  ]
+[; ;common.c: 969: putchar_b_buf(13, 23, &Font);
+"969
+[e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> -> 23 `i `uc -> &U _Font `*F3098 ]
+[e :U 482 ]
+[; ;common.c: 970: scroll_right();
+"970
+[e ( _scroll_right ..  ]
+[; ;common.c: 971: RTOS_DeleteTask(time_led);
+"971
+[e ( _RTOS_DeleteTask (1 &U _time_led ]
+[; ;common.c: 972: RTOS_SetTask(pressure, 0, 20);
+"972
+[e ( _RTOS_SetTask (3 , , &U _pressure -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 973: events = 5;
+"973
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 974: en_put = 0;
+"974
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 981: break;
+"981
+[e $U 473  ]
+[; ;common.c: 982: case 3:
+"982
+[e :U 483 ]
+[; ;common.c: 985: if (type_clk == 2)
+"985
+[e $ ! == -> _type_clk `i -> 2 `i 484  ]
+[; ;common.c: 986: putchar_b_buf(13, 23, &Font);
+"986
+[e ( _putchar_b_buf (3 , , -> -> 13 `i `uc -> -> 23 `i `uc -> &U _Font `*F3098 ]
+[e :U 484 ]
+[; ;common.c: 987: scroll_left();
+"987
+[e ( _scroll_left ..  ]
+[; ;common.c: 988: RTOS_DeleteTask(time_led);
+"988
+[e ( _RTOS_DeleteTask (1 &U _time_led ]
+[; ;common.c: 989: RTOS_SetTask(home_temp, 0, 20);
+"989
+[e ( _RTOS_SetTask (3 , , &U _home_temp -> -> 0 `i `ui -> -> 20 `i `ui ]
+[; ;common.c: 990: events = 5;
+"990
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 991: en_put = 0;
+"991
+[e = _en_put -> -> 0 `i `b ]
+[; ;common.c: 992: break;
+"992
+[e $U 473  ]
+[; ;common.c: 993: case 4:
+"993
+[e :U 485 ]
+[; ;common.c: 994: events = 5;
+"994
+[e = _events -> -> 5 `i `uc ]
+[; ;common.c: 995: RTOS_DeleteTask(default_state);
+"995
+[e ( _RTOS_DeleteTask (1 &U _default_state ]
+[; ;common.c: 997: _delay((unsigned long)((10)*(40000000/4000.0)));
+"997
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
+[; ;common.c: 1001: if (nrf24_dataReady()) {
+"1001
+[e $ ! != -> ( _nrf24_dataReady ..  `i -> -> -> 0 `i `uc `i 486  ]
+{
+[; ;common.c: 1002: test++;
+"1002
+[e ++ F3442 -> -> 1 `i `ui ]
+[; ;common.c: 1003: nrf24_getData(&data_array);
+"1003
+[e ( _nrf24_getData (1 &U _data_array ]
+[; ;common.c: 1004: printf("%u > ", test);
+"1004
+[e ( _printf , (. :s 2C F3442 ]
+[; ;common.c: 1005: printf("%u ", data_array[0]);
+"1005
+[e ( _printf , (. :s 3C -> *U + &U _data_array * -> -> -> 0 `i `ui `ux -> -> # *U &U _data_array `ui `ux `i ]
+[; ;common.c: 1006: printf("%c ", data_array[1]);
+"1006
+[e ( _printf , (. :s 4C -> *U + &U _data_array * -> -> -> 1 `i `ui `ux -> -> # *U &U _data_array `ui `ux `i ]
+[; ;common.c: 1007: printf("%2X ", data_array[2]);
+"1007
+[e ( _printf , (. :s 5C -> *U + &U _data_array * -> -> -> 2 `i `ui `ux -> -> # *U &U _data_array `ui `ux `i ]
+[; ;common.c: 1008: printf("%2X\r\n", data_array[3]);
+"1008
+[e ( _printf , (. :s 6C -> *U + &U _data_array * -> -> -> 3 `i `ui `ux -> -> # *U &U _data_array `ui `ux `i ]
+"1009
+}
+[e :U 486 ]
+[; ;common.c: 1009: }
+[; ;common.c: 1011: break;
+"1011
+[e $U 473  ]
+[; ;common.c: 1012: case 6:
+"1012
+[e :U 487 ]
+[; ;common.c: 1014: break;
+"1014
+[e $U 473  ]
+"1015
+}
+[; ;common.c: 1015: }
+[e $U 473  ]
+"938
+[e :U 474 ]
+[e [\ _events , $ -> -> 5 `i `uc 475
+ , $ -> -> 1 `i `uc 479
+ , $ -> -> 2 `i `uc 481
+ , $ -> -> 3 `i `uc 483
+ , $ -> -> 4 `i `uc 485
+ , $ -> -> 6 `i `uc 487
+ 473 ]
+"1015
+[e :U 473 ]
+[; ;common.c: 1016: if (en_put)
+"1016
+[e $ ! _en_put 488  ]
+[; ;common.c: 1017: Update_Matrix(Dis_Buff);
+"1017
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[e :U 488 ]
+[; ;common.c: 1019: if (brg_type) {
+"1019
+[e $ ! != -> _brg_type `i -> -> -> 0 `i `uc `i 489  ]
+{
+[; ;common.c: 1020: if ((TTime.Ts % 5 == 0)&&(oldsec_flag)) {
+"1020
+[e $ ! && == % -> . _TTime 0 `i -> 5 `i -> 0 `i _oldsec_flag 490  ]
+{
+[; ;common.c: 1021: oldsec_flag = 0;
+"1021
+[e = _oldsec_flag -> -> 0 `i `b ]
+[; ;common.c: 1022: read_adc();
+"1022
+[e ( _read_adc ..  ]
+"1023
+}
+[e :U 490 ]
+[; ;common.c: 1023: }
+[; ;common.c: 1024: adj_brig();
+"1024
+[e ( _adj_brig ..  ]
+"1025
+}
+[e :U 489 ]
+[; ;common.c: 1025: }
+[; ;common.c: 1026: en_put = 1;
+"1026
+[e = _en_put -> -> 1 `i `b ]
+[; ;common.c: 1029: if (nrf24_dataReady()) {
+"1029
+[e $ ! != -> ( _nrf24_dataReady ..  `i -> -> -> 0 `i `uc `i 491  ]
+{
+[; ;common.c: 1030: nrf24_getData(&data_array);
+"1030
+[e ( _nrf24_getData (1 &U _data_array ]
+[; ;common.c: 1031: spi_rw(0b11100010);
+"1031
+[e ( _spi_rw (1 -> -> 226 `i `uc ]
+[; ;common.c: 1033: temperature_radio = data_array[0];
+"1033
+[e = _temperature_radio *U + &U _data_array * -> -> -> 0 `i `ui `ux -> -> # *U &U _data_array `ui `ux ]
+[; ;common.c: 1034: minus = data_array[1];
+"1034
+[e = _minus *U + &U _data_array * -> -> -> 1 `i `ui `ux -> -> # *U &U _data_array `ui `ux ]
+[; ;common.c: 1035: err_ds_count = 0;
+"1035
+[e = _err_ds_count -> -> 0 `i `ui ]
+[; ;common.c: 1036: err_ds18 = 0;
+"1036
+[e = _err_ds18 -> -> 0 `i `b ]
+"1037
+}
+[; ;common.c: 1037: } else
+[e $U 492  ]
+[e :U 491 ]
+[; ;common.c: 1038: err_ds_count++;
+"1038
+[e ++ _err_ds_count -> -> 1 `i `ui ]
+[e :U 492 ]
+[; ;common.c: 1040: if (err_ds_count > 600)
+"1040
+[e $ ! > _err_ds_count -> -> 600 `i `ui 493  ]
+[; ;common.c: 1041: err_ds18 = 1;
+"1041
+[e = _err_ds18 -> -> 1 `i `b ]
+[e :U 493 ]
+[; ;common.c: 1047: if (nrf24_dataReady()) {
+"1047
+[e $ ! != -> ( _nrf24_dataReady ..  `i -> -> -> 0 `i `uc `i 494  ]
+{
+[; ;common.c: 1048: test++;
+"1048
+[e ++ F3442 -> -> 1 `i `ui ]
+[; ;common.c: 1049: nrf24_getData(&data_array);
+"1049
+[e ( _nrf24_getData (1 &U _data_array ]
+[; ;common.c: 1050: printf("%u > ", test);
+"1050
+[e ( _printf , (. :s 7C F3442 ]
+[; ;common.c: 1051: printf("%u ", data_array[0]);
+"1051
+[e ( _printf , (. :s 8C -> *U + &U _data_array * -> -> -> 0 `i `ui `ux -> -> # *U &U _data_array `ui `ux `i ]
+[; ;common.c: 1052: printf("%c ", data_array[1]);
+"1052
+[e ( _printf , (. :s 9C -> *U + &U _data_array * -> -> -> 1 `i `ui `ux -> -> # *U &U _data_array `ui `ux `i ]
+[; ;common.c: 1053: printf("%2X ", data_array[2]);
+"1053
+[e ( _printf , (. :s 10C -> *U + &U _data_array * -> -> -> 2 `i `ui `ux -> -> # *U &U _data_array `ui `ux `i ]
+[; ;common.c: 1054: printf("%2X\r\n", data_array[3]);
+"1054
+[e ( _printf , (. :s 11C -> *U + &U _data_array * -> -> -> 3 `i `ui `ux -> -> # *U &U _data_array `ui `ux `i ]
+"1055
+}
+[e :U 494 ]
+[; ;common.c: 1055: }
+[; ;common.c: 1059: }
+"1059
+[e :UE 472 ]
+}
+"1065
+[v _usart_r `(v ~T0 @X0 1 ef ]
+{
+[; ;common.c: 1065: void usart_r() {
+[e :U _usart_r ]
+[f ]
+"1066
+[v F3452 `uc ~T0 @X0 -> 8 `i s usart_data ]
+"1067
+[v F3453 `uc ~T0 @X0 1 s i ]
+[i F3453
+-> -> 0 `i `uc
+]
+[; ;common.c: 1066: static uint8_t usart_data[8];
+[; ;common.c: 1067: static uint8_t i = 0;
+[; ;common.c: 1069: if ((eusartRxCount)) {
+"1069
+[e $ ! != -> _eusartRxCount `i -> -> -> 0 `i `Vuc `i 496  ]
+{
+[; ;common.c: 1071: usart_data[i++] = EUSART_Read();
+"1071
+[e = *U + &U F3452 * -> ++ F3453 -> -> 1 `i `uc `ux -> -> # *U &U F3452 `ui `ux ( _EUSART_Read ..  ]
+[; ;common.c: 1072: return;
+"1072
+[e $UE 495  ]
+"1073
+}
+[e :U 496 ]
+[; ;common.c: 1073: }
+[; ;common.c: 1074: if ((usart_data[0] == '$')) {
+"1074
+[e $ ! == -> *U + &U F3452 * -> -> -> 0 `i `ui `ux -> -> # *U &U F3452 `ui `ux `ui -> 36 `ui 497  ]
+{
+[; ;common.c: 1075: switch (usart_data[1]) {
+"1075
+[e $U 499  ]
+{
+[; ;common.c: 1076: case 't':
+"1076
+[e :U 500 ]
+[; ;common.c: 1077: TSTime.Thr = ((usart_data[2]-48)*10)+(usart_data[3]-48);
+"1077
+[e = . _TSTime 2 -> + * - -> *U + &U F3452 * -> -> -> 2 `i `ui `ux -> -> # *U &U F3452 `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U F3452 * -> -> -> 3 `i `ui `ux -> -> # *U &U F3452 `ui `ux `i -> 48 `i `uc ]
+[; ;common.c: 1078: TSTime.Tmin = ((usart_data[4]-48)*10)+(usart_data[5]-48);
+"1078
+[e = . _TSTime 1 -> + * - -> *U + &U F3452 * -> -> -> 4 `i `ui `ux -> -> # *U &U F3452 `ui `ux `i -> 48 `i -> 10 `i - -> *U + &U F3452 * -> -> -> 5 `i `ui `ux -> -> # *U &U F3452 `ui `ux `i -> 48 `i `uc ]
+[; ;common.c: 1079: setTime(TSTime.Thr, TSTime.Tmin, 0);
+"1079
+[e ( _setTime (3 , , . _TSTime 2 . _TSTime 1 -> -> 0 `i `uc ]
+[; ;common.c: 1080: EUSART_Write('O');
+"1080
+[e ( _EUSART_Write (1 -> -> 79 `ui `uc ]
+[; ;common.c: 1081: EUSART_Write('K');
+"1081
+[e ( _EUSART_Write (1 -> -> 75 `ui `uc ]
+[; ;common.c: 1082: EUSART_Write('\r');
+"1082
+[e ( _EUSART_Write (1 -> -> 13 `ui `uc ]
+[; ;common.c: 1083: EUSART_Write('\n');
+"1083
+[e ( _EUSART_Write (1 -> -> 10 `ui `uc ]
+[; ;common.c: 1085: break;
+"1085
+[e $U 498  ]
+"1086
+}
+[; ;common.c: 1086: }
+[e $U 498  ]
+"1075
+[e :U 499 ]
+[e [\ *U + &U F3452 * -> -> -> 1 `i `ui `ux -> -> # *U &U F3452 `ui `ux , $ -> -> 116 `ui `uc 500
+ 498 ]
+"1086
+[e :U 498 ]
+"1087
+}
+[e :U 497 ]
+[; ;common.c: 1087: }
+[; ;common.c: 1088: usart_data[0] = 0;
+"1088
+[e = *U + &U F3452 * -> -> -> 0 `i `ui `ux -> -> # *U &U F3452 `ui `ux -> -> 0 `i `uc ]
+[; ;common.c: 1089: usart_data[1] = 0;
+"1089
+[e = *U + &U F3452 * -> -> -> 1 `i `ui `ux -> -> # *U &U F3452 `ui `ux -> -> 0 `i `uc ]
+[; ;common.c: 1090: i = 0;
+"1090
+[e = F3453 -> -> 0 `i `uc ]
+[; ;common.c: 1091: reinit_rx();
+"1091
+[e ( _reinit_rx ..  ]
+[; ;common.c: 1093: }
+"1093
+[e :UE 495 ]
+}
+"1096
+[v _version `(v ~T0 @X0 1 ef ]
+"1097
+{
+[; ;common.c: 1096: void version(void)
+[; ;common.c: 1097: {
+[e :U _version ]
+[f ]
+"1098
+[v _i `uc ~T0 @X0 1 a ]
+[; ;common.c: 1098: uint8_t i;
+[; ;common.c: 1100: sprintf(text_buf, "Clock v11.10.17 by Ivan_fd");
+"1100
+[e ( _sprintf (1 , &U _text_buf :s 12C ]
+[; ;common.c: 1101: interval_scroll_text();
+"1101
+[e ( _interval_scroll_text ..  ]
+[; ;common.c: 1109: }
+"1109
+[e :UE 501 ]
+}
+"1115
+[v _read_adc `(v ~T0 @X0 1 ef ]
+{
+[; ;common.c: 1115: void read_adc() {
+[e :U _read_adc ]
+[f ]
+[; ;common.c: 1116: ADCON0bits.GO = 1;
+"1116
+[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
+[; ;common.c: 1117: while (ADCON0bits.GO);
+"1117
+[e $U 503  ]
+[e :U 504 ]
+[e :U 503 ]
+[e $ != -> . . _ADCON0bits 2 1 `i -> -> -> 0 `i `Vuc `i 504  ]
+[e :U 505 ]
+[; ;common.c: 1118: adc_res = (ADRESH << 8) + ADRESL;
+"1118
+[e = _adc_res -> + << -> _ADRESH `i -> 8 `i -> _ADRESL `i `ui ]
+[; ;common.c: 1121: printf("ADC_RESULT:%u\r\n", adc_res);
+"1121
+[e ( _printf , (. :s 13C _adc_res ]
+[; ;common.c: 1124: }
+"1124
+[e :UE 502 ]
+}
+"1130
+[v _adj_brig `(v ~T0 @X0 1 ef ]
+{
+[; ;common.c: 1130: void adj_brig() {
+[e :U _adj_brig ]
+[f ]
+[; ;common.c: 1134: if (adc_res >= 600)
+"1134
+[e $ ! >= _adc_res -> -> 600 `i `ui 507  ]
+[; ;common.c: 1135: Cmd7221(0x0A, 0x04);
+"1135
+[e ( _Cmd7221 (2 , -> -> 10 `i `uc -> -> 4 `i `uc ]
+[e $U 508  ]
+"1136
+[e :U 507 ]
+[; ;common.c: 1136: else if (adc_res >= 450)
+[e $ ! >= _adc_res -> -> 450 `i `ui 509  ]
+[; ;common.c: 1137: Cmd7221(0x0A, 0x03);
+"1137
+[e ( _Cmd7221 (2 , -> -> 10 `i `uc -> -> 3 `i `uc ]
+[e $U 510  ]
+"1138
+[e :U 509 ]
+[; ;common.c: 1138: else if (adc_res >= 300)
+[e $ ! >= _adc_res -> -> 300 `i `ui 511  ]
+[; ;common.c: 1139: Cmd7221(0x0A, 0x02);
+"1139
+[e ( _Cmd7221 (2 , -> -> 10 `i `uc -> -> 2 `i `uc ]
+[e $U 512  ]
+"1140
+[e :U 511 ]
+[; ;common.c: 1140: else if (adc_res >= 150)
+[e $ ! >= _adc_res -> -> 150 `i `ui 513  ]
+[; ;common.c: 1141: Cmd7221(0x0A, 0x01);
+"1141
+[e ( _Cmd7221 (2 , -> -> 10 `i `uc -> -> 1 `i `uc ]
+[e $U 514  ]
+"1142
+[e :U 513 ]
+[; ;common.c: 1142: else if (adc_res <= 100)
+[e $ ! <= _adc_res -> -> 100 `i `ui 515  ]
+[; ;common.c: 1143: Cmd7221(0x0A, 0x00);
+"1143
+[e ( _Cmd7221 (2 , -> -> 10 `i `uc -> -> 0 `i `uc ]
+[e :U 515 ]
+"1145
+[e :U 514 ]
+[e :U 512 ]
+[e :U 510 ]
+[e :U 508 ]
+[; ;common.c: 1145: }
+[e :UE 506 ]
+}
+"1148
+[v _default_state `(v ~T0 @X0 1 ef ]
+"1149
+{
+[; ;common.c: 1148: void default_state(void)
+[; ;common.c: 1149: {
+[e :U _default_state ]
+[f ]
+[; ;common.c: 1150: events = 4;
+"1150
+[e = _events -> -> 4 `i `uc ]
+[; ;common.c: 1152: }
+"1152
+[e :UE 516 ]
+}
+"1155
+[v _INT0_ISR `(v ~T0 @X0 1 ef ]
+"1156
+{
+[; ;common.c: 1155: void INT0_ISR(void)
+[; ;common.c: 1156: {
 [e :U _INT0_ISR ]
 [f ]
-[; ;common.c: 947: RTOS_SetTask(GetTime, 0, 0);
-"947
+[; ;common.c: 1164: RTOS_SetTask(GetTime, 0, 0);
+"1164
 [e ( _RTOS_SetTask (3 , , &U _GetTime -> -> 0 `i `ui -> -> 0 `i `ui ]
-[; ;common.c: 949: idx_pnt++;
-"949
+[; ;common.c: 1166: idx_pnt++;
+"1166
 [e ++ _idx_pnt -> -> 1 `i `uc ]
-[; ;common.c: 950: if (idx_pnt == 8) idx_pnt = 0;
-"950
-[e $ ! == -> _idx_pnt `i -> 8 `i 469  ]
+[; ;common.c: 1167: if (idx_pnt == 8) idx_pnt = 0;
+"1167
+[e $ ! == -> _idx_pnt `i -> 8 `i 518  ]
 [e = _idx_pnt -> -> 0 `i `uc ]
-[e :U 469 ]
-[; ;common.c: 951: }
-"951
-[e :UE 468 ]
+[e :U 518 ]
+[; ;common.c: 1169: }
+"1169
+[e :UE 517 ]
 }
-"956
+"1174
 [v _TMR1_ISR `(v ~T0 @X0 1 ef ]
-"957
+"1175
 {
-[; ;common.c: 956: void TMR1_ISR(void)
-[; ;common.c: 957: {
+[; ;common.c: 1174: void TMR1_ISR(void)
+[; ;common.c: 1175: {
 [e :U _TMR1_ISR ]
 [f ]
-[; ;common.c: 960: if(++timer_val >= 150)
-"960
-[e $ ! >= -> =+ _timer_val -> -> 1 `i `uc `i -> 150 `i 471  ]
-[; ;common.c: 961: {
-"961
+[; ;common.c: 1178: if(++timer_val >= 150)
+"1178
+[e $ ! >= -> =+ _timer_val -> -> 1 `i `uc `i -> 150 `i 520  ]
+[; ;common.c: 1179: {
+"1179
 {
-[; ;common.c: 962: timer_val = 0;
-"962
+[; ;common.c: 1180: timer_val = 0;
+"1180
 [e = _timer_val -> -> 0 `i `uc ]
-[; ;common.c: 963: time_flag = 1;
-"963
+[; ;common.c: 1181: time_flag = 1;
+"1181
 [e = _time_flag -> -> 1 `i `uc ]
-[; ;common.c: 964: T1CONbits.TMR1ON = 0;
-"964
+[; ;common.c: 1182: T1CONbits.TMR1ON = 0;
+"1182
 [e = . . _T1CONbits 1 0 -> -> 0 `i `uc ]
-"966
+"1184
 }
-[e :U 471 ]
-[; ;common.c: 966: }
-[; ;common.c: 978: }
-"978
-[e :UE 470 ]
+[e :U 520 ]
+[; ;common.c: 1184: }
+[; ;common.c: 1196: }
+"1196
+[e :UE 519 ]
 }
 [p f _sprintf 8388608 ]
-[a 2C 67 108 111 99 107 32 118 49 49 46 49 48 46 49 55 32 98 121 32 73 118 97 110 95 102 100 0 ]
+[p f _printf 11043840 ]
+[a 12C 67 108 111 99 107 32 118 49 49 46 49 48 46 49 55 32 98 121 32 73 118 97 110 95 102 100 0 ]
 [a 1C 236 236 46 240 242 46 241 242 46 0 ]
+[a 3C 37 117 32 0 ]
+[a 8C 37 117 32 0 ]
+[a 4C 37 99 32 0 ]
+[a 9C 37 99 32 0 ]
+[a 5C 37 50 88 32 0 ]
+[a 10C 37 50 88 32 0 ]
+[a 2C 37 117 32 62 32 0 ]
+[a 7C 37 117 32 62 32 0 ]
+[a 13C 65 68 67 95 82 69 83 85 76 84 58 37 117 13 10 0 ]
+[a 6C 37 50 88 13 10 0 ]
+[a 11C 37 50 88 13 10 0 ]

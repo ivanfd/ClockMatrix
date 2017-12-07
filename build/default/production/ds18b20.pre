@@ -4320,9 +4320,15 @@ void scroll_left(void);
 void interval_scroll_text();
 void scroll_right(void);
 
-# 8 "eusart.h"
+# 13 "eusart.h"
+extern volatile uint8_t eusartRxCount;
+
 void init_uart(void);
 void putch(char data);
+void EUSART_Receive_ISR(void);
+uint8_t EUSART_Read(void);
+void EUSART_Write(uint8_t txData);
+void reinit_rx();
 
 # 52 "BMP_280.h"
 void bmp280_Init();
@@ -4387,7 +4393,7 @@ void sound_init();
 
 void TMR3_ISR();
 
-# 17 "interrupt.h"
+# 18 "interrupt.h"
 void interrupt INTERRUPT_InterruptManager(void);
 
 # 13 "dispatcher.h"
@@ -4406,7 +4412,7 @@ void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeri
 void RTOS_DeleteTask (void (*taskFunc)(void));
 void RTOS_DispatchTask (void);
 
-# 46 "common.h"
+# 49 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 void time_set_min(void);
@@ -4426,6 +4432,11 @@ void pressure(void);
 void pre_ref_dis(void);
 void set_type_clk(void);
 void radio_temp(void);
+void read_adc();
+void adj_brig();
+void brg_set();
+void set_brg_manual();
+void usart_r();
 
 # 10 "ds18b20.h"
 const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
@@ -4502,7 +4513,10 @@ temp = temp >> 4;
 temp = (temp & 0x00ff) * 10;
 temp = temp + tmp;
 
-# 100
+
+printf("Temperature: %d\n\r ", temp);
+
+
 fptmp = temp % 10;
 temp = temp / 10;
 

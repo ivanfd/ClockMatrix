@@ -1,5 +1,24 @@
 #include "eusart.h"
 
+/**
+  Section: Macro Declarations
+*/
+#define EUSART_TX_BUFFER_SIZE 8
+#define EUSART_RX_BUFFER_SIZE 8
+
+/**
+  Section: Global Variables
+*/
+
+static uint8_t eusartTxHead = 0;
+static uint8_t eusartTxTail = 0;
+static uint8_t eusartTxBuffer[EUSART_TX_BUFFER_SIZE];
+volatile uint8_t eusartTxBufferRemaining;
+
+static uint8_t eusartRxHead = 0;
+static uint8_t eusartRxTail = 0;
+static uint8_t eusartRxBuffer[EUSART_RX_BUFFER_SIZE];
+volatile uint8_t eusartRxCount;
 
 
 void putch(char data)
@@ -29,4 +48,85 @@ void init_uart(void)
     
     SPBRGH = 0x04;
     SPBRG = 0x10;
+    
+        // initializing the driver state
+    eusartTxHead = 0;
+    eusartTxTail = 0;
+    eusartTxBufferRemaining = sizeof(eusartTxBuffer);
+
+    eusartRxHead = 0;
+    eusartRxTail = 0;
+    eusartRxCount = 0;
+    
+        // enable receive interrupt
+    PIE1bits.RCIE = 1;
+}
+
+uint8_t EUSART_Read(void) {
+    uint8_t readValue = 0;
+
+    while (0 == eusartRxCount) {
+    }
+
+    readValue = eusartRxBuffer[eusartRxTail++];
+    if (sizeof (eusartRxBuffer) <= eusartRxTail) {
+        eusartRxTail = 0;
+    }
+    PIE1bits.RCIE = 0;
+    eusartRxCount--;
+    PIE1bits.RCIE = 1;
+
+    return readValue;
+}
+
+void EUSART_Write(uint8_t txData) {
+    while (0 == eusartTxBufferRemaining) {
+    }
+
+    if (0 == PIE1bits.TXIE) {
+        while (!TXIF)
+            continue;
+        TXREG = txData;
+        // TXREG = txData;
+    } else {
+        PIE1bits.TXIE = 0;
+        eusartTxBuffer[eusartTxHead++] = txData;
+        if (sizeof (eusartTxBuffer) <= eusartTxHead) {
+            eusartTxHead = 0;
+        }
+        eusartTxBufferRemaining--;
+    }
+    //  PIE1bits.TXIE = 1;
+}
+
+//=========================================
+//  деініціалізувати прийомник (очистити)
+//=========================================
+
+void reinit_rx() {
+    eusartRxHead = 0;
+    eusartRxTail = 0;
+    eusartRxCount = 0;
+}
+
+
+
+// переривання по прийомі порта
+
+void EUSART_Receive_ISR(void) {
+
+    if (1 == RCSTAbits.OERR) {
+        // EUSART error - restart
+
+        RCSTAbits.CREN = 0;
+        RCSTAbits.CREN = 1;
+    }
+
+    // buffer overruns are ignored
+    eusartRxBuffer[eusartRxHead++] = RCREG;
+    if (sizeof (eusartRxBuffer) <= eusartRxHead) {
+        eusartRxHead = 0;
+    }
+    eusartRxCount++;
+        
 }

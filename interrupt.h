@@ -8,6 +8,7 @@
 #include "display.h"
 #include "timer.h"
 #include "sound.h"
+#include "eusart.h"
 
 #define INTERRUPT_GlobalInterruptEnable() (INTCONbits.GIE = 1)
 #define INTERRUPT_GlobalInterruptDisable() (INTCONbits.GIE = 0)

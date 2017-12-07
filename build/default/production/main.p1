@@ -25,10 +25,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S261 . . . . ]
 "6517
 [v _INTCONbits `VS261 ~T0 @X0 0 e@4082 ]
-[v F3141 `(v ~T0 @X0 0 tf ]
+[v F3151 `(v ~T0 @X0 0 tf ]
 "26 dispatcher.h
-[v _RTOS_SetTask `(v ~T0 @X0 0 ef3`*F3141`ui`ui ]
-"55 common.h
+[v _RTOS_SetTask `(v ~T0 @X0 0 ef3`*F3151`ui`ui ]
+"58 common.h
 [v _time_led `(v ~T0 @X0 0 ef ]
 "22 key.h
 [v _key_press `(v ~T0 @X0 0 ef ]
@@ -5812,7 +5812,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;timer.h: 13: void TMRInit(void);
 [; ;sound.h: 14: void sound_init();
 [; ;sound.h: 16: void TMR3_ISR();
-[; ;interrupt.h: 17: void interrupt INTERRUPT_InterruptManager(void);
+[; ;eusart.h: 13: extern volatile uint8_t eusartRxCount;
+[; ;eusart.h: 15: void init_uart(void);
+[; ;eusart.h: 16: void putch(char data);
+[; ;eusart.h: 17: void EUSART_Receive_ISR(void);
+[; ;eusart.h: 18: uint8_t EUSART_Read(void);
+[; ;eusart.h: 19: void EUSART_Write(uint8_t txData);
+[; ;eusart.h: 20: void reinit_rx();
+[; ;interrupt.h: 18: void interrupt INTERRUPT_InterruptManager(void);
 [; ;dispatcher.h: 13: typedef struct task
 [; ;dispatcher.h: 14: {
 [; ;dispatcher.h: 15: void (*pFunc) (void);
@@ -5865,27 +5872,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;bmp_280.h: 57: uint32_t bmp280ReadInt32(uint8_t address);
 [; ;bmp_280.h: 58: int32_t bmp280ReadPressure();
 [; ;bmp_280.h: 59: uint8_t bmp280Convert(int32_t *press, int32_t *temper);
-[; ;eusart.h: 8: void init_uart(void);
-[; ;eusart.h: 9: void putch(char data);
-[; ;common.h: 46: void INT0_ISR(void);
-[; ;common.h: 47: void GetTime(void);
-[; ;common.h: 48: void time_set_min(void);
-[; ;common.h: 49: void time_set_hr(void);
-[; ;common.h: 50: void time_set_yr(void);
-[; ;common.h: 51: void time_set_mt(void);
-[; ;common.h: 52: void time_set_dt(void);
-[; ;common.h: 53: void time_set_dy(void);
-[; ;common.h: 54: void TMR1_ISR();
-[; ;common.h: 55: void time_led();
-[; ;common.h: 56: void version(void);
-[; ;common.h: 57: void default_state(void);
-[; ;common.h: 58: void home_temp(void);
-[; ;common.h: 59: void set_font();
-[; ;common.h: 60: void set_font_set(void);
-[; ;common.h: 61: void pressure(void);
-[; ;common.h: 62: void pre_ref_dis(void);
-[; ;common.h: 63: void set_type_clk(void);
-[; ;common.h: 64: void radio_temp(void);
+[; ;common.h: 49: void INT0_ISR(void);
+[; ;common.h: 50: void GetTime(void);
+[; ;common.h: 51: void time_set_min(void);
+[; ;common.h: 52: void time_set_hr(void);
+[; ;common.h: 53: void time_set_yr(void);
+[; ;common.h: 54: void time_set_mt(void);
+[; ;common.h: 55: void time_set_dt(void);
+[; ;common.h: 56: void time_set_dy(void);
+[; ;common.h: 57: void TMR1_ISR();
+[; ;common.h: 58: void time_led();
+[; ;common.h: 59: void version(void);
+[; ;common.h: 60: void default_state(void);
+[; ;common.h: 61: void home_temp(void);
+[; ;common.h: 62: void set_font();
+[; ;common.h: 63: void set_font_set(void);
+[; ;common.h: 64: void pressure(void);
+[; ;common.h: 65: void pre_ref_dis(void);
+[; ;common.h: 66: void set_type_clk(void);
+[; ;common.h: 67: void radio_temp(void);
+[; ;common.h: 68: void read_adc();
+[; ;common.h: 69: void adj_brig();
+[; ;common.h: 70: void brg_set();
+[; ;common.h: 71: void set_brg_manual();
+[; ;common.h: 72: void usart_r();
 [; ;i2c.h: 10: void I2C_Master_Wait();
 [; ;i2c.h: 11: void I2C_Master_Start();
 [; ;i2c.h: 12: void I2C_Master_RepeatedStart();

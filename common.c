@@ -21,6 +21,12 @@ extern uint8_t play_sound; //  чи можна програвати
 uint8_t type_clk = TYPE_CLK_1; // вигляд годинника
 uint8_t idx_pnt = 0; // індекс, для вигляду мигаючих крапок
 extern uint8_t x1, x2, x3, x4, y1, y2, y3, y4; //Для зсуву стовбця вниз
+uint16_t adc_res = 500; // результат вимірювання АЦП
+uint8_t oldsec;// секунди попередні
+bit oldsec_flag;
+uint8_t brg_type;// яскравість по датчику, чи постійна
+uint8_t brig;// значення яскравості
+
 __EEPROM_DATA(3, 1, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, 
 // 0 - тип шрифту (від 1 до 5)
 
@@ -28,8 +34,11 @@ __EEPROM_DATA(3, 1, 0, 0, 0, 0, 0, 0); // ініціалізація еепром,
 // 
 void GetTime(void)
 {
+    oldsec = TTime.Ts;
     getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
     getDate(&TTime.Tdy,&TTime.Tdt,&TTime.Tmt,&TTime.Tyr);
+    if (oldsec != TTime.Ts) 
+        oldsec_flag = 1;
 }
 
 //****************************************
@@ -537,8 +546,8 @@ switch (events)
         break;
         case KEY_OK_EVENT:
             RTOS_DeleteTask(set_type_clk);
-            RTOS_SetTask(time_led, 0, cycle_main);
-            RTOS_DeleteTask(default_state);
+            RTOS_SetTask(brg_set, 0, cycle_main);
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
             events = MAIN_EVENT;
             en_put = 0;
             clear_matrix();
@@ -576,6 +585,128 @@ if(en_put)
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;
+}
+
+ //=====================================================
+ //   Налаштування - яскравість авто чи постійна
+ //=====================================================
+
+void brg_set() {
+    switch (events) {
+        case MAIN_EVENT:
+
+            break;
+        case KEY_OK_EVENT:
+            if (brg_type) {
+                RTOS_DeleteTask(brg_set);
+                RTOS_SetTask(time_led, 0, cycle_main);
+                RTOS_DeleteTask(default_state);
+                events = MAIN_EVENT;
+                en_put = 0;
+                clear_matrix();
+            } else {
+                RTOS_DeleteTask(brg_set);
+                RTOS_SetTask(set_brg_manual, 0, cycle_main);
+                RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+                events = MAIN_EVENT;
+                en_put = 0;
+                clear_matrix();
+            }
+            
+            break;
+        case KEY_EXIT_EVENT:
+            RTOS_DeleteTask(brg_set);
+            RTOS_DeleteTask(default_state);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_UP_EVENT:
+            brg_type = !brg_type;
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_TYPE_BRG,brg_type);
+            break;
+        case KEY_DOWN_EVENT:
+            brg_type = !brg_type;
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_TYPE_BRG,brg_type);
+            break;
+    }
+    if (en_put) {
+        putchar_b_buf(0, 'Я', &Font);
+        putchar_b_buf(6, 'с', &Font);
+        putchar_b_buf(12, ':', &Font);
+        if (brg_type) {
+            putchar_b_buf(18, 'А', &Font);
+            putchar_b_buf(24, 'в', &Font);
+        } else {
+            putchar_b_buf(18, 'П', &Font);
+            putchar_b_buf(24, 'с', &Font);
+        }
+
+    }
+    Update_Matrix(Dis_Buff); // обновити дані на дисплеї
+    en_put = 1;
+
+}
+
+
+//**************************************************
+//      ручна яскравість - налаштування
+//*************************************************
+void set_brg_manual(){
+switch (events)
+   {
+        case MAIN_EVENT:
+
+        break;
+        case KEY_OK_EVENT:
+            RTOS_DeleteTask(set_brg_manual);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state);
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_EXIT_EVENT:
+            RTOS_DeleteTask(set_brg_manual);
+            RTOS_DeleteTask(default_state);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_UP_EVENT:
+            brig++;
+            if(brig > 8) brig = 0;
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_DAT_BRG,brig);
+            Cmd7221(INTENSITY_R, brig); //Intensity Register
+            break;
+        case KEY_DOWN_EVENT:
+            brig--;
+            if(brig == 255) brig = 8;           
+            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_DAT_BRG,brig);
+            Cmd7221(INTENSITY_R, brig); //Intensity Register
+            break;    
+    }
+if(en_put)
+{
+    putchar_b_buf(0,'Я', &Font);
+    putchar_b_buf(6,'с', &Font);
+    putchar_b_buf(12,':', &Font);
+    putchar_b_buf(18,brig % 10, pFont);
+    putchar_b_buf(24,0, &Font);
+}    
+       Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+       en_put=1;    
+    
 }
 
 
@@ -675,7 +806,11 @@ void radio_temp(void) {
             break;
     }
 }
- 
+
+
+
+
+
  //=====================================================
  //   Заміна шрифту
  //=====================================================
@@ -797,6 +932,7 @@ void pre_ref_dis(void) {
 void time_led()
 {
     uint8_t data_array[4];
+
     static uint16_t test = 0;
 
    switch (events)
@@ -879,11 +1015,20 @@ void time_led()
     }
     if (en_put)
         Update_Matrix(Dis_Buff); // обновити дані на дисплеї
+
+    if (brg_type) {
+        if ((TTime.Ts % 5 == 0)&&(oldsec_flag)) {
+            oldsec_flag = 0;
+            read_adc(); // прочитаємо дані з ацп
+        }
+        adj_brig(); //  регулюємо яскравість
+    }
     en_put = 1;
+  
     // читаємо радіодатчик
     if (nrf24_dataReady()) {
         nrf24_getData(&data_array);
-        spi_rw(FLUSH_RX);   // очистити прийомний буфер
+        spi_rw(FLUSH_RX); // очистити прийомний буфер
 
         temperature_radio = data_array[0];
         minus = data_array[1];
@@ -895,6 +1040,8 @@ void time_led()
     if (err_ds_count > 600) // чекаємо хвилину. Якщо не було ні одного зчитування
         err_ds18 = 1;       // то ставимо признак помилки радіодатчика
     
+    
+
 
 #ifdef DEBUG
             if (nrf24_dataReady()) {
@@ -911,6 +1058,39 @@ void time_led()
 
 }
 
+//=======================================================
+//          Робота з ком портом
+//=======================================================
+
+void usart_r() {
+    static uint8_t usart_data[8];
+    static uint8_t i = 0;
+    
+    if (EUSART_DataReady) {
+
+        usart_data[i++] = EUSART_Read();
+        return;
+    }
+    if ((usart_data[0] == '$')) {
+        switch (usart_data[1]) {
+            case 't':
+                TSTime.Thr = ((usart_data[2]-48)*10)+(usart_data[3]-48);
+                TSTime.Tmin = ((usart_data[4]-48)*10)+(usart_data[5]-48);
+                setTime(TSTime.Thr, TSTime.Tmin, 0);
+                EUSART_Write('O');
+                EUSART_Write('K');
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+
+                break;
+        }
+    }
+    usart_data[0] = 0;
+    usart_data[1] = 0;
+    i = 0;
+    reinit_rx();
+
+}
 
 //  вивід версії
 void version(void)
@@ -927,6 +1107,43 @@ void version(void)
 //
 //    };
 }
+
+//===========================================
+// АЦП перетворення
+//===========================================
+
+void read_adc() {
+    ADCON0bits.GO = 1; // Вимірюємо
+    while (ADCON0bits.GO); // чекаємо закінчення перетворення
+    adc_res = (ADRESH << 8) + ADRESL;
+#ifdef DEBUG
+
+    printf("ADC_RESULT:%u\r\n", adc_res);
+#endif  
+
+}
+
+//===========================================
+//          Яскравість матриці
+//===========================================
+
+void adj_brig() {
+
+
+
+    if (adc_res >= 600)
+        Cmd7221(INTENSITY_R, 0x04); //Intensity Register - 1/16
+    else if (adc_res >= 450)
+        Cmd7221(INTENSITY_R, 0x03); //Intensity Register - 2/16
+    else if (adc_res >= 300)
+        Cmd7221(INTENSITY_R, 0x02); //Intensity Register - 2/16
+    else if (adc_res >= 150)
+        Cmd7221(INTENSITY_R, 0x01); //Intensity Register - 2/16
+    else if (adc_res <= 100)
+        Cmd7221(INTENSITY_R, 0x00); //Intensity Register - 2/16
+    
+}
+
 
 void default_state(void)
 {
@@ -948,6 +1165,7 @@ void default_state(void)
                                         // кожні 500мс.
      idx_pnt++;
      if (idx_pnt == 8) idx_pnt = 0;
+      //               putchar_b_buf(13, 23 + idx_pnt, &Font);
 }
  
  

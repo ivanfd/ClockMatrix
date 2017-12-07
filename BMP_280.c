@@ -38,34 +38,34 @@ void bmp280_Init() {
     bmp280WriteByte(BMP280_REG_CONTROL, (BMP280_OVERSAMPLING_T16 | BMP280_OVERSAMPLING_P16 | BMP280_MODE_NORMAL));
 
 #ifdef DEBUG
-    dig_T1 = 27504;
-    dig_T2 = 26435;
-    dig_T3 = -1000;
-    dig_P1 = 36477;
-    dig_P2 = -10685;
-    dig_P3 = 3024;
-    dig_P4 = 2855;
-    dig_P5 = 140;
-    dig_P6 = -7;
-    dig_P7 = 15500;
-    dig_P8 = -14600;
-    dig_P9 = 6000;
+//    dig_T1 = 27504;
+//    dig_T2 = 26435;
+//    dig_T3 = -1000;
+//    dig_P1 = 36477;
+//    dig_P2 = -10685;
+//    dig_P3 = 3024;
+//    dig_P4 = 2855;
+//    dig_P5 = 140;
+//    dig_P6 = -7;
+//    dig_P7 = 15500;
+//    dig_P8 = -14600;
+//    dig_P9 = 6000;
 #endif
 
 #ifdef DEBUG
     __delay_ms(200);
-    printf("dig_T1: %u\n\r", dig_T1);
-    printf("dig_T2: %d\n\r", dig_T2);
-    printf("dig_T3: %d\n\r", dig_T3);
-    printf("dig_P1: %u\n\r", dig_P1);
-    printf("dig_P2: %d\n\r", dig_P2);
-    printf("dig_P3: %d\n\r", dig_P3);
-    printf("dig_P4: %d\n\r", dig_P4);
-    printf("dig_P5: %d\n\r", dig_P5);
-    printf("dig_P6: %d\n\r", dig_P6);
-    printf("dig_P7: %d\n\r", dig_P7);
-    printf("dig_P8: %d\n\r", dig_P8);
-    printf("dig_P9: %d\n\r", dig_P9);
+    printf("dig_T1: %u\r\n", dig_T1);
+    printf("dig_T2: %d\r\n", dig_T2);
+    printf("dig_T3: %d\r\n", dig_T3);
+    printf("dig_P1: %u\r\n", dig_P1);
+    printf("dig_P2: %d\r\n", dig_P2);
+    printf("dig_P3: %d\r\n", dig_P3);
+    printf("dig_P4: %d\r\n", dig_P4);
+    printf("dig_P5: %d\r\n", dig_P5);
+    printf("dig_P6: %d\r\n", dig_P6);
+    printf("dig_P7: %d\r\n", dig_P7);
+    printf("dig_P8: %d\r\n", dig_P8);
+    printf("dig_P9: %d\r\n", dig_P9);
 #endif
 
 }
@@ -163,8 +163,8 @@ int32_t bmp280ReadTemp() {
 #ifdef DEBUG
     __delay_ms(200);
 
-    temperature = 519888;
-    printf("UncTemp: %ld\n\r", temperature);
+   // temperature = 519888;
+    printf("UncTemp: %ld\r\n", temperature);
 
 
 #endif
@@ -187,8 +187,8 @@ int32_t bmp280ReadPressure() {
 
 #ifdef DEBUG
     __delay_ms(200);
-    pressure = 415148;
-    printf("UncPress: %ld\n\r", pressure);
+  // pressure = 415148;
+    printf("UncPress: %ld\r\n", pressure);
 
 
 #endif
@@ -215,50 +215,50 @@ uint8_t bmp280Convert(int32_t *press, int32_t *temper) {
     var1 = ((((adc_T >> 3) - ((int32_t) dig_T1 << 1))) * ((int32_t) dig_T2)) >> 11;
 #ifdef DEBUG
     __delay_ms(10);
-    printf("var1 =  %lu\n\r", var1);
+    printf("var1 =  %lu\r\n", var1);
 #endif
     var2 = (((((adc_T >> 4) - ((int32_t) dig_T1)) * ((adc_T >> 4) - ((int32_t) dig_T1))) >> 12) * ((int32_t) dig_T3)) >> 14;
 #ifdef DEBUG
     __delay_ms(10);
-    printf("var2 =  %ld\n\r", var2);
+    printf("var2 =  %ld\r\n", var2);
 #endif
     t_fine = var1 + var2;
     T = (t_fine * 5 + 128) >> 8;
 #ifdef DEBUG
     __delay_ms(10);
-    printf("T1 =  %ld\n\r", T);
+    printf("T1 =  %ld\r\n", T);
 #endif    
     *temper = T;
 
     var1 = (((int32_t) t_fine) >> 1) - (int32_t) 64000;
 #ifdef DEBUG
     __delay_ms(10);
-    printf("var1 =  %ld\n\r", var1);
+    printf("var1 =  %ld\r\n", var1);
 #endif  
     var2 = (((var1 >> 2) * (var1 >> 2)) >> 11) * ((int32_t) dig_P6);
 #ifdef DEBUG
     __delay_ms(10);
-    printf("var2 =  %ld\n\r", var2);
+    printf("var2 =  %ld\r\n", var2);
 #endif  
     var2 = var2 + ((var1 * ((int32_t) dig_P5)) << 1);
 #ifdef DEBUG
     __delay_ms(10);
-    printf("var2 =  %ld\n\r", var2);
+    printf("var2 =  %ld\r\n", var2);
 #endif  
     var2 = (var2 >> 2)+(((int32_t) dig_P4) << 16);
 #ifdef DEBUG
     __delay_ms(10);
-    printf("var2 =  %ld\n\r", var2);
+    printf("var2 =  %ld\r\n", var2);
 #endif  
     var1 = (((dig_P3 * (((var1 >> 2) * (var1 >> 2)) >> 13)) >> 3) + ((((int32_t) dig_P2) * var1) >> 1)) >> 18;
 #ifdef DEBUG
     __delay_ms(10);
-    printf("var1 =  %ld\n\r", var1);
+    printf("var1 =  %ld\r\n", var1);
 #endif  
     var1 = ((((32768 + var1))*((int32_t) dig_P1)) >> 15);
 #ifdef DEBUG
     __delay_ms(10);
-    printf("var1 =  %ld\n\r", var1);
+    printf("var1 =  %ld\r\n", var1);
 #endif  
     if (var1 == 0) {
         return 0; // avoid exception caused by division by zero
@@ -271,23 +271,23 @@ uint8_t bmp280Convert(int32_t *press, int32_t *temper) {
     }
 #ifdef DEBUG
     __delay_ms(10);
-    printf("P =  %ld\n\r", P);
+    printf("P =  %ld\r\n", P);
 #endif  
 
     var1 = (((int32_t) dig_P9) * ((int32_t) (((P >> 3) * (P >> 3)) >> 13))) >> 12;
 #ifdef DEBUG
     __delay_ms(10);
-    printf("var1 =  %ld\n\r", var1);
+    printf("var1 =  %ld\r\n", var1);
 #endif  
     var2 = (((int32_t) (P >> 2)) * ((int32_t) dig_P8)) >> 13;
 #ifdef DEBUG
     __delay_ms(10);
-    printf("var2 =  %ld\n\r", var2);
+    printf("var2 =  %ld\r\n", var2);
 #endif  
     P = (uint32_t) ((int32_t) P + ((var1 + var2 + dig_P7) >> 4));
 #ifdef DEBUG
     __delay_ms(10);
-    printf("P =  %lu\n\r", P);
+    printf("P =  %lu\r\n", P);
 #endif  
 
     //*press = P;
@@ -364,8 +364,8 @@ uint8_t bmp280Convert(int32_t *press, int32_t *temper) {
 #ifdef DEBUG
     __delay_ms(200);
 
-    printf("Temp280: %d\n\r", *temper);
-    printf("Press280: %u\n\r", *press);
+    printf("Temp280: %d\r\n", *temper);
+    printf("Press280: %lu\n", *press);
 #endif
 
 }

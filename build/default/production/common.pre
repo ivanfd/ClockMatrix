@@ -4320,9 +4320,15 @@ void scroll_left(void);
 void interval_scroll_text();
 void scroll_right(void);
 
-# 8 "eusart.h"
+# 13 "eusart.h"
+extern volatile uint8_t eusartRxCount;
+
 void init_uart(void);
 void putch(char data);
+void EUSART_Receive_ISR(void);
+uint8_t EUSART_Read(void);
+void EUSART_Write(uint8_t txData);
+void reinit_rx();
 
 # 52 "BMP_280.h"
 void bmp280_Init();
@@ -4387,7 +4393,7 @@ void sound_init();
 
 void TMR3_ISR();
 
-# 17 "interrupt.h"
+# 18 "interrupt.h"
 void interrupt INTERRUPT_InterruptManager(void);
 
 # 13 "dispatcher.h"
@@ -4413,7 +4419,7 @@ const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 uint8_t readTemp_Single(uint8_t *buf, uint8_t *minus, uint8_t *time_flag, uint8_t *timer_val);
 void init_ds18b20(void);
 
-# 46 "common.h"
+# 49 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 void time_set_min(void);
@@ -4433,6 +4439,11 @@ void pressure(void);
 void pre_ref_dis(void);
 void set_type_clk(void);
 void radio_temp(void);
+void read_adc();
+void adj_brig();
+void brg_set();
+void set_brg_manual();
+void usart_r();
 
 # 3 "common.c"
 extern uint8_t TxtBuf[6];
@@ -4456,6 +4467,12 @@ extern uint8_t play_sound;
 uint8_t type_clk = 1;
 uint8_t idx_pnt = 0;
 extern uint8_t x1, x2, x3, x4, y1, y2, y3, y4;
+uint16_t adc_res = 500;
+uint8_t oldsec;
+bit oldsec_flag;
+uint8_t brg_type;
+uint8_t brig;
+
 asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "3" "," "1" "," "0" "," "0" "," "0" "," "0" "," "0" "," "0");
 
 
@@ -4463,8 +4480,11 @@ asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "3" "," "1" "," "0"
 
 void GetTime(void)
 {
+oldsec = TTime.Ts;
 getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
 getDate(&TTime.Tdy,&TTime.Tdt,&TTime.Tmt,&TTime.Tyr);
+if (oldsec != TTime.Ts)
+oldsec_flag = 1;
 }
 
 
@@ -4822,7 +4842,7 @@ Update_Matrix(Dis_Buff);
 en_put=1;
 }
 
-# 394
+# 403
 void time_set_dy(void)
 {
 switch (events)
@@ -4956,7 +4976,7 @@ Update_Matrix(Dis_Buff);
 en_put=1;
 }
 
-# 531
+# 540
 void set_type_clk(void)
 {
 switch (events)
@@ -4966,8 +4986,8 @@ case 5:
 break;
 case 1:
 RTOS_DeleteTask(set_type_clk);
-RTOS_SetTask(time_led, 0, 20);
-RTOS_DeleteTask(default_state);
+RTOS_SetTask(brg_set, 0, 20);
+RTOS_SetTask(default_state, 2000, 0);
 events = 5;
 en_put = 0;
 clear_matrix();
@@ -5007,7 +5027,123 @@ Update_Matrix(Dis_Buff);
 en_put=1;
 }
 
-# 585
+# 594
+void brg_set() {
+switch (events) {
+case 5:
+
+break;
+case 1:
+if (brg_type) {
+RTOS_DeleteTask(brg_set);
+RTOS_SetTask(time_led, 0, 20);
+RTOS_DeleteTask(default_state);
+events = 5;
+en_put = 0;
+clear_matrix();
+} else {
+RTOS_DeleteTask(brg_set);
+RTOS_SetTask(set_brg_manual, 0, 20);
+RTOS_SetTask(default_state, 2000, 0);
+events = 5;
+en_put = 0;
+clear_matrix();
+}
+
+break;
+case 4:
+RTOS_DeleteTask(brg_set);
+RTOS_DeleteTask(default_state);
+RTOS_SetTask(time_led, 0, 20);
+events = 5;
+en_put = 0;
+clear_matrix();
+break;
+case 2:
+brg_type = !brg_type;
+RTOS_SetTask(default_state, 2000, 0);
+events = 5;
+write_eep(2,brg_type);
+break;
+case 3:
+brg_type = !brg_type;
+RTOS_SetTask(default_state, 2000, 0);
+events = 5;
+write_eep(2,brg_type);
+break;
+}
+if (en_put) {
+putchar_b_buf(0, 'ß', &Font);
+putchar_b_buf(6, 'ñ', &Font);
+putchar_b_buf(12, ':', &Font);
+if (brg_type) {
+putchar_b_buf(18, 'À', &Font);
+putchar_b_buf(24, 'â', &Font);
+} else {
+putchar_b_buf(18, 'Ï', &Font);
+putchar_b_buf(24, 'ñ', &Font);
+}
+
+}
+Update_Matrix(Dis_Buff);
+en_put = 1;
+
+}
+
+# 660
+void set_brg_manual(){
+switch (events)
+{
+case 5:
+
+break;
+case 1:
+RTOS_DeleteTask(set_brg_manual);
+RTOS_SetTask(time_led, 0, 20);
+RTOS_DeleteTask(default_state);
+events = 5;
+en_put = 0;
+clear_matrix();
+break;
+case 4:
+RTOS_DeleteTask(set_brg_manual);
+RTOS_DeleteTask(default_state);
+RTOS_SetTask(time_led, 0, 20);
+events = 5;
+en_put = 0;
+clear_matrix();
+break;
+case 2:
+brig++;
+if(brig > 8) brig = 0;
+RTOS_SetTask(default_state, 2000, 0);
+events = 5;
+write_eep(3,brig);
+Cmd7221(0x0A, brig);
+break;
+case 3:
+brig--;
+if(brig == 255) brig = 8;
+RTOS_SetTask(default_state, 2000, 0);
+events = 5;
+write_eep(3,brig);
+Cmd7221(0x0A, brig);
+break;
+}
+if(en_put)
+{
+putchar_b_buf(0,'ß', &Font);
+putchar_b_buf(6,'ñ', &Font);
+putchar_b_buf(12,':', &Font);
+putchar_b_buf(18,brig % 10, pFont);
+putchar_b_buf(24,0, &Font);
+}
+Update_Matrix(Dis_Buff);
+en_put=1;
+
+}
+
+# 716
 void home_temp(void)
 {
 switch (events)
@@ -5049,7 +5185,7 @@ break;
 }
 }
 
-# 630
+# 761
 void radio_temp(void) {
 switch (events) {
 case 5:
@@ -5099,9 +5235,7 @@ break;
 }
 }
 
-
-
-
+# 817
 void set_font()
 {
 switch (type_font)
@@ -5213,10 +5347,11 @@ x3 = y3;
 x4 = y4;
 }
 
-# 797
+# 932
 void time_led()
 {
 uint8_t data_array[4];
+
 static uint16_t test = 0;
 
 switch (events)
@@ -5257,7 +5392,7 @@ RTOS_SetTask(pressure, 0, 20);
 events = 5;
 en_put = 0;
 
-# 845
+# 981
 break;
 case 3:
 
@@ -5274,7 +5409,20 @@ case 4:
 events = 5;
 RTOS_DeleteTask(default_state);
 
-# 875
+_delay((unsigned long)((10)*(40000000/4000.0)));
+
+
+
+if (nrf24_dataReady()) {
+test++;
+nrf24_getData(&data_array);
+printf("%u > ", test);
+printf("%u ", data_array[0]);
+printf("%c ", data_array[1]);
+printf("%2X ", data_array[2]);
+printf("%2X\r\n", data_array[3]);
+}
+
 break;
 case 6:
 
@@ -5282,7 +5430,16 @@ break;
 }
 if (en_put)
 Update_Matrix(Dis_Buff);
+
+if (brg_type) {
+if ((TTime.Ts % 5 == 0)&&(oldsec_flag)) {
+oldsec_flag = 0;
+read_adc();
+}
+adj_brig();
+}
 en_put = 1;
+
 
 if (nrf24_dataReady()) {
 nrf24_getData(&data_array);
@@ -5298,9 +5455,51 @@ err_ds_count++;
 if (err_ds_count > 600)
 err_ds18 = 1;
 
-# 912
+# 1047
+if (nrf24_dataReady()) {
+test++;
+nrf24_getData(&data_array);
+printf("%u > ", test);
+printf("%u ", data_array[0]);
+printf("%c ", data_array[1]);
+printf("%2X ", data_array[2]);
+printf("%2X\r\n", data_array[3]);
 }
 
+
+
+}
+
+# 1065
+void usart_r() {
+static uint8_t usart_data[8];
+static uint8_t i = 0;
+
+if ((eusartRxCount)) {
+
+usart_data[i++] = EUSART_Read();
+return;
+}
+if ((usart_data[0] == '$')) {
+switch (usart_data[1]) {
+case 't':
+TSTime.Thr = ((usart_data[2]-48)*10)+(usart_data[3]-48);
+TSTime.Tmin = ((usart_data[4]-48)*10)+(usart_data[5]-48);
+setTime(TSTime.Thr, TSTime.Tmin, 0);
+EUSART_Write('O');
+EUSART_Write('K');
+EUSART_Write('\r');
+EUSART_Write('\n');
+
+break;
+}
+}
+usart_data[0] = 0;
+usart_data[1] = 0;
+i = 0;
+reinit_rx();
+
+}
 
 
 void version(void)
@@ -5310,8 +5509,39 @@ uint8_t i;
 sprintf(text_buf, "Clock v11.10.17 by Ivan_fd");
 interval_scroll_text();
 
-# 929
+# 1109
 }
+
+# 1115
+void read_adc() {
+ADCON0bits.GO = 1;
+while (ADCON0bits.GO);
+adc_res = (ADRESH << 8) + ADRESL;
+
+
+printf("ADC_RESULT:%u\r\n", adc_res);
+
+
+}
+
+# 1130
+void adj_brig() {
+
+
+
+if (adc_res >= 600)
+Cmd7221(0x0A, 0x04);
+else if (adc_res >= 450)
+Cmd7221(0x0A, 0x03);
+else if (adc_res >= 300)
+Cmd7221(0x0A, 0x02);
+else if (adc_res >= 150)
+Cmd7221(0x0A, 0x01);
+else if (adc_res <= 100)
+Cmd7221(0x0A, 0x00);
+
+}
+
 
 void default_state(void)
 {
@@ -5323,11 +5553,12 @@ events = 4;
 void INT0_ISR(void)
 {
 
-# 947
+# 1164
 RTOS_SetTask(GetTime, 0, 0);
 
 idx_pnt++;
 if (idx_pnt == 8) idx_pnt = 0;
+
 }
 
 
@@ -5345,6 +5576,6 @@ T1CONbits.TMR1ON = 0;
 
 }
 
-# 978
+# 1196
 }
 

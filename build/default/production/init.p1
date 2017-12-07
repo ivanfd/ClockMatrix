@@ -28,7 +28,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _read_eep `(uc ~T0 @X0 0 ef1`us ]
 "64 init.c
 [v _type_clk `uc ~T0 @X0 0 e ]
-"59 common.h
+"65
+[v _brg_type `uc ~T0 @X0 0 e ]
+"66
+[v _brig `uc ~T0 @X0 0 e ]
+"23 max7221.h
+[v _Cmd7221 `(v ~T0 @X0 0 ef2`uc`uc ]
+"62 common.h
 [v _set_font `(v ~T0 @X0 0 ef ]
 "14 sound.h
 [v _sound_init `(v ~T0 @X0 0 ef ]
@@ -36,6 +42,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _spi_init `(v ~T0 @X0 0 ef ]
 "136 nrf24l01p.h
 [v _nrf24_init `(v ~T0 @X0 0 ef2`uc`uc ]
+[v F3151 `(v ~T0 @X0 0 tf ]
+"26 dispatcher.h
+[v _RTOS_SetTask `(v ~T0 @X0 0 ef3`*F3151`ui`ui ]
+"72 common.h
+[v _usart_r `(v ~T0 @X0 0 ef ]
 "1102 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
 [v _LATC `Vuc ~T0 @X0 0 e@3979 ]
 "1822
@@ -50,6 +61,64 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _LATD `Vuc ~T0 @X0 0 e@3980 ]
 "2044
 [v _TRISD `Vuc ~T0 @X0 0 e@3989 ]
+"878
+[v _LATA `Vuc ~T0 @X0 0 e@3977 ]
+"1378
+[v _TRISA `Vuc ~T0 @X0 0 e@3986 ]
+"4613
+[s S177 :1 `uc 1 :1 `uc 1 ]
+[n S177 . . GO_NOT_DONE ]
+"4617
+[s S178 :1 `uc 1 :1 `uc 1 :4 `uc 1 ]
+[n S178 . ADON GO_nDONE CHS ]
+"4622
+[s S179 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S179 . . GO CHS0 CHS1 CHS2 CHS3 ]
+"4630
+[s S180 :1 `uc 1 :1 `uc 1 ]
+[n S180 . . DONE ]
+"4634
+[s S181 :1 `uc 1 :1 `uc 1 ]
+[n S181 . . NOT_DONE ]
+"4638
+[s S182 :1 `uc 1 :1 `uc 1 ]
+[n S182 . . nDONE ]
+"4642
+[s S183 :1 `uc 1 :1 `uc 1 ]
+[n S183 . . GO_DONE ]
+"4646
+[s S184 :1 `uc 1 :1 `uc 1 ]
+[n S184 . . GODONE ]
+"4612
+[u S176 `S177 1 `S178 1 `S179 1 `S180 1 `S181 1 `S182 1 `S183 1 `S184 1 ]
+[n S176 . . . . . . . . . ]
+"4651
+[v _ADCON0bits `VS176 ~T0 @X0 0 e@4034 ]
+"4528
+[s S173 :4 `uc 1 :2 `uc 1 ]
+[n S173 . PCFG VCFG ]
+"4532
+[s S174 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S174 . PCFG0 PCFG1 PCFG2 PCFG3 VCFG0 VCFG1 ]
+"4540
+[s S175 :3 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S175 . . CHSN3 VCFG01 VCFG11 ]
+"4527
+[u S172 `S173 1 `S174 1 `S175 1 ]
+[n S172 . . . . ]
+"4547
+[v _ADCON1bits `VS172 ~T0 @X0 0 e@4033 ]
+"4457
+[s S170 :3 `uc 1 :3 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S170 . ADCS ACQT . ADFM ]
+"4463
+[s S171 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
+[n S171 . ADCS0 ADCS1 ADCS2 ACQT0 ACQT1 ACQT2 ]
+"4456
+[u S169 `S170 1 `S171 1 ]
+[n S169 . . . ]
+"4472
+[v _ADCON2bits `VS169 ~T0 @X0 0 e@4032 ]
 "6421
 [s S258 :7 `uc 1 :1 `uc 1 ]
 [n S258 . . NOT_RBPU ]
@@ -5936,7 +6005,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;timer.h: 13: void TMRInit(void);
 [; ;sound.h: 14: void sound_init();
 [; ;sound.h: 16: void TMR3_ISR();
-[; ;interrupt.h: 17: void interrupt INTERRUPT_InterruptManager(void);
+[; ;eusart.h: 13: extern volatile uint8_t eusartRxCount;
+[; ;eusart.h: 15: void init_uart(void);
+[; ;eusart.h: 16: void putch(char data);
+[; ;eusart.h: 17: void EUSART_Receive_ISR(void);
+[; ;eusart.h: 18: uint8_t EUSART_Read(void);
+[; ;eusart.h: 19: void EUSART_Write(uint8_t txData);
+[; ;eusart.h: 20: void reinit_rx();
+[; ;interrupt.h: 18: void interrupt INTERRUPT_InterruptManager(void);
 [; ;dispatcher.h: 13: typedef struct task
 [; ;dispatcher.h: 14: {
 [; ;dispatcher.h: 15: void (*pFunc) (void);
@@ -5989,27 +6065,30 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;bmp_280.h: 57: uint32_t bmp280ReadInt32(uint8_t address);
 [; ;bmp_280.h: 58: int32_t bmp280ReadPressure();
 [; ;bmp_280.h: 59: uint8_t bmp280Convert(int32_t *press, int32_t *temper);
-[; ;eusart.h: 8: void init_uart(void);
-[; ;eusart.h: 9: void putch(char data);
-[; ;common.h: 46: void INT0_ISR(void);
-[; ;common.h: 47: void GetTime(void);
-[; ;common.h: 48: void time_set_min(void);
-[; ;common.h: 49: void time_set_hr(void);
-[; ;common.h: 50: void time_set_yr(void);
-[; ;common.h: 51: void time_set_mt(void);
-[; ;common.h: 52: void time_set_dt(void);
-[; ;common.h: 53: void time_set_dy(void);
-[; ;common.h: 54: void TMR1_ISR();
-[; ;common.h: 55: void time_led();
-[; ;common.h: 56: void version(void);
-[; ;common.h: 57: void default_state(void);
-[; ;common.h: 58: void home_temp(void);
-[; ;common.h: 59: void set_font();
-[; ;common.h: 60: void set_font_set(void);
-[; ;common.h: 61: void pressure(void);
-[; ;common.h: 62: void pre_ref_dis(void);
-[; ;common.h: 63: void set_type_clk(void);
-[; ;common.h: 64: void radio_temp(void);
+[; ;common.h: 49: void INT0_ISR(void);
+[; ;common.h: 50: void GetTime(void);
+[; ;common.h: 51: void time_set_min(void);
+[; ;common.h: 52: void time_set_hr(void);
+[; ;common.h: 53: void time_set_yr(void);
+[; ;common.h: 54: void time_set_mt(void);
+[; ;common.h: 55: void time_set_dt(void);
+[; ;common.h: 56: void time_set_dy(void);
+[; ;common.h: 57: void TMR1_ISR();
+[; ;common.h: 58: void time_led();
+[; ;common.h: 59: void version(void);
+[; ;common.h: 60: void default_state(void);
+[; ;common.h: 61: void home_temp(void);
+[; ;common.h: 62: void set_font();
+[; ;common.h: 63: void set_font_set(void);
+[; ;common.h: 64: void pressure(void);
+[; ;common.h: 65: void pre_ref_dis(void);
+[; ;common.h: 66: void set_type_clk(void);
+[; ;common.h: 67: void radio_temp(void);
+[; ;common.h: 68: void read_adc();
+[; ;common.h: 69: void adj_brig();
+[; ;common.h: 70: void brg_set();
+[; ;common.h: 71: void set_brg_manual();
+[; ;common.h: 72: void usart_r();
 [; ;i2c.h: 10: void I2C_Master_Wait();
 [; ;i2c.h: 11: void I2C_Master_Start();
 [; ;i2c.h: 12: void I2C_Master_RepeatedStart();
@@ -6045,126 +6124,164 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;init.h: 21: void Interrupt_Init(void);
 [; ;init.c: 63: extern uint8_t type_font;
 [; ;init.c: 64: extern uint8_t type_clk;
-"66 init.c
+[; ;init.c: 65: extern uint8_t brg_type;
+[; ;init.c: 66: extern uint8_t brig;
+"68 init.c
 [v _SYSTEM_Initialize `(v ~T0 @X0 1 ef ]
-"67
+"69
 {
-[; ;init.c: 66: void SYSTEM_Initialize(void)
-[; ;init.c: 67: {
+[; ;init.c: 68: void SYSTEM_Initialize(void)
+[; ;init.c: 69: {
 [e :U _SYSTEM_Initialize ]
 [f ]
-[; ;init.c: 69: Port_Init();
-"69
-[e ( _Port_Init ..  ]
-[; ;init.c: 70: I2C_Init();
-"70
-[e ( _I2C_Init ..  ]
-[; ;init.c: 71: Init7221();
+[; ;init.c: 71: Port_Init();
 "71
-[e ( _Init7221 ..  ]
-[; ;init.c: 72: TMRInit();
+[e ( _Port_Init ..  ]
+[; ;init.c: 72: I2C_Init();
 "72
-[e ( _TMRInit ..  ]
-[; ;init.c: 73: Interrupt_Init();
+[e ( _I2C_Init ..  ]
+[; ;init.c: 73: Init7221();
 "73
-[e ( _Interrupt_Init ..  ]
-[; ;init.c: 74: DS3231_init();
+[e ( _Init7221 ..  ]
+[; ;init.c: 74: TMRInit();
 "74
-[e ( _DS3231_init ..  ]
-[; ;init.c: 75: init_ds18b20();
+[e ( _TMRInit ..  ]
+[; ;init.c: 75: Interrupt_Init();
 "75
-[e ( _init_ds18b20 ..  ]
-[; ;init.c: 76: RTOS_Init();
+[e ( _Interrupt_Init ..  ]
+[; ;init.c: 76: DS3231_init();
 "76
-[e ( _RTOS_Init ..  ]
-[; ;init.c: 77: init_uart();
+[e ( _DS3231_init ..  ]
+[; ;init.c: 77: init_ds18b20();
 "77
-[e ( _init_uart ..  ]
-[; ;init.c: 79: bmp280_Init();
+[e ( _init_ds18b20 ..  ]
+[; ;init.c: 78: RTOS_Init();
+"78
+[e ( _RTOS_Init ..  ]
+[; ;init.c: 79: init_uart();
 "79
-[e ( _bmp280_Init ..  ]
-[; ;init.c: 80: type_font = read_eep(0);
-"80
-[e = _type_font ( _read_eep (1 -> -> 0 `i `us ]
-[; ;init.c: 81: type_clk = read_eep(1);
+[e ( _init_uart ..  ]
+[; ;init.c: 81: bmp280_Init();
 "81
-[e = _type_clk ( _read_eep (1 -> -> 1 `i `us ]
-[; ;init.c: 82: set_font();
+[e ( _bmp280_Init ..  ]
+[; ;init.c: 82: type_font = read_eep(0);
 "82
-[e ( _set_font ..  ]
-[; ;init.c: 83: sound_init();
+[e = _type_font ( _read_eep (1 -> -> 0 `i `us ]
+[; ;init.c: 83: type_clk = read_eep(1);
 "83
-[e ( _sound_init ..  ]
-[; ;init.c: 84: spi_init();
+[e = _type_clk ( _read_eep (1 -> -> 1 `i `us ]
+[; ;init.c: 84: brg_type = read_eep(2);
 "84
-[e ( _spi_init ..  ]
-[; ;init.c: 85: nrf24_init(100, 4);
+[e = _brg_type ( _read_eep (1 -> -> 2 `i `us ]
+[; ;init.c: 85: brig = read_eep(3);
 "85
-[e ( _nrf24_init (2 , -> -> 100 `i `uc -> -> 4 `i `uc ]
-[; ;init.c: 87: }
+[e = _brig ( _read_eep (1 -> -> 3 `i `us ]
+[; ;init.c: 86: Cmd7221(0x0A, brig);
+"86
+[e ( _Cmd7221 (2 , -> -> 10 `i `uc _brig ]
+[; ;init.c: 87: set_font();
 "87
+[e ( _set_font ..  ]
+[; ;init.c: 88: sound_init();
+"88
+[e ( _sound_init ..  ]
+[; ;init.c: 89: spi_init();
+"89
+[e ( _spi_init ..  ]
+[; ;init.c: 90: nrf24_init(100, 4);
+"90
+[e ( _nrf24_init (2 , -> -> 100 `i `uc -> -> 4 `i `uc ]
+[; ;init.c: 91: RTOS_SetTask(usart_r, 40, 20);
+"91
+[e ( _RTOS_SetTask (3 , , &U _usart_r -> -> 40 `i `ui -> -> 20 `i `ui ]
+[; ;init.c: 93: }
+"93
 [e :UE 272 ]
 }
-"89
+"95
 [v _Port_Init `(v ~T0 @X0 1 ef ]
-"90
+"96
 {
-[; ;init.c: 89: void Port_Init(void)
-[; ;init.c: 90: {
+[; ;init.c: 95: void Port_Init(void)
+[; ;init.c: 96: {
 [e :U _Port_Init ]
 [f ]
-[; ;init.c: 91: LATC = 0x00;
-"91
-[e = _LATC -> -> 0 `i `uc ]
-[; ;init.c: 92: TRISC = 0b00011000;
-"92
-[e = _TRISC -> -> 24 `i `uc ]
-[; ;init.c: 93: LATB = 0x00;
-"93
-[e = _LATB -> -> 0 `i `uc ]
-[; ;init.c: 94: TRISB = 0b00011111;
-"94
-[e = _TRISB -> -> 31 `i `uc ]
-[; ;init.c: 95: INTCON2 &= (~(1<<7));
-"95
-[e =& _INTCON2 -> ~ << -> 1 `i -> 7 `i `uc ]
-[; ;init.c: 96: LATD = 0x00;
-"96
-[e = _LATD -> -> 0 `i `uc ]
-[; ;init.c: 97: TRISD = 0x00;
+[; ;init.c: 97: LATC = 0x00;
 "97
-[e = _TRISD -> -> 0 `i `uc ]
-[; ;init.c: 98: INTCON2bits.INTEDG0 = 1;
+[e = _LATC -> -> 0 `i `uc ]
+[; ;init.c: 98: TRISC = 0b00011000;
 "98
-[e = . . _INTCON2bits 1 6 -> -> 1 `i `uc ]
-[; ;init.c: 99: INTCONbits.INT0IF = 0;
+[e = _TRISC -> -> 24 `i `uc ]
+[; ;init.c: 99: LATB = 0x00;
 "99
-[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
-[; ;init.c: 100: INTCONbits.INT0IE = 1;
+[e = _LATB -> -> 0 `i `uc ]
+[; ;init.c: 100: TRISB = 0b00011111;
 "100
-[e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
-[; ;init.c: 101: PORTCbits.RC0 = 1;
+[e = _TRISB -> -> 31 `i `uc ]
+[; ;init.c: 101: INTCON2 &= (~(1<<7));
 "101
-[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
-[; ;init.c: 102: }
+[e =& _INTCON2 -> ~ << -> 1 `i -> 7 `i `uc ]
+[; ;init.c: 102: LATD = 0x00;
 "102
+[e = _LATD -> -> 0 `i `uc ]
+[; ;init.c: 103: TRISD = 0x00;
+"103
+[e = _TRISD -> -> 0 `i `uc ]
+[; ;init.c: 104: LATA = 0;
+"104
+[e = _LATA -> -> 0 `i `uc ]
+[; ;init.c: 105: TRISA = 0b00000001;
+"105
+[e = _TRISA -> -> 1 `i `uc ]
+[; ;init.c: 106: ADCON0bits.CHS = 0b0000;
+"106
+[e = . . _ADCON0bits 1 2 -> -> 0 `i `uc ]
+[; ;init.c: 107: ADCON1bits.PCFG = 0b1110;
+"107
+[e = . . _ADCON1bits 0 0 -> -> 14 `i `uc ]
+[; ;init.c: 108: ADCON1bits.VCFG = 0b00;
+"108
+[e = . . _ADCON1bits 0 1 -> -> 0 `i `uc ]
+[; ;init.c: 109: ADCON2bits.ADCS = 0b010;
+"109
+[e = . . _ADCON2bits 0 0 -> -> 2 `i `uc ]
+[; ;init.c: 110: ADCON2bits.ADFM = 1;
+"110
+[e = . . _ADCON2bits 0 3 -> -> 1 `i `uc ]
+[; ;init.c: 111: ADCON0bits.ADON = 1;
+"111
+[e = . . _ADCON0bits 1 0 -> -> 1 `i `uc ]
+[; ;init.c: 112: INTCON2bits.INTEDG0 = 1;
+"112
+[e = . . _INTCON2bits 1 6 -> -> 1 `i `uc ]
+[; ;init.c: 113: INTCONbits.INT0IF = 0;
+"113
+[e = . . _INTCONbits 0 1 -> -> 0 `i `uc ]
+[; ;init.c: 114: INTCONbits.INT0IE = 1;
+"114
+[e = . . _INTCONbits 0 4 -> -> 1 `i `uc ]
+[; ;init.c: 115: PORTCbits.RC0 = 1;
+"115
+[e = . . _PORTCbits 0 0 -> -> 1 `i `uc ]
+[; ;init.c: 116: }
+"116
 [e :UE 273 ]
 }
-"104
+"118
 [v _Interrupt_Init `(v ~T0 @X0 1 ef ]
-"105
+"119
 {
-[; ;init.c: 104: void Interrupt_Init(void)
-[; ;init.c: 105: {
+[; ;init.c: 118: void Interrupt_Init(void)
+[; ;init.c: 119: {
 [e :U _Interrupt_Init ]
 [f ]
-[; ;init.c: 106: (INTCONbits.GIE = 1);
-"106
+[; ;init.c: 120: (INTCONbits.GIE = 1);
+"120
 [e = . . _INTCONbits 1 7 -> -> 1 `i `uc ]
-[; ;init.c: 107: (INTCONbits.PEIE = 1);
-"107
+[; ;init.c: 121: (INTCONbits.PEIE = 1);
+"121
 [e = . . _INTCONbits 1 6 -> -> 1 `i `uc ]
-[; ;init.c: 108: }
-"108
+[; ;init.c: 122: }
+"122
 [e :UE 274 ]
 }

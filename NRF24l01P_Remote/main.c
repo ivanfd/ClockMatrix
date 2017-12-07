@@ -30,7 +30,7 @@ void main(void) {
         data_array[1] = minus;
         data_array[2] = 0x19;
         data_array[3] = 0x79;
-        LED = 1;
+        LED = 0;
         CLRWDT();
         nrf24_send(&data_array);
 
@@ -55,11 +55,11 @@ void main(void) {
         /* Or you might want to power down after TX */
         nrf24_powerDown();
 
-        LED = 0;
+        LED = 1;
         TRISB = 0;
         PORTB = 0;
         TRISA = 0b00001000;
-        PORTA = 0;
+        PORTA = 0b00000001;
 loop:
         SLEEP();
         count++;
@@ -84,7 +84,7 @@ loop:
 
 
 void init_Cpu(void){
-    PORTA = 0;
+    PORTA = 0b00000001;
     CMCON = 0x07;
     TRISA = 0;
     OPTION_REGbits.PSA = 1; // дільник перед песиком

@@ -32,7 +32,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S257 . . . . ]
 "6440
 [v _INTCON2bits `VS257 ~T0 @X0 0 e@4081 ]
-"46 common.h
+"49 common.h
 [v _INT0_ISR `(v ~T0 @X0 0 ef ]
 "2501 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
 [s S86 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -60,7 +60,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR1H `Vuc ~T0 @X0 0 e@4047 ]
 "5439
 [v _TMR1L `Vuc ~T0 @X0 0 e@4046 ]
-"54 common.h
+"57 common.h
 [v _TMR1_ISR `(v ~T0 @X0 0 ef ]
 "2732 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
 [s S95 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -90,6 +90,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR3L `Vuc ~T0 @X0 0 e@4018 ]
 "16 sound.h
 [v _TMR3_ISR `(v ~T0 @X0 0 ef ]
+"17 eusart.h
+[v _EUSART_Receive_ISR `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -5886,8 +5888,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 58: void scroll_right(void);
 [; ;key.h: 22: void key_press(void);
 [; ;timer.h: 13: void TMRInit(void);
-[; ;eusart.h: 8: void init_uart(void);
-[; ;eusart.h: 9: void putch(char data);
+[; ;eusart.h: 13: extern volatile uint8_t eusartRxCount;
+[; ;eusart.h: 15: void init_uart(void);
+[; ;eusart.h: 16: void putch(char data);
+[; ;eusart.h: 17: void EUSART_Receive_ISR(void);
+[; ;eusart.h: 18: uint8_t EUSART_Read(void);
+[; ;eusart.h: 19: void EUSART_Write(uint8_t txData);
+[; ;eusart.h: 20: void reinit_rx();
 [; ;BMP_280.h: 52: void bmp280_Init();
 [; ;BMP_280.h: 53: uint16_t bmp280ReadInt16(uint8_t address);
 [; ;BMP_280.h: 54: void bmp280WriteByte(uint8_t address, int8_t data);
@@ -5953,32 +5960,37 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 [; ;ds18b20.h: 13: uint8_t readTemp_Single(uint8_t *buf, uint8_t *minus, uint8_t *time_flag, uint8_t *timer_val);
 [; ;ds18b20.h: 14: void init_ds18b20(void);
-[; ;common.h: 46: void INT0_ISR(void);
-[; ;common.h: 47: void GetTime(void);
-[; ;common.h: 48: void time_set_min(void);
-[; ;common.h: 49: void time_set_hr(void);
-[; ;common.h: 50: void time_set_yr(void);
-[; ;common.h: 51: void time_set_mt(void);
-[; ;common.h: 52: void time_set_dt(void);
-[; ;common.h: 53: void time_set_dy(void);
-[; ;common.h: 54: void TMR1_ISR();
-[; ;common.h: 55: void time_led();
-[; ;common.h: 56: void version(void);
-[; ;common.h: 57: void default_state(void);
-[; ;common.h: 58: void home_temp(void);
-[; ;common.h: 59: void set_font();
-[; ;common.h: 60: void set_font_set(void);
-[; ;common.h: 61: void pressure(void);
-[; ;common.h: 62: void pre_ref_dis(void);
-[; ;common.h: 63: void set_type_clk(void);
-[; ;common.h: 64: void radio_temp(void);
+[; ;common.h: 49: void INT0_ISR(void);
+[; ;common.h: 50: void GetTime(void);
+[; ;common.h: 51: void time_set_min(void);
+[; ;common.h: 52: void time_set_hr(void);
+[; ;common.h: 53: void time_set_yr(void);
+[; ;common.h: 54: void time_set_mt(void);
+[; ;common.h: 55: void time_set_dt(void);
+[; ;common.h: 56: void time_set_dy(void);
+[; ;common.h: 57: void TMR1_ISR();
+[; ;common.h: 58: void time_led();
+[; ;common.h: 59: void version(void);
+[; ;common.h: 60: void default_state(void);
+[; ;common.h: 61: void home_temp(void);
+[; ;common.h: 62: void set_font();
+[; ;common.h: 63: void set_font_set(void);
+[; ;common.h: 64: void pressure(void);
+[; ;common.h: 65: void pre_ref_dis(void);
+[; ;common.h: 66: void set_type_clk(void);
+[; ;common.h: 67: void radio_temp(void);
+[; ;common.h: 68: void read_adc();
+[; ;common.h: 69: void adj_brig();
+[; ;common.h: 70: void brg_set();
+[; ;common.h: 71: void set_brg_manual();
+[; ;common.h: 72: void usart_r();
 [; ;sound.h: 14: void sound_init();
 [; ;sound.h: 16: void TMR3_ISR();
-[; ;interrupt.h: 17: void interrupt INTERRUPT_InterruptManager(void);
+[; ;interrupt.h: 18: void interrupt INTERRUPT_InterruptManager(void);
 [v $root$_INTERRUPT_InterruptManager `(v ~T0 @X0 0 e ]
-[v F3282 `(v ~T0 @X0 1 tf ]
+[v F3295 `(v ~T0 @X0 1 tf ]
 "4 interrupt.c
-[v _INTERRUPT_InterruptManager `IF3282 ~T0 @X0 1 e ]
+[v _INTERRUPT_InterruptManager `IF3295 ~T0 @X0 1 e ]
 "5
 {
 [; ;interrupt.c: 4: void interrupt INTERRUPT_InterruptManager (void)
@@ -6037,33 +6049,42 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _TMR1_ISR ..  ]
 "24
 }
-[; ;interrupt.c: 24: } else if (PIE2bits.TMR3IE == 1 && PIR2bits.TMR3IF ==1)
+[; ;interrupt.c: 24: } else if (PIE2bits.TMR3IE == 1 && PIR2bits.TMR3IF ==1) {
 [e $U 278  ]
 [e :U 277 ]
 [e $ ! && == -> . . _PIE2bits 0 1 `i -> 1 `i == -> . . _PIR2bits 0 1 `i -> 1 `i 279  ]
-[; ;interrupt.c: 25: {
-"25
 {
-[; ;interrupt.c: 26: PIR2bits.TMR3IF = 0;
-"26
+[; ;interrupt.c: 25: PIR2bits.TMR3IF = 0;
+"25
 [e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
-[; ;interrupt.c: 27: TMR3H = ((unsigned char)(((60536)>>8)&0xFF));
-"27
+[; ;interrupt.c: 26: TMR3H = ((unsigned char)(((60536)>>8)&0xFF));
+"26
 [e = _TMR3H -> & >> -> 60536 `l -> 8 `i -> -> 255 `i `l `uc ]
-[; ;interrupt.c: 28: TMR3L = ((unsigned char)((60536)&0xFF));
-"28
+[; ;interrupt.c: 27: TMR3L = ((unsigned char)((60536)&0xFF));
+"27
 [e = _TMR3L -> & -> 60536 `l -> -> 255 `i `l `uc ]
-[; ;interrupt.c: 30: TMR3_ISR();
-"30
+[; ;interrupt.c: 29: TMR3_ISR();
+"29
 [e ( _TMR3_ISR ..  ]
-"31
+"30
 }
+[; ;interrupt.c: 30: } else if (INTCONbits.PEIE == 1 && PIE1bits.RCIE == 1 && PIR1bits.RCIF == 1) {
+[e $U 280  ]
 [e :U 279 ]
+[e $ ! && && == -> . . _INTCONbits 1 6 `i -> 1 `i == -> . . _PIE1bits 0 5 `i -> 1 `i == -> . . _PIR1bits 0 5 `i -> 1 `i 281  ]
+{
+[; ;interrupt.c: 31: EUSART_Receive_ISR();
+"31
+[e ( _EUSART_Receive_ISR ..  ]
 "32
+}
+[e :U 281 ]
+"33
+[e :U 280 ]
 [e :U 278 ]
 [e :U 276 ]
 [e :U 274 ]
-[; ;interrupt.c: 31: }
 [; ;interrupt.c: 32: }
+[; ;interrupt.c: 33: }
 [e :UE 272 ]
 }
