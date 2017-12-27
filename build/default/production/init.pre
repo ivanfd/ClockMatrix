@@ -4363,16 +4363,17 @@ void pic_to_led(uint8_t x, uint8_t pic);
 void scroll_left(void);
 void interval_scroll_text();
 void scroll_right(void);
+void hide_two_side(void);
 
 # 13 "timer.h"
 void TMRInit(void);
 
-# 14 "sound.h"
+# 16 "sound.h"
 void sound_init();
 
 void TMR3_ISR();
 
-# 13 "eusart.h"
+# 19 "eusart.h"
 extern volatile uint8_t eusartRxCount;
 
 void init_uart(void);
@@ -4419,7 +4420,7 @@ const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 uint8_t readTemp_Single(uint8_t *buf, uint8_t *minus, uint8_t *time_flag, uint8_t *timer_val);
 void init_ds18b20(void);
 
-# 52 "bmp_280.h"
+# 52 "BMP_280.h"
 void bmp280_Init();
 uint16_t bmp280ReadInt16(uint8_t address);
 void bmp280WriteByte(uint8_t address, int8_t data);
@@ -4429,30 +4430,43 @@ uint32_t bmp280ReadInt32(uint8_t address);
 int32_t bmp280ReadPressure();
 uint8_t bmp280Convert(int32_t *press, int32_t *temper);
 
-# 49 "common.h"
-void INT0_ISR(void);
-void GetTime(void);
+# 7 "eeprom.h"
+void write_eep( unsigned char address, unsigned char data );
+unsigned char read_eep( unsigned short address );
+
+# 13 "settings.h"
 void time_set_min(void);
 void time_set_hr(void);
 void time_set_yr(void);
 void time_set_mt(void);
 void time_set_dt(void);
 void time_set_dy(void);
+void set_font_set(void);
+void set_type_clk(void);
+void brg_set();
+void set_brg_manual();
+void set_sound_h(void);
+
+# 52 "common.h"
+void INT0_ISR(void);
+void GetTime(void);
+
+
+
 void TMR1_ISR();
 void time_led();
 void version(void);
 void default_state(void);
 void home_temp(void);
 void set_font();
-void set_font_set(void);
+
 void pressure(void);
 void pre_ref_dis(void);
-void set_type_clk(void);
+
 void radio_temp(void);
 void read_adc();
 void adj_brig();
-void brg_set();
-void set_brg_manual();
+
 void usart_r();
 
 # 10 "i2c.h"
@@ -4464,15 +4478,11 @@ void I2C_Master_Write(uint8_t d);
 uint8_t I2C_Master_Read(uint8_t a);
 void I2C_Init(void);
 
-# 7 "eeprom.h"
-void write_eep( unsigned char address, unsigned char data );
-unsigned char read_eep( unsigned short address );
-
 # 25 "spi.h"
 void spi_init();
 uint8_t spi_rw(uint8_t value);
 
-# 136 "nrf24l01p.h"
+# 137 "nrf24l01p.h"
 void nrf24_init(uint8_t channel, uint8_t pay_length);
 void nrf24_write_reg(uint8_t reg, uint8_t value);
 uint8_t nrf24_read_reg(uint8_t reg);
@@ -4503,6 +4513,8 @@ extern uint8_t type_font;
 extern uint8_t type_clk;
 extern uint8_t brg_type;
 extern uint8_t brig;
+extern uint8_t blk_dot;
+extern uint8_t en_h_snd;
 
 void SYSTEM_Initialize(void)
 {
@@ -4520,14 +4532,20 @@ init_uart();
 bmp280_Init();
 type_font = read_eep(0);
 type_clk = read_eep(1);
+if(type_clk == 1)
+blk_dot = 0;
+else
+blk_dot = 1;
 brg_type = read_eep(2);
 brig = read_eep(3);
 Cmd7221(0x0A, brig);
 set_font();
 sound_init();
 spi_init();
-nrf24_init(100, 4);
+nrf24_init(120, 4);
 RTOS_SetTask(usart_r, 40, 20);
+RTOS_SetTask(GetTime, 100, 20);
+en_h_snd = read_eep(4);
 
 }
 

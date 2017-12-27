@@ -1,10 +1,6 @@
 #include "eusart.h"
 
-/**
-  Section: Macro Declarations
-*/
-#define EUSART_TX_BUFFER_SIZE 8
-#define EUSART_RX_BUFFER_SIZE 8
+
 
 /**
   Section: Global Variables
@@ -127,6 +123,8 @@ void EUSART_Receive_ISR(void) {
     if (sizeof (eusartRxBuffer) <= eusartRxHead) {
         eusartRxHead = 0;
     }
-    eusartRxCount++;
+    
+    if ((eusartRxCount++) >= sizeof (eusartRxBuffer) )
+        eusartRxCount = 0;
         
 }

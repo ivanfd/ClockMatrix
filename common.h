@@ -14,9 +14,10 @@
 #include "main.h"
 #include "onewire.h"
 #include "ds18b20.h"
-#include "bmp_280.h"
+#include "BMP_280.h"
 #include "eusart.h"
-
+#include "strings.h"
+#include "settings.h"
 
 #define SetBit(x,y)    do{ x |=  (1 << (y));} while(0)
 #define ClrBit(x,y)    do{ x &= ~(1 << (y));} while(0)
@@ -41,6 +42,8 @@
 #define EE_TYPE_CLK 1 // адреса в еепром типу годинника
 #define EE_TYPE_BRG 2 // адреса в еепром типу яскравості
 #define EE_DAT_BRG 3 // адреса в еепром значення яскравості
+#define EE_EN_SND_H 4 //адреса в еепром, чи можна відтворювати щогодинний сигнал
+
 
 #define TYPE_CLK_1 1  // вигляд годинника
 #define TYPE_CLK_2 2  // вигляд годинника
@@ -48,28 +51,25 @@
 
  void INT0_ISR(void);
  void GetTime(void);
- void time_set_min(void);
- void time_set_hr(void);
- void time_set_yr(void);
- void time_set_mt(void); 
- void time_set_dt(void); 
- void time_set_dy(void);
+ 
+
+
  void TMR1_ISR();
  void time_led(); 
  void version(void);
  void default_state(void);
  void home_temp(void);
  void set_font();
- void set_font_set(void);
+ 
  void pressure(void);
  void pre_ref_dis(void);
- void set_type_clk(void);
+
  void radio_temp(void);
  void read_adc();
  void adj_brig();
- void brg_set();
- void set_brg_manual();
+
  void usart_r();
+
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

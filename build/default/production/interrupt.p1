@@ -32,7 +32,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S257 . . . . ]
 "6440
 [v _INTCON2bits `VS257 ~T0 @X0 0 e@4081 ]
-"49 common.h
+"52 common.h
 [v _INT0_ISR `(v ~T0 @X0 0 ef ]
 "2501 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
 [s S86 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -88,9 +88,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR3H `Vuc ~T0 @X0 0 e@4019 ]
 "3646
 [v _TMR3L `Vuc ~T0 @X0 0 e@4018 ]
-"16 sound.h
+"18 sound.h
 [v _TMR3_ISR `(v ~T0 @X0 0 ef ]
-"17 eusart.h
+"23 eusart.h
 [v _EUSART_Receive_ISR `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
@@ -5886,15 +5886,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 56: void scroll_left(void);
 [; ;display.h: 57: void interval_scroll_text();
 [; ;display.h: 58: void scroll_right(void);
+[; ;display.h: 59: void hide_two_side(void);
 [; ;key.h: 22: void key_press(void);
 [; ;timer.h: 13: void TMRInit(void);
-[; ;eusart.h: 13: extern volatile uint8_t eusartRxCount;
-[; ;eusart.h: 15: void init_uart(void);
-[; ;eusart.h: 16: void putch(char data);
-[; ;eusart.h: 17: void EUSART_Receive_ISR(void);
-[; ;eusart.h: 18: uint8_t EUSART_Read(void);
-[; ;eusart.h: 19: void EUSART_Write(uint8_t txData);
-[; ;eusart.h: 20: void reinit_rx();
+[; ;eusart.h: 19: extern volatile uint8_t eusartRxCount;
+[; ;eusart.h: 21: void init_uart(void);
+[; ;eusart.h: 22: void putch(char data);
+[; ;eusart.h: 23: void EUSART_Receive_ISR(void);
+[; ;eusart.h: 24: uint8_t EUSART_Read(void);
+[; ;eusart.h: 25: void EUSART_Write(uint8_t txData);
+[; ;eusart.h: 26: void reinit_rx();
 [; ;BMP_280.h: 52: void bmp280_Init();
 [; ;BMP_280.h: 53: uint16_t bmp280ReadInt16(uint8_t address);
 [; ;BMP_280.h: 54: void bmp280WriteByte(uint8_t address, int8_t data);
@@ -5907,25 +5908,25 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;eeprom.h: 8: unsigned char read_eep( unsigned short address );
 [; ;spi.h: 25: void spi_init();
 [; ;spi.h: 26: uint8_t spi_rw(uint8_t value);
-[; ;nrf24l01p.h: 136: void nrf24_init(uint8_t channel, uint8_t pay_length);
-[; ;nrf24l01p.h: 137: void nrf24_write_reg(uint8_t reg, uint8_t value);
-[; ;nrf24l01p.h: 138: uint8_t nrf24_read_reg(uint8_t reg);
-[; ;nrf24l01p.h: 139: void nrf24_powerUpRx();
-[; ;nrf24l01p.h: 140: void nrf24_powerUpTx();
-[; ;nrf24l01p.h: 141: void nrf24_powerDown();
-[; ;nrf24l01p.h: 142: void nrf24_write_buf(uint8_t reg, uint8_t *pBuf, uint8_t length);
-[; ;nrf24l01p.h: 143: void nrf24_read_buf(uint8_t reg, uint8_t *pBuf, uint8_t length);
-[; ;nrf24l01p.h: 144: void nrf24_tx_address(uint8_t *adr);
-[; ;nrf24l01p.h: 145: void nrf24_rx_address(uint8_t *adr);
-[; ;nrf24l01p.h: 146: void nrf24_send(uint8_t *value);
-[; ;nrf24l01p.h: 147: uint8_t nrf24_isSending();
-[; ;nrf24l01p.h: 148: uint8_t nrf24_getStatus();
-[; ;nrf24l01p.h: 149: uint8_t nrf24_messageStatus();
-[; ;nrf24l01p.h: 150: uint8_t nrf24_retransmissionCount();
-[; ;nrf24l01p.h: 151: void nrf24_getData(uint8_t* data);
-[; ;nrf24l01p.h: 152: uint8_t nrf24_payloadLength();
-[; ;nrf24l01p.h: 153: uint8_t nrf24_rxFifoEmpty();
-[; ;nrf24l01p.h: 154: uint8_t nrf24_dataReady();
+[; ;nrf24l01p.h: 137: void nrf24_init(uint8_t channel, uint8_t pay_length);
+[; ;nrf24l01p.h: 138: void nrf24_write_reg(uint8_t reg, uint8_t value);
+[; ;nrf24l01p.h: 139: uint8_t nrf24_read_reg(uint8_t reg);
+[; ;nrf24l01p.h: 140: void nrf24_powerUpRx();
+[; ;nrf24l01p.h: 141: void nrf24_powerUpTx();
+[; ;nrf24l01p.h: 142: void nrf24_powerDown();
+[; ;nrf24l01p.h: 143: void nrf24_write_buf(uint8_t reg, uint8_t *pBuf, uint8_t length);
+[; ;nrf24l01p.h: 144: void nrf24_read_buf(uint8_t reg, uint8_t *pBuf, uint8_t length);
+[; ;nrf24l01p.h: 145: void nrf24_tx_address(uint8_t *adr);
+[; ;nrf24l01p.h: 146: void nrf24_rx_address(uint8_t *adr);
+[; ;nrf24l01p.h: 147: void nrf24_send(uint8_t *value);
+[; ;nrf24l01p.h: 148: uint8_t nrf24_isSending();
+[; ;nrf24l01p.h: 149: uint8_t nrf24_getStatus();
+[; ;nrf24l01p.h: 150: uint8_t nrf24_messageStatus();
+[; ;nrf24l01p.h: 151: uint8_t nrf24_retransmissionCount();
+[; ;nrf24l01p.h: 152: void nrf24_getData(uint8_t* data);
+[; ;nrf24l01p.h: 153: uint8_t nrf24_payloadLength();
+[; ;nrf24l01p.h: 154: uint8_t nrf24_rxFifoEmpty();
+[; ;nrf24l01p.h: 155: uint8_t nrf24_dataReady();
 [; ;init.h: 19: void SYSTEM_Initialize(void);
 [; ;init.h: 20: void Port_Init(void);
 [; ;init.h: 21: void Interrupt_Init(void);
@@ -5960,37 +5961,38 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds18b20.h: 10: const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 [; ;ds18b20.h: 13: uint8_t readTemp_Single(uint8_t *buf, uint8_t *minus, uint8_t *time_flag, uint8_t *timer_val);
 [; ;ds18b20.h: 14: void init_ds18b20(void);
-[; ;common.h: 49: void INT0_ISR(void);
-[; ;common.h: 50: void GetTime(void);
-[; ;common.h: 51: void time_set_min(void);
-[; ;common.h: 52: void time_set_hr(void);
-[; ;common.h: 53: void time_set_yr(void);
-[; ;common.h: 54: void time_set_mt(void);
-[; ;common.h: 55: void time_set_dt(void);
-[; ;common.h: 56: void time_set_dy(void);
+[; ;settings.h: 13: void time_set_min(void);
+[; ;settings.h: 14: void time_set_hr(void);
+[; ;settings.h: 15: void time_set_yr(void);
+[; ;settings.h: 16: void time_set_mt(void);
+[; ;settings.h: 17: void time_set_dt(void);
+[; ;settings.h: 18: void time_set_dy(void);
+[; ;settings.h: 19: void set_font_set(void);
+[; ;settings.h: 20: void set_type_clk(void);
+[; ;settings.h: 21: void brg_set();
+[; ;settings.h: 22: void set_brg_manual();
+[; ;settings.h: 23: void set_sound_h(void);
+[; ;common.h: 52: void INT0_ISR(void);
+[; ;common.h: 53: void GetTime(void);
 [; ;common.h: 57: void TMR1_ISR();
 [; ;common.h: 58: void time_led();
 [; ;common.h: 59: void version(void);
 [; ;common.h: 60: void default_state(void);
 [; ;common.h: 61: void home_temp(void);
 [; ;common.h: 62: void set_font();
-[; ;common.h: 63: void set_font_set(void);
 [; ;common.h: 64: void pressure(void);
 [; ;common.h: 65: void pre_ref_dis(void);
-[; ;common.h: 66: void set_type_clk(void);
 [; ;common.h: 67: void radio_temp(void);
 [; ;common.h: 68: void read_adc();
 [; ;common.h: 69: void adj_brig();
-[; ;common.h: 70: void brg_set();
-[; ;common.h: 71: void set_brg_manual();
-[; ;common.h: 72: void usart_r();
-[; ;sound.h: 14: void sound_init();
-[; ;sound.h: 16: void TMR3_ISR();
+[; ;common.h: 71: void usart_r();
+[; ;sound.h: 16: void sound_init();
+[; ;sound.h: 18: void TMR3_ISR();
 [; ;interrupt.h: 18: void interrupt INTERRUPT_InterruptManager(void);
 [v $root$_INTERRUPT_InterruptManager `(v ~T0 @X0 0 e ]
-[v F3295 `(v ~T0 @X0 1 tf ]
+[v F3299 `(v ~T0 @X0 1 tf ]
 "4 interrupt.c
-[v _INTERRUPT_InterruptManager `IF3295 ~T0 @X0 1 e ]
+[v _INTERRUPT_InterruptManager `IF3299 ~T0 @X0 1 e ]
 "5
 {
 [; ;interrupt.c: 4: void interrupt INTERRUPT_InterruptManager (void)
@@ -6057,12 +6059,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;interrupt.c: 25: PIR2bits.TMR3IF = 0;
 "25
 [e = . . _PIR2bits 0 1 -> -> 0 `i `uc ]
-[; ;interrupt.c: 26: TMR3H = ((unsigned char)(((60536)>>8)&0xFF));
+[; ;interrupt.c: 26: TMR3H = ((unsigned char)(((61536)>>8)&0xFF));
 "26
-[e = _TMR3H -> & >> -> 60536 `l -> 8 `i -> -> 255 `i `l `uc ]
-[; ;interrupt.c: 27: TMR3L = ((unsigned char)((60536)&0xFF));
+[e = _TMR3H -> & >> -> 61536 `l -> 8 `i -> -> 255 `i `l `uc ]
+[; ;interrupt.c: 27: TMR3L = ((unsigned char)((61536)&0xFF));
 "27
-[e = _TMR3L -> & -> 60536 `l -> -> 255 `i `l `uc ]
+[e = _TMR3L -> & -> 61536 `l -> -> 255 `i `l `uc ]
 [; ;interrupt.c: 29: TMR3_ISR();
 "29
 [e ( _TMR3_ISR ..  ]

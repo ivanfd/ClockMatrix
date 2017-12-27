@@ -7,7 +7,7 @@ uint8_t text_buf[100];      // буфер для біг строки
 uint8_t i_char, i_bchar;    // індекс літери та байтк в літері
 uint8_t(*pFont)[][5] = &dFont1; // вказівник на шрифт цифр для показу годин     
 extern uint8_t idx_pnt;
-uint8_t x1 = 0, x2 = 0, x3 = 0, x4 = 0, y1, y2, y3, y4; //Для зсуву стовбця вниз
+extern volatile uint8_t x1 = 0, x2 = 0, x3 = 0, x4 = 0, y1, y2, y3, y4; //Для зсуву стовбця вниз
 //uint8_t Hours, Min, Sec;
 
 //*****************************************
@@ -186,7 +186,7 @@ void FillBuf(uint8_t type) {
             Dis_Buff[24] = 0;
             Dis_Buff[28] = 0;
             break;
-        case TYPE_CLK_2:
+        case TYPE_CLK_2:// якщо тип годинника 2
 
             y1 = (TTime.Thr / 10) % 10;
             y2 = TTime.Thr % 10;
@@ -194,7 +194,7 @@ void FillBuf(uint8_t type) {
             y4 = TTime.Tmin % 10;
             //Якщо люба з цифр змінилася
             if ((x1 != y1) || (x2 != y2) || (x3 != y3) || (x4 != y4)) {
-                putchar_b_buf(13, ':', &Font);
+                //putchar_b_buf(13, ':', &Font);
                 if (x4 != y4)
                     putchar_down(25, TTime.Tmin % 10, pFont);
                 else
@@ -219,7 +219,7 @@ void FillBuf(uint8_t type) {
                 } else
                     putchar_down(1, 0, &Font);
                 // putchar_b_buf(13, 23 + idx_pnt, &Font);
-                idx_pnt = 0;
+                //idx_pnt = 0;
 
 
                 x1 = y1;
@@ -233,7 +233,7 @@ void FillBuf(uint8_t type) {
                 else
                     putchar_b_buf(1, 0, &Font);
                 putchar_b_buf(7, TTime.Thr % 10, pFont);
-                putchar_b_buf(13, 23 + idx_pnt, &Font);
+               // putchar_b_buf(13, 23 + idx_pnt, &Font);
                 putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
                 putchar_b_buf(25, TTime.Tmin % 10, pFont);
             }
@@ -388,4 +388,22 @@ while(scroll_text())
             __delay_ms(1);
 
     };    
+}
+
+//**************************************************
+//             Ефект згасання з двох сторін :-)
+//**************************************************
+
+void hide_two_side(void) {
+    uint8_t a = 0, b = 31;
+    uint8_t i, j;
+
+    for (i = 0; i <= 15; i++) {
+        Dis_Buff[a++] = 0;
+        Dis_Buff[b--] = 0;
+        Update_Matrix(Dis_Buff); // обновити дані на дисплеї
+        for (j = 0; j < 30; j++) // пауза
+            __delay_ms(1);
+
+    }
 }

@@ -30,7 +30,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define DEBUG
+//#define DEBUG
 #define LED PORTAbits.RA0
 
 void init_Cpu(void);

@@ -12,6 +12,8 @@ uint8_t pay_len;  // довжина посилки
 
 void nrf24_init(uint8_t channel, uint8_t pay_length) {
 
+    SPI_CSN = 1;
+    SPI_CE = 0;
     pay_len = pay_length;
     
     nrf24_tx_address(&nrf_tx_address);
@@ -26,8 +28,8 @@ void nrf24_init(uint8_t channel, uint8_t pay_length) {
     nrf24_write_reg(NRF24_RX_PW_P4, 0x00);
     nrf24_write_reg(NRF24_RX_PW_P5, 0x00);
 
-    // 1 Mbps, потужність: 0dbm
-    nrf24_write_reg(NRF24_RF_SETUP, (0 << RF_DR) | ((0x03) << RF_PWR));
+    // 250 Kbps, потужність: 0dbm
+    nrf24_write_reg(NRF24_RF_SETUP, (1 << RF_DR_LOW) | (0 << RF_DR) | ((0x03) << RF_PWR));
 
     // CRC активувати, довжина CRC 1 байт
     nrf24_write_reg(NRF24_CONFIG, CONFIG_SET);
@@ -43,6 +45,9 @@ void nrf24_init(uint8_t channel, uint8_t pay_length) {
 
 // Dynamic length configurations: No dynamic length
     nrf24_write_reg(NRF24_DYNPD,(0<<DPL_P0)|(0<<DPL_P1)|(0<<DPL_P2)|(0<<DPL_P3)|(0<<DPL_P4)|(0<<DPL_P5));
+    
+        // Start listening
+    nrf24_powerUpRx();
     
 }
 
@@ -125,7 +130,7 @@ void nrf24_write_buf(uint8_t reg, uint8_t *pBuf, uint8_t length) {
 
 /**************************************************         
 	Читає 'length' з репгістру 'reg'         
-/**************************************************/
+**************************************************/
 void nrf24_read_buf(uint8_t reg, uint8_t *pBuf, uint8_t length) {
     uint8_t status, i;
 
@@ -160,7 +165,7 @@ void nrf24_send(uint8_t *value) {
 
     SPI_CE = 0;
     nrf24_powerUpTx();
-    SPI_CSN = 0; // очищаємо буфер пердачі
+    SPI_CSN = 0; // очищаємо буфер передачі
     spi_rw(FLUSH_TX); //...........
     SPI_CSN = 1; //
 
@@ -190,7 +195,7 @@ uint8_t nrf24_isSending() {
 
 
 /********************************
- *  Отримати регістр STSTUS
+ *  Отримати регістр STATUS
 ********************************/
 uint8_t nrf24_getStatus() {
     uint8_t r_status;

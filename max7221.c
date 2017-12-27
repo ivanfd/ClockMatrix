@@ -6,23 +6,24 @@
 void Send_Byte_7221(uint8_t dat)
    {
       uint8_t i;
-      
-         for (i = 0; i < 8; i++)
-         {
-               if (dat & 0x80)
-                  DAT_MAX = 1;
-               else
-                  DAT_MAX = 0;
-                  CLK_MAX = 1;
-                  asm("nop");
-                  asm("nop");
-//                  asm("nop");
-//                  asm("nop");
-//                  asm("nop");
-//                  asm("nop");
-                  CLK_MAX = 0;
-                  dat <<= 1;   
-         }
+
+    for (i = 0; i < 8; i++) {
+        if (dat & 0x80)
+            DAT_MAX = 1;
+        else
+            DAT_MAX = 0;
+        CLK_MAX = 1;
+        // __delay_ms(1);
+        asm("nop");
+        asm("nop");
+        asm("nop");
+        asm("nop");
+        asm("nop");
+        asm("nop");
+        asm("nop");
+        CLK_MAX = 0;
+        dat <<= 1;
+    }
       
 
    }

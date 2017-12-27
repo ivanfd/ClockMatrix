@@ -71,6 +71,7 @@
 #define NRF24_RF_CH       0x05  // Встановлює частотний канал 
 #define NRF24_RF_SETUP    0x06  // Регістр налаштувань RF
 /* RF setup register */
+#define RF_DR_LOW   5
 #define PLL_LOCK    4
 #define RF_DR       3
 #define RF_PWR      1 /* 2 bits */ 
@@ -79,7 +80,7 @@
 
 #define NRF24_STATUS      0x07  // Регістр стану модуля. Дані з цього регістру завжди видаються по SPI після першого записаного байту.
 #define RX_DR             6     // Відбулося переривання по прийому. Для скидання записати 1.
-#define TX_DS             5     // Перивання відбулося по відправлених даних TX FIFO. Встановлюється, коли пакет, переданий. Якщо AUTO_ACK активовано, цей біт встановлюється лише тоді, коли є ACK отримано.
+#define TX_DS             5     // Перивання відбулося по відправлених даних TX FIFO. Встановлюэться, коли пакет, переданий. Якщо AUTO_ACK активовано, цей біт встановлюється лише тоді, коли є ACK отримано.
 #define MAX_RT            4     // Переривання максимальної кількісті повторів передачі. Записати 1, щоб очистити біт. Якщо заявлено MAX_RT, має бути очищеним для подальшого спілкування.
 #define RX_P_NO_2         3
 #define RX_P_NO_1         2
@@ -112,7 +113,7 @@
 
 #define NRF24_FIFO_STATUS  0x17 // Регістр стану FIFO
 #define TX_REUSE            6
-#define TX_FULL             5
+#define TX_FULL_FIFO        5
 #define TX_EMPTY            4
 #define RX_FULL             1
 #define RX_EMPTY            0

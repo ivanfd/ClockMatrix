@@ -4319,8 +4319,9 @@ void pic_to_led(uint8_t x, uint8_t pic);
 void scroll_left(void);
 void interval_scroll_text();
 void scroll_right(void);
+void hide_two_side(void);
 
-# 13 "eusart.h"
+# 19 "eusart.h"
 extern volatile uint8_t eusartRxCount;
 
 void init_uart(void);
@@ -4351,7 +4352,7 @@ uint8_t spi_rw(uint8_t value);
 # 22 "key.h"
 void key_press(void);
 
-# 136 "nrf24l01p.h"
+# 137 "nrf24l01p.h"
 void nrf24_init(uint8_t channel, uint8_t pay_length);
 void nrf24_write_reg(uint8_t reg, uint8_t value);
 uint8_t nrf24_read_reg(uint8_t reg);
@@ -4380,7 +4381,7 @@ void Interrupt_Init(void);
 # 13 "timer.h"
 void TMRInit(void);
 
-# 14 "sound.h"
+# 16 "sound.h"
 void sound_init();
 
 void TMR3_ISR();
@@ -4411,30 +4412,39 @@ const char fract[] = {0,1,1,2,2,3,4,4,5,6,6,7,7,8,9,9};
 uint8_t readTemp_Single(uint8_t *buf, uint8_t *minus, uint8_t *time_flag, uint8_t *timer_val);
 void init_ds18b20(void);
 
-# 49 "common.h"
-void INT0_ISR(void);
-void GetTime(void);
+# 13 "settings.h"
 void time_set_min(void);
 void time_set_hr(void);
 void time_set_yr(void);
 void time_set_mt(void);
 void time_set_dt(void);
 void time_set_dy(void);
+void set_font_set(void);
+void set_type_clk(void);
+void brg_set();
+void set_brg_manual();
+void set_sound_h(void);
+
+# 52 "common.h"
+void INT0_ISR(void);
+void GetTime(void);
+
+
+
 void TMR1_ISR();
 void time_led();
 void version(void);
 void default_state(void);
 void home_temp(void);
 void set_font();
-void set_font_set(void);
+
 void pressure(void);
 void pre_ref_dis(void);
-void set_type_clk(void);
+
 void radio_temp(void);
 void read_adc();
 void adj_brig();
-void brg_set();
-void set_brg_manual();
+
 void usart_r();
 
 # 12 "onewire.h"

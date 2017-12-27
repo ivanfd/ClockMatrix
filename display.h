@@ -56,6 +56,7 @@ struct Time_Get             // структура для годин
  void scroll_left(void);
  void interval_scroll_text();
  void scroll_right(void);
+ void hide_two_side(void);
  
 #endif	/* XC_HEADER_TEMPLATE_H */
 

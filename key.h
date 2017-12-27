@@ -11,10 +11,10 @@
 
 #define KEY_PORT    PORTB
 //  входи до яких підключені кнопки
-#define KEY_OK 4
-#define KEY_UP 1
-#define KEY_DOWN 2
-#define KEY_EXIT 3
+#define KEY_OK 1
+#define KEY_UP 2
+#define KEY_DOWN 3
+#define KEY_EXIT 4
 
 
 

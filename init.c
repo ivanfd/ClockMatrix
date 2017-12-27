@@ -64,6 +64,8 @@ extern uint8_t type_font;
 extern uint8_t type_clk;
 extern uint8_t brg_type;
 extern uint8_t brig;// значення яскравості
+extern uint8_t blk_dot; // дозвіл на мигання кнопок
+extern uint8_t en_h_snd;
 
 void SYSTEM_Initialize(void)  // ініціалізація контролера
 {
@@ -81,14 +83,20 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     bmp280_Init();
     type_font = read_eep(EE_FONT);
     type_clk = read_eep(EE_TYPE_CLK);
+    if(type_clk == 1)
+        blk_dot = 0;
+    else
+        blk_dot = 1;
     brg_type = read_eep(EE_TYPE_BRG);
     brig = read_eep(EE_DAT_BRG);
     Cmd7221(INTENSITY_R, brig); //Intensity Register
     set_font();
     sound_init();
     spi_init();
-    nrf24_init(100, 4);
+    nrf24_init(120, 4);
     RTOS_SetTask(usart_r, 40, cycle_main); // ЗАДАЧА ОПИТУВАННЯ КОМ ПОРТА
+    RTOS_SetTask(GetTime, 100, cycle_main);// Задача зчитування даних з RTC
+    en_h_snd = read_eep(EE_EN_SND_H);
 
 }
 

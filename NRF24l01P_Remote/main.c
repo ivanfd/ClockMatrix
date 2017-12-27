@@ -17,6 +17,7 @@ uint8_t minus;
 uint8_t count = 0; // скільки сидимо в сні
 
 void main(void) {
+    uint8_t temp_flag; // чи присутный датчик
     init_Cpu();
     data_array[0] = 0x75;
     data_array[1] = 0xDC;
@@ -24,30 +25,42 @@ void main(void) {
     data_array[3] = 0x79;
     while (1) {
         CLRWDT();
-        printf("> ....\r\n");
-        readTemp_Single(&temperature, &minus);
-        data_array[0] = temperature; // пишемо в буфер температуру
-        data_array[1] = minus;
+        //  printf("> ....\r\n");
+        if (temp_flag = readTemp_Single(&temperature, &minus)) {
+            data_array[0] = temperature; // пишемо в буфер температуру
+            data_array[1] = minus;
+        }else{
+            temperature = 0xFF;
+            data_array[0] = temperature;
+        }
         data_array[2] = 0x19;
         data_array[3] = 0x79;
-        LED = 0;
+        LED = 0;// засвітити світлодіод
         CLRWDT();
         nrf24_send(&data_array);
 
-        while (nrf24_isSending());
+        while (nrf24_isSending()); // чекаємо поки передасть
         
         /* Make analysis on last tranmission attempt */
         temp = nrf24_messageStatus();
 
         if (temp == NRF24_TRANSMISSON_OK) {
-            printf("> Tranmission went OK\r\n");
+//            printf("> Tranmission went OK\r\n");
         } else if (temp == NRF24_MESSAGE_LOST) {
-            printf("> Message is lost ...\r\n");
+            LED = 1;
+            __delay_ms(100);
+            LED = 0;
+            __delay_ms(25);
+            LED = 1;
+            __delay_ms(100);
+            LED = 0;
+            __delay_ms(25);
+            //            printf("> Message is lost ...\r\n");
         }
 
         /* Retranmission count indicates the tranmission quality */
         temp = nrf24_retransmissionCount();
-        printf("> Retranmission count: %d\r\n", temp);
+//     //   printf("> Retranmission count: %d\r\n", temp);
 
         /* Optionally, go back to RX mode ... */
         ////nrf24_powerUpRx();
@@ -63,7 +76,7 @@ void main(void) {
 loop:
         SLEEP();
         count++;
-        if (count < 10) goto loop;
+        if (count < 15) goto loop;
         count = 0;
         /* Wait a little ... */
         //_delay_ms(10);
@@ -96,7 +109,7 @@ void init_Cpu(void){
     
     spi_init();
     init_ds18b20();
-    nrf24_init(100, 4);
+    nrf24_init(120, 4);
     init_uart();
 #ifdef DEBUG
     printf("-USART READY- \n\r");

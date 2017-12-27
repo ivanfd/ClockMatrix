@@ -28,6 +28,8 @@
       <itemPath>BMP_280.h</itemPath>
       <itemPath>nrf24l01p.h</itemPath>
       <itemPath>spi.h</itemPath>
+      <itemPath>strings.h</itemPath>
+      <itemPath>settings.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -55,6 +57,7 @@
       <itemPath>BMP_280.c</itemPath>
       <itemPath>spi.c</itemPath>
       <itemPath>nrf24l01p.c</itemPath>
+      <itemPath>settings.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -177,6 +180,7 @@
         <property key="ToolFirmwareFilePath"
                   value="C:\Program Files (x86)/Microchip/MPLABX/v3.51/mplab_ide/mplablibs/modules/ext/PICKIT3.jar/PK3FW_014614.jam"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="hwtoolclock.frcindebug" value="false"/>
         <property key="memories.aux" value="false"/>
         <property key="memories.bootflash" value="true"/>

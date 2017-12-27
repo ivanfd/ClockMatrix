@@ -28,8 +28,8 @@ void nrf24_init(uint8_t channel, uint8_t pay_length) {
     nrf24_write_reg(NRF24_RX_PW_P4, 0x00);
     nrf24_write_reg(NRF24_RX_PW_P5, 0x00);
 
-    // 1 Mbps, потужність: 0dbm
-    nrf24_write_reg(NRF24_RF_SETUP, (0 << RF_DR) | ((0x03) << RF_PWR));
+    // 250 Kbps, потужність: 0dbm
+    nrf24_write_reg(NRF24_RF_SETUP, (1 << RF_DR_LOW) | (0 << RF_DR) | ((0x03) << RF_PWR));
 
     // CRC активувати, довжина CRC 1 байт
     nrf24_write_reg(NRF24_CONFIG, CONFIG_SET);
@@ -130,7 +130,7 @@ void nrf24_write_buf(uint8_t reg, uint8_t *pBuf, uint8_t length) {
 
 /**************************************************         
 	Читає 'length' з репгістру 'reg'         
-/**************************************************/
+**************************************************/
 void nrf24_read_buf(uint8_t reg, uint8_t *pBuf, uint8_t length) {
     uint8_t status, i;
 
@@ -195,7 +195,7 @@ uint8_t nrf24_isSending() {
 
 
 /********************************
- *  Отримати регістр STSTUS
+ *  Отримати регістр STATUS
 ********************************/
 uint8_t nrf24_getStatus() {
     uint8_t r_status;

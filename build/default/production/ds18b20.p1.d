@@ -3,6 +3,7 @@
  ds18b20.c  \
 init.h  \
 spi.h  \
+settings.h  \
 timer.h  \
 nrf24l01p.h  \
 main.h  \
@@ -20,9 +21,9 @@ Font.h  \
 eeprom.h  \
 common.h  \
 eusart.h  \
-bmp_280.h  \
 max7221.h  \
 display.h  \
+strings.h  \
 ds18b20.h  \
 BMP_280.h  \
 events.h 
