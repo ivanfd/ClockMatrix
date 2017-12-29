@@ -33,7 +33,7 @@ extern uint8_t h_snd_t; //година співпадає з дозволом
 extern uint8_t snd_flag; // один раз відтворювати
 
 
-__EEPROM_DATA(5, 2, 1, 0, 1, 0, 0, 0); // ініціалізація еепром, 
+__EEPROM_DATA(5, 2, 1, 2, 1, 0, 0, 0); // ініціалізація еепром, 
 // 0 - тип шрифту (від 1 до 5)
 
 // читаємо з DS3231 години, хвилини, секунди та дату
@@ -88,7 +88,8 @@ void GetTime(void)
             break;
         case KEY_EXIT_EVENT: // повертаємось в показ часу
             events = MAIN_EVENT;
-            scroll_right();
+            Rand_ef(); // випадковий ефект
+            //scroll_right();
             //pre_ref_dis();
             RTOS_DeleteTask(default_state);
             RTOS_DeleteTask(home_temp);
@@ -138,68 +139,68 @@ void radio_temp(void) {
                     putchar_down(22, '-', &Font);
                 }
             }
-                events = TEMP_EVENT;
-                RTOS_SetTask(default_state, 650, 0);  // 3,5 секунд для виходу
+            events = TEMP_EVENT;
+            RTOS_SetTask(default_state, 650, 0); // 3,5 секунд для виходу
 
-           // }
-                
+            // }
+
             break;
         case TEMP_EVENT:
-            break;    
-        case KEY_EXIT_EVENT:  // повертаємось в показ часу
+            break;
+        case KEY_EXIT_EVENT: // повертаємось в показ часу
             events = MAIN_EVENT;
-            hide_two_side();
+                       
+            Rand_ef(); // випадковий ефект
+            //hide_two_side();
             //scroll_left();
             pre_ref_dis();
             RTOS_DeleteTask(default_state);
             RTOS_DeleteTask(radio_temp);
             RTOS_SetTask(time_led, 0, cycle_main);
-           // clear_matrix();
+            // clear_matrix();
             break;
     }
 }
 
 
- //=====================================================
- //   Заміна шрифту
- //=====================================================
- void set_font()
- {
-     switch (type_font)
-     {
-         case 1:
-             pFont = &dFont1;
+//=====================================================
+//   Заміна шрифту
+//=====================================================
+
+void set_font() {
+    switch (type_font) {
+        case 1:
+            pFont = &dFont1;
             break;
-         case 2:
-             pFont = &dFont2;
-             break;
-         case 3:
-             pFont = &dFont3;
-             break;
-         case 4:
-             pFont = &dFont4;
-             break;
-         case 5:
-             pFont = &dFont5;
-             break;
-     }
- }
+        case 2:
+            pFont = &dFont2;
+            break;
+        case 3:
+            pFont = &dFont3;
+            break;
+        case 4:
+            pFont = &dFont4;
+            break;
+        case 5:
+            pFont = &dFont5;
+            break;
+    }
+}
 
 //==================================================
 //  вивід атмосферного тиску
 // =================================================
- void pressure(void)
- {
-     uint16_t pr;
-    
-    switch (events)
-    {
+
+void pressure(void) {
+    uint16_t pr;
+
+    switch (events) {
         case MAIN_EVENT:
             clear_matrix();
             if (press) {
-//                pic_to_led(3, 4);
-//                putchar_down(11, (press / 100) % 10, pFont);
-//                putchar_down(17, (press / 10) % 10, pFont);
+                //                pic_to_led(3, 4);
+                //                putchar_down(11, (press / 100) % 10, pFont);
+                //                putchar_down(17, (press / 10) % 10, pFont);
                 //                putchar_down(23, press % 10, pFont);
                 pr = press / 100;
                 pic_to_led(3, 4);
@@ -207,7 +208,7 @@ void radio_temp(void) {
                 putchar_down(17, (pr / 10) % 10, pFont);
                 putchar_down(23, pr % 10, pFont);
                 //putchar_down(25, '.', &Font);
-                
+
             } else {
                 pic_to_led(3, 4);
                 putchar_down(11, 'E', &Font);
@@ -231,7 +232,9 @@ void radio_temp(void) {
                 sprintf(text_buf, "мм.рт.ст.");
                 interval_scroll_text();
             } else
-                scroll_left();
+                        //scroll_right();
+            Rand_ef(); // випадковий ефект
+                //    scroll_left();
             pre_ref_dis();
             RTOS_DeleteTask(default_state);
             RTOS_DeleteTask(pressure);
@@ -283,23 +286,22 @@ void pre_ref_dis(void) {
 //==================================================
 //  виводимо годину на дисплей -:)
 //==================================================
-void time_led()
-{
+
+void time_led() {
     uint8_t data_array[4];
 
-    static uint16_t test = 0;
+    uint16_t test = 0;
 
-   switch (events)
-   {
+    switch (events) {
         case MAIN_EVENT:
             FillBuf(type_clk);
-            if((TTime.Ts>5)&&(TTime.Ts<7))          //прочитаємо температуру
+            if ((TTime.Ts > 5)&&(TTime.Ts < 7)) //прочитаємо температуру
             {
                 readTemp_Single(&temperature, &minus, &time_flag, &timer_val);
             }
-            if(((TTime.Ts>14)&&(TTime.Ts<16)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо температуру
+            if (((TTime.Ts > 14)&&(TTime.Ts < 16)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо температуру
                 events = KEY_DOWN_EVENT;
-            if(((TTime.Ts>39)&&(TTime.Ts<41)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо атмосферний тиск
+            if (((TTime.Ts > 39)&&(TTime.Ts < 41)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо атмосферний тиск
                 events = KEY_UP_EVENT;
             break;
         case KEY_OK_EVENT: // якщо натиснули кнопку ОК
@@ -313,33 +315,28 @@ void time_led()
                 putchar_b_buf(13, 23, &Font);
             //clear_matrix();
             break;
-        case  KEY_UP_EVENT:
-   //         asm("nop");
-                        blk_dot = 0;
+        case KEY_UP_EVENT:
+            //         asm("nop");
+            blk_dot = 0;
             bmp280Convert(&press, &temperbmp280);
-         ////  press = BMP085Pressure(1);
-            //scroll_left();
             if (type_clk == TYPE_CLK_2)
                 putchar_b_buf(13, 23, &Font);
-            scroll_right();
+            //scroll_right();
+            Rand_ef(); // випадковий ефект
             RTOS_DeleteTask(time_led); //видаляємо задачу
             RTOS_SetTask(pressure, 0, cycle_main); //додаємо задачу 
             events = MAIN_EVENT;
             en_put = 0;
 
-            //  scroll_left();
-            //            clear_matrix();
-            //            pic_to_led(0,1);
-//            pic_to_led(8,2);
-//            pic_to_led(16,3);
             break;
-        case  KEY_DOWN_EVENT:
-            //ow_reset();
-            //    init_ds18b20();
-                        blk_dot = 0;
+        case KEY_DOWN_EVENT:
+
+            blk_dot = 0;
             if (type_clk == TYPE_CLK_2)
                 putchar_b_buf(13, 23, &Font);
-            scroll_left();
+            //scroll_left();
+            //dissolve();
+            Rand_ef();
             RTOS_DeleteTask(time_led); //видаляємо задачу
             RTOS_SetTask(home_temp, 0, cycle_main); //додаємо задачу 
             events = MAIN_EVENT;
@@ -348,31 +345,33 @@ void time_led()
         case KEY_EXIT_EVENT:
             events = MAIN_EVENT;
             RTOS_DeleteTask(default_state);
-            nrf24_init(120, 4);
-//#ifdef DEBUG
-//            __delay_ms(10);
-//            //printf("Test_NRF =  %u\n\r", nrf24_read_reg(NRF24_RX_ADDR_P0));
-//            //printf("Test_NRF_Chan =  %u\n\r", nrf24_read_reg(NRF24_RF_CH));
-//
-//            if (nrf24_dataReady()) {
-//                test++;
-//                nrf24_getData(&data_array);
-//                printf("%u > ", test);
-//                printf("%u ", data_array[0]);
-//                printf("%c ", data_array[1]);
-//                printf("%2X ", data_array[2]);
-//                printf("%2X\r\n", data_array[3]);
-//            }
-//#endif  
-//            break;
+            //           test = 0 + rand() % 10;
+            //           printf("Tst = %u", test);
+            //nrf24_init(120, 4);
+            //#ifdef DEBUG
+            //            __delay_ms(10);
+            //            //printf("Test_NRF =  %u\n\r", nrf24_read_reg(NRF24_RX_ADDR_P0));
+            //            //printf("Test_NRF_Chan =  %u\n\r", nrf24_read_reg(NRF24_RF_CH));
+            //
+            //            if (nrf24_dataReady()) {
+            //                test++;
+            //                nrf24_getData(&data_array);
+            //                printf("%u > ", test);
+            //                printf("%u ", data_array[0]);
+            //                printf("%c ", data_array[1]);
+            //                printf("%2X ", data_array[2]);
+            //                printf("%2X\r\n", data_array[3]);
+            //            }
+            //#endif  
+            //            break;
         case TEMP_EVENT:
-            
+
             break;
     }
     if (en_put)
         Update_Matrix(Dis_Buff); // обновити дані на дисплеї
-   
-   // яскравість
+
+    // яскравість
     if (brg_type) {
         if ((TTime.Ts % 2 == 0)&&(oldsec_flag)) {
             oldsec_flag = 0;
@@ -381,7 +380,7 @@ void time_led()
         adj_brig(); //  регулюємо яскравість
     }
     en_put = 1;
-  
+
     // читаємо радіодатчик
     if (nrf24_dataReady()) {
         nrf24_getData(&data_array);
@@ -398,15 +397,15 @@ void time_led()
     if (err_ds_count > 1000) // чекаємо ~1.6 хвилини. Якщо не було ні одного зчитування
     {
         err_ds18 = 1; // то ставимо признак помилки радіодатчика
-        nrf24_powerUpRx();// Переводимо датчик у режим прийому, та скидаємо всі переривання
+        nrf24_powerUpRx(); // Переводимо датчик у режим прийому, та скидаємо всі переривання
         nrf24_init(120, 4); // Ще раз ініціалізуємо
     }
 
 
-//#ifdef DEBUG
-//            if (nrf24_dataReady()) {
-//                test++;
-//                nrf24_getData(&data_array);
+    //#ifdef DEBUG
+    //            if (nrf24_dataReady()) {
+    //                test++;
+    //                nrf24_getData(&data_array);
     //                printf("%u > ", test);
     //                printf("%u ", data_array[0]);
     //                printf("%c ", data_array[1]);
@@ -639,6 +638,20 @@ void adj_brig() {
 void default_state(void) {
     events = KEY_EXIT_EVENT;
 
+}
+
+
+//=========================================
+//  Вибір випадкового ефекту
+//=========================================
+void Rand_ef(void) {
+    uint8_t eff;
+    void (*function) (void);    // вказівник на функцію
+    void (*p_MyFunc[4])(void) = {dissolve, scroll_left,scroll_right,hide_two_side};
+
+    eff = (0 + rand() % 4);
+    function = p_MyFunc[eff];
+    (*function)();                               // виконуємо задачу
 }
 
 // функція переривання по входу RB0

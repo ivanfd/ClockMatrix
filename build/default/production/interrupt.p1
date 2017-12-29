@@ -32,7 +32,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [n S257 . . . . ]
 "6440
 [v _INTCON2bits `VS257 ~T0 @X0 0 e@4081 ]
-"52 common.h
+"53 common.h
 [v _INT0_ISR `(v ~T0 @X0 0 ef ]
 "2501 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
 [s S86 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -60,7 +60,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _TMR1H `Vuc ~T0 @X0 0 e@4047 ]
 "5439
 [v _TMR1L `Vuc ~T0 @X0 0 e@4046 ]
-"57 common.h
+"58 common.h
 [v _TMR1_ISR `(v ~T0 @X0 0 ef ]
 "2732 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
 [s S95 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -5776,10 +5776,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 :U ..
 "64
 -> -> 0 `i `uc
--> -> 2 `i `uc
+-> -> 66 `i `uc
 -> -> 127 `i `uc
 -> -> 127 `i `uc
--> -> 0 `i `uc
+-> -> 64 `i `uc
 ..
 :U ..
 "65
@@ -5849,7 +5849,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;digits_f.h: 62: const unsigned char dFont5[][5] = {
 [; ;digits_f.h: 63: {0x3E,0x41,0x41,0x7F,0x3E},
-[; ;digits_f.h: 64: {0x00,0x02,0x7F,0x7F,0x00},
+[; ;digits_f.h: 64: {0x00,0x42,0x7F,0x7F,0x40},
 [; ;digits_f.h: 65: {0x62,0x73,0x59,0x4F,0x46},
 [; ;digits_f.h: 66: {0x22,0x63,0x49,0x7F,0x36},
 [; ;digits_f.h: 67: {0x18,0x14,0x12,0x7F,0x7F},
@@ -5887,6 +5887,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 57: void interval_scroll_text();
 [; ;display.h: 58: void scroll_right(void);
 [; ;display.h: 59: void hide_two_side(void);
+[; ;display.h: 60: void dissolve(void);
 [; ;key.h: 22: void key_press(void);
 [; ;timer.h: 13: void TMRInit(void);
 [; ;eusart.h: 19: extern volatile uint8_t eusartRxCount;
@@ -5927,9 +5928,59 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;nrf24l01p.h: 153: uint8_t nrf24_payloadLength();
 [; ;nrf24l01p.h: 154: uint8_t nrf24_rxFifoEmpty();
 [; ;nrf24l01p.h: 155: uint8_t nrf24_dataReady();
-[; ;init.h: 19: void SYSTEM_Initialize(void);
-[; ;init.h: 20: void Port_Init(void);
-[; ;init.h: 21: void Interrupt_Init(void);
+[; ;stdlib.h: 7: typedef unsigned short wchar_t;
+[; ;stdlib.h: 15: typedef struct {
+[; ;stdlib.h: 16: int rem;
+[; ;stdlib.h: 17: int quot;
+[; ;stdlib.h: 18: } div_t;
+[; ;stdlib.h: 19: typedef struct {
+[; ;stdlib.h: 20: unsigned rem;
+[; ;stdlib.h: 21: unsigned quot;
+[; ;stdlib.h: 22: } udiv_t;
+[; ;stdlib.h: 23: typedef struct {
+[; ;stdlib.h: 24: long quot;
+[; ;stdlib.h: 25: long rem;
+[; ;stdlib.h: 26: } ldiv_t;
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: unsigned long quot;
+[; ;stdlib.h: 29: unsigned long rem;
+[; ;stdlib.h: 30: } uldiv_t;
+[; ;stdlib.h: 53: extern double atof(const char *);
+[; ;stdlib.h: 54: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 55: extern int atoi(const char *);
+[; ;stdlib.h: 56: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 57: extern long atol(const char *);
+[; ;stdlib.h: 58: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 60: extern int rand(void);
+[; ;stdlib.h: 61: extern void srand(unsigned int);
+[; ;stdlib.h: 62: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 63: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 64: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 65: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 66: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 67: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 68: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 69: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 70: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 75: extern void * malloc(size_t);
+[; ;stdlib.h: 76: extern void free(void *);
+[; ;stdlib.h: 77: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 86: extern int atexit(void (*)(void));
+[; ;stdlib.h: 87: extern char * getenv(const char *);
+[; ;stdlib.h: 88: extern char ** environ;
+[; ;stdlib.h: 89: extern int system(char *);
+[; ;stdlib.h: 90: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 91: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 92: extern int abs(int);
+[; ;stdlib.h: 93: extern long labs(long);
+[; ;stdlib.h: 95: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 96: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+[; ;init.h: 20: void SYSTEM_Initialize(void);
+[; ;init.h: 21: void Port_Init(void);
+[; ;init.h: 22: void Interrupt_Init(void);
 [; ;onewire.h: 12: uint8_t ow_reset(void);
 [; ;onewire.h: 13: uint8_t read_bit(void);
 [; ;onewire.h: 14: void write_bit(uint8_t bitval);
@@ -5972,27 +6023,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;settings.h: 21: void brg_set();
 [; ;settings.h: 22: void set_brg_manual();
 [; ;settings.h: 23: void set_sound_h(void);
-[; ;common.h: 52: void INT0_ISR(void);
-[; ;common.h: 53: void GetTime(void);
-[; ;common.h: 57: void TMR1_ISR();
-[; ;common.h: 58: void time_led();
-[; ;common.h: 59: void version(void);
-[; ;common.h: 60: void default_state(void);
-[; ;common.h: 61: void home_temp(void);
-[; ;common.h: 62: void set_font();
-[; ;common.h: 64: void pressure(void);
-[; ;common.h: 65: void pre_ref_dis(void);
-[; ;common.h: 67: void radio_temp(void);
-[; ;common.h: 68: void read_adc();
-[; ;common.h: 69: void adj_brig();
-[; ;common.h: 71: void usart_r();
+[; ;common.h: 53: void INT0_ISR(void);
+[; ;common.h: 54: void GetTime(void);
+[; ;common.h: 58: void TMR1_ISR();
+[; ;common.h: 59: void time_led();
+[; ;common.h: 60: void version(void);
+[; ;common.h: 61: void default_state(void);
+[; ;common.h: 62: void home_temp(void);
+[; ;common.h: 63: void set_font();
+[; ;common.h: 65: void pressure(void);
+[; ;common.h: 66: void pre_ref_dis(void);
+[; ;common.h: 68: void radio_temp(void);
+[; ;common.h: 69: void read_adc();
+[; ;common.h: 70: void adj_brig();
+[; ;common.h: 72: void usart_r();
+[; ;common.h: 73: void Rand_ef(void);
 [; ;sound.h: 16: void sound_init();
 [; ;sound.h: 18: void TMR3_ISR();
 [; ;interrupt.h: 18: void interrupt INTERRUPT_InterruptManager(void);
 [v $root$_INTERRUPT_InterruptManager `(v ~T0 @X0 0 e ]
-[v F3299 `(v ~T0 @X0 1 tf ]
+[v F3422 `(v ~T0 @X0 1 tf ]
 "4 interrupt.c
-[v _INTERRUPT_InterruptManager `IF3299 ~T0 @X0 1 e ]
+[v _INTERRUPT_InterruptManager `IF3422 ~T0 @X0 1 e ]
 "5
 {
 [; ;interrupt.c: 4: void interrupt INTERRUPT_InterruptManager (void)
@@ -6001,7 +6053,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [f ]
 [; ;interrupt.c: 7: if(INTCONbits.TMR0IE == 1 && INTCONbits.TMR0IF == 1)
 "7
-[e $ ! && == -> . . _INTCONbits 0 5 `i -> 1 `i == -> . . _INTCONbits 0 2 `i -> 1 `i 273  ]
+[e $ ! && == -> . . _INTCONbits 0 5 `i -> 1 `i == -> . . _INTCONbits 0 2 `i -> 1 `i 277  ]
 [; ;interrupt.c: 8: {
 "8
 {
@@ -6011,11 +6063,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "10
 }
 [; ;interrupt.c: 10: }
-[e $U 274  ]
+[e $U 278  ]
 "11
-[e :U 273 ]
+[e :U 277 ]
 [; ;interrupt.c: 11: else if (INTCONbits.INT0IE == 1 && INTCONbits.INT0IF == 1)
-[e $ ! && == -> . . _INTCONbits 0 4 `i -> 1 `i == -> . . _INTCONbits 0 1 `i -> 1 `i 275  ]
+[e $ ! && == -> . . _INTCONbits 0 4 `i -> 1 `i == -> . . _INTCONbits 0 1 `i -> 1 `i 279  ]
 [; ;interrupt.c: 12: {
 "12
 {
@@ -6031,9 +6083,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "17
 }
 [; ;interrupt.c: 17: } else if (PIE1bits.TMR1IE == 1 && PIR1bits.TMR1IF ==1)
-[e $U 276  ]
-[e :U 275 ]
-[e $ ! && == -> . . _PIE1bits 0 0 `i -> 1 `i == -> . . _PIR1bits 0 0 `i -> 1 `i 277  ]
+[e $U 280  ]
+[e :U 279 ]
+[e $ ! && == -> . . _PIE1bits 0 0 `i -> 1 `i == -> . . _PIR1bits 0 0 `i -> 1 `i 281  ]
 [; ;interrupt.c: 18: {
 "18
 {
@@ -6052,9 +6104,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "24
 }
 [; ;interrupt.c: 24: } else if (PIE2bits.TMR3IE == 1 && PIR2bits.TMR3IF ==1) {
-[e $U 278  ]
-[e :U 277 ]
-[e $ ! && == -> . . _PIE2bits 0 1 `i -> 1 `i == -> . . _PIR2bits 0 1 `i -> 1 `i 279  ]
+[e $U 282  ]
+[e :U 281 ]
+[e $ ! && == -> . . _PIE2bits 0 1 `i -> 1 `i == -> . . _PIR2bits 0 1 `i -> 1 `i 283  ]
 {
 [; ;interrupt.c: 25: PIR2bits.TMR3IF = 0;
 "25
@@ -6071,22 +6123,22 @@ Version 3.2 HI-TECH Software Intermediate Code
 "30
 }
 [; ;interrupt.c: 30: } else if (INTCONbits.PEIE == 1 && PIE1bits.RCIE == 1 && PIR1bits.RCIF == 1) {
-[e $U 280  ]
-[e :U 279 ]
-[e $ ! && && == -> . . _INTCONbits 1 6 `i -> 1 `i == -> . . _PIE1bits 0 5 `i -> 1 `i == -> . . _PIR1bits 0 5 `i -> 1 `i 281  ]
+[e $U 284  ]
+[e :U 283 ]
+[e $ ! && && == -> . . _INTCONbits 1 6 `i -> 1 `i == -> . . _PIE1bits 0 5 `i -> 1 `i == -> . . _PIR1bits 0 5 `i -> 1 `i 285  ]
 {
 [; ;interrupt.c: 31: EUSART_Receive_ISR();
 "31
 [e ( _EUSART_Receive_ISR ..  ]
 "32
 }
-[e :U 281 ]
+[e :U 285 ]
 "33
+[e :U 284 ]
+[e :U 282 ]
 [e :U 280 ]
 [e :U 278 ]
-[e :U 276 ]
-[e :U 274 ]
 [; ;interrupt.c: 32: }
 [; ;interrupt.c: 33: }
-[e :UE 272 ]
+[e :UE 276 ]
 }

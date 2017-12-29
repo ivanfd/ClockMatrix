@@ -26,6 +26,7 @@
             <file>file:/D:/Ivan/Electro/XC8/18F4525/common.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/pict.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/common.h</file>
+            <file>file:/D:/Ivan/Electro/XC8/18F4525/settings.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/ds3231.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/nrf24l01p.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/max7221.h</file>
@@ -38,6 +39,7 @@
             <file>file:/D:/Ivan/Electro/XC8/18F4525/ds18b20.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/i2c.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/dispatcher.c</file>
+            <file>file:/D:/Ivan/Electro/XC8/18F4525/settings.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/display.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/display.c</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/key.h</file>

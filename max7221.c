@@ -81,6 +81,6 @@ void Init7221()
       Cmd7221(SHUTDOWN_R,1);    //Shutdown Register - Normal Mode
       Cmd7221(DECODE_R,0);      //Decode-Mode Register - No decode for digits 7–0
       Cmd7221(SCAN_R,7);        //Scan-Limit Register - Display digits 0 1 2 3 4 5 6 7
-      Cmd7221(INTENSITY_R,0x01);//Intensity Register - 5/16
+      Cmd7221(INTENSITY_R,0x02);//Intensity Register - 5/16
       Cmd7221(TEST_R,0);        //test - Normal Operation
    }

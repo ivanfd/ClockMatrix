@@ -4280,7 +4280,7 @@ const unsigned char dFont4[][5] = {
 
 const unsigned char dFont5[][5] = {
 {0x3E,0x41,0x41,0x7F,0x3E},
-{0x00,0x02,0x7F,0x7F,0x00},
+{0x00,0x42,0x7F,0x7F,0x40},
 {0x62,0x73,0x59,0x4F,0x46},
 {0x22,0x63,0x49,0x7F,0x36},
 {0x18,0x14,0x12,0x7F,0x7F},
@@ -4320,6 +4320,7 @@ void scroll_left(void);
 void interval_scroll_text();
 void scroll_right(void);
 void hide_two_side(void);
+void dissolve(void);
 
 # 19 "eusart.h"
 extern volatile uint8_t eusartRxCount;
@@ -4381,7 +4382,76 @@ uint8_t nrf24_payloadLength();
 uint8_t nrf24_rxFifoEmpty();
 uint8_t nrf24_dataReady();
 
-# 19 "init.h"
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdlib.h"
+typedef unsigned short wchar_t;
+
+# 15
+typedef struct {
+int rem;
+int quot;
+} div_t;
+typedef struct {
+unsigned rem;
+unsigned quot;
+} udiv_t;
+typedef struct {
+long quot;
+long rem;
+} ldiv_t;
+typedef struct {
+unsigned long quot;
+unsigned long rem;
+} uldiv_t;
+
+# 53
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+
+# 86
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+
+# 20 "init.h"
 void SYSTEM_Initialize(void);
 void Port_Init(void);
 void Interrupt_Init(void);
@@ -4433,7 +4503,7 @@ void brg_set();
 void set_brg_manual();
 void set_sound_h(void);
 
-# 52 "common.h"
+# 53 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 
@@ -4454,6 +4524,7 @@ void read_adc();
 void adj_brig();
 
 void usart_r();
+void Rand_ef(void);
 
 # 3 "common.c"
 extern uint8_t TxtBuf[6];
@@ -4489,7 +4560,7 @@ extern uint8_t h_snd_t;
 extern uint8_t snd_flag;
 
 
-asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "5" "," "2" "," "1" "," "0" "," "1" "," "0" "," "0" "," "0");
+asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "5" "," "2" "," "1" "," "2" "," "1" "," "0" "," "0" "," "0");
 
 
 
@@ -4541,7 +4612,8 @@ case 6:
 break;
 case 4:
 events = 5;
-scroll_right();
+Rand_ef();
+
 
 RTOS_DeleteTask(default_state);
 RTOS_DeleteTask(home_temp);
@@ -4551,7 +4623,7 @@ break;
 }
 }
 
-# 105
+# 106
 void radio_temp(void) {
 switch (events) {
 case 5:
@@ -4598,7 +4670,9 @@ case 6:
 break;
 case 4:
 events = 5;
-hide_two_side();
+
+Rand_ef();
+
 
 pre_ref_dis();
 RTOS_DeleteTask(default_state);
@@ -4609,11 +4683,9 @@ break;
 }
 }
 
-# 166
-void set_font()
-{
-switch (type_font)
-{
+# 170
+void set_font() {
+switch (type_font) {
 case 1:
 pFont = &dFont1;
 break;
@@ -4632,15 +4704,11 @@ break;
 }
 }
 
-
-
-
-void pressure(void)
-{
+# 194
+void pressure(void) {
 uint16_t pr;
 
-switch (events)
-{
+switch (events) {
 case 5:
 clear_matrix();
 if (press) {
@@ -4678,7 +4746,9 @@ if (press) {
 sprintf(text_buf, "לל.נע.סע.");
 interval_scroll_text();
 } else
-scroll_left();
+
+Rand_ef();
+
 pre_ref_dis();
 RTOS_DeleteTask(default_state);
 RTOS_DeleteTask(pressure);
@@ -4726,24 +4796,22 @@ break;
 
 }
 
-# 286
-void time_led()
-{
+# 290
+void time_led() {
 uint8_t data_array[4];
 
-static uint16_t test = 0;
+uint16_t test = 0;
 
-switch (events)
-{
+switch (events) {
 case 5:
 FillBuf(type_clk);
-if((TTime.Ts>5)&&(TTime.Ts<7))
+if ((TTime.Ts > 5)&&(TTime.Ts < 7))
 {
 readTemp_Single(&temperature, &minus, &time_flag, &timer_val);
 }
-if(((TTime.Ts>14)&&(TTime.Ts<16)))
+if (((TTime.Ts > 14)&&(TTime.Ts < 16)))
 events = 3;
-if(((TTime.Ts>39)&&(TTime.Ts<41)))
+if (((TTime.Ts > 39)&&(TTime.Ts < 41)))
 events = 2;
 break;
 case 1:
@@ -4761,25 +4829,24 @@ case 2:
 
 blk_dot = 0;
 bmp280Convert(&press, &temperbmp280);
-
-
 if (type_clk == 2)
 putchar_b_buf(13, 23, &Font);
-scroll_right();
+
+Rand_ef();
 RTOS_DeleteTask(time_led);
 RTOS_SetTask(pressure, 0, 20);
 events = 5;
 en_put = 0;
 
-# 335
 break;
 case 3:
-
 
 blk_dot = 0;
 if (type_clk == 2)
 putchar_b_buf(13, 23, &Font);
-scroll_left();
+
+
+Rand_ef();
 RTOS_DeleteTask(time_led);
 RTOS_SetTask(home_temp, 0, 20);
 events = 5;
@@ -4788,9 +4855,8 @@ break;
 case 4:
 events = 5;
 RTOS_DeleteTask(default_state);
-nrf24_init(120, 4);
 
-# 368
+# 367
 case 6:
 
 break;
@@ -4828,10 +4894,10 @@ nrf24_powerUpRx();
 nrf24_init(120, 4);
 }
 
-# 419
+# 418
 }
 
-# 425
+# 424
 void usart_r() {
 
 static uint8_t i = 0;
@@ -4992,13 +5058,13 @@ void version(void)
 {
 uint8_t i;
 
-sprintf(text_buf, "Clock v11.10.17 by Ivan_fd");
+sprintf(text_buf, "Clock v3.0.0 by Ivan_fd 29.12.2017");
 interval_scroll_text();
 
-# 594
+# 593
 }
 
-# 600
+# 599
 void read_adc() {
 ADCON0bits.GO = 1;
 while (ADCON0bits.GO);
@@ -5006,10 +5072,10 @@ adc_res = (ADRESH << 8) + ADRESL;
 asm("nop");
 asm("nop");
 
-# 611
+# 610
 }
 
-# 617
+# 616
 void adj_brig() {
 
 if (adc_res >= 150)
@@ -5017,12 +5083,23 @@ Cmd7221(0x0A, 0x02);
 else if (adc_res <= 50)
 Cmd7221(0x0A, 0x00);
 
-# 637
+# 636
 }
 
 void default_state(void) {
 events = 4;
 
+}
+
+# 647
+void Rand_ef(void) {
+uint8_t eff;
+void (*function) (void);
+void (*p_MyFunc[4])(void) = {dissolve, scroll_left,scroll_right,hide_two_side};
+
+eff = (0 + rand() % 4);
+function = p_MyFunc[eff];
+(*function)();
 }
 
 
@@ -5084,6 +5161,6 @@ T1CONbits.TMR1ON = 0;
 
 }
 
-# 713
+# 726
 }
 

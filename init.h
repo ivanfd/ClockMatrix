@@ -15,6 +15,7 @@
 #include "eeprom.h"
 #include "spi.h"
 #include "nrf24l01p.h"
+#include <stdlib.h>
 
 void SYSTEM_Initialize(void);  // ініціалізація контролера
 void Port_Init(void);  // ініціалізація портів

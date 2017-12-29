@@ -5668,10 +5668,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 :U ..
 "64
 -> -> 0 `i `uc
--> -> 2 `i `uc
+-> -> 66 `i `uc
 -> -> 127 `i `uc
 -> -> 127 `i `uc
--> -> 0 `i `uc
+-> -> 64 `i `uc
 ..
 :U ..
 "65
@@ -5741,7 +5741,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;digits_f.h: 62: const unsigned char dFont5[][5] = {
 [; ;digits_f.h: 63: {0x3E,0x41,0x41,0x7F,0x3E},
-[; ;digits_f.h: 64: {0x00,0x02,0x7F,0x7F,0x00},
+[; ;digits_f.h: 64: {0x00,0x42,0x7F,0x7F,0x40},
 [; ;digits_f.h: 65: {0x62,0x73,0x59,0x4F,0x46},
 [; ;digits_f.h: 66: {0x22,0x63,0x49,0x7F,0x36},
 [; ;digits_f.h: 67: {0x18,0x14,0x12,0x7F,0x7F},
@@ -5779,6 +5779,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 57: void interval_scroll_text();
 [; ;display.h: 58: void scroll_right(void);
 [; ;display.h: 59: void hide_two_side(void);
+[; ;display.h: 60: void dissolve(void);
 [; ;i2c.h: 10: void I2C_Master_Wait();
 [; ;i2c.h: 11: void I2C_Master_Start();
 [; ;i2c.h: 12: void I2C_Master_RepeatedStart();
@@ -5831,9 +5832,59 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;nrf24l01p.h: 153: uint8_t nrf24_payloadLength();
 [; ;nrf24l01p.h: 154: uint8_t nrf24_rxFifoEmpty();
 [; ;nrf24l01p.h: 155: uint8_t nrf24_dataReady();
-[; ;init.h: 19: void SYSTEM_Initialize(void);
-[; ;init.h: 20: void Port_Init(void);
-[; ;init.h: 21: void Interrupt_Init(void);
+[; ;stdlib.h: 7: typedef unsigned short wchar_t;
+[; ;stdlib.h: 15: typedef struct {
+[; ;stdlib.h: 16: int rem;
+[; ;stdlib.h: 17: int quot;
+[; ;stdlib.h: 18: } div_t;
+[; ;stdlib.h: 19: typedef struct {
+[; ;stdlib.h: 20: unsigned rem;
+[; ;stdlib.h: 21: unsigned quot;
+[; ;stdlib.h: 22: } udiv_t;
+[; ;stdlib.h: 23: typedef struct {
+[; ;stdlib.h: 24: long quot;
+[; ;stdlib.h: 25: long rem;
+[; ;stdlib.h: 26: } ldiv_t;
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: unsigned long quot;
+[; ;stdlib.h: 29: unsigned long rem;
+[; ;stdlib.h: 30: } uldiv_t;
+[; ;stdlib.h: 53: extern double atof(const char *);
+[; ;stdlib.h: 54: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 55: extern int atoi(const char *);
+[; ;stdlib.h: 56: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 57: extern long atol(const char *);
+[; ;stdlib.h: 58: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 60: extern int rand(void);
+[; ;stdlib.h: 61: extern void srand(unsigned int);
+[; ;stdlib.h: 62: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 63: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 64: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 65: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 66: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 67: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 68: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 69: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 70: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 75: extern void * malloc(size_t);
+[; ;stdlib.h: 76: extern void free(void *);
+[; ;stdlib.h: 77: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 86: extern int atexit(void (*)(void));
+[; ;stdlib.h: 87: extern char * getenv(const char *);
+[; ;stdlib.h: 88: extern char ** environ;
+[; ;stdlib.h: 89: extern int system(char *);
+[; ;stdlib.h: 90: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 91: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 92: extern int abs(int);
+[; ;stdlib.h: 93: extern long labs(long);
+[; ;stdlib.h: 95: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 96: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+[; ;init.h: 20: void SYSTEM_Initialize(void);
+[; ;init.h: 21: void Port_Init(void);
+[; ;init.h: 22: void Interrupt_Init(void);
 [; ;timer.h: 13: void TMRInit(void);
 [; ;sound.h: 16: void sound_init();
 [; ;sound.h: 18: void TMR3_ISR();
@@ -5886,20 +5937,21 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;settings.h: 21: void brg_set();
 [; ;settings.h: 22: void set_brg_manual();
 [; ;settings.h: 23: void set_sound_h(void);
-[; ;common.h: 52: void INT0_ISR(void);
-[; ;common.h: 53: void GetTime(void);
-[; ;common.h: 57: void TMR1_ISR();
-[; ;common.h: 58: void time_led();
-[; ;common.h: 59: void version(void);
-[; ;common.h: 60: void default_state(void);
-[; ;common.h: 61: void home_temp(void);
-[; ;common.h: 62: void set_font();
-[; ;common.h: 64: void pressure(void);
-[; ;common.h: 65: void pre_ref_dis(void);
-[; ;common.h: 67: void radio_temp(void);
-[; ;common.h: 68: void read_adc();
-[; ;common.h: 69: void adj_brig();
-[; ;common.h: 71: void usart_r();
+[; ;common.h: 53: void INT0_ISR(void);
+[; ;common.h: 54: void GetTime(void);
+[; ;common.h: 58: void TMR1_ISR();
+[; ;common.h: 59: void time_led();
+[; ;common.h: 60: void version(void);
+[; ;common.h: 61: void default_state(void);
+[; ;common.h: 62: void home_temp(void);
+[; ;common.h: 63: void set_font();
+[; ;common.h: 65: void pressure(void);
+[; ;common.h: 66: void pre_ref_dis(void);
+[; ;common.h: 68: void radio_temp(void);
+[; ;common.h: 69: void read_adc();
+[; ;common.h: 70: void adj_brig();
+[; ;common.h: 72: void usart_r();
+[; ;common.h: 73: void Rand_ef(void);
 [; ;ds3231.h: 39: uint8_t bcd_to_decimal(uint8_t d);
 [; ;ds3231.h: 40: uint8_t decimal_to_bcd(uint8_t d);
 [; ;ds3231.h: 44: uint8_t DS3231_Read(uint8_t address);
@@ -5923,10 +5975,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds3231.c: 6: return ((d & 0x0F) + (((d & 0xF0) >> 4) * 10));
 "6
 [e ) -> + & -> _d `i -> 15 `i * >> & -> _d `i -> 240 `i -> 4 `i -> 10 `i `uc ]
-[e $UE 272  ]
+[e $UE 276  ]
 [; ;ds3231.c: 7: }
 "7
-[e :UE 272 ]
+[e :UE 276 ]
 }
 "10
 [v _decimal_to_bcd `(uc ~T0 @X0 1 ef1`uc ]
@@ -5942,10 +5994,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds3231.c: 12: return (((d / 10) << 4) & 0xF0) | ((d % 10) & 0x0F);
 "12
 [e ) -> | & << / -> _d `i -> 10 `i -> 4 `i -> 240 `i & % -> _d `i -> 10 `i -> 15 `i `uc ]
-[e $UE 273  ]
+[e $UE 277  ]
 [; ;ds3231.c: 13: }
 "13
-[e :UE 273 ]
+[e :UE 277 ]
 }
 "16
 [v _DS3231_Read `(uc ~T0 @X0 1 ef1`uc ]
@@ -5986,10 +6038,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;ds3231.c: 26: return value;
 "26
 [e ) _value ]
-[e $UE 274  ]
+[e $UE 278  ]
 [; ;ds3231.c: 27: }
 "27
-[e :UE 274 ]
+[e :UE 278 ]
 }
 "30
 [v _DS3231_Write `(v ~T0 @X0 1 ef2`uc`uc ]
@@ -6020,7 +6072,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _I2C_Master_Stop ..  ]
 [; ;ds3231.c: 37: }
 "37
-[e :UE 275 ]
+[e :UE 279 ]
 }
 "40
 [v _DS3231_init `(v ~T0 @X0 1 ef ]
@@ -6038,7 +6090,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _DS3231_Write (2 , -> -> 15 `i `uc -> -> 8 `i `uc ]
 [; ;ds3231.c: 44: }
 "44
-[e :UE 276 ]
+[e :UE 280 ]
 }
 "49
 [v _getTime `(v ~T0 @X0 1 ef3`*uc`*uc`*uc ]
@@ -6073,7 +6125,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = *U _p3 ( _bcd_to_decimal (1 *U _p3 ]
 [; ;ds3231.c: 57: }
 "57
-[e :UE 277 ]
+[e :UE 281 ]
 }
 "62
 [v _getDate `(v ~T0 @X0 1 ef4`*uc`*uc`*uc`*uc ]
@@ -6115,7 +6167,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e = *U _p4 ( _bcd_to_decimal (1 *U _p4 ]
 [; ;ds3231.c: 72: }
 "72
-[e :UE 278 ]
+[e :UE 282 ]
 }
 "74
 [v _setTime `(v ~T0 @X0 1 ef3`uc`uc`uc ]
@@ -6141,7 +6193,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _DS3231_Write (2 , -> -> 2 `i `uc -> & -> 63 `i -> ( _decimal_to_bcd (1 _hSet `i `uc ]
 [; ;ds3231.c: 79: }
 "79
-[e :UE 279 ]
+[e :UE 283 ]
 }
 "82
 [v _setDate `(v ~T0 @X0 1 ef4`uc`uc`uc`uc ]
@@ -6171,5 +6223,5 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e ( _DS3231_Write (2 , -> -> 6 `i `uc ( _decimal_to_bcd (1 _yearSet ]
 [; ;ds3231.c: 88: }
 "88
-[e :UE 280 ]
+[e :UE 284 ]
 }

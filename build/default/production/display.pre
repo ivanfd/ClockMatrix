@@ -4254,7 +4254,76 @@ uint8_t nrf24_payloadLength();
 uint8_t nrf24_rxFifoEmpty();
 uint8_t nrf24_dataReady();
 
-# 19 "init.h"
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdlib.h"
+typedef unsigned short wchar_t;
+
+# 15
+typedef struct {
+int rem;
+int quot;
+} div_t;
+typedef struct {
+unsigned rem;
+unsigned quot;
+} udiv_t;
+typedef struct {
+long quot;
+long rem;
+} ldiv_t;
+typedef struct {
+unsigned long quot;
+unsigned long rem;
+} uldiv_t;
+
+# 53
+extern double atof(const char *);
+extern double strtod(const char *, const char **);
+extern int atoi(const char *);
+extern unsigned xtoi(const char *);
+extern long atol(const char *);
+extern long strtol(const char *, char **, int);
+
+extern int rand(void);
+extern void srand(unsigned int);
+extern void * calloc(size_t, size_t);
+extern div_t div(int numer, int denom);
+extern udiv_t udiv(unsigned numer, unsigned denom);
+extern ldiv_t ldiv(long numer, long denom);
+extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+extern unsigned int _rotl(unsigned int value, unsigned int shift);
+extern unsigned int _rotr(unsigned int value, unsigned int shift);
+
+
+
+
+extern void * malloc(size_t);
+extern void free(void *);
+extern void * realloc(void *, size_t);
+
+# 86
+extern int atexit(void (*)(void));
+extern char * getenv(const char *);
+extern char ** environ;
+extern int system(char *);
+extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+extern int abs(int);
+extern long labs(long);
+
+extern char * itoa(char * buf, int val, int base);
+extern char * utoa(char * buf, unsigned val, int base);
+
+
+
+
+extern char * ltoa(char * buf, long val, int base);
+extern char * ultoa(char * buf, unsigned long val, int base);
+
+extern char * ftoa(float f, int * status);
+
+# 20 "init.h"
 void SYSTEM_Initialize(void);
 void Port_Init(void);
 void Interrupt_Init(void);
@@ -4306,7 +4375,7 @@ void brg_set();
 void set_brg_manual();
 void set_sound_h(void);
 
-# 52 "common.h"
+# 53 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 
@@ -4327,6 +4396,7 @@ void read_adc();
 void adj_brig();
 
 void usart_r();
+void Rand_ef(void);
 
 # 22 "max7221.h"
 void Send_Byte_7221(uint8_t dat);
@@ -4414,7 +4484,7 @@ const unsigned char dFont4[][5] = {
 
 const unsigned char dFont5[][5] = {
 {0x3E,0x41,0x41,0x7F,0x3E},
-{0x00,0x02,0x7F,0x7F,0x00},
+{0x00,0x42,0x7F,0x7F,0x40},
 {0x62,0x73,0x59,0x4F,0x46},
 {0x22,0x63,0x49,0x7F,0x36},
 {0x18,0x14,0x12,0x7F,0x7F},
@@ -4454,6 +4524,7 @@ void scroll_left(void);
 void interval_scroll_text();
 void scroll_right(void);
 void hide_two_side(void);
+void dissolve(void);
 
 # 4 "display.c"
 uint8_t Dis_Buff[4 * 8];
@@ -4464,7 +4535,9 @@ uint8_t(*pFont)[][5] = &dFont1;
 extern uint8_t idx_pnt;
 extern volatile uint8_t x1 = 0, x2 = 0, x3 = 0, x4 = 0, y1, y2, y3, y4;
 
-# 16
+const uint8_t dissolve_arr[16] = {253,191,239,127,251,223,247,254,253,191,239,127,251,223,247,254};
+
+# 18
 void pixel_on(uint8_t x, uint8_t y)
 {
 Dis_Buff[x] |= (1<<y);
@@ -4604,7 +4677,7 @@ for (i=0; i<=4 * 8; i++)
 Dis_Buff[i] = 0;
 }
 
-# 160
+# 162
 void FillBuf(uint8_t type) {
 uint8_t i;
 switch (type) {
@@ -4691,7 +4764,7 @@ break;
 
 }
 
-# 253
+# 255
 void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag)
 {
 uint8_t i, j, d, nch = 0;
@@ -4725,7 +4798,7 @@ Dis_Buff[31] = 0;
 }
 }
 
-# 290
+# 292
 uint8_t scroll_text(void)
 {
 uint8_t i;
@@ -4764,7 +4837,7 @@ return 1;
 
 }
 
-# 332
+# 334
 void scroll_left(void)
 {
 uint8_t i,j,k,speed = 100;
@@ -4820,13 +4893,13 @@ uint8_t i;
 while(scroll_text())
 {
 Update_Matrix(Dis_Buff);
-for(i=0; i<50; i++)
+for(i=0; i<60; i++)
 _delay((unsigned long)((1)*(40000000/4000.0)));
 
 };
 }
 
-# 397
+# 399
 void hide_two_side(void) {
 uint8_t a = 0, b = 31;
 uint8_t i, j;
@@ -4835,8 +4908,26 @@ for (i = 0; i <= 15; i++) {
 Dis_Buff[a++] = 0;
 Dis_Buff[b--] = 0;
 Update_Matrix(Dis_Buff);
-for (j = 0; j < 40; j++)
+for (j = 0; j < 30; j++)
 _delay((unsigned long)((1)*(40000000/4000.0)));
 
+}
+}
+
+# 418
+void dissolve(void) {
+uint8_t i, j, n = 0, z, k;
+
+
+for (z = 0; z <= 7; z++) {
+for (i = 0; i <= 31; i++) {
+Dis_Buff[i] &= dissolve_arr[n + z];
+n++;
+if (n > 7)
+n = 0;
+}
+Update_Matrix(Dis_Buff);
+for (k = 0; k < 100; k++)
+_delay((unsigned long)((1)*(40000000/4000.0)));
 }
 }

@@ -1,11 +1,11 @@
 Version 3.2 HI-TECH Software Intermediate Code
 "21 display.h
-[s S271 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
-[n S271 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
-[v F3267 `uc ~T0 @X0 -> 5 `i t ]
-[v F3266 `F3267 ~T0 @X0 -> 10 `i t ]
-[v F3286 `uc ~T0 @X0 -> 5 `i t ]
-[v F3285 `F3286 ~T0 @X0 -> 10 `i t ]
+[s S275 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
+[n S275 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
+[v F3388 `uc ~T0 @X0 -> 5 `i t ]
+[v F3387 `F3388 ~T0 @X0 -> 10 `i t ]
+[v F3407 `uc ~T0 @X0 -> 5 `i t ]
+[v F3406 `F3407 ~T0 @X0 -> 10 `i t ]
 [v F2919 `(v ~T0 @X0 1 tf1`ul ]
 "164 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18.h
 [v __delay `JF2919 ~T0 @X0 0 e ]
@@ -5167,9 +5167,59 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;nrf24l01p.h: 153: uint8_t nrf24_payloadLength();
 [; ;nrf24l01p.h: 154: uint8_t nrf24_rxFifoEmpty();
 [; ;nrf24l01p.h: 155: uint8_t nrf24_dataReady();
-[; ;init.h: 19: void SYSTEM_Initialize(void);
-[; ;init.h: 20: void Port_Init(void);
-[; ;init.h: 21: void Interrupt_Init(void);
+[; ;stdlib.h: 7: typedef unsigned short wchar_t;
+[; ;stdlib.h: 15: typedef struct {
+[; ;stdlib.h: 16: int rem;
+[; ;stdlib.h: 17: int quot;
+[; ;stdlib.h: 18: } div_t;
+[; ;stdlib.h: 19: typedef struct {
+[; ;stdlib.h: 20: unsigned rem;
+[; ;stdlib.h: 21: unsigned quot;
+[; ;stdlib.h: 22: } udiv_t;
+[; ;stdlib.h: 23: typedef struct {
+[; ;stdlib.h: 24: long quot;
+[; ;stdlib.h: 25: long rem;
+[; ;stdlib.h: 26: } ldiv_t;
+[; ;stdlib.h: 27: typedef struct {
+[; ;stdlib.h: 28: unsigned long quot;
+[; ;stdlib.h: 29: unsigned long rem;
+[; ;stdlib.h: 30: } uldiv_t;
+[; ;stdlib.h: 53: extern double atof(const char *);
+[; ;stdlib.h: 54: extern double strtod(const char *, const char **);
+[; ;stdlib.h: 55: extern int atoi(const char *);
+[; ;stdlib.h: 56: extern unsigned xtoi(const char *);
+[; ;stdlib.h: 57: extern long atol(const char *);
+[; ;stdlib.h: 58: extern long strtol(const char *, char **, int);
+[; ;stdlib.h: 60: extern int rand(void);
+[; ;stdlib.h: 61: extern void srand(unsigned int);
+[; ;stdlib.h: 62: extern void * calloc(size_t, size_t);
+[; ;stdlib.h: 63: extern div_t div(int numer, int denom);
+[; ;stdlib.h: 64: extern udiv_t udiv(unsigned numer, unsigned denom);
+[; ;stdlib.h: 65: extern ldiv_t ldiv(long numer, long denom);
+[; ;stdlib.h: 66: extern uldiv_t uldiv(unsigned long numer,unsigned long denom);
+[; ;stdlib.h: 67: extern unsigned long _lrotl(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 68: extern unsigned long _lrotr(unsigned long value, unsigned int shift);
+[; ;stdlib.h: 69: extern unsigned int _rotl(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 70: extern unsigned int _rotr(unsigned int value, unsigned int shift);
+[; ;stdlib.h: 75: extern void * malloc(size_t);
+[; ;stdlib.h: 76: extern void free(void *);
+[; ;stdlib.h: 77: extern void * realloc(void *, size_t);
+[; ;stdlib.h: 86: extern int atexit(void (*)(void));
+[; ;stdlib.h: 87: extern char * getenv(const char *);
+[; ;stdlib.h: 88: extern char ** environ;
+[; ;stdlib.h: 89: extern int system(char *);
+[; ;stdlib.h: 90: extern void qsort(void *, size_t, size_t, int (*)(const void *, const void *));
+[; ;stdlib.h: 91: extern void * bsearch(const void *, void *, size_t, size_t, int(*)(const void *, const void *));
+[; ;stdlib.h: 92: extern int abs(int);
+[; ;stdlib.h: 93: extern long labs(long);
+[; ;stdlib.h: 95: extern char * itoa(char * buf, int val, int base);
+[; ;stdlib.h: 96: extern char * utoa(char * buf, unsigned val, int base);
+[; ;stdlib.h: 101: extern char * ltoa(char * buf, long val, int base);
+[; ;stdlib.h: 102: extern char * ultoa(char * buf, unsigned long val, int base);
+[; ;stdlib.h: 104: extern char * ftoa(float f, int * status);
+[; ;init.h: 20: void SYSTEM_Initialize(void);
+[; ;init.h: 21: void Port_Init(void);
+[; ;init.h: 22: void Interrupt_Init(void);
 [; ;timer.h: 13: void TMRInit(void);
 [; ;sound.h: 16: void sound_init();
 [; ;sound.h: 18: void TMR3_ISR();
@@ -5222,27 +5272,28 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;settings.h: 21: void brg_set();
 [; ;settings.h: 22: void set_brg_manual();
 [; ;settings.h: 23: void set_sound_h(void);
-[; ;common.h: 52: void INT0_ISR(void);
-[; ;common.h: 53: void GetTime(void);
-[; ;common.h: 57: void TMR1_ISR();
-[; ;common.h: 58: void time_led();
-[; ;common.h: 59: void version(void);
-[; ;common.h: 60: void default_state(void);
-[; ;common.h: 61: void home_temp(void);
-[; ;common.h: 62: void set_font();
-[; ;common.h: 64: void pressure(void);
-[; ;common.h: 65: void pre_ref_dis(void);
-[; ;common.h: 67: void radio_temp(void);
-[; ;common.h: 68: void read_adc();
-[; ;common.h: 69: void adj_brig();
-[; ;common.h: 71: void usart_r();
+[; ;common.h: 53: void INT0_ISR(void);
+[; ;common.h: 54: void GetTime(void);
+[; ;common.h: 58: void TMR1_ISR();
+[; ;common.h: 59: void time_led();
+[; ;common.h: 60: void version(void);
+[; ;common.h: 61: void default_state(void);
+[; ;common.h: 62: void home_temp(void);
+[; ;common.h: 63: void set_font();
+[; ;common.h: 65: void pressure(void);
+[; ;common.h: 66: void pre_ref_dis(void);
+[; ;common.h: 68: void radio_temp(void);
+[; ;common.h: 69: void read_adc();
+[; ;common.h: 70: void adj_brig();
+[; ;common.h: 72: void usart_r();
+[; ;common.h: 73: void Rand_ef(void);
 [; ;max7221.h: 22: void Send_Byte_7221(uint8_t dat);
 [; ;max7221.h: 23: void Cmd7221(uint8_t adr, uint8_t val );
 [; ;max7221.h: 24: void Update_Matrix(uint8_t *buf);
 [; ;max7221.h: 25: void Init7221();
-[v F3233 `Cuc ~T0 @X0 -> 3 `i t ]
+[v F3354 `Cuc ~T0 @X0 -> 3 `i t ]
 "3 FontS.h
-[v _FontS `F3233 ~T0 @X0 -> 0 `x e ]
+[v _FontS `F3354 ~T0 @X0 -> 0 `x e ]
 [i _FontS
 :U ..
 :U ..
@@ -5326,9 +5377,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;FontS.h: 13: {0x7C,0x54,0x7C},
 [; ;FontS.h: 14: {0x5C,0x54,0x7C}
 [; ;FontS.h: 15: };
-[v F3235 `Cuc ~T0 @X0 -> 7 `i t ]
+[v F3356 `Cuc ~T0 @X0 -> 7 `i t ]
 "3 pict.h
-[v _pic7x8 `F3235 ~T0 @X0 -> 0 `x e ]
+[v _pic7x8 `F3356 ~T0 @X0 -> 0 `x e ]
 [i _pic7x8
 :U ..
 :U ..
@@ -5391,9 +5442,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pict.h: 8: {0x20,0x3E,0x7F,0x7F,0x3F,0x3E,0x20},
 [; ;pict.h: 9: {0x7E,0x12,0x1E,0x00,0x70,0x10,0x00}
 [; ;pict.h: 10: };
-[v F3237 `Cuc ~T0 @X0 -> 5 `i t ]
+[v F3358 `Cuc ~T0 @X0 -> 5 `i t ]
 "10 digits_f.h
-[v _dFont1 `F3237 ~T0 @X0 -> 0 `x e ]
+[v _dFont1 `F3358 ~T0 @X0 -> 0 `x e ]
 [i _dFont1
 :U ..
 :U ..
@@ -5490,9 +5541,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digits_f.h: 19: {0x7F,0x7F,0x49,0x7F,0x7F},
 [; ;digits_f.h: 20: {0x5F,0x5F,0x51,0x7F,0x7F}
 [; ;digits_f.h: 21: };
-[v F3239 `Cuc ~T0 @X0 -> 5 `i t ]
+[v F3360 `Cuc ~T0 @X0 -> 5 `i t ]
 "23
-[v _dFont2 `F3239 ~T0 @X0 -> 0 `x e ]
+[v _dFont2 `F3360 ~T0 @X0 -> 0 `x e ]
 [i _dFont2
 :U ..
 :U ..
@@ -5589,9 +5640,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digits_f.h: 32: {0x7F,0x7F,0x49,0x7F,0x7F},
 [; ;digits_f.h: 33: {0x6F,0x6F,0x49,0x7F,0x7F}
 [; ;digits_f.h: 34: };
-[v F3241 `Cuc ~T0 @X0 -> 5 `i t ]
+[v F3362 `Cuc ~T0 @X0 -> 5 `i t ]
 "36
-[v _dFont3 `F3241 ~T0 @X0 -> 0 `x e ]
+[v _dFont3 `F3362 ~T0 @X0 -> 0 `x e ]
 [i _dFont3
 :U ..
 :U ..
@@ -5688,9 +5739,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digits_f.h: 45: {0x7F,0x49,0x49,0x7F,0x7F},
 [; ;digits_f.h: 46: {0x4F,0x49,0x49,0x7F,0x7F}
 [; ;digits_f.h: 47: };
-[v F3243 `Cuc ~T0 @X0 -> 5 `i t ]
+[v F3364 `Cuc ~T0 @X0 -> 5 `i t ]
 "49
-[v _dFont4 `F3243 ~T0 @X0 -> 0 `x e ]
+[v _dFont4 `F3364 ~T0 @X0 -> 0 `x e ]
 [i _dFont4
 :U ..
 :U ..
@@ -5787,9 +5838,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digits_f.h: 58: {0x36,0x7F,0x49,0x7F,0x36},
 [; ;digits_f.h: 59: {0x26,0x6F,0x49,0x7F,0x3E}
 [; ;digits_f.h: 60: };
-[v F3245 `Cuc ~T0 @X0 -> 5 `i t ]
+[v F3366 `Cuc ~T0 @X0 -> 5 `i t ]
 "62
-[v _dFont5 `F3245 ~T0 @X0 -> 0 `x e ]
+[v _dFont5 `F3366 ~T0 @X0 -> 0 `x e ]
 [i _dFont5
 :U ..
 :U ..
@@ -5803,10 +5854,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 :U ..
 "64
 -> -> 0 `i `uc
--> -> 2 `i `uc
+-> -> 66 `i `uc
 -> -> 127 `i `uc
 -> -> 127 `i `uc
--> -> 0 `i `uc
+-> -> 64 `i `uc
 ..
 :U ..
 "65
@@ -5876,7 +5927,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 ]
 [; ;digits_f.h: 62: const unsigned char dFont5[][5] = {
 [; ;digits_f.h: 63: {0x3E,0x41,0x41,0x7F,0x3E},
-[; ;digits_f.h: 64: {0x00,0x02,0x7F,0x7F,0x00},
+[; ;digits_f.h: 64: {0x00,0x42,0x7F,0x7F,0x40},
 [; ;digits_f.h: 65: {0x62,0x73,0x59,0x4F,0x46},
 [; ;digits_f.h: 66: {0x22,0x63,0x49,0x7F,0x36},
 [; ;digits_f.h: 67: {0x18,0x14,0x12,0x7F,0x7F},
@@ -5887,8 +5938,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;digits_f.h: 72: {0x26,0x49,0x49,0x7F,0x3E}
 [; ;digits_f.h: 73: };
 "30 display.h
-[v _TTime `S271 ~T0 @X0 1 e ]
-[v _TSTime `S271 ~T0 @X0 1 e ]
+[v _TTime `S275 ~T0 @X0 1 e ]
+[v _TSTime `S275 ~T0 @X0 1 e ]
 [; ;display.h: 21: struct Time_Get
 [; ;display.h: 22: {
 [; ;display.h: 23: uint8_t Ts;
@@ -5914,6 +5965,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 57: void interval_scroll_text();
 [; ;display.h: 58: void scroll_right(void);
 [; ;display.h: 59: void hide_two_side(void);
+[; ;display.h: 60: void dissolve(void);
 "4 display.c
 [v _Dis_Buff `uc ~T0 @X0 * -> 4 `i -> 8 `i e ]
 [; ;display.c: 4: uint8_t Dis_Buff[4 * 8];
@@ -5924,12 +5976,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _i_char `uc ~T0 @X0 1 e ]
 [v _i_bchar `uc ~T0 @X0 1 e ]
 [; ;display.c: 7: uint8_t i_char, i_bchar;
-[v F3306 `uc ~T0 @X0 -> 5 `i t ]
-[v F3305 `F3306 ~T0 @X0 -> 0 `x t ]
+[v F3429 `uc ~T0 @X0 -> 5 `i t ]
+[v F3428 `F3429 ~T0 @X0 -> 0 `x t ]
 "8
-[v _pFont `*F3305 ~T0 @X0 1 e ]
+[v _pFont `*F3428 ~T0 @X0 1 e ]
 [i _pFont
--> &U _dFont1 `*F3305
+-> &U _dFont1 `*F3428
 ]
 [; ;display.c: 8: uint8_t(*pFont)[][5] = &dFont1;
 [; ;display.c: 9: extern uint8_t idx_pnt;
@@ -5951,1242 +6003,1349 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> -> 0 `i `uc
 ]
 [; ;display.c: 10: extern volatile uint8_t x1 = 0, x2 = 0, x3 = 0, x4 = 0, y1, y2, y3, y4;
-"16
-[v _pixel_on `(v ~T0 @X0 1 ef2`uc`uc ]
-"17
-{
-[; ;display.c: 16: void pixel_on(uint8_t x, uint8_t y)
-[; ;display.c: 17: {
-[e :U _pixel_on ]
-"16
-[v _x `uc ~T0 @X0 1 r1 ]
-[v _y `uc ~T0 @X0 1 r2 ]
-"17
-[f ]
-[; ;display.c: 18: Dis_Buff[x] |= (1<<y);
+"12
+[v _dissolve_arr `Cuc ~T0 @X0 -> 16 `i e ]
+[i _dissolve_arr
+:U ..
+-> -> 253 `i `uc
+-> -> 191 `i `uc
+-> -> 239 `i `uc
+-> -> 127 `i `uc
+-> -> 251 `i `uc
+-> -> 223 `i `uc
+-> -> 247 `i `uc
+-> -> 254 `i `uc
+-> -> 253 `i `uc
+-> -> 191 `i `uc
+-> -> 239 `i `uc
+-> -> 127 `i `uc
+-> -> 251 `i `uc
+-> -> 223 `i `uc
+-> -> 247 `i `uc
+-> -> 254 `i `uc
+..
+]
+[; ;display.c: 12: const uint8_t dissolve_arr[16] = {253,191,239,127,251,223,247,254,253,191,239,127,251,223,247,254};
 "18
-[e =| *U + &U _Dis_Buff * -> _x `ux -> -> # *U &U _Dis_Buff `ui `ux -> << -> 1 `i _y `uc ]
-[; ;display.c: 19: }
+[v _pixel_on `(v ~T0 @X0 1 ef2`uc`uc ]
 "19
-[e :UE 272 ]
-}
-"24
-[v _pixel_off `(v ~T0 @X0 1 ef2`uc`uc ]
-"25
 {
-[; ;display.c: 24: void pixel_off(uint8_t x, uint8_t y)
-[; ;display.c: 25: {
-[e :U _pixel_off ]
-"24
+[; ;display.c: 18: void pixel_on(uint8_t x, uint8_t y)
+[; ;display.c: 19: {
+[e :U _pixel_on ]
+"18
 [v _x `uc ~T0 @X0 1 r1 ]
 [v _y `uc ~T0 @X0 1 r2 ]
-"25
+"19
 [f ]
-[; ;display.c: 26: Dis_Buff[x] &= ~(1<<y);
-"26
-[e =& *U + &U _Dis_Buff * -> _x `ux -> -> # *U &U _Dis_Buff `ui `ux -> ~ << -> 1 `i _y `uc ]
-[; ;display.c: 27: }
-"27
-[e :UE 273 ]
+[; ;display.c: 20: Dis_Buff[x] |= (1<<y);
+"20
+[e =| *U + &U _Dis_Buff * -> _x `ux -> -> # *U &U _Dis_Buff `ui `ux -> << -> 1 `i _y `uc ]
+[; ;display.c: 21: }
+"21
+[e :UE 276 ]
 }
-"32
-[v _pic_to_led `(v ~T0 @X0 1 ef2`uc`uc ]
-"33
+"26
+[v _pixel_off `(v ~T0 @X0 1 ef2`uc`uc ]
+"27
 {
-[; ;display.c: 32: void pic_to_led(uint8_t x, uint8_t pic)
-[; ;display.c: 33: {
+[; ;display.c: 26: void pixel_off(uint8_t x, uint8_t y)
+[; ;display.c: 27: {
+[e :U _pixel_off ]
+"26
+[v _x `uc ~T0 @X0 1 r1 ]
+[v _y `uc ~T0 @X0 1 r2 ]
+"27
+[f ]
+[; ;display.c: 28: Dis_Buff[x] &= ~(1<<y);
+"28
+[e =& *U + &U _Dis_Buff * -> _x `ux -> -> # *U &U _Dis_Buff `ui `ux -> ~ << -> 1 `i _y `uc ]
+[; ;display.c: 29: }
+"29
+[e :UE 277 ]
+}
+"34
+[v _pic_to_led `(v ~T0 @X0 1 ef2`uc`uc ]
+"35
+{
+[; ;display.c: 34: void pic_to_led(uint8_t x, uint8_t pic)
+[; ;display.c: 35: {
 [e :U _pic_to_led ]
-"32
+"34
 [v _x `uc ~T0 @X0 1 r1 ]
 [v _pic `uc ~T0 @X0 1 r2 ]
-"33
+"35
 [f ]
-"34
+"36
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
 [v _mask `uc ~T0 @X0 1 a ]
-[; ;display.c: 34: uint8_t i, j, mask=0x01;
+[; ;display.c: 36: uint8_t i, j, mask=0x01;
 [e = _mask -> -> 1 `i `uc ]
-[; ;display.c: 36: for(i=0; i<7; i++){
-"36
+[; ;display.c: 38: for(i=0; i<7; i++){
+"38
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 7 `i 275  ]
-[e $U 276  ]
-[e :U 275 ]
+[e $ < -> _i `i -> 7 `i 279  ]
+[e $U 280  ]
+[e :U 279 ]
 {
-[; ;display.c: 37: for(j=0;j<8;j++){
-"37
+[; ;display.c: 39: for(j=0;j<8;j++){
+"39
 {
 [e = _j -> -> 0 `i `uc ]
-[e $ < -> _j `i -> 8 `i 278  ]
-[e $U 279  ]
-[e :U 278 ]
-{
-[; ;display.c: 38: if(pic7x8[pic][i] & mask){
-"38
-[e $ ! != & -> *U + &U *U + &U _pic7x8 * -> _pic `ux -> * -> # *U &U *U &U _pic7x8 `ui -> -> 7 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _pic7x8 * -> _pic `ux -> * -> # *U &U *U &U _pic7x8 `ui -> -> 7 `i `ui `ux `ui `ux `i -> _mask `i -> 0 `i 281  ]
-{
-[; ;display.c: 39: pixel_on(x+i,j);
-"39
-[e ( _pixel_on (2 , -> + -> _x `i -> _i `i `uc _j ]
-"40
-}
-[; ;display.c: 40: }
-[e $U 282  ]
-"41
-[e :U 281 ]
-[; ;display.c: 41: else {
-{
-[; ;display.c: 42: pixel_off(x+i,j);
-"42
-[e ( _pixel_off (2 , -> + -> _x `i -> _i `i `uc _j ]
-"43
-}
+[e $ < -> _j `i -> 8 `i 282  ]
+[e $U 283  ]
 [e :U 282 ]
-[; ;display.c: 43: };
-[; ;display.c: 44: mask = mask<<1;
+{
+[; ;display.c: 40: if(pic7x8[pic][i] & mask){
+"40
+[e $ ! != & -> *U + &U *U + &U _pic7x8 * -> _pic `ux -> * -> # *U &U *U &U _pic7x8 `ui -> -> 7 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _pic7x8 * -> _pic `ux -> * -> # *U &U *U &U _pic7x8 `ui -> -> 7 `i `ui `ux `ui `ux `i -> _mask `i -> 0 `i 285  ]
+{
+[; ;display.c: 41: pixel_on(x+i,j);
+"41
+[e ( _pixel_on (2 , -> + -> _x `i -> _i `i `uc _j ]
+"42
+}
+[; ;display.c: 42: }
+[e $U 286  ]
+"43
+[e :U 285 ]
+[; ;display.c: 43: else {
+{
+[; ;display.c: 44: pixel_off(x+i,j);
 "44
-[e = _mask -> << -> _mask `i -> 1 `i `uc ]
+[e ( _pixel_off (2 , -> + -> _x `i -> _i `i `uc _j ]
 "45
 }
-"37
-[e ++ _j -> -> 1 `i `uc ]
-[e $ < -> _j `i -> 8 `i 278  ]
-[e :U 279 ]
-"45
-}
+[e :U 286 ]
 [; ;display.c: 45: };
-[; ;display.c: 46: mask=0x01;
+[; ;display.c: 46: mask = mask<<1;
 "46
-[e = _mask -> -> 1 `i `uc ]
+[e = _mask -> << -> _mask `i -> 1 `i `uc ]
 "47
 }
-"36
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 7 `i 275  ]
-[e :U 276 ]
+"39
+[e ++ _j -> -> 1 `i `uc ]
+[e $ < -> _j `i -> 8 `i 282  ]
+[e :U 283 ]
 "47
 }
 [; ;display.c: 47: };
-[; ;display.c: 48: }
+[; ;display.c: 48: mask=0x01;
 "48
-[e :UE 274 ]
+[e = _mask -> -> 1 `i `uc ]
+"49
 }
-"53
-[v _putchar_b_buf `(v ~T0 @X0 1 ef3`uc`uc`*F3266 ]
-"54
+"38
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 7 `i 279  ]
+[e :U 280 ]
+"49
+}
+[; ;display.c: 49: };
+[; ;display.c: 50: }
+"50
+[e :UE 278 ]
+}
+"55
+[v _putchar_b_buf `(v ~T0 @X0 1 ef3`uc`uc`*F3387 ]
+"56
 {
-[; ;display.c: 53: void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[][5])
-[; ;display.c: 54: {
+[; ;display.c: 55: void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[][5])
+[; ;display.c: 56: {
 [e :U _putchar_b_buf ]
-"53
+"55
 [v _x `uc ~T0 @X0 1 r1 ]
 [v _symbol `uc ~T0 @X0 1 r2 ]
-[v F3329 `uc ~T0 @X0 -> 5 `i t ]
-[v F3328 `F3329 ~T0 @X0 -> 0 `x t ]
-[v _pF `*F3328 ~T0 @X0 1 r3 ]
-"54
+[v F3453 `uc ~T0 @X0 -> 5 `i t ]
+[v F3452 `F3453 ~T0 @X0 -> 0 `x t ]
+[v _pF `*F3452 ~T0 @X0 1 r3 ]
+"56
 [f ]
-"55
+"57
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
 [v _mask `uc ~T0 @X0 1 a ]
-[; ;display.c: 55: uint8_t i, j, mask=0x01;
+[; ;display.c: 57: uint8_t i, j, mask=0x01;
 [e = _mask -> -> 1 `i `uc ]
-[; ;display.c: 58: for(i=0; i<5; i++)
-"58
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 5 `i 284  ]
-[e $U 285  ]
-"59
-[e :U 284 ]
-[; ;display.c: 59: {
-{
-[; ;display.c: 60: for(j=0;j<8;j++)
+[; ;display.c: 60: for(i=0; i<5; i++)
 "60
 {
-[e = _j -> -> 0 `i `uc ]
-[e $ < -> _j `i -> 8 `i 287  ]
-[e $U 288  ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 5 `i 288  ]
+[e $U 289  ]
 "61
-[e :U 287 ]
+[e :U 288 ]
 [; ;display.c: 61: {
 {
-[; ;display.c: 62: if((*pF)[symbol] [i] & mask)
+[; ;display.c: 62: for(j=0;j<8;j++)
 "62
-[e $ ! != & -> *U + &U *U + &U *U _pF * -> _symbol `ux -> * -> # *U &U *U &U *U _pF `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pF * -> _symbol `ux -> * -> # *U &U *U &U *U _pF `ui -> -> 5 `i `ui `ux `ui `ux `i -> _mask `i -> 0 `i 290  ]
-[; ;display.c: 63: pixel_on(x+i,j);
+{
+[e = _j -> -> 0 `i `uc ]
+[e $ < -> _j `i -> 8 `i 291  ]
+[e $U 292  ]
 "63
-[e ( _pixel_on (2 , -> + -> _x `i -> _i `i `uc _j ]
-[e $U 291  ]
-"64
-[e :U 290 ]
-[; ;display.c: 64: else
-[; ;display.c: 65: pixel_off(x+i,j);
-"65
-[e ( _pixel_off (2 , -> + -> _x `i -> _i `i `uc _j ]
 [e :U 291 ]
-[; ;display.c: 67: mask = mask<<1;
+[; ;display.c: 63: {
+{
+[; ;display.c: 64: if((*pF)[symbol] [i] & mask)
+"64
+[e $ ! != & -> *U + &U *U + &U *U _pF * -> _symbol `ux -> * -> # *U &U *U &U *U _pF `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pF * -> _symbol `ux -> * -> # *U &U *U &U *U _pF `ui -> -> 5 `i `ui `ux `ui `ux `i -> _mask `i -> 0 `i 294  ]
+[; ;display.c: 65: pixel_on(x+i,j);
+"65
+[e ( _pixel_on (2 , -> + -> _x `i -> _i `i `uc _j ]
+[e $U 295  ]
+"66
+[e :U 294 ]
+[; ;display.c: 66: else
+[; ;display.c: 67: pixel_off(x+i,j);
 "67
+[e ( _pixel_off (2 , -> + -> _x `i -> _i `i `uc _j ]
+[e :U 295 ]
+[; ;display.c: 69: mask = mask<<1;
+"69
 [e = _mask -> << -> _mask `i -> 1 `i `uc ]
-"68
+"70
+}
+"62
+[e ++ _j -> -> 1 `i `uc ]
+[e $ < -> _j `i -> 8 `i 291  ]
+[e :U 292 ]
+"70
+}
+[; ;display.c: 70: };
+[; ;display.c: 72: mask=0x01;
+"72
+[e = _mask -> -> 1 `i `uc ]
+"73
 }
 "60
-[e ++ _j -> -> 1 `i `uc ]
-[e $ < -> _j `i -> 8 `i 287  ]
-[e :U 288 ]
-"68
-}
-[; ;display.c: 68: };
-[; ;display.c: 70: mask=0x01;
-"70
-[e = _mask -> -> 1 `i `uc ]
-"71
-}
-"58
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 5 `i 284  ]
-[e :U 285 ]
-"71
+[e $ < -> _i `i -> 5 `i 288  ]
+[e :U 289 ]
+"73
 }
-[; ;display.c: 71: };
-[; ;display.c: 72: }
-"72
-[e :UE 283 ]
+[; ;display.c: 73: };
+[; ;display.c: 74: }
+"74
+[e :UE 287 ]
 }
-"77
+"79
 [v _putchar_s_buf `(v ~T0 @X0 1 ef2`uc`uc ]
-"78
+"80
 {
-[; ;display.c: 77: void putchar_s_buf(uint8_t x, uint8_t symbol)
-[; ;display.c: 78: {
+[; ;display.c: 79: void putchar_s_buf(uint8_t x, uint8_t symbol)
+[; ;display.c: 80: {
 [e :U _putchar_s_buf ]
-"77
+"79
 [v _x `uc ~T0 @X0 1 r1 ]
 [v _symbol `uc ~T0 @X0 1 r2 ]
-"78
+"80
 [f ]
-"79
+"81
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
 [v _mask `uc ~T0 @X0 1 a ]
-[; ;display.c: 79: uint8_t i, j, mask=0x01;
+[; ;display.c: 81: uint8_t i, j, mask=0x01;
 [e = _mask -> -> 1 `i `uc ]
-[; ;display.c: 81: symbol -= 47;
-"81
-[e =- _symbol -> -> 47 `i `uc ]
-[; ;display.c: 82: for(i=0; i<3; i++)
-"82
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 3 `i 293  ]
-[e $U 294  ]
+[; ;display.c: 83: symbol -= 47;
 "83
-[e :U 293 ]
-[; ;display.c: 83: {
-{
-[; ;display.c: 84: for(j=0;j<8;j++)
+[e =- _symbol -> -> 47 `i `uc ]
+[; ;display.c: 84: for(i=0; i<3; i++)
 "84
 {
-[e = _j -> -> 0 `i `uc ]
-[e $ < -> _j `i -> 8 `i 296  ]
-[e $U 297  ]
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 3 `i 297  ]
+[e $U 298  ]
 "85
-[e :U 296 ]
+[e :U 297 ]
 [; ;display.c: 85: {
 {
-[; ;display.c: 86: if(FontS[symbol] [i] & mask)
+[; ;display.c: 86: for(j=0;j<8;j++)
 "86
-[e $ ! != & -> *U + &U *U + &U _FontS * -> _symbol `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> _symbol `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux `i -> _mask `i -> 0 `i 299  ]
-[; ;display.c: 87: pixel_on(x+i,j);
+{
+[e = _j -> -> 0 `i `uc ]
+[e $ < -> _j `i -> 8 `i 300  ]
+[e $U 301  ]
 "87
-[e ( _pixel_on (2 , -> + -> _x `i -> _i `i `uc _j ]
-[e $U 300  ]
-"88
-[e :U 299 ]
-[; ;display.c: 88: else
-[; ;display.c: 89: pixel_off(x+i,j);
-"89
-[e ( _pixel_off (2 , -> + -> _x `i -> _i `i `uc _j ]
 [e :U 300 ]
-[; ;display.c: 91: mask = mask<<1;
+[; ;display.c: 87: {
+{
+[; ;display.c: 88: if(FontS[symbol] [i] & mask)
+"88
+[e $ ! != & -> *U + &U *U + &U _FontS * -> _symbol `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> _symbol `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux `i -> _mask `i -> 0 `i 303  ]
+[; ;display.c: 89: pixel_on(x+i,j);
+"89
+[e ( _pixel_on (2 , -> + -> _x `i -> _i `i `uc _j ]
+[e $U 304  ]
+"90
+[e :U 303 ]
+[; ;display.c: 90: else
+[; ;display.c: 91: pixel_off(x+i,j);
 "91
+[e ( _pixel_off (2 , -> + -> _x `i -> _i `i `uc _j ]
+[e :U 304 ]
+[; ;display.c: 93: mask = mask<<1;
+"93
 [e = _mask -> << -> _mask `i -> 1 `i `uc ]
-"92
+"94
+}
+"86
+[e ++ _j -> -> 1 `i `uc ]
+[e $ < -> _j `i -> 8 `i 300  ]
+[e :U 301 ]
+"94
+}
+[; ;display.c: 94: };
+[; ;display.c: 96: mask=0x01;
+"96
+[e = _mask -> -> 1 `i `uc ]
+"97
 }
 "84
-[e ++ _j -> -> 1 `i `uc ]
-[e $ < -> _j `i -> 8 `i 296  ]
-[e :U 297 ]
-"92
-}
-[; ;display.c: 92: };
-[; ;display.c: 94: mask=0x01;
-"94
-[e = _mask -> -> 1 `i `uc ]
-"95
-}
-"82
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 3 `i 293  ]
-[e :U 294 ]
-"95
+[e $ < -> _i `i -> 3 `i 297  ]
+[e :U 298 ]
+"97
 }
-[; ;display.c: 95: };
-[; ;display.c: 96: }
-"96
-[e :UE 292 ]
+[; ;display.c: 97: };
+[; ;display.c: 98: }
+"98
+[e :UE 296 ]
 }
-"101
-[v _putchar_down `(v ~T0 @X0 1 ef3`uc`uc`*F3285 ]
-"102
+"103
+[v _putchar_down `(v ~T0 @X0 1 ef3`uc`uc`*F3406 ]
+"104
 {
-[; ;display.c: 101: void putchar_down(uint8_t x, uint8_t symbol,uint8_t (*pF)[][5])
-[; ;display.c: 102: {
+[; ;display.c: 103: void putchar_down(uint8_t x, uint8_t symbol,uint8_t (*pF)[][5])
+[; ;display.c: 104: {
 [e :U _putchar_down ]
-"101
+"103
 [v _x `uc ~T0 @X0 1 r1 ]
 [v _symbol `uc ~T0 @X0 1 r2 ]
-[v F3342 `uc ~T0 @X0 -> 5 `i t ]
-[v F3341 `F3342 ~T0 @X0 -> 0 `x t ]
-[v _pF `*F3341 ~T0 @X0 1 r3 ]
-"102
+[v F3466 `uc ~T0 @X0 -> 5 `i t ]
+[v F3465 `F3466 ~T0 @X0 -> 0 `x t ]
+[v _pF `*F3465 ~T0 @X0 1 r3 ]
+"104
 [f ]
-"103
+"105
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
 [v _k `uc ~T0 @X0 1 a ]
-[; ;display.c: 103: uint8_t i, j, k;
-[; ;display.c: 105: for(j=0;j<=7;j++)
-"105
-{
-[e = _j -> -> 0 `i `uc ]
-[e $ <= -> _j `i -> 7 `i 302  ]
-[e $U 303  ]
-"106
-[e :U 302 ]
-[; ;display.c: 106: {
-{
-[; ;display.c: 107: for(i=0;i<5;i++)
+[; ;display.c: 105: uint8_t i, j, k;
+[; ;display.c: 107: for(j=0;j<=7;j++)
 "107
 {
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 5 `i 305  ]
-[e $U 306  ]
+[e = _j -> -> 0 `i `uc ]
+[e $ <= -> _j `i -> 7 `i 306  ]
+[e $U 307  ]
 "108
-[e :U 305 ]
+[e :U 306 ]
 [; ;display.c: 108: {
 {
-[; ;display.c: 109: Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | ((*pF)[symbol][i] >> (8-1-j));
+[; ;display.c: 109: for(i=0;i<5;i++)
 "109
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 5 `i 309  ]
+[e $U 310  ]
+"110
+[e :U 309 ]
+[; ;display.c: 110: {
+{
+[; ;display.c: 111: Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | ((*pF)[symbol][i] >> (8-1-j));
+"111
 [e = *U + &U _Dis_Buff * -> -> + -> _x `i -> _i `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> | << -> *U + &U _Dis_Buff * -> -> + -> _x `i -> _i `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux `i -> 1 `i >> -> *U + &U *U + &U *U _pF * -> _symbol `ux -> * -> # *U &U *U &U *U _pF `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pF * -> _symbol `ux -> * -> # *U &U *U &U *U _pF `ui -> -> 5 `i `ui `ux `ui `ux `i - - -> 8 `i -> 1 `i -> _j `i `uc ]
-"110
-}
-"107
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 5 `i 305  ]
-[e :U 306 ]
-"110
-}
-[; ;display.c: 110: }
-[; ;display.c: 112: for(k=0;k<40;k++)
 "112
+}
+"109
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 5 `i 309  ]
+[e :U 310 ]
+"112
+}
+[; ;display.c: 112: }
+[; ;display.c: 114: for(k=0;k<40;k++)
+"114
 {
 [e = _k -> -> 0 `i `uc ]
-[e $ < -> _k `i -> 40 `i 308  ]
-[e $U 309  ]
-"113
-[e :U 308 ]
-[; ;display.c: 113: _delay((unsigned long)((1)*(40000000/4000.0)));
+[e $ < -> _k `i -> 40 `i 312  ]
+[e $U 313  ]
+"115
+[e :U 312 ]
+[; ;display.c: 115: _delay((unsigned long)((1)*(40000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-"112
-[e ++ _k -> -> 1 `i `uc ]
-[e $ < -> _k `i -> 40 `i 308  ]
-[e :U 309 ]
-"113
-}
-[; ;display.c: 114: Update_Matrix(Dis_Buff);
 "114
+[e ++ _k -> -> 1 `i `uc ]
+[e $ < -> _k `i -> 40 `i 312  ]
+[e :U 313 ]
+"115
+}
+[; ;display.c: 116: Update_Matrix(Dis_Buff);
+"116
 [e ( _Update_Matrix (1 &U _Dis_Buff ]
-"116
-}
-"105
-[e ++ _j -> -> 1 `i `uc ]
-[e $ <= -> _j `i -> 7 `i 302  ]
-[e :U 303 ]
-"116
-}
-[; ;display.c: 116: }
-[; ;display.c: 118: }
 "118
-[e :UE 301 ]
 }
-"123
+"107
+[e ++ _j -> -> 1 `i `uc ]
+[e $ <= -> _j `i -> 7 `i 306  ]
+[e :U 307 ]
+"118
+}
+[; ;display.c: 118: }
+[; ;display.c: 120: }
+"120
+[e :UE 305 ]
+}
+"125
 [v _putchar_down_s `(v ~T0 @X0 1 ef2`uc`uc ]
-"124
+"126
 {
-[; ;display.c: 123: void putchar_down_s(uint8_t x, uint8_t symbol)
-[; ;display.c: 124: {
+[; ;display.c: 125: void putchar_down_s(uint8_t x, uint8_t symbol)
+[; ;display.c: 126: {
 [e :U _putchar_down_s ]
-"123
+"125
 [v _x `uc ~T0 @X0 1 r1 ]
 [v _symbol `uc ~T0 @X0 1 r2 ]
-"124
+"126
 [f ]
-"125
+"127
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
 [v _k `uc ~T0 @X0 1 a ]
-[; ;display.c: 125: uint8_t i, j, k;
-[; ;display.c: 130: for(j=0;j<=7;j++)
-"130
+[; ;display.c: 127: uint8_t i, j, k;
+[; ;display.c: 132: for(j=0;j<=7;j++)
+"132
 {
 [e = _j -> -> 0 `i `uc ]
-[e $ <= -> _j `i -> 7 `i 312  ]
-[e $U 313  ]
-"131
-[e :U 312 ]
-[; ;display.c: 131: {
-{
-[; ;display.c: 132: for(i=0;i<3;i++)
-"132
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 3 `i 315  ]
-[e $U 316  ]
+[e $ <= -> _j `i -> 7 `i 316  ]
+[e $U 317  ]
 "133
-[e :U 315 ]
+[e :U 316 ]
 [; ;display.c: 133: {
 {
-[; ;display.c: 134: Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | (FontS[symbol][i] >> (8-1-j));
+[; ;display.c: 134: for(i=0;i<3;i++)
 "134
-[e = *U + &U _Dis_Buff * -> -> + -> _x `i -> _i `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> | << -> *U + &U _Dis_Buff * -> -> + -> _x `i -> _i `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux `i -> 1 `i >> -> *U + &U *U + &U _FontS * -> _symbol `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> _symbol `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux `i - - -> 8 `i -> 1 `i -> _j `i `uc ]
-"135
-}
-"132
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 3 `i 315  ]
-[e :U 316 ]
-"135
-}
-[; ;display.c: 135: }
-[; ;display.c: 137: for(k=0;k<40;k++)
-"137
-{
-[e = _k -> -> 0 `i `uc ]
-[e $ < -> _k `i -> 40 `i 318  ]
-[e $U 319  ]
-"138
-[e :U 318 ]
-[; ;display.c: 138: _delay((unsigned long)((1)*(40000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-"137
-[e ++ _k -> -> 1 `i `uc ]
-[e $ < -> _k `i -> 40 `i 318  ]
-[e :U 319 ]
-"138
-}
-[; ;display.c: 139: Update_Matrix(Dis_Buff);
-"139
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-"141
-}
-"130
-[e ++ _j -> -> 1 `i `uc ]
-[e $ <= -> _j `i -> 7 `i 312  ]
-[e :U 313 ]
-"141
-}
-[; ;display.c: 141: }
-[; ;display.c: 143: }
-"143
-[e :UE 311 ]
-}
-"148
-[v _clear_matrix `(v ~T0 @X0 1 ef ]
-"149
-{
-[; ;display.c: 148: void clear_matrix(void)
-[; ;display.c: 149: {
-[e :U _clear_matrix ]
-[f ]
-"150
-[v _i `uc ~T0 @X0 1 a ]
-[; ;display.c: 150: uint8_t i;
-[; ;display.c: 151: for (i=0; i<=4 * 8; i++)
-"151
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ <= -> _i `i * -> 4 `i -> 8 `i 322  ]
-[e $U 323  ]
-"152
-[e :U 322 ]
-[; ;display.c: 152: Dis_Buff[i] = 0;
-[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-"151
+[e $ < -> _i `i -> 3 `i 319  ]
+[e $U 320  ]
+"135
+[e :U 319 ]
+[; ;display.c: 135: {
+{
+[; ;display.c: 136: Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | (FontS[symbol][i] >> (8-1-j));
+"136
+[e = *U + &U _Dis_Buff * -> -> + -> _x `i -> _i `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> | << -> *U + &U _Dis_Buff * -> -> + -> _x `i -> _i `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux `i -> 1 `i >> -> *U + &U *U + &U _FontS * -> _symbol `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> _symbol `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux `i - - -> 8 `i -> 1 `i -> _j `i `uc ]
+"137
+}
+"134
 [e ++ _i -> -> 1 `i `uc ]
-[e $ <= -> _i `i * -> 4 `i -> 8 `i 322  ]
+[e $ < -> _i `i -> 3 `i 319  ]
+[e :U 320 ]
+"137
+}
+[; ;display.c: 137: }
+[; ;display.c: 139: for(k=0;k<40;k++)
+"139
+{
+[e = _k -> -> 0 `i `uc ]
+[e $ < -> _k `i -> 40 `i 322  ]
+[e $U 323  ]
+"140
+[e :U 322 ]
+[; ;display.c: 140: _delay((unsigned long)((1)*(40000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
+"139
+[e ++ _k -> -> 1 `i `uc ]
+[e $ < -> _k `i -> 40 `i 322  ]
 [e :U 323 ]
+"140
+}
+[; ;display.c: 141: Update_Matrix(Dis_Buff);
+"141
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+"143
+}
+"132
+[e ++ _j -> -> 1 `i `uc ]
+[e $ <= -> _j `i -> 7 `i 316  ]
+[e :U 317 ]
+"143
+}
+[; ;display.c: 143: }
+[; ;display.c: 145: }
+"145
+[e :UE 315 ]
+}
+"150
+[v _clear_matrix `(v ~T0 @X0 1 ef ]
+"151
+{
+[; ;display.c: 150: void clear_matrix(void)
+[; ;display.c: 151: {
+[e :U _clear_matrix ]
+[f ]
 "152
-}
-[; ;display.c: 153: }
+[v _i `uc ~T0 @X0 1 a ]
+[; ;display.c: 152: uint8_t i;
+[; ;display.c: 153: for (i=0; i<=4 * 8; i++)
 "153
-[e :UE 321 ]
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ <= -> _i `i * -> 4 `i -> 8 `i 326  ]
+[e $U 327  ]
+"154
+[e :U 326 ]
+[; ;display.c: 154: Dis_Buff[i] = 0;
+[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+"153
+[e ++ _i -> -> 1 `i `uc ]
+[e $ <= -> _i `i * -> 4 `i -> 8 `i 326  ]
+[e :U 327 ]
+"154
 }
-"160
+[; ;display.c: 155: }
+"155
+[e :UE 325 ]
+}
+"162
 [v _FillBuf `(v ~T0 @X0 1 ef1`uc ]
 {
-[; ;display.c: 160: void FillBuf(uint8_t type) {
+[; ;display.c: 162: void FillBuf(uint8_t type) {
 [e :U _FillBuf ]
 [v _type `uc ~T0 @X0 1 r1 ]
 [f ]
-"161
-[v _i `uc ~T0 @X0 1 a ]
-[; ;display.c: 161: uint8_t i;
-[; ;display.c: 162: switch (type) {
-"162
-[e $U 327  ]
-{
-[; ;display.c: 163: case 1:
 "163
-[e :U 328 ]
-[; ;display.c: 164: for (i = 0; i < 5; ++i) {
+[v _i `uc ~T0 @X0 1 a ]
+[; ;display.c: 163: uint8_t i;
+[; ;display.c: 164: switch (type) {
 "164
+[e $U 331  ]
 {
-[e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 5 `i 329  ]
-[e $U 330  ]
-[e :U 329 ]
-{
-[; ;display.c: 165: if ((TTime.Thr / 10) % 10)
+[; ;display.c: 165: case 1:
 "165
-[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 332  ]
-[; ;display.c: 166: Dis_Buff[i] = (*pFont)[(TTime.Thr / 10) % 10][i];
-"166
-[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U *U _pFont * -> -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pFont * -> -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux `ui `ux ]
-[e $U 333  ]
-"167
 [e :U 332 ]
-[; ;display.c: 167: else
-[; ;display.c: 168: Dis_Buff[i] = 0x00;
-"168
-[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[e :U 333 ]
-[; ;display.c: 171: Dis_Buff[i + 6] = (*pFont)[TTime.Thr % 10 ][i];
-"171
-[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 6 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U *U _pFont * -> -> % -> . _TTime 2 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pFont * -> -> % -> . _TTime 2 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux `ui `ux ]
-[; ;display.c: 172: Dis_Buff[i + 13] = (*pFont)[(TTime.Tmin / 10) % 10 ][i];
-"172
-[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 13 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U *U _pFont * -> -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pFont * -> -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux `ui `ux ]
-[; ;display.c: 173: Dis_Buff[i + 19] = (*pFont)[TTime.Tmin % 10 ][i];
-"173
-[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 19 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U *U _pFont * -> -> % -> . _TTime 1 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pFont * -> -> % -> . _TTime 1 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux `ui `ux ]
-"175
-}
-"164
-[e =+ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 5 `i 329  ]
-[e :U 330 ]
-"175
-}
-[; ;display.c: 175: }
-[; ;display.c: 177: for (i = 0; i < 3; ++i) {
-"177
+[; ;display.c: 166: for (i = 0; i < 5; ++i) {
+"166
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 3 `i 334  ]
-[e $U 335  ]
-[e :U 334 ]
+[e $ < -> _i `i -> 5 `i 333  ]
+[e $U 334  ]
+[e :U 333 ]
 {
-[; ;display.c: 178: Dis_Buff[i + 25] = FontS[(TTime.Ts / 10) % 10 + 1][i];
-"178
-[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 25 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _FontS * -> -> + % / -> . _TTime 0 `i -> 10 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> -> + % / -> . _TTime 0 `i -> 10 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux ]
-[; ;display.c: 179: Dis_Buff[i + 29] = FontS[TTime.Ts % 10 + 1][i];
-"179
-[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 29 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _FontS * -> -> + % -> . _TTime 0 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> -> + % -> . _TTime 0 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux ]
-"180
-}
-"177
-[e =+ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 3 `i 334  ]
-[e :U 335 ]
-"180
-}
-[; ;display.c: 180: }
-[; ;display.c: 182: Dis_Buff[5] = 0;
-"182
-[e = *U + &U _Dis_Buff * -> -> -> 5 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 183: Dis_Buff[11] = 0x80;
-"183
-[e = *U + &U _Dis_Buff * -> -> -> 11 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 128 `i `uc ]
-[; ;display.c: 184: Dis_Buff[12] = 0x80;
-"184
-[e = *U + &U _Dis_Buff * -> -> -> 12 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 128 `i `uc ]
-[; ;display.c: 185: Dis_Buff[18] = 0;
-"185
-[e = *U + &U _Dis_Buff * -> -> -> 18 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 186: Dis_Buff[24] = 0;
-"186
-[e = *U + &U _Dis_Buff * -> -> -> 24 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 187: Dis_Buff[28] = 0;
-"187
-[e = *U + &U _Dis_Buff * -> -> -> 28 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 188: break;
-"188
-[e $U 326  ]
-[; ;display.c: 189: case 2:
-"189
+[; ;display.c: 167: if ((TTime.Thr / 10) % 10)
+"167
+[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 336  ]
+[; ;display.c: 168: Dis_Buff[i] = (*pFont)[(TTime.Thr / 10) % 10][i];
+"168
+[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U *U _pFont * -> -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pFont * -> -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux `ui `ux ]
+[e $U 337  ]
+"169
+[e :U 336 ]
+[; ;display.c: 169: else
+[; ;display.c: 170: Dis_Buff[i] = 0x00;
+"170
+[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
 [e :U 337 ]
-[; ;display.c: 191: y1 = (TTime.Thr / 10) % 10;
-"191
-[e = _y1 -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc ]
-[; ;display.c: 192: y2 = TTime.Thr % 10;
-"192
-[e = _y2 -> % -> . _TTime 2 `i -> 10 `i `uc ]
-[; ;display.c: 193: y3 = (TTime.Tmin / 10) % 10;
-"193
-[e = _y3 -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc ]
-[; ;display.c: 194: y4 = TTime.Tmin % 10;
-"194
-[e = _y4 -> % -> . _TTime 1 `i -> 10 `i `uc ]
-[; ;display.c: 196: if ((x1 != y1) || (x2 != y2) || (x3 != y3) || (x4 != y4)) {
-"196
-[e $ ! || || || != -> _x1 `i -> _y1 `i != -> _x2 `i -> _y2 `i != -> _x3 `i -> _y3 `i != -> _x4 `i -> _y4 `i 338  ]
-{
-[; ;display.c: 198: if (x4 != y4)
-"198
-[e $ ! != -> _x4 `i -> _y4 `i 339  ]
-[; ;display.c: 199: putchar_down(25, TTime.Tmin % 10, pFont);
-"199
-[e ( _putchar_down (3 , , -> -> 25 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
-[e $U 340  ]
-"200
-[e :U 339 ]
-[; ;display.c: 200: else
-[; ;display.c: 201: putchar_b_buf(25, TTime.Tmin % 10, pFont);
-"201
-[e ( _putchar_b_buf (3 , , -> -> 25 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
-[e :U 340 ]
-[; ;display.c: 203: if (x3 != y3)
-"203
-[e $ ! != -> _x3 `i -> _y3 `i 341  ]
-[; ;display.c: 204: putchar_down(19, (TTime.Tmin / 10) % 10, pFont);
-"204
-[e ( _putchar_down (3 , , -> -> 19 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
-[e $U 342  ]
-"205
-[e :U 341 ]
-[; ;display.c: 205: else
-[; ;display.c: 206: putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
-"206
-[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
-[e :U 342 ]
-[; ;display.c: 208: if (x2 != y2)
-"208
-[e $ ! != -> _x2 `i -> _y2 `i 343  ]
-[; ;display.c: 209: putchar_down(7, TTime.Thr % 10, pFont);
-"209
-[e ( _putchar_down (3 , , -> -> 7 `i `uc -> % -> . _TTime 2 `i -> 10 `i `uc _pFont ]
-[e $U 344  ]
-"210
-[e :U 343 ]
-[; ;display.c: 210: else
-[; ;display.c: 211: putchar_b_buf(7, TTime.Thr % 10, pFont);
-"211
-[e ( _putchar_b_buf (3 , , -> -> 7 `i `uc -> % -> . _TTime 2 `i -> 10 `i `uc _pFont ]
-[e :U 344 ]
-[; ;display.c: 213: if ((TTime.Thr / 10) % 10) {
-"213
-[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 345  ]
-{
-[; ;display.c: 214: if (x1 != y1)
-"214
-[e $ ! != -> _x1 `i -> _y1 `i 346  ]
-[; ;display.c: 215: putchar_down(1, (TTime.Thr / 10) % 10, pFont);
-"215
-[e ( _putchar_down (3 , , -> -> 1 `i `uc -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
-[e $U 347  ]
-"216
-[e :U 346 ]
-[; ;display.c: 216: else
-[; ;display.c: 217: putchar_b_buf(1, (TTime.Thr / 10) % 10, pFont);
-"217
-[e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
-[e :U 347 ]
-"219
+[; ;display.c: 173: Dis_Buff[i + 6] = (*pFont)[TTime.Thr % 10 ][i];
+"173
+[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 6 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U *U _pFont * -> -> % -> . _TTime 2 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pFont * -> -> % -> . _TTime 2 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux `ui `ux ]
+[; ;display.c: 174: Dis_Buff[i + 13] = (*pFont)[(TTime.Tmin / 10) % 10 ][i];
+"174
+[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 13 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U *U _pFont * -> -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pFont * -> -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux `ui `ux ]
+[; ;display.c: 175: Dis_Buff[i + 19] = (*pFont)[TTime.Tmin % 10 ][i];
+"175
+[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 19 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U *U _pFont * -> -> % -> . _TTime 1 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U *U _pFont * -> -> % -> . _TTime 1 `i -> 10 `i `ui `ux -> * -> # *U &U *U &U *U _pFont `ui -> -> 5 `i `ui `ux `ui `ux ]
+"177
 }
-[; ;display.c: 219: } else
-[e $U 348  ]
-[e :U 345 ]
-[; ;display.c: 220: putchar_down(1, 0, &Font);
-"220
-[e ( _putchar_down (3 , , -> -> 1 `i `uc -> -> 0 `i `uc -> &U _Font `*F3285 ]
-[e :U 348 ]
-[; ;display.c: 225: x1 = y1;
-"225
-[e = _x1 _y1 ]
-[; ;display.c: 226: x2 = y2;
-"226
-[e = _x2 _y2 ]
-[; ;display.c: 227: x3 = y3;
-"227
-[e = _x3 _y3 ]
-[; ;display.c: 228: x4 = y4;
-"228
-[e = _x4 _y4 ]
-"230
+"166
+[e =+ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 5 `i 333  ]
+[e :U 334 ]
+"177
 }
-[; ;display.c: 230: } else {
-[e $U 349  ]
+[; ;display.c: 177: }
+[; ;display.c: 179: for (i = 0; i < 3; ++i) {
+"179
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 3 `i 338  ]
+[e $U 339  ]
 [e :U 338 ]
 {
-[; ;display.c: 231: if ((TTime.Thr / 10) % 10)
-"231
-[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 350  ]
-[; ;display.c: 232: putchar_b_buf(1, (TTime.Thr / 10) % 10, pFont);
-"232
-[e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
-[e $U 351  ]
-"233
-[e :U 350 ]
-[; ;display.c: 233: else
-[; ;display.c: 234: putchar_b_buf(1, 0, &Font);
-"234
-[e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> -> 0 `i `uc -> &U _Font `*F3266 ]
-[e :U 351 ]
-[; ;display.c: 235: putchar_b_buf(7, TTime.Thr % 10, pFont);
-"235
-[e ( _putchar_b_buf (3 , , -> -> 7 `i `uc -> % -> . _TTime 2 `i -> 10 `i `uc _pFont ]
-[; ;display.c: 237: putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
-"237
-[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
-[; ;display.c: 238: putchar_b_buf(25, TTime.Tmin % 10, pFont);
-"238
-[e ( _putchar_b_buf (3 , , -> -> 25 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
-"239
+[; ;display.c: 180: Dis_Buff[i + 25] = FontS[(TTime.Ts / 10) % 10 + 1][i];
+"180
+[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 25 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _FontS * -> -> + % / -> . _TTime 0 `i -> 10 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> -> + % / -> . _TTime 0 `i -> 10 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux ]
+[; ;display.c: 181: Dis_Buff[i + 29] = FontS[TTime.Ts % 10 + 1][i];
+"181
+[e = *U + &U _Dis_Buff * -> -> + -> _i `i -> 29 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _FontS * -> -> + % -> . _TTime 0 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _FontS * -> -> + % -> . _TTime 0 `i -> 10 `i -> 1 `i `ui `ux -> * -> # *U &U *U &U _FontS `ui -> -> 3 `i `ui `ux `ui `ux ]
+"182
 }
-[e :U 349 ]
-[; ;display.c: 239: }
-[; ;display.c: 240: break;
-"240
-[e $U 326  ]
-"241
+"179
+[e =+ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 3 `i 338  ]
+[e :U 339 ]
+"182
 }
-[; ;display.c: 241: }
-[e $U 326  ]
-"162
-[e :U 327 ]
-[e [\ _type , $ -> -> 1 `i `uc 328
- , $ -> -> 2 `i `uc 337
- 326 ]
-"241
-[e :U 326 ]
-[; ;display.c: 244: }
-"244
-[e :UE 325 ]
-}
-"253
-[v _FillBufS `(v ~T0 @X0 1 ef3`*uc`uc`uc ]
-"254
+[; ;display.c: 182: }
+[; ;display.c: 184: Dis_Buff[5] = 0;
+"184
+[e = *U + &U _Dis_Buff * -> -> -> 5 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 185: Dis_Buff[11] = 0x80;
+"185
+[e = *U + &U _Dis_Buff * -> -> -> 11 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 128 `i `uc ]
+[; ;display.c: 186: Dis_Buff[12] = 0x80;
+"186
+[e = *U + &U _Dis_Buff * -> -> -> 12 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 128 `i `uc ]
+[; ;display.c: 187: Dis_Buff[18] = 0;
+"187
+[e = *U + &U _Dis_Buff * -> -> -> 18 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 188: Dis_Buff[24] = 0;
+"188
+[e = *U + &U _Dis_Buff * -> -> -> 24 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 189: Dis_Buff[28] = 0;
+"189
+[e = *U + &U _Dis_Buff * -> -> -> 28 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 190: break;
+"190
+[e $U 330  ]
+[; ;display.c: 191: case 2:
+"191
+[e :U 341 ]
+[; ;display.c: 193: y1 = (TTime.Thr / 10) % 10;
+"193
+[e = _y1 -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc ]
+[; ;display.c: 194: y2 = TTime.Thr % 10;
+"194
+[e = _y2 -> % -> . _TTime 2 `i -> 10 `i `uc ]
+[; ;display.c: 195: y3 = (TTime.Tmin / 10) % 10;
+"195
+[e = _y3 -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc ]
+[; ;display.c: 196: y4 = TTime.Tmin % 10;
+"196
+[e = _y4 -> % -> . _TTime 1 `i -> 10 `i `uc ]
+[; ;display.c: 198: if ((x1 != y1) || (x2 != y2) || (x3 != y3) || (x4 != y4)) {
+"198
+[e $ ! || || || != -> _x1 `i -> _y1 `i != -> _x2 `i -> _y2 `i != -> _x3 `i -> _y3 `i != -> _x4 `i -> _y4 `i 342  ]
 {
-[; ;display.c: 253: void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag)
-[; ;display.c: 254: {
+[; ;display.c: 200: if (x4 != y4)
+"200
+[e $ ! != -> _x4 `i -> _y4 `i 343  ]
+[; ;display.c: 201: putchar_down(25, TTime.Tmin % 10, pFont);
+"201
+[e ( _putchar_down (3 , , -> -> 25 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
+[e $U 344  ]
+"202
+[e :U 343 ]
+[; ;display.c: 202: else
+[; ;display.c: 203: putchar_b_buf(25, TTime.Tmin % 10, pFont);
+"203
+[e ( _putchar_b_buf (3 , , -> -> 25 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
+[e :U 344 ]
+[; ;display.c: 205: if (x3 != y3)
+"205
+[e $ ! != -> _x3 `i -> _y3 `i 345  ]
+[; ;display.c: 206: putchar_down(19, (TTime.Tmin / 10) % 10, pFont);
+"206
+[e ( _putchar_down (3 , , -> -> 19 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
+[e $U 346  ]
+"207
+[e :U 345 ]
+[; ;display.c: 207: else
+[; ;display.c: 208: putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
+"208
+[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
+[e :U 346 ]
+[; ;display.c: 210: if (x2 != y2)
+"210
+[e $ ! != -> _x2 `i -> _y2 `i 347  ]
+[; ;display.c: 211: putchar_down(7, TTime.Thr % 10, pFont);
+"211
+[e ( _putchar_down (3 , , -> -> 7 `i `uc -> % -> . _TTime 2 `i -> 10 `i `uc _pFont ]
+[e $U 348  ]
+"212
+[e :U 347 ]
+[; ;display.c: 212: else
+[; ;display.c: 213: putchar_b_buf(7, TTime.Thr % 10, pFont);
+"213
+[e ( _putchar_b_buf (3 , , -> -> 7 `i `uc -> % -> . _TTime 2 `i -> 10 `i `uc _pFont ]
+[e :U 348 ]
+[; ;display.c: 215: if ((TTime.Thr / 10) % 10) {
+"215
+[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 349  ]
+{
+[; ;display.c: 216: if (x1 != y1)
+"216
+[e $ ! != -> _x1 `i -> _y1 `i 350  ]
+[; ;display.c: 217: putchar_down(1, (TTime.Thr / 10) % 10, pFont);
+"217
+[e ( _putchar_down (3 , , -> -> 1 `i `uc -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
+[e $U 351  ]
+"218
+[e :U 350 ]
+[; ;display.c: 218: else
+[; ;display.c: 219: putchar_b_buf(1, (TTime.Thr / 10) % 10, pFont);
+"219
+[e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
+[e :U 351 ]
+"221
+}
+[; ;display.c: 221: } else
+[e $U 352  ]
+[e :U 349 ]
+[; ;display.c: 222: putchar_down(1, 0, &Font);
+"222
+[e ( _putchar_down (3 , , -> -> 1 `i `uc -> -> 0 `i `uc -> &U _Font `*F3406 ]
+[e :U 352 ]
+[; ;display.c: 227: x1 = y1;
+"227
+[e = _x1 _y1 ]
+[; ;display.c: 228: x2 = y2;
+"228
+[e = _x2 _y2 ]
+[; ;display.c: 229: x3 = y3;
+"229
+[e = _x3 _y3 ]
+[; ;display.c: 230: x4 = y4;
+"230
+[e = _x4 _y4 ]
+"232
+}
+[; ;display.c: 232: } else {
+[e $U 353  ]
+[e :U 342 ]
+{
+[; ;display.c: 233: if ((TTime.Thr / 10) % 10)
+"233
+[e $ ! != % / -> . _TTime 2 `i -> 10 `i -> 10 `i -> 0 `i 354  ]
+[; ;display.c: 234: putchar_b_buf(1, (TTime.Thr / 10) % 10, pFont);
+"234
+[e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> % / -> . _TTime 2 `i -> 10 `i -> 10 `i `uc _pFont ]
+[e $U 355  ]
+"235
+[e :U 354 ]
+[; ;display.c: 235: else
+[; ;display.c: 236: putchar_b_buf(1, 0, &Font);
+"236
+[e ( _putchar_b_buf (3 , , -> -> 1 `i `uc -> -> 0 `i `uc -> &U _Font `*F3387 ]
+[e :U 355 ]
+[; ;display.c: 237: putchar_b_buf(7, TTime.Thr % 10, pFont);
+"237
+[e ( _putchar_b_buf (3 , , -> -> 7 `i `uc -> % -> . _TTime 2 `i -> 10 `i `uc _pFont ]
+[; ;display.c: 239: putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
+"239
+[e ( _putchar_b_buf (3 , , -> -> 19 `i `uc -> % / -> . _TTime 1 `i -> 10 `i -> 10 `i `uc _pFont ]
+[; ;display.c: 240: putchar_b_buf(25, TTime.Tmin % 10, pFont);
+"240
+[e ( _putchar_b_buf (3 , , -> -> 25 `i `uc -> % -> . _TTime 1 `i -> 10 `i `uc _pFont ]
+"241
+}
+[e :U 353 ]
+[; ;display.c: 241: }
+[; ;display.c: 242: break;
+"242
+[e $U 330  ]
+"243
+}
+[; ;display.c: 243: }
+[e $U 330  ]
+"164
+[e :U 331 ]
+[e [\ _type , $ -> -> 1 `i `uc 332
+ , $ -> -> 2 `i `uc 341
+ 330 ]
+"243
+[e :U 330 ]
+[; ;display.c: 246: }
+"246
+[e :UE 329 ]
+}
+"255
+[v _FillBufS `(v ~T0 @X0 1 ef3`*uc`uc`uc ]
+"256
+{
+[; ;display.c: 255: void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag)
+[; ;display.c: 256: {
 [e :U _FillBufS ]
-"253
+"255
 [v _buf `*uc ~T0 @X0 1 r1 ]
 [v _edit_Flag `uc ~T0 @X0 1 r2 ]
 [v _scr_flag `uc ~T0 @X0 1 r3 ]
-"254
+"256
 [f ]
-"255
+"257
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
 [v _d `uc ~T0 @X0 1 a ]
 [v _nch `uc ~T0 @X0 1 a ]
-[; ;display.c: 255: uint8_t i, j, d, nch = 0;
+[; ;display.c: 257: uint8_t i, j, d, nch = 0;
 [e = _nch -> -> 0 `i `uc ]
-[; ;display.c: 256: d = 0;
-"256
-[e = _d -> -> 0 `i `uc ]
-[; ;display.c: 258: for (j=0;j<=4;++j)
+[; ;display.c: 258: d = 0;
 "258
+[e = _d -> -> 0 `i `uc ]
+[; ;display.c: 260: for (j=0;j<=4;++j)
+"260
 {
 [e = _j -> -> 0 `i `uc ]
-[e $ <= -> _j `i -> 4 `i 353  ]
-[e $U 354  ]
-"259
-[e :U 353 ]
-[; ;display.c: 259: {
-{
-[; ;display.c: 260: for (i=0;i<=4;++i)
-"260
-{
-[e = _i -> -> 0 `i `uc ]
-[e $ <= -> _i `i -> 4 `i 356  ]
-[e $U 357  ]
+[e $ <= -> _j `i -> 4 `i 357  ]
+[e $U 358  ]
 "261
-[e :U 356 ]
+[e :U 357 ]
 [; ;display.c: 261: {
 {
-[; ;display.c: 262: if((nch >= 3) && edit_Flag)
+[; ;display.c: 262: for (i=0;i<=4;++i)
 "262
-[e $ ! && >= -> _nch `i -> 3 `i != -> _edit_Flag `i -> -> -> 0 `i `uc `i 359  ]
-[; ;display.c: 263: Dis_Buff[d] = (Font[*(buf + j)] [i]) + 0x80;
-"263
-[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux -> + -> *U + &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux `i -> 128 `i `uc ]
-[e $U 360  ]
-"264
-[e :U 359 ]
-[; ;display.c: 264: else
-[; ;display.c: 265: Dis_Buff[d] = Font[*(buf + j)] [i];
-"265
-[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
-[e :U 360 ]
-[; ;display.c: 266: d++;
-"266
-[e ++ _d -> -> 1 `i `uc ]
-"267
-}
-"260
-[e =+ _i -> -> 1 `i `uc ]
-[e $ <= -> _i `i -> 4 `i 356  ]
-[e :U 357 ]
-"267
-}
-[; ;display.c: 267: }
-[; ;display.c: 269: Dis_Buff[d] = 0;
-"269
-[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 270: d++;
-"270
-[e ++ _d -> -> 1 `i `uc ]
-[; ;display.c: 271: nch++;
-"271
-[e ++ _nch -> -> 1 `i `uc ]
-"273
-}
-"258
-[e =+ _j -> -> 1 `i `uc ]
-[e $ <= -> _j `i -> 4 `i 353  ]
-[e :U 354 ]
-"273
-}
-[; ;display.c: 273: }
-[; ;display.c: 274: if (scr_flag)
-"274
-[e $ ! != -> _scr_flag `i -> -> -> 0 `i `uc `i 361  ]
-[; ;display.c: 275: {
-"275
-{
-[; ;display.c: 276: Dis_Buff[30] = Font[*(buf + 5)] [0];
-"276
-[e = *U + &U _Dis_Buff * -> -> -> 30 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
-[; ;display.c: 277: Dis_Buff[31] = Font[*(buf + 5)] [1];
-"277
-[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
-"278
-}
-[; ;display.c: 278: }
-[e $U 362  ]
-"279
-[e :U 361 ]
-[; ;display.c: 279: else
-[; ;display.c: 280: {
-"280
-{
-[; ;display.c: 281: Dis_Buff[30] = 0;
-"281
-[e = *U + &U _Dis_Buff * -> -> -> 30 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 282: Dis_Buff[31] = 0;
-"282
-[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-"283
-}
-[e :U 362 ]
-[; ;display.c: 283: }
-[; ;display.c: 284: }
-"284
-[e :UE 352 ]
-}
-"290
-[v _scroll_text `(uc ~T0 @X0 1 ef ]
-"291
-{
-[; ;display.c: 290: uint8_t scroll_text(void)
-[; ;display.c: 291: {
-[e :U _scroll_text ]
-[f ]
-"292
-[v _i `uc ~T0 @X0 1 a ]
-[; ;display.c: 292: uint8_t i;
-[; ;display.c: 294: for (i=0; i<31; i++)
-"294
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 31 `i 364  ]
-[e $U 365  ]
-"295
-[e :U 364 ]
-[; ;display.c: 295: Dis_Buff[i] = Dis_Buff[i+1];
-[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _Dis_Buff * -> -> + -> _i `i -> 1 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux ]
-"294
-[e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 31 `i 364  ]
-[e :U 365 ]
-"295
-}
-[; ;display.c: 297: if ((i_bchar) >= 5)
-"297
-[e $ ! >= -> _i_bchar `i -> 5 `i 367  ]
-[; ;display.c: 298: {
-"298
+[e $ <= -> _i `i -> 4 `i 360  ]
+[e $U 361  ]
+"263
+[e :U 360 ]
+[; ;display.c: 263: {
 {
-[; ;display.c: 299: if (text_buf[i_char] == 0)
+[; ;display.c: 264: if((nch >= 3) && edit_Flag)
+"264
+[e $ ! && >= -> _nch `i -> 3 `i != -> _edit_Flag `i -> -> -> 0 `i `uc `i 363  ]
+[; ;display.c: 265: Dis_Buff[d] = (Font[*(buf + j)] [i]) + 0x80;
+"265
+[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux -> + -> *U + &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux `i -> 128 `i `uc ]
+[e $U 364  ]
+"266
+[e :U 363 ]
+[; ;display.c: 266: else
+[; ;display.c: 267: Dis_Buff[d] = Font[*(buf + j)] [i];
+"267
+[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> _i `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> _j `ux -> -> # *U _buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+[e :U 364 ]
+[; ;display.c: 268: d++;
+"268
+[e ++ _d -> -> 1 `i `uc ]
+"269
+}
+"262
+[e =+ _i -> -> 1 `i `uc ]
+[e $ <= -> _i `i -> 4 `i 360  ]
+[e :U 361 ]
+"269
+}
+[; ;display.c: 269: }
+[; ;display.c: 271: Dis_Buff[d] = 0;
+"271
+[e = *U + &U _Dis_Buff * -> _d `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 272: d++;
+"272
+[e ++ _d -> -> 1 `i `uc ]
+[; ;display.c: 273: nch++;
+"273
+[e ++ _nch -> -> 1 `i `uc ]
+"275
+}
+"260
+[e =+ _j -> -> 1 `i `uc ]
+[e $ <= -> _j `i -> 4 `i 357  ]
+[e :U 358 ]
+"275
+}
+[; ;display.c: 275: }
+[; ;display.c: 276: if (scr_flag)
+"276
+[e $ ! != -> _scr_flag `i -> -> -> 0 `i `uc `i 365  ]
+[; ;display.c: 277: {
+"277
+{
+[; ;display.c: 278: Dis_Buff[30] = Font[*(buf + 5)] [0];
+"278
+[e = *U + &U _Dis_Buff * -> -> -> 30 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> -> -> 0 `i `ui `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+[; ;display.c: 279: Dis_Buff[31] = Font[*(buf + 5)] [1];
+"279
+[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> -> -> 1 `i `ui `ux -> -> # *U &U *U + &U _Font * -> *U + _buf * -> -> 5 `i `x -> -> # *U _buf `i `x `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+"280
+}
+[; ;display.c: 280: }
+[e $U 366  ]
+"281
+[e :U 365 ]
+[; ;display.c: 281: else
+[; ;display.c: 282: {
+"282
+{
+[; ;display.c: 283: Dis_Buff[30] = 0;
+"283
+[e = *U + &U _Dis_Buff * -> -> -> 30 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 284: Dis_Buff[31] = 0;
+"284
+[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+"285
+}
+[e :U 366 ]
+[; ;display.c: 285: }
+[; ;display.c: 286: }
+"286
+[e :UE 356 ]
+}
+"292
+[v _scroll_text `(uc ~T0 @X0 1 ef ]
+"293
+{
+[; ;display.c: 292: uint8_t scroll_text(void)
+[; ;display.c: 293: {
+[e :U _scroll_text ]
+[f ]
+"294
+[v _i `uc ~T0 @X0 1 a ]
+[; ;display.c: 294: uint8_t i;
+[; ;display.c: 296: for (i=0; i<31; i++)
+"296
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ < -> _i `i -> 31 `i 368  ]
+[e $U 369  ]
+"297
+[e :U 368 ]
+[; ;display.c: 297: Dis_Buff[i] = Dis_Buff[i+1];
+[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _Dis_Buff * -> -> + -> _i `i -> 1 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux ]
+"296
+[e ++ _i -> -> 1 `i `uc ]
+[e $ < -> _i `i -> 31 `i 368  ]
+[e :U 369 ]
+"297
+}
+[; ;display.c: 299: if ((i_bchar) >= 5)
 "299
-[e $ ! == -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `i -> 0 `i 368  ]
+[e $ ! >= -> _i_bchar `i -> 5 `i 371  ]
 [; ;display.c: 300: {
 "300
 {
-[; ;display.c: 301: i_bchar++;
+[; ;display.c: 301: if (text_buf[i_char] == 0)
 "301
-[e ++ _i_bchar -> -> 1 `i `uc ]
-[; ;display.c: 302: if (i_bchar >= 32)
+[e $ ! == -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `i -> 0 `i 372  ]
+[; ;display.c: 302: {
 "302
-[e $ ! >= -> _i_bchar `i -> 32 `i 369  ]
-[; ;display.c: 303: {
+{
+[; ;display.c: 303: i_bchar++;
 "303
-{
-[; ;display.c: 304: i_char = 0;
+[e ++ _i_bchar -> -> 1 `i `uc ]
+[; ;display.c: 304: if (i_bchar >= 32)
 "304
-[e = _i_char -> -> 0 `i `uc ]
-[; ;display.c: 305: i_bchar = 0;
+[e $ ! >= -> _i_bchar `i -> 32 `i 373  ]
+[; ;display.c: 305: {
 "305
-[e = _i_bchar -> -> 0 `i `uc ]
-[; ;display.c: 306: return 0;
+{
+[; ;display.c: 306: i_char = 0;
 "306
-[e ) -> -> 0 `i `uc ]
-[e $UE 363  ]
+[e = _i_char -> -> 0 `i `uc ]
+[; ;display.c: 307: i_bchar = 0;
 "307
-}
-[e :U 369 ]
-"308
-}
-[; ;display.c: 307: }
-[; ;display.c: 308: }
-[e $U 370  ]
-"309
-[e :U 368 ]
-[; ;display.c: 309: else
-[; ;display.c: 310: {
-"310
-{
-[; ;display.c: 311: Dis_Buff[31] = 0;
-"311
-[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 312: i_bchar = 0;
-"312
 [e = _i_bchar -> -> 0 `i `uc ]
-[; ;display.c: 313: i_char++;
+[; ;display.c: 308: return 0;
+"308
+[e ) -> -> 0 `i `uc ]
+[e $UE 367  ]
+"309
+}
+[e :U 373 ]
+"310
+}
+[; ;display.c: 309: }
+[; ;display.c: 310: }
+[e $U 374  ]
+"311
+[e :U 372 ]
+[; ;display.c: 311: else
+[; ;display.c: 312: {
+"312
+{
+[; ;display.c: 313: Dis_Buff[31] = 0;
 "313
-[e ++ _i_char -> -> 1 `i `uc ]
+[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 314: i_bchar = 0;
 "314
-}
-[e :U 370 ]
+[e = _i_bchar -> -> 0 `i `uc ]
+[; ;display.c: 315: i_char++;
 "315
-}
-[; ;display.c: 314: }
-[; ;display.c: 315: }
-[e $U 371  ]
+[e ++ _i_char -> -> 1 `i `uc ]
 "316
-[e :U 367 ]
-[; ;display.c: 316: else
-[; ;display.c: 317: {
+}
+[e :U 374 ]
 "317
-{
-[; ;display.c: 318: Dis_Buff[31] = Font[ text_buf[i_char]][i_bchar++];
+}
+[; ;display.c: 316: }
+[; ;display.c: 317: }
+[e $U 375  ]
 "318
-[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> ++ _i_bchar -> -> 1 `i `uc `ux -> -> # *U &U *U + &U _Font * -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
-"320
-}
 [e :U 371 ]
-[; ;display.c: 320: }
-[; ;display.c: 324: return 1;
-"324
-[e ) -> -> 1 `i `uc ]
-[e $UE 363  ]
-[; ;display.c: 326: }
-"326
-[e :UE 363 ]
-}
-"332
-[v _scroll_left `(v ~T0 @X0 1 ef ]
-"333
+[; ;display.c: 318: else
+[; ;display.c: 319: {
+"319
 {
-[; ;display.c: 332: void scroll_left(void)
-[; ;display.c: 333: {
+[; ;display.c: 320: Dis_Buff[31] = Font[ text_buf[i_char]][i_bchar++];
+"320
+[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U *U + &U _Font * -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux * -> ++ _i_bchar -> -> 1 `i `uc `ux -> -> # *U &U *U + &U _Font * -> *U + &U _text_buf * -> _i_char `ux -> -> # *U &U _text_buf `ui `ux `ux -> * -> # *U &U *U &U _Font `ui -> -> 5 `i `ui `ux `ui `ux ]
+"322
+}
+[e :U 375 ]
+[; ;display.c: 322: }
+[; ;display.c: 326: return 1;
+"326
+[e ) -> -> 1 `i `uc ]
+[e $UE 367  ]
+[; ;display.c: 328: }
+"328
+[e :UE 367 ]
+}
+"334
+[v _scroll_left `(v ~T0 @X0 1 ef ]
+"335
+{
+[; ;display.c: 334: void scroll_left(void)
+[; ;display.c: 335: {
 [e :U _scroll_left ]
 [f ]
-"334
+"336
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
 [v _k `uc ~T0 @X0 1 a ]
 [v _speed `uc ~T0 @X0 1 a ]
-[; ;display.c: 334: uint8_t i,j,k,speed = 100;
+[; ;display.c: 336: uint8_t i,j,k,speed = 100;
 [e = _speed -> -> 100 `i `uc ]
-[; ;display.c: 337: for (k=0;k<=31;k++)
-"337
+[; ;display.c: 339: for (k=0;k<=31;k++)
+"339
 {
 [e = _k -> -> 0 `i `uc ]
-[e $ <= -> _k `i -> 31 `i 373  ]
-[e $U 374  ]
-"338
-[e :U 373 ]
-[; ;display.c: 338: {
+[e $ <= -> _k `i -> 31 `i 377  ]
+[e $U 378  ]
+"340
+[e :U 377 ]
+[; ;display.c: 340: {
 {
-[; ;display.c: 339: for (i=0; i<=31; i++)
-"339
+[; ;display.c: 341: for (i=0; i<=31; i++)
+"341
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ <= -> _i `i -> 31 `i 376  ]
-[e $U 377  ]
-"340
-[e :U 376 ]
-[; ;display.c: 340: Dis_Buff[i] = Dis_Buff[i+1];
-[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _Dis_Buff * -> -> + -> _i `i -> 1 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux ]
-"339
-[e ++ _i -> -> 1 `i `uc ]
-[e $ <= -> _i `i -> 31 `i 376  ]
-[e :U 377 ]
-"340
-}
-[; ;display.c: 342: Dis_Buff[31] = 0;
+[e $ <= -> _i `i -> 31 `i 380  ]
+[e $U 381  ]
 "342
-[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 343: Update_Matrix(Dis_Buff);
-"343
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;display.c: 344: for(j=0; j<speed; j++)
+[e :U 380 ]
+[; ;display.c: 342: Dis_Buff[i] = Dis_Buff[i+1];
+[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _Dis_Buff * -> -> + -> _i `i -> 1 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux ]
+"341
+[e ++ _i -> -> 1 `i `uc ]
+[e $ <= -> _i `i -> 31 `i 380  ]
+[e :U 381 ]
+"342
+}
+[; ;display.c: 344: Dis_Buff[31] = 0;
 "344
+[e = *U + &U _Dis_Buff * -> -> -> 31 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 345: Update_Matrix(Dis_Buff);
+"345
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;display.c: 346: for(j=0; j<speed; j++)
+"346
 {
 [e = _j -> -> 0 `i `uc ]
-[e $U 382  ]
-"345
-[e :U 379 ]
-[; ;display.c: 345: _delay((unsigned long)((1)*(40000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-"344
-[e ++ _j -> -> 1 `i `uc ]
-[e :U 382 ]
-[e $ < -> _j `i -> _speed `i 379  ]
-[e :U 380 ]
-"345
-}
-[; ;display.c: 346: if (speed > 10) speed -=10;
-"346
-[e $ ! > -> _speed `i -> 10 `i 383  ]
-[e =- _speed -> -> 10 `i `uc ]
+[e $U 386  ]
+"347
 [e :U 383 ]
-"348
+[; ;display.c: 347: _delay((unsigned long)((1)*(40000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
+"346
+[e ++ _j -> -> 1 `i `uc ]
+[e :U 386 ]
+[e $ < -> _j `i -> _speed `i 383  ]
+[e :U 384 ]
+"347
 }
-"337
+[; ;display.c: 348: if (speed > 10) speed -=10;
+"348
+[e $ ! > -> _speed `i -> 10 `i 387  ]
+[e =- _speed -> -> 10 `i `uc ]
+[e :U 387 ]
+"350
+}
+"339
 [e ++ _k -> -> 1 `i `uc ]
-[e $ <= -> _k `i -> 31 `i 373  ]
-[e :U 374 ]
-"348
+[e $ <= -> _k `i -> 31 `i 377  ]
+[e :U 378 ]
+"350
 }
-[; ;display.c: 348: }
-[; ;display.c: 351: }
-"351
-[e :UE 372 ]
+[; ;display.c: 350: }
+[; ;display.c: 353: }
+"353
+[e :UE 376 ]
 }
-"356
+"358
 [v _scroll_right `(v ~T0 @X0 1 ef ]
-"357
+"359
 {
-[; ;display.c: 356: void scroll_right(void)
-[; ;display.c: 357: {
+[; ;display.c: 358: void scroll_right(void)
+[; ;display.c: 359: {
 [e :U _scroll_right ]
 [f ]
-"358
+"360
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
 [v _k `uc ~T0 @X0 1 a ]
 [v _speed `uc ~T0 @X0 1 a ]
-[; ;display.c: 358: uint8_t i,j,k,speed = 100;
+[; ;display.c: 360: uint8_t i,j,k,speed = 100;
 [e = _speed -> -> 100 `i `uc ]
-[; ;display.c: 361: for (k = 0; k <= 31; k++) {
-"361
+[; ;display.c: 363: for (k = 0; k <= 31; k++) {
+"363
 {
 [e = _k -> -> 0 `i `uc ]
-[e $ <= -> _k `i -> 31 `i 385  ]
-[e $U 386  ]
-[e :U 385 ]
+[e $ <= -> _k `i -> 31 `i 389  ]
+[e $U 390  ]
+[e :U 389 ]
 {
-[; ;display.c: 363: for (i = 31; i > 0; i--)
-"363
+[; ;display.c: 365: for (i = 31; i > 0; i--)
+"365
 {
 [e = _i -> -> 31 `i `uc ]
-[e $ > -> _i `i -> 0 `i 388  ]
-[e $U 389  ]
-"364
-[e :U 388 ]
-[; ;display.c: 364: Dis_Buff[i] = Dis_Buff[i - 1];
-[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _Dis_Buff * -> -> - -> _i `i -> 1 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux ]
-"363
-[e -- _i -> -> 1 `i `uc ]
-[e $ > -> _i `i -> 0 `i 388  ]
-[e :U 389 ]
-"364
-}
-[; ;display.c: 366: Dis_Buff[0] = 0;
+[e $ > -> _i `i -> 0 `i 392  ]
+[e $U 393  ]
 "366
-[e = *U + &U _Dis_Buff * -> -> -> 0 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 367: Update_Matrix(Dis_Buff);
-"367
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;display.c: 368: for (j = 0; j < speed; j++)
+[e :U 392 ]
+[; ;display.c: 366: Dis_Buff[i] = Dis_Buff[i - 1];
+[e = *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _Dis_Buff * -> -> - -> _i `i -> 1 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux ]
+"365
+[e -- _i -> -> 1 `i `uc ]
+[e $ > -> _i `i -> 0 `i 392  ]
+[e :U 393 ]
+"366
+}
+[; ;display.c: 368: Dis_Buff[0] = 0;
 "368
+[e = *U + &U _Dis_Buff * -> -> -> 0 `i `ui `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 369: Update_Matrix(Dis_Buff);
+"369
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;display.c: 370: for (j = 0; j < speed; j++)
+"370
 {
 [e = _j -> -> 0 `i `uc ]
-[e $U 394  ]
-"369
-[e :U 391 ]
-[; ;display.c: 369: _delay((unsigned long)((1)*(40000000/4000.0)));
-[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-"368
-[e ++ _j -> -> 1 `i `uc ]
-[e :U 394 ]
-[e $ < -> _j `i -> _speed `i 391  ]
-[e :U 392 ]
-"369
-}
-[; ;display.c: 370: if (speed > 10) speed -= 10;
-"370
-[e $ ! > -> _speed `i -> 10 `i 395  ]
-[e =- _speed -> -> 10 `i `uc ]
+[e $U 398  ]
+"371
 [e :U 395 ]
-"372
+[; ;display.c: 371: _delay((unsigned long)((1)*(40000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
+"370
+[e ++ _j -> -> 1 `i `uc ]
+[e :U 398 ]
+[e $ < -> _j `i -> _speed `i 395  ]
+[e :U 396 ]
+"371
 }
-"361
+[; ;display.c: 372: if (speed > 10) speed -= 10;
+"372
+[e $ ! > -> _speed `i -> 10 `i 399  ]
+[e =- _speed -> -> 10 `i `uc ]
+[e :U 399 ]
+"374
+}
+"363
 [e ++ _k -> -> 1 `i `uc ]
-[e $ <= -> _k `i -> 31 `i 385  ]
-[e :U 386 ]
-"372
+[e $ <= -> _k `i -> 31 `i 389  ]
+[e :U 390 ]
+"374
 }
-[; ;display.c: 372: }
-[; ;display.c: 375: }
-"375
-[e :UE 384 ]
+[; ;display.c: 374: }
+[; ;display.c: 377: }
+"377
+[e :UE 388 ]
 }
-"380
+"382
 [v _interval_scroll_text `(v ~T0 @X0 1 ef ]
-"381
+"383
 {
-[; ;display.c: 380: void interval_scroll_text()
-[; ;display.c: 381: {
+[; ;display.c: 382: void interval_scroll_text()
+[; ;display.c: 383: {
 [e :U _interval_scroll_text ]
 [f ]
-"382
-[v _i `uc ~T0 @X0 1 a ]
-[; ;display.c: 382: uint8_t i;
-[; ;display.c: 384: while(scroll_text())
 "384
-[e $U 397  ]
-[e :U 398 ]
-[; ;display.c: 385: {
-"385
-{
-[; ;display.c: 386: Update_Matrix(Dis_Buff);
+[v _i `uc ~T0 @X0 1 a ]
+[; ;display.c: 384: uint8_t i;
+[; ;display.c: 386: while(scroll_text())
 "386
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;display.c: 387: for(i=0; i<50; i++)
+[e $U 401  ]
+[e :U 402 ]
+[; ;display.c: 387: {
 "387
+{
+[; ;display.c: 388: Update_Matrix(Dis_Buff);
+"388
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;display.c: 389: for(i=0; i<60; i++)
+"389
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ < -> _i `i -> 50 `i 400  ]
-[e $U 401  ]
-"388
-[e :U 400 ]
-[; ;display.c: 388: _delay((unsigned long)((1)*(40000000/4000.0)));
+[e $ < -> _i `i -> 60 `i 404  ]
+[e $U 405  ]
+"390
+[e :U 404 ]
+[; ;display.c: 390: _delay((unsigned long)((1)*(40000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-"387
+"389
 [e ++ _i -> -> 1 `i `uc ]
-[e $ < -> _i `i -> 50 `i 400  ]
-[e :U 401 ]
-"388
-}
+[e $ < -> _i `i -> 60 `i 404  ]
+[e :U 405 ]
 "390
 }
-[e :U 397 ]
-"384
-[e $ != -> ( _scroll_text ..  `i -> -> -> 0 `i `uc `i 398  ]
-[e :U 399 ]
-[; ;display.c: 390: };
-[; ;display.c: 391: }
-"391
-[e :UE 396 ]
+"392
 }
-"397
+[e :U 401 ]
+"386
+[e $ != -> ( _scroll_text ..  `i -> -> -> 0 `i `uc `i 402  ]
+[e :U 403 ]
+[; ;display.c: 392: };
+[; ;display.c: 393: }
+"393
+[e :UE 400 ]
+}
+"399
 [v _hide_two_side `(v ~T0 @X0 1 ef ]
 {
-[; ;display.c: 397: void hide_two_side(void) {
+[; ;display.c: 399: void hide_two_side(void) {
 [e :U _hide_two_side ]
 [f ]
-"398
+"400
 [v _a `uc ~T0 @X0 1 a ]
-[; ;display.c: 398: uint8_t a = 0, b = 31;
+[; ;display.c: 400: uint8_t a = 0, b = 31;
 [e = _a -> -> 0 `i `uc ]
 [v _b `uc ~T0 @X0 1 a ]
 [e = _b -> -> 31 `i `uc ]
-"399
+"401
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
-[; ;display.c: 399: uint8_t i, j;
-[; ;display.c: 401: for (i = 0; i <= 15; i++) {
-"401
+[; ;display.c: 401: uint8_t i, j;
+[; ;display.c: 403: for (i = 0; i <= 15; i++) {
+"403
 {
 [e = _i -> -> 0 `i `uc ]
-[e $ <= -> _i `i -> 15 `i 404  ]
-[e $U 405  ]
-[e :U 404 ]
+[e $ <= -> _i `i -> 15 `i 408  ]
+[e $U 409  ]
+[e :U 408 ]
 {
-[; ;display.c: 402: Dis_Buff[a++] = 0;
-"402
-[e = *U + &U _Dis_Buff * -> ++ _a -> -> 1 `i `uc `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 403: Dis_Buff[b--] = 0;
-"403
-[e = *U + &U _Dis_Buff * -> -- _b -> -> 1 `i `uc `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
-[; ;display.c: 404: Update_Matrix(Dis_Buff);
+[; ;display.c: 404: Dis_Buff[a++] = 0;
 "404
-[e ( _Update_Matrix (1 &U _Dis_Buff ]
-[; ;display.c: 405: for (j = 0; j < 40; j++)
+[e = *U + &U _Dis_Buff * -> ++ _a -> -> 1 `i `uc `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 405: Dis_Buff[b--] = 0;
 "405
+[e = *U + &U _Dis_Buff * -> -- _b -> -> 1 `i `uc `ux -> -> # *U &U _Dis_Buff `ui `ux -> -> 0 `i `uc ]
+[; ;display.c: 406: Update_Matrix(Dis_Buff);
+"406
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;display.c: 407: for (j = 0; j < 30; j++)
+"407
 {
 [e = _j -> -> 0 `i `uc ]
-[e $ < -> _j `i -> 40 `i 407  ]
-[e $U 408  ]
-"406
-[e :U 407 ]
-[; ;display.c: 406: _delay((unsigned long)((1)*(40000000/4000.0)));
+[e $ < -> _j `i -> 30 `i 411  ]
+[e $U 412  ]
+"408
+[e :U 411 ]
+[; ;display.c: 408: _delay((unsigned long)((1)*(40000000/4000.0)));
 [e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
-"405
+"407
 [e ++ _j -> -> 1 `i `uc ]
-[e $ < -> _j `i -> 40 `i 407  ]
-[e :U 408 ]
-"406
-}
+[e $ < -> _j `i -> 30 `i 411  ]
+[e :U 412 ]
 "408
 }
-"401
+"410
+}
+"403
 [e ++ _i -> -> 1 `i `uc ]
-[e $ <= -> _i `i -> 15 `i 404  ]
-[e :U 405 ]
-"408
+[e $ <= -> _i `i -> 15 `i 408  ]
+[e :U 409 ]
+"410
 }
-[; ;display.c: 408: }
-[; ;display.c: 409: }
-"409
-[e :UE 403 ]
+[; ;display.c: 410: }
+[; ;display.c: 411: }
+"411
+[e :UE 407 ]
+}
+"418
+[v _dissolve `(v ~T0 @X0 1 ef ]
+{
+[; ;display.c: 418: void dissolve(void) {
+[e :U _dissolve ]
+[f ]
+"419
+[v _i `uc ~T0 @X0 1 a ]
+[v _j `uc ~T0 @X0 1 a ]
+[v _n `uc ~T0 @X0 1 a ]
+[; ;display.c: 419: uint8_t i, j, n = 0, z, k;
+[e = _n -> -> 0 `i `uc ]
+[v _z `uc ~T0 @X0 1 a ]
+[v _k `uc ~T0 @X0 1 a ]
+[; ;display.c: 422: for (z = 0; z <= 7; z++) {
+"422
+{
+[e = _z -> -> 0 `i `uc ]
+[e $ <= -> _z `i -> 7 `i 415  ]
+[e $U 416  ]
+[e :U 415 ]
+{
+[; ;display.c: 423: for (i = 0; i <= 31; i++) {
+"423
+{
+[e = _i -> -> 0 `i `uc ]
+[e $ <= -> _i `i -> 31 `i 418  ]
+[e $U 419  ]
+[e :U 418 ]
+{
+[; ;display.c: 424: Dis_Buff[i] &= dissolve_arr[n + z];
+"424
+[e =& *U + &U _Dis_Buff * -> _i `ux -> -> # *U &U _Dis_Buff `ui `ux *U + &U _dissolve_arr * -> -> + -> _n `i -> _z `i `ui `ux -> -> # *U &U _dissolve_arr `ui `ux ]
+[; ;display.c: 425: n++;
+"425
+[e ++ _n -> -> 1 `i `uc ]
+[; ;display.c: 426: if (n > 7)
+"426
+[e $ ! > -> _n `i -> 7 `i 421  ]
+[; ;display.c: 427: n = 0;
+"427
+[e = _n -> -> 0 `i `uc ]
+[e :U 421 ]
+"428
+}
+"423
+[e ++ _i -> -> 1 `i `uc ]
+[e $ <= -> _i `i -> 31 `i 418  ]
+[e :U 419 ]
+"428
+}
+[; ;display.c: 428: }
+[; ;display.c: 429: Update_Matrix(Dis_Buff);
+"429
+[e ( _Update_Matrix (1 &U _Dis_Buff ]
+[; ;display.c: 430: for (k = 0; k < 100; k++)
+"430
+{
+[e = _k -> -> 0 `i `uc ]
+[e $ < -> _k `i -> 100 `i 422  ]
+[e $U 423  ]
+"431
+[e :U 422 ]
+[; ;display.c: 431: _delay((unsigned long)((1)*(40000000/4000.0)));
+[e ( __delay (1 -> * -> -> 1 `i `d / -> -> 40000000 `l `d .4000.0 `ul ]
+"430
+[e ++ _k -> -> 1 `i `uc ]
+[e $ < -> _k `i -> 100 `i 422  ]
+[e :U 423 ]
+"431
+}
+"432
+}
+"422
+[e ++ _z -> -> 1 `i `uc ]
+[e $ <= -> _z `i -> 7 `i 415  ]
+[e :U 416 ]
+"432
+}
+[; ;display.c: 432: }
+[; ;display.c: 433: }
+"433
+[e :UE 414 ]
 }

@@ -15,7 +15,7 @@
 
 
 #define BUF_SIZE COUNT_MATRIX * 8
-#define SPEED_STRING 50     // швидкість бігучої строки, підібрати
+#define SPEED_STRING 60     // швидкість бігучої строки, підібрати
 #define DELAY_SHIFT_DOWN 40 // швидкість ефекту зсуву вниз
 
 struct Time_Get             // структура для годин
@@ -57,6 +57,7 @@ struct Time_Get             // структура для годин
  void interval_scroll_text();
  void scroll_right(void);
  void hide_two_side(void);
+ void dissolve(void);
  
 #endif	/* XC_HEADER_TEMPLATE_H */
 

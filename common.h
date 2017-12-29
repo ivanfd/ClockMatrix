@@ -18,6 +18,7 @@
 #include "eusart.h"
 #include "strings.h"
 #include "settings.h"
+#include <stdint.h>
 
 #define SetBit(x,y)    do{ x |=  (1 << (y));} while(0)
 #define ClrBit(x,y)    do{ x &= ~(1 << (y));} while(0)
@@ -69,6 +70,7 @@
  void adj_brig();
 
  void usart_r();
+ void Rand_ef(void);
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */

@@ -97,7 +97,7 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     RTOS_SetTask(usart_r, 40, cycle_main); // ЗАДАЧА ОПИТУВАННЯ КОМ ПОРТА
     RTOS_SetTask(GetTime, 100, cycle_main);// Задача зчитування даних з RTC
     en_h_snd = read_eep(EE_EN_SND_H);
-
+    srand(3);
 }
 
 void Port_Init(void)  // ініціалізація портів
