@@ -2,11 +2,11 @@ Version 3.2 HI-TECH Software Intermediate Code
 "21 display.h
 [s S270 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S270 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
-[v F3401 `(v ~T0 @X0 0 tf ]
+[v F3493 `(v ~T0 @X0 0 tf ]
 "13 dispatcher.h
-[s S275 `*F3401 1 `ui 1 `ui 1 `ui 1 ]
+[s S275 `*F3493 1 `ui 1 `ui 1 `ui 1 ]
 [n S275 task pFunc delay period run ]
-"5967 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
+"5967 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f4525.h
 [v _T0CON `Vuc ~T0 @X0 0 e@4053 ]
 "6491
 [s S262 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
@@ -24,13 +24,13 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _INTCONbits `VS261 ~T0 @X0 0 e@4082 ]
 "6044
 [v _TMR0 `Vus ~T0 @X0 0 e@4054 ]
-[v F3413 `(v ~T0 @X0 0 tf ]
-[v F3419 `(v ~T0 @X0 0 tf ]
+[v F3505 `(v ~T0 @X0 0 tf ]
+[v F3511 `(v ~T0 @X0 0 tf ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4525.h: 50: extern volatile unsigned char PORTA @ 0xF80;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f4525.h
 [; ;pic18f4525.h: 52: asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
 [; ;pic18f4525.h: 55: typedef union {
@@ -5794,22 +5794,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 28: uint8_t Tmt;
 [; ;display.h: 29: uint8_t Tyr;
 [; ;display.h: 30: } TTime,TSTime;
-[; ;display.h: 44: void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);
-[; ;display.h: 45: void FillBuf(uint8_t type);
-[; ;display.h: 47: void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
-[; ;display.h: 48: void putchar_s_buf(uint8_t x, uint8_t symbol);
-[; ;display.h: 49: void pixel_on(uint8_t x, uint8_t y);
-[; ;display.h: 50: void pixel_off(uint8_t x, uint8_t y);
-[; ;display.h: 51: void clear_matrix(void);
-[; ;display.h: 52: uint8_t scroll_text(void);
-[; ;display.h: 53: void putchar_down(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
-[; ;display.h: 54: void putchar_down_s(uint8_t x, uint8_t symbol);
-[; ;display.h: 55: void pic_to_led(uint8_t x, uint8_t pic);
-[; ;display.h: 56: void scroll_left(void);
-[; ;display.h: 57: void interval_scroll_text();
-[; ;display.h: 58: void scroll_right(void);
-[; ;display.h: 59: void hide_two_side(void);
-[; ;display.h: 60: void dissolve(void);
+[; ;display.h: 43: typedef void (*p_MyFunc)();
+[; ;display.h: 46: void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);
+[; ;display.h: 47: void FillBuf(uint8_t type);
+[; ;display.h: 49: void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
+[; ;display.h: 50: void putchar_s_buf(uint8_t x, uint8_t symbol);
+[; ;display.h: 51: void pixel_on(uint8_t x, uint8_t y);
+[; ;display.h: 52: void pixel_off(uint8_t x, uint8_t y);
+[; ;display.h: 53: void clear_matrix(void);
+[; ;display.h: 54: uint8_t scroll_text(void);
+[; ;display.h: 55: void putchar_down(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
+[; ;display.h: 56: void putchar_down_s(uint8_t x, uint8_t symbol);
+[; ;display.h: 57: void pic_to_led(uint8_t x, uint8_t pic);
+[; ;display.h: 58: void scroll_left(void);
+[; ;display.h: 59: void dissolve(void);
+[; ;display.h: 60: void interval_scroll_text();
+[; ;display.h: 61: void scroll_right(void);
+[; ;display.h: 62: void hide_two_side(void);
+[; ;display.h: 63: void Rand_ef(void);
 [; ;key.h: 22: void key_press(void);
 [; ;timer.h: 13: void TMRInit(void);
 [; ;eusart.h: 19: extern volatile uint8_t eusartRxCount;
@@ -5945,21 +5947,49 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;settings.h: 21: void brg_set();
 [; ;settings.h: 22: void set_brg_manual();
 [; ;settings.h: 23: void set_sound_h(void);
-[; ;common.h: 53: void INT0_ISR(void);
-[; ;common.h: 54: void GetTime(void);
-[; ;common.h: 58: void TMR1_ISR();
-[; ;common.h: 59: void time_led();
-[; ;common.h: 60: void version(void);
-[; ;common.h: 61: void default_state(void);
-[; ;common.h: 62: void home_temp(void);
-[; ;common.h: 63: void set_font();
-[; ;common.h: 65: void pressure(void);
-[; ;common.h: 66: void pre_ref_dis(void);
-[; ;common.h: 68: void radio_temp(void);
-[; ;common.h: 69: void read_adc();
-[; ;common.h: 70: void adj_brig();
-[; ;common.h: 72: void usart_r();
-[; ;common.h: 73: void Rand_ef(void);
+[; ;settings.h: 24: void set_en_ds1(void);
+[; ;settings.h: 25: void default_state(void);
+[; ;settings.h: 26: void set_en_ds2(void);
+[; ;settings.h: 27: void set_en_bmp(void);
+[; ;string.h: 14: extern void * memcpy(void *, const void *, size_t);
+[; ;string.h: 15: extern void * memmove(void *, const void *, size_t);
+[; ;string.h: 16: extern void * memset(void *, int, size_t);
+[; ;string.h: 36: extern char * strcat(char *, const char *);
+[; ;string.h: 37: extern char * strcpy(char *, const char *);
+[; ;string.h: 38: extern char * strncat(char *, const char *, size_t);
+[; ;string.h: 39: extern char * strncpy(char *, const char *, size_t);
+[; ;string.h: 40: extern char * strdup(const char *);
+[; ;string.h: 41: extern char * strtok(char *, const char *);
+[; ;string.h: 44: extern int memcmp(const void *, const void *, size_t);
+[; ;string.h: 45: extern int strcmp(const char *, const char *);
+[; ;string.h: 46: extern int stricmp(const char *, const char *);
+[; ;string.h: 47: extern int strncmp(const char *, const char *, size_t);
+[; ;string.h: 48: extern int strnicmp(const char *, const char *, size_t);
+[; ;string.h: 49: extern void * memchr(const void *, int, size_t);
+[; ;string.h: 50: extern size_t strcspn(const char *, const char *);
+[; ;string.h: 51: extern char * strpbrk(const char *, const char *);
+[; ;string.h: 52: extern size_t strspn(const char *, const char *);
+[; ;string.h: 53: extern char * strstr(const char *, const char *);
+[; ;string.h: 54: extern char * stristr(const char *, const char *);
+[; ;string.h: 55: extern char * strerror(int);
+[; ;string.h: 56: extern size_t strlen(const char *);
+[; ;string.h: 57: extern char * strchr(const char *, int);
+[; ;string.h: 58: extern char * strichr(const char *, int);
+[; ;string.h: 59: extern char * strrchr(const char *, int);
+[; ;string.h: 60: extern char * strrichr(const char *, int);
+[; ;common.h: 57: void INT0_ISR(void);
+[; ;common.h: 58: void GetTime(void);
+[; ;common.h: 62: void TMR1_ISR();
+[; ;common.h: 63: void time_led();
+[; ;common.h: 64: void version(void);
+[; ;common.h: 66: void home_temp(void);
+[; ;common.h: 67: void set_font();
+[; ;common.h: 69: void pressure(void);
+[; ;common.h: 70: void pre_ref_dis(void);
+[; ;common.h: 72: void radio_temp(void);
+[; ;common.h: 73: void read_adc();
+[; ;common.h: 74: void adj_brig();
+[; ;common.h: 76: void usart_r();
 [; ;sound.h: 16: void sound_init();
 [; ;sound.h: 18: void TMR3_ISR();
 [; ;interrupt.h: 18: void interrupt INTERRUPT_InterruptManager(void);
@@ -6009,15 +6039,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 276 ]
 }
 "22
-[v _RTOS_SetTask `(v ~T0 @X0 1 ef3`*F3413`ui`ui ]
+[v _RTOS_SetTask `(v ~T0 @X0 1 ef3`*F3505`ui`ui ]
 "23
 {
 [; ;dispatcher.c: 22: void RTOS_SetTask (void (*taskFunc)(void), uint16_t taskDelay, uint16_t taskPeriod)
 [; ;dispatcher.c: 23: {
 [e :U _RTOS_SetTask ]
-[v F3427 `(v ~T0 @X0 0 tf ]
+[v F3519 `(v ~T0 @X0 0 tf ]
 "22
-[v _taskFunc `*F3427 ~T0 @X0 1 r1 ]
+[v _taskFunc `*F3519 ~T0 @X0 1 r1 ]
 [v _taskDelay `ui ~T0 @X0 1 r2 ]
 [v _taskPeriod `ui ~T0 @X0 1 r3 ]
 "23
@@ -6027,7 +6057,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dispatcher.c: 24: uint8_t i;
 [; ;dispatcher.c: 26: if(!taskFunc) return;
 "26
-[e $ ! ! != _taskFunc -> -> 0 `i `*F3427 278  ]
+[e $ ! ! != _taskFunc -> -> 0 `i `*F3519 278  ]
 [e $UE 277  ]
 [e :U 278 ]
 [; ;dispatcher.c: 27: for(i = 0; i < arrayTail; i++)
@@ -6040,9 +6070,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dispatcher.c: 28: {
 {
 [; ;dispatcher.c: 29: if(TaskArray[i].pFunc == taskFunc)
-[v F3432 `*F3401 ~T0 @X0 1 t ]
+[v F3524 `*F3493 ~T0 @X0 1 t ]
 "29
-[e $ ! == . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3401 283  ]
+[e $ ! == . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3493 283  ]
 [; ;dispatcher.c: 30: {
 "30
 {
@@ -6088,9 +6118,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "44
 [e = . . _INTCONbits 1 7 -> -> 0 `i `uc ]
 [; ;dispatcher.c: 46: TaskArray[arrayTail].pFunc = taskFunc;
-[v F3433 `*F3401 ~T0 @X0 1 t ]
+[v F3525 `*F3493 ~T0 @X0 1 t ]
 "46
-[e = . *U + &U _TaskArray * -> _arrayTail `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3401 ]
+[e = . *U + &U _TaskArray * -> _arrayTail `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3493 ]
 [; ;dispatcher.c: 47: TaskArray[arrayTail].delay = taskDelay;
 "47
 [e = . *U + &U _TaskArray * -> _arrayTail `ux -> -> # *U &U _TaskArray `ui `ux 1 _taskDelay ]
@@ -6115,15 +6145,15 @@ Version 3.2 HI-TECH Software Intermediate Code
 [e :UE 277 ]
 }
 "59
-[v _RTOS_DeleteTask `(v ~T0 @X0 1 ef1`*F3419 ]
+[v _RTOS_DeleteTask `(v ~T0 @X0 1 ef1`*F3511 ]
 "60
 {
 [; ;dispatcher.c: 59: void RTOS_DeleteTask (void (*taskFunc)(void))
 [; ;dispatcher.c: 60: {
 [e :U _RTOS_DeleteTask ]
-[v F3435 `(v ~T0 @X0 0 tf ]
+[v F3527 `(v ~T0 @X0 0 tf ]
 "59
-[v _taskFunc `*F3435 ~T0 @X0 1 r1 ]
+[v _taskFunc `*F3527 ~T0 @X0 1 r1 ]
 "60
 [f ]
 "61
@@ -6139,9 +6169,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;dispatcher.c: 64: {
 {
 [; ;dispatcher.c: 65: if(TaskArray[i].pFunc == taskFunc)
-[v F3438 `*F3401 ~T0 @X0 1 t ]
+[v F3530 `*F3493 ~T0 @X0 1 t ]
 "65
-[e $ ! == . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3401 290  ]
+[e $ ! == . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 -> _taskFunc `V*F3493 290  ]
 [; ;dispatcher.c: 66: {
 "66
 {
@@ -6199,9 +6229,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "86
 [v _i `uc ~T0 @X0 1 a ]
 [v _j `uc ~T0 @X0 1 a ]
-[v F3442 `(v ~T0 @X0 0 tf ]
+[v F3534 `(v ~T0 @X0 0 tf ]
 "87
-[v _function `*F3442 ~T0 @X0 1 a ]
+[v _function `*F3534 ~T0 @X0 1 a ]
 [; ;dispatcher.c: 86: uint8_t i, j;
 [; ;dispatcher.c: 87: void (*function) (void);
 [; ;dispatcher.c: 89: if (Timer0Interrupt)
@@ -6265,7 +6295,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;dispatcher.c: 104: function = TaskArray[i].pFunc;
 "104
-[e = _function -> . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 `*F3442 ]
+[e = _function -> . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 `*F3534 ]
 [; ;dispatcher.c: 106: if(TaskArray[i].period == 0)
 "106
 [e $ ! == . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 2 -> -> 0 `i `ui 305  ]
@@ -6274,7 +6304,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 {
 [; ;dispatcher.c: 108: RTOS_DeleteTask(TaskArray[i].pFunc);
 "108
-[e ( _RTOS_DeleteTask (1 -> . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 `*F3419 ]
+[e ( _RTOS_DeleteTask (1 -> . *U + &U _TaskArray * -> _i `ux -> -> # *U &U _TaskArray `ui `ux 0 `*F3511 ]
 "110
 }
 [; ;dispatcher.c: 110: }

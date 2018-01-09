@@ -11,6 +11,10 @@ extern uint8_t en_h_snd; // чи можна генерувати сигнал
 extern uint8_t brig;// значення яскравості
 extern uint8_t brg_type;// яскравість по датчику, чи постійна
 extern uint8_t blk_dot; // дозвіл на мигання кнопок
+extern uint8_t en_ds_1;    //  чи пок. температуру з датчика 1
+extern uint8_t en_ds_2;    //  чи пок. температуру з датчика 2
+extern uint8_t en_bmp280; //  чи показуємо тиск
+
 //****************************************
 // налаштування годинника -  хвилини
 //****************************************
@@ -698,8 +702,8 @@ switch (events)
         break;
         case KEY_OK_EVENT:
             RTOS_DeleteTask(set_sound_h);
-            RTOS_SetTask(time_led, 0, cycle_main);
-            RTOS_DeleteTask(default_state); 
+            RTOS_SetTask(set_en_ds1, 0, cycle_main);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу 
             events = MAIN_EVENT;
             en_put = 0;
             clear_matrix();
@@ -738,5 +742,173 @@ if(en_put)
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;    
     
+}
+
+//============================================================
+// Налаштування - чи можна показувати температуру з 1 датчика. 
+//============================================================
+void set_en_ds1(void){
+switch (events)
+   {
+        case MAIN_EVENT:
+
+        break;
+        case KEY_OK_EVENT:
+            RTOS_DeleteTask(set_en_ds1);
+            RTOS_SetTask(set_en_ds2, 0, cycle_main);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_EXIT_EVENT:
+            RTOS_DeleteTask(set_en_ds1);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state); 
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_UP_EVENT:
+            en_ds_1 = !(en_ds_1);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_EN_DS1, en_ds_1);
+            break;
+        case KEY_DOWN_EVENT:
+            en_ds_1 = !(en_ds_1);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_EN_DS1, en_ds_1);
+            break;
+   
+    }
+if(en_put) {
+        putchar_b_buf(0, STR_DS1[0], &Font);
+        putchar_b_buf(6, STR_DS1[1], &Font);
+        putchar_b_buf(12, STR_DS1[2], &Font);
+        if (en_ds_1)
+            putchar_b_buf(18, '+', &Font);
+        else
+            putchar_b_buf(18, '-', &Font);
+        putchar_b_buf(24, 0, &Font);
+}    
+       Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+       en_put=1;    
+    
+}
+
+//============================================================
+// Налаштування - чи можна показувати температуру з 1 датчика. 
+//============================================================
+void set_en_ds2(void){
+switch (events)
+   {
+        case MAIN_EVENT:
+
+        break;
+        case KEY_OK_EVENT:
+            RTOS_DeleteTask(set_en_ds2);
+            RTOS_SetTask(set_en_bmp, 0, cycle_main);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_EXIT_EVENT:
+            RTOS_DeleteTask(set_en_ds2);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state); 
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_UP_EVENT:
+            en_ds_2 = !(en_ds_2);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_EN_DS2, en_ds_2);
+            break;
+        case KEY_DOWN_EVENT:
+            en_ds_2 = !(en_ds_2);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_EN_DS2, en_ds_2);
+            break;
+   
+    }
+if(en_put) {
+        putchar_b_buf(0, STR_DS2[0], &Font);
+        putchar_b_buf(6, STR_DS2[1], &Font);
+        putchar_b_buf(12, STR_DS2[2], &Font);
+        if (en_ds_2)
+            putchar_b_buf(18, '+', &Font);
+        else
+            putchar_b_buf(18, '-', &Font);
+        putchar_b_buf(24, 0, &Font);
+}    
+       Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+       en_put=1;    
+    
+}
+
+//============================================================
+// Налаштування - чи можна показувати температуру з 1 датчика. 
+//============================================================
+void set_en_bmp(void){
+switch (events)
+   {
+        case MAIN_EVENT:
+
+        break;
+        case KEY_OK_EVENT:
+            RTOS_DeleteTask(set_en_bmp);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state); 
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_EXIT_EVENT:
+            RTOS_DeleteTask(set_en_bmp);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state); 
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_UP_EVENT:
+            en_bmp280 = !(en_bmp280);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_EN_BMP, en_bmp280);
+            break;
+        case KEY_DOWN_EVENT:
+            en_bmp280 = !(en_bmp280);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_EN_BMP, en_bmp280);
+            break;
+   
+    }
+if(en_put) {
+        putchar_b_buf(0, STR_BMP[0], &Font);
+        putchar_b_buf(6, STR_BMP[1], &Font);
+        putchar_b_buf(12, STR_BMP[2], &Font);
+        if (en_bmp280)
+            putchar_b_buf(18, '+', &Font);
+        else
+            putchar_b_buf(18, '-', &Font);
+        putchar_b_buf(24, 0, &Font);
+}    
+       Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+       en_put=1;    
+    
+}
+
+
+void default_state(void) {
+    events = KEY_EXIT_EVENT;
+
 }
 

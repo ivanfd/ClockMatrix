@@ -58,19 +58,40 @@
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
+#pragma config IDLOC0 = 1;
+#pragma config IDLOC1 = 9;
+#pragma config IDLOC2 = 7;
+#pragma config IDLOC3 = 9;
+#pragma config IDLOC4 = 3;
+#pragma config IDLOC5 = 0;
+#pragma config IDLOC6 = 0;
+#pragma config IDLOC7 = 0;
+
 #include "init.h"
 
+//extern const unsigned char userID[ 8 ] @ 0x200000;
 extern uint8_t type_font;
 extern uint8_t type_clk;
 extern uint8_t brg_type;
 extern uint8_t brig;// значення яскравості
 extern uint8_t blk_dot; // дозвіл на мигання кнопок
 extern uint8_t en_h_snd;
+extern uint8_t en_ds_1;    //  чи пок. температуру з датчика 1
+extern uint8_t en_ds_2;    //  чи пок. температуру з датчика 2
+extern uint8_t en_bmp280; //  чи показуємо тиск
+//extern const unsigned char userID[8] @ 0x200000;
+//volatile unsigned char usrID[8];
+
 
 void SYSTEM_Initialize(void)  // ініціалізація контролера
 {
+  //  uint8_t i;
+    
+   // for (i = 0; i <= 7; i++)
+   //     usrID[i] = userID[i];
 
-    Port_Init();  
+
+    Port_Init();
     I2C_Init();
     Init7221();
     TMRInit();
@@ -97,6 +118,9 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     RTOS_SetTask(usart_r, 40, cycle_main); // ЗАДАЧА ОПИТУВАННЯ КОМ ПОРТА
     RTOS_SetTask(GetTime, 100, cycle_main);// Задача зчитування даних з RTC
     en_h_snd = read_eep(EE_EN_SND_H);
+    en_ds_1 = read_eep(EE_EN_DS1);    
+    en_ds_2 = read_eep(EE_EN_DS2);
+    en_bmp280 = read_eep(EE_EN_BMP);
     srand(3);
 }
 

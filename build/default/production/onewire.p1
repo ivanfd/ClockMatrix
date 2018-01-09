@@ -2,7 +2,7 @@ Version 3.2 HI-TECH Software Intermediate Code
 "21 display.h
 [s S270 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 `uc 1 ]
 [n S270 Time_Get Ts Tmin Thr Tdy Tdt Tmt Tyr ]
-"364 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
+"364 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f4525.h
 [s S16 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 :1 `uc 1 ]
 [n S16 . RC0 RC1 RC2 RC3 RC4 RC5 RC6 RC7 ]
 "374
@@ -34,14 +34,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 "1854
 [v _TRISCbits `VS64 ~T0 @X0 0 e@3988 ]
 [v F2919 `(v ~T0 @X0 1 tf1`ul ]
-"164 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18.h
+"164 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18.h
 [v __delay `JF2919 ~T0 @X0 0 e ]
 [p i __delay ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
 [; ;pic18f4525.h: 50: extern volatile unsigned char PORTA @ 0xF80;
-"52 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h
+"52 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f4525.h
 [; ;pic18f4525.h: 52: asm("PORTA equ 0F80h");
 [; <" PORTA equ 0F80h ;# ">
 [; ;pic18f4525.h: 55: typedef union {
@@ -5805,22 +5805,24 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;display.h: 28: uint8_t Tmt;
 [; ;display.h: 29: uint8_t Tyr;
 [; ;display.h: 30: } TTime,TSTime;
-[; ;display.h: 44: void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);
-[; ;display.h: 45: void FillBuf(uint8_t type);
-[; ;display.h: 47: void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
-[; ;display.h: 48: void putchar_s_buf(uint8_t x, uint8_t symbol);
-[; ;display.h: 49: void pixel_on(uint8_t x, uint8_t y);
-[; ;display.h: 50: void pixel_off(uint8_t x, uint8_t y);
-[; ;display.h: 51: void clear_matrix(void);
-[; ;display.h: 52: uint8_t scroll_text(void);
-[; ;display.h: 53: void putchar_down(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
-[; ;display.h: 54: void putchar_down_s(uint8_t x, uint8_t symbol);
-[; ;display.h: 55: void pic_to_led(uint8_t x, uint8_t pic);
-[; ;display.h: 56: void scroll_left(void);
-[; ;display.h: 57: void interval_scroll_text();
-[; ;display.h: 58: void scroll_right(void);
-[; ;display.h: 59: void hide_two_side(void);
-[; ;display.h: 60: void dissolve(void);
+[; ;display.h: 43: typedef void (*p_MyFunc)();
+[; ;display.h: 46: void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);
+[; ;display.h: 47: void FillBuf(uint8_t type);
+[; ;display.h: 49: void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
+[; ;display.h: 50: void putchar_s_buf(uint8_t x, uint8_t symbol);
+[; ;display.h: 51: void pixel_on(uint8_t x, uint8_t y);
+[; ;display.h: 52: void pixel_off(uint8_t x, uint8_t y);
+[; ;display.h: 53: void clear_matrix(void);
+[; ;display.h: 54: uint8_t scroll_text(void);
+[; ;display.h: 55: void putchar_down(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
+[; ;display.h: 56: void putchar_down_s(uint8_t x, uint8_t symbol);
+[; ;display.h: 57: void pic_to_led(uint8_t x, uint8_t pic);
+[; ;display.h: 58: void scroll_left(void);
+[; ;display.h: 59: void dissolve(void);
+[; ;display.h: 60: void interval_scroll_text();
+[; ;display.h: 61: void scroll_right(void);
+[; ;display.h: 62: void hide_two_side(void);
+[; ;display.h: 63: void Rand_ef(void);
 [; ;eusart.h: 19: extern volatile uint8_t eusartRxCount;
 [; ;eusart.h: 21: void init_uart(void);
 [; ;eusart.h: 22: void putch(char data);
@@ -5965,21 +5967,49 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;settings.h: 21: void brg_set();
 [; ;settings.h: 22: void set_brg_manual();
 [; ;settings.h: 23: void set_sound_h(void);
-[; ;common.h: 53: void INT0_ISR(void);
-[; ;common.h: 54: void GetTime(void);
-[; ;common.h: 58: void TMR1_ISR();
-[; ;common.h: 59: void time_led();
-[; ;common.h: 60: void version(void);
-[; ;common.h: 61: void default_state(void);
-[; ;common.h: 62: void home_temp(void);
-[; ;common.h: 63: void set_font();
-[; ;common.h: 65: void pressure(void);
-[; ;common.h: 66: void pre_ref_dis(void);
-[; ;common.h: 68: void radio_temp(void);
-[; ;common.h: 69: void read_adc();
-[; ;common.h: 70: void adj_brig();
-[; ;common.h: 72: void usart_r();
-[; ;common.h: 73: void Rand_ef(void);
+[; ;settings.h: 24: void set_en_ds1(void);
+[; ;settings.h: 25: void default_state(void);
+[; ;settings.h: 26: void set_en_ds2(void);
+[; ;settings.h: 27: void set_en_bmp(void);
+[; ;string.h: 14: extern void * memcpy(void *, const void *, size_t);
+[; ;string.h: 15: extern void * memmove(void *, const void *, size_t);
+[; ;string.h: 16: extern void * memset(void *, int, size_t);
+[; ;string.h: 36: extern char * strcat(char *, const char *);
+[; ;string.h: 37: extern char * strcpy(char *, const char *);
+[; ;string.h: 38: extern char * strncat(char *, const char *, size_t);
+[; ;string.h: 39: extern char * strncpy(char *, const char *, size_t);
+[; ;string.h: 40: extern char * strdup(const char *);
+[; ;string.h: 41: extern char * strtok(char *, const char *);
+[; ;string.h: 44: extern int memcmp(const void *, const void *, size_t);
+[; ;string.h: 45: extern int strcmp(const char *, const char *);
+[; ;string.h: 46: extern int stricmp(const char *, const char *);
+[; ;string.h: 47: extern int strncmp(const char *, const char *, size_t);
+[; ;string.h: 48: extern int strnicmp(const char *, const char *, size_t);
+[; ;string.h: 49: extern void * memchr(const void *, int, size_t);
+[; ;string.h: 50: extern size_t strcspn(const char *, const char *);
+[; ;string.h: 51: extern char * strpbrk(const char *, const char *);
+[; ;string.h: 52: extern size_t strspn(const char *, const char *);
+[; ;string.h: 53: extern char * strstr(const char *, const char *);
+[; ;string.h: 54: extern char * stristr(const char *, const char *);
+[; ;string.h: 55: extern char * strerror(int);
+[; ;string.h: 56: extern size_t strlen(const char *);
+[; ;string.h: 57: extern char * strchr(const char *, int);
+[; ;string.h: 58: extern char * strichr(const char *, int);
+[; ;string.h: 59: extern char * strrchr(const char *, int);
+[; ;string.h: 60: extern char * strrichr(const char *, int);
+[; ;common.h: 57: void INT0_ISR(void);
+[; ;common.h: 58: void GetTime(void);
+[; ;common.h: 62: void TMR1_ISR();
+[; ;common.h: 63: void time_led();
+[; ;common.h: 64: void version(void);
+[; ;common.h: 66: void home_temp(void);
+[; ;common.h: 67: void set_font();
+[; ;common.h: 69: void pressure(void);
+[; ;common.h: 70: void pre_ref_dis(void);
+[; ;common.h: 72: void radio_temp(void);
+[; ;common.h: 73: void read_adc();
+[; ;common.h: 74: void adj_brig();
+[; ;common.h: 76: void usart_r();
 [; ;onewire.h: 12: uint8_t ow_reset(void);
 [; ;onewire.h: 13: uint8_t read_bit(void);
 [; ;onewire.h: 14: void write_bit(uint8_t bitval);

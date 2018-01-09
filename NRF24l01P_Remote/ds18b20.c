@@ -28,7 +28,7 @@ void init_ds18b20(void)
 //  один датчик на шині!
 //====================================================
 
-uint8_t readTemp_Single(uint8_t *buf, uint8_t *minus) {
+uint8_t readTemp_Single(uint16_t *buf, uint8_t *minus) {
 
     uint16_t temp = 0; // температура
     uint8_t i, tmp, fptmp;
@@ -72,10 +72,10 @@ uint8_t readTemp_Single(uint8_t *buf, uint8_t *minus) {
     printf("Temperature: %d\r\n ", temp);
 #endif
 
-    fptmp = temp % 10; // остача
-    temp = temp / 10; // ціла частина
+    //fptmp = temp % 10; // остача
+    //temp = temp / 10; // ціла частина
 
-    if (fptmp >= 6) temp += 1;
+    //if (fptmp >= 6) temp += 1;
     //  temp = floor(temp);
 
     *buf = temp;

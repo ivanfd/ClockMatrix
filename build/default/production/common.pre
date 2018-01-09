@@ -1,17 +1,17 @@
 
 # 1 "common.c"
 
-# 26 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\htc.h"
+# 26 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\htc.h"
 extern const char __xc8_OPTIM_SPEED;
 
 extern double __fpnormalize(double);
 
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\xc8debug.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\xc8debug.h"
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 
-# 50 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f4525.h"
+# 50 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f4525.h"
 extern volatile unsigned char PORTA @ 0xF80;
 
 asm("PORTA equ 0F80h");
@@ -3720,7 +3720,7 @@ extern volatile __bit nWR @ (((unsigned) &PORTE)*8) + 1;
 
 extern volatile __bit nWRITE @ (((unsigned) &SSPSTAT)*8) + 2;
 
-# 18 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18.h"
+# 18 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18.h"
 __attribute__((__unsupported__("The " "flash_write" " routine is no longer supported. Please use the MPLAB X MCC."))) void flash_write(const unsigned char *, unsigned int, __far unsigned char *);
 __attribute__((__unsupported__("The " "EraseFlash" " routine is no longer supported. Please use the MPLAB X MCC."))) void EraseFlash(unsigned long startaddr, unsigned long endaddr);
 
@@ -3747,7 +3747,7 @@ extern __nonreentrant void _delaywdt(unsigned long);
 #pragma intrinsic(_delay3)
 extern __nonreentrant void _delay3(unsigned char);
 
-# 13 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdint.h"
+# 13 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdint.h"
 typedef signed char int8_t;
 
 # 20
@@ -3837,10 +3837,10 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 4 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\__size_t.h"
+# 4 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\__size_t.h"
 typedef unsigned size_t;
 
-# 7 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdarg.h"
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdarg.h"
 typedef void * va_list[1];
 
 #pragma intrinsic(__va_start)
@@ -3849,17 +3849,17 @@ extern void * __va_start(void);
 #pragma intrinsic(__va_arg)
 extern void * __va_arg(void *, ...);
 
-# 43 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdio.h"
+# 43 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdio.h"
 struct __prbuf
 {
 char * ptr;
 void (* func)(char);
 };
 
-# 29 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\errno.h"
+# 29 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\errno.h"
 extern int errno;
 
-# 12 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\conio.h"
+# 12 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\conio.h"
 extern void init_uart(void);
 
 extern char getch(void);
@@ -3873,7 +3873,7 @@ extern __bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 88 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdio.h"
+# 88 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdio.h"
 extern int cprintf(char *, ...);
 #pragma printf_check(cprintf)
 
@@ -4303,7 +4303,10 @@ uint8_t Tmt;
 uint8_t Tyr;
 } TTime,TSTime;
 
-# 44
+# 43
+typedef void (*p_MyFunc)();
+
+
 void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);
 void FillBuf(uint8_t type);
 
@@ -4317,10 +4320,11 @@ void putchar_down(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
 void putchar_down_s(uint8_t x, uint8_t symbol);
 void pic_to_led(uint8_t x, uint8_t pic);
 void scroll_left(void);
+void dissolve(void);
 void interval_scroll_text();
 void scroll_right(void);
 void hide_two_side(void);
-void dissolve(void);
+void Rand_ef(void);
 
 # 19 "eusart.h"
 extern volatile uint8_t eusartRxCount;
@@ -4382,7 +4386,7 @@ uint8_t nrf24_payloadLength();
 uint8_t nrf24_rxFifoEmpty();
 uint8_t nrf24_dataReady();
 
-# 7 "C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdlib.h"
+# 7 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\stdlib.h"
 typedef unsigned short wchar_t;
 
 # 15
@@ -4502,8 +4506,44 @@ void set_type_clk(void);
 void brg_set();
 void set_brg_manual();
 void set_sound_h(void);
+void set_en_ds1(void);
+void default_state(void);
+void set_en_ds2(void);
+void set_en_bmp(void);
 
-# 53 "common.h"
+# 14 "C:\Program Files (x86)\Microchip\xc8\v1.45\include\string.h"
+extern void * memcpy(void *, const void *, size_t);
+extern void * memmove(void *, const void *, size_t);
+extern void * memset(void *, int, size_t);
+
+# 36
+extern char * strcat(char *, const char *);
+extern char * strcpy(char *, const char *);
+extern char * strncat(char *, const char *, size_t);
+extern char * strncpy(char *, const char *, size_t);
+extern char * strdup(const char *);
+extern char * strtok(char *, const char *);
+
+
+extern int memcmp(const void *, const void *, size_t);
+extern int strcmp(const char *, const char *);
+extern int stricmp(const char *, const char *);
+extern int strncmp(const char *, const char *, size_t);
+extern int strnicmp(const char *, const char *, size_t);
+extern void * memchr(const void *, int, size_t);
+extern size_t strcspn(const char *, const char *);
+extern char * strpbrk(const char *, const char *);
+extern size_t strspn(const char *, const char *);
+extern char * strstr(const char *, const char *);
+extern char * stristr(const char *, const char *);
+extern char * strerror(int);
+extern size_t strlen(const char *);
+extern char * strchr(const char *, int);
+extern char * strichr(const char *, int);
+extern char * strrchr(const char *, int);
+extern char * strrichr(const char *, int);
+
+# 57 "common.h"
 void INT0_ISR(void);
 void GetTime(void);
 
@@ -4512,7 +4552,7 @@ void GetTime(void);
 void TMR1_ISR();
 void time_led();
 void version(void);
-void default_state(void);
+
 void home_temp(void);
 void set_font();
 
@@ -4524,7 +4564,6 @@ void read_adc();
 void adj_brig();
 
 void usart_r();
-void Rand_ef(void);
 
 # 3 "common.c"
 extern uint8_t TxtBuf[6];
@@ -4536,10 +4575,11 @@ uint8_t events = 5;
 bit show_digit;
 bit en_put;
 uint8_t temperature;
-uint8_t temperature_radio;
+uint16_t temperature_radio;
 bit err_ds18 = 0;
 uint16_t err_ds_count = 0;
 uint8_t minus;
+uint8_t minus_radio = '+';
 uint8_t timer_val = 0, time_flag = 0;
 extern uint8_t(*pFont)[][5];
 uint8_t type_font = 0;
@@ -4558,13 +4598,18 @@ uint8_t blk_dot = 0;
 extern uint8_t en_h_snd;
 extern uint8_t h_snd_t;
 extern uint8_t snd_flag;
+uint8_t en_ds_1;
+uint8_t en_ds_2;
+uint8_t en_bmp280;
+uint8_t const compile_date[12] = "Jan 06 2018";
+uint8_t const compile_time[9] = "00:35:38";
 
 
-asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "5" "," "2" "," "1" "," "2" "," "1" "," "0" "," "0" "," "0");
 
 
+asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "5" "," "2" "," "1" "," "2" "," "1" "," "1" "," "1" "," "1");
 
-
+# 53
 void GetTime(void)
 {
 oldsec = TTime.Ts;
@@ -4580,7 +4625,7 @@ h_snd_t = 1;
 
 }
 
-# 60
+# 72
 void home_temp(void)
 {
 switch (events)
@@ -4617,14 +4662,21 @@ Rand_ef();
 
 RTOS_DeleteTask(default_state);
 RTOS_DeleteTask(home_temp);
+if (en_ds_2)
 RTOS_SetTask(radio_temp, 0, 20);
-
+else {
+RTOS_SetTask(time_led, 0, 20);
+pre_ref_dis();
+}
 break;
+
 }
 }
 
-# 106
+# 123
 void radio_temp(void) {
+uint8_t fptmp;
+
 switch (events) {
 case 5:
 clear_matrix();
@@ -4635,18 +4687,29 @@ putchar_down(15, 'r', &Font);
 putchar_down(21, 'r', &Font);
 } else {
 
-if (temperature_radio != 0xFF) {
+if (temperature_radio != 0xFFFF) {
+
+fptmp = temperature_radio % 10;
+temperature_radio = temperature_radio / 10;
+if (fptmp >= 6) temperature_radio += 1;
+
 if (!((temperature_radio / 10) % 10))
 {
-pic_to_led(0, 2);
+pic_to_led(3, 2);
 
-putchar_down(9, minus, &Font);
-putchar_down(15, temperature_radio % 10, pFont);
-putchar_down(21, 176, &Font);
+if (temperature_radio != 0) {
+putchar_down(13, minus_radio, &Font);
+putchar_down(19, temperature_radio % 10, pFont);
+putchar_down(25, 176, &Font);
+} else {
 
+putchar_down(13, temperature_radio % 10, pFont);
+putchar_down(19, 176, &Font);
+}
 } else {
 pic_to_led(0, 2);
-putchar_down(9, minus, &Font);
+
+putchar_down(9, minus_radio, &Font);
 putchar_down(15, (temperature_radio / 10) % 10, pFont);
 putchar_down(22, temperature_radio % 10, pFont);
 putchar_down(27, 176, &Font);
@@ -4683,7 +4746,7 @@ break;
 }
 }
 
-# 170
+# 200
 void set_font() {
 switch (type_font) {
 case 1:
@@ -4704,7 +4767,7 @@ break;
 }
 }
 
-# 194
+# 224
 void pressure(void) {
 uint16_t pr;
 
@@ -4796,21 +4859,23 @@ break;
 
 }
 
-# 290
+# 320
 void time_led() {
 uint8_t data_array[4];
 
-uint16_t test = 0;
 
 switch (events) {
 case 5:
 FillBuf(type_clk);
+if (type_clk == 2)
+blk_dot = 1;
 if ((TTime.Ts > 5)&&(TTime.Ts < 7))
 {
 readTemp_Single(&temperature, &minus, &time_flag, &timer_val);
 }
 if (((TTime.Ts > 14)&&(TTime.Ts < 16)))
 events = 3;
+if (en_bmp280)
 if (((TTime.Ts > 39)&&(TTime.Ts < 41)))
 events = 2;
 break;
@@ -4821,8 +4886,10 @@ RTOS_SetTask(default_state, 2000, 0);
 TSTime = TTime;
 events = 5;
 en_put = 0;
-if (type_clk == 2)
+if (type_clk == 2){
+blk_dot = 0;
 putchar_b_buf(13, 23, &Font);
+}
 
 break;
 case 2:
@@ -4840,7 +4907,7 @@ en_put = 0;
 
 break;
 case 3:
-
+if (en_ds_1) {
 blk_dot = 0;
 if (type_clk == 2)
 putchar_b_buf(13, 23, &Font);
@@ -4851,12 +4918,25 @@ RTOS_DeleteTask(time_led);
 RTOS_SetTask(home_temp, 0, 20);
 events = 5;
 en_put = 0;
+} else if (en_ds_2) {
+blk_dot = 0;
+if (type_clk == 2)
+putchar_b_buf(13, 23, &Font);
+
+
+Rand_ef();
+RTOS_DeleteTask(time_led);
+RTOS_SetTask(home_temp, 0, 20);
+events = 5;
+en_put = 0;
+}
+events = 5;
 break;
 case 4:
 events = 5;
 RTOS_DeleteTask(default_state);
 
-# 367
+# 414
 case 6:
 
 break;
@@ -4869,8 +4949,9 @@ if (brg_type) {
 if ((TTime.Ts % 2 == 0)&&(oldsec_flag)) {
 oldsec_flag = 0;
 read_adc();
-}
 adj_brig();
+}
+
 }
 en_put = 1;
 
@@ -4879,8 +4960,8 @@ if (nrf24_dataReady()) {
 nrf24_getData(&data_array);
 
 nrf24_powerUpRx();
-temperature_radio = data_array[0];
-minus = data_array[1];
+temperature_radio = data_array[1] | (uint16_t) (data_array[2] << 8);
+minus_radio = data_array[0];
 err_ds_count = 0;
 err_ds18 = 0;
 } else
@@ -4894,13 +4975,14 @@ nrf24_powerUpRx();
 nrf24_init(120, 4);
 }
 
-# 418
+# 466
 }
 
-# 424
+# 472
 void usart_r() {
 
 static uint8_t i = 0;
+uint8_t j;
 
 if ((eusartRxCount)) {
 
@@ -5005,8 +5087,8 @@ case 'b':
 
 
 if (((usart_data[2]-48) == 0) || ((usart_data[2]-48) == 1)) {
-brg_type = usart_data[2]-48;
-brig = usart_data[3]-48;
+brg_type = usart_data[2] - 48;
+brig = usart_data[3] - 48;
 write_eep(2, brg_type);
 } else {
 EUSART_Write('E');
@@ -5044,10 +5126,95 @@ EUSART_Write('\r');
 EUSART_Write('\n');
 
 break;
+case 'a':
+
+
+if ((((usart_data[2] - 48) == 0) || ((usart_data[2] - 48) == 1)) && (((usart_data[3] - 48) == 0) || ((usart_data[3] - 48) == 1))) {
+en_ds_1 = usart_data[2] - 48;
+en_ds_2 = usart_data[3] - 48;
+write_eep(5, en_ds_1);
+write_eep(6, en_ds_2);
+} else {
+EUSART_Write('E');
+EUSART_Write('R');
+EUSART_Write('\r');
+EUSART_Write('\n');
+break;
+}
+EUSART_Write('O');
+EUSART_Write('K');
+EUSART_Write('\r');
+EUSART_Write('\n');
+
+break;
+case 'e':
+
+
+if (((usart_data[2] - 48) == 0) || ((usart_data[2] - 48) == 1)){
+en_bmp280 = usart_data[2] - 48;
+write_eep(7, en_bmp280);
+} else {
+EUSART_Write('E');
+EUSART_Write('R');
+EUSART_Write('\r');
+EUSART_Write('\n');
+break;
+}
+EUSART_Write('O');
+EUSART_Write('K');
+EUSART_Write('\r');
+EUSART_Write('\n');
+
+break;
+case 'r':
+
+switch (usart_data[2]) {
+case 'a':
+EUSART_Write(((adc_res / 100) % 10) + 48);
+EUSART_Write(((adc_res / 10) % 10) + 48);
+EUSART_Write((adc_res % 10) + 48);
+break;
+case 'v':
+
+
+for (j = 0; j <= 11; j++)
+EUSART_Write(compile_date[j]);
+
+EUSART_Write('\r');
+EUSART_Write('\n');
+for (j = 0; j <= 8; j++)
+EUSART_Write(compile_time[j]);
+
+EUSART_Write('\r');
+EUSART_Write('\n');
+break;
+case 't':
+EUSART_Write(minus_radio);
+EUSART_Write(((temperature_radio / 100) % 10) + 48);
+EUSART_Write(((temperature_radio / 10) % 10) + 48);
+EUSART_Write((temperature_radio % 10) + 48);
+break;
+
+default:
+EUSART_Write('E');
+EUSART_Write('R');
+EUSART_Write('\r');
+EUSART_Write('\n');
+break;
+
+}
+
+EUSART_Write('O');
+EUSART_Write('K');
+EUSART_Write('\r');
+EUSART_Write('\n');
+
+break;
 }
 }
 usart_data[0] = 0;
 usart_data[1] = 0;
+usart_data[2] = 0;
 i = 0;
 reinit_rx();
 
@@ -5058,13 +5225,13 @@ void version(void)
 {
 uint8_t i;
 
-sprintf(text_buf, "Clock v3.0.0 by Ivan_fd 29.12.2017");
+sprintf(text_buf, "Clock v3.0.0 by Ivan_fd 03.01.2018");
 interval_scroll_text();
 
-# 593
+# 727
 }
 
-# 599
+# 733
 void read_adc() {
 ADCON0bits.GO = 1;
 while (ADCON0bits.GO);
@@ -5072,38 +5239,21 @@ adc_res = (ADRESH << 8) + ADRESL;
 asm("nop");
 asm("nop");
 
-# 610
+# 744
 }
 
-# 616
+# 750
 void adj_brig() {
 
-if (adc_res >= 150)
-Cmd7221(0x0A, 0x02);
+if (adc_res >= 70)
+Cmd7221(0x0A, 0x03);
 else if (adc_res <= 50)
 Cmd7221(0x0A, 0x00);
 
-# 636
+# 770
 }
 
-void default_state(void) {
-events = 4;
-
-}
-
-# 647
-void Rand_ef(void) {
-uint8_t eff;
-void (*function) (void);
-void (*p_MyFunc[4])(void) = {dissolve, scroll_left,scroll_right,hide_two_side};
-
-eff = (0 + rand() % 4);
-function = p_MyFunc[eff];
-(*function)();
-}
-
-
-
+# 777
 void INT0_ISR(void) {
 if (blk_dot) {
 idx_pnt++;
@@ -5161,6 +5311,6 @@ T1CONbits.TMR1ON = 0;
 
 }
 
-# 726
+# 844
 }
 

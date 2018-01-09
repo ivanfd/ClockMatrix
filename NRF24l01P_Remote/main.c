@@ -12,12 +12,12 @@
 uint8_t data_array[4];
 uint8_t temp;
 
-uint8_t temperature;
+uint16_t temperature;
 uint8_t minus;
 uint8_t count = 0; // скільки сидимо в сні
 
 void main(void) {
-    uint8_t temp_flag; // чи присутный датчик
+    uint8_t temp_flag; // чи присутній датчик
     init_Cpu();
     data_array[0] = 0x75;
     data_array[1] = 0xDC;
@@ -27,13 +27,16 @@ void main(void) {
         CLRWDT();
         //  printf("> ....\r\n");
         if (temp_flag = readTemp_Single(&temperature, &minus)) {
-            data_array[0] = temperature; // пишемо в буфер температуру
-            data_array[1] = minus;
+            //data_array[0] = temperature; // пишемо в буфер температуру
+            data_array[0] = minus;
+            data_array[1] = temperature & 0xFF;
+            data_array[2] = (uint8_t)(temperature >> 8);
         }else{
-            temperature = 0xFF;
-            data_array[0] = temperature;
+            //temperature = 0xFF;
+            data_array[0] = 0xFF;
+            data_array[1] = 0xFF;
         }
-        data_array[2] = 0x19;
+       // data_array[2] = 0x19;
         data_array[3] = 0x79;
         LED = 0;// засвітити світлодіод
         CLRWDT();

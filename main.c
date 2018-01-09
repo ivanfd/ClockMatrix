@@ -26,7 +26,7 @@ void main(void) {
 //    printf("AC1: %d\n\r", tst2);
     clear_matrix();
     blk_dot = 0;
-    version();
+  //  version();
     blk_dot = 1;
     
     INTERRUPT_GlobalInterruptDisable();

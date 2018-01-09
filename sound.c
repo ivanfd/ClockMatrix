@@ -54,7 +54,7 @@ void TMR3_ISR()
             }
             if (cnt_b == 1)
                 cnt_p++; // çá³ëüøóºìî ïàóçó ïàóçè
-            if (cnt_p > 400) {
+            if (cnt_p > 300) {
                 cnt_p = 0;
                 cnt_b = 2;
             }

@@ -19,6 +19,8 @@
 #include "strings.h"
 #include "settings.h"
 #include <stdint.h>
+#include <string.h>
+
 
 #define SetBit(x,y)    do{ x |=  (1 << (y));} while(0)
 #define ClrBit(x,y)    do{ x &= ~(1 << (y));} while(0)
@@ -44,7 +46,9 @@
 #define EE_TYPE_BRG 2 // адреса в еепром типу яскравості
 #define EE_DAT_BRG 3 // адреса в еепром значення яскравості
 #define EE_EN_SND_H 4 //адреса в еепром, чи можна відтворювати щогодинний сигнал
-
+#define EE_EN_DS1 5 // еепром, чи показувати температуру з датчика 1
+#define EE_EN_DS2 6 // еепром, чи показувати температуру з датчика 2
+#define EE_EN_BMP 7 // еепром, датчик тиску
 
 #define TYPE_CLK_1 1  // вигляд годинника
 #define TYPE_CLK_2 2  // вигляд годинника
@@ -58,7 +62,7 @@
  void TMR1_ISR();
  void time_led(); 
  void version(void);
- void default_state(void);
+
  void home_temp(void);
  void set_font();
  
@@ -70,7 +74,7 @@
  void adj_brig();
 
  void usart_r();
- void Rand_ef(void);
+
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */

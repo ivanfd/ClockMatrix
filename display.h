@@ -40,6 +40,8 @@ struct Time_Get             // структура для годин
 //   unsigned char hr_1;
 //} TTimeConv ;
 
+typedef void (*p_MyFunc)();
+
         
  void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);       
  void FillBuf(uint8_t type);
@@ -54,10 +56,12 @@ struct Time_Get             // структура для годин
  void putchar_down_s(uint8_t x, uint8_t symbol);
  void pic_to_led(uint8_t x, uint8_t pic);
  void scroll_left(void);
+ void dissolve(void);
  void interval_scroll_text();
  void scroll_right(void);
  void hide_two_side(void);
- void dissolve(void);
+  void Rand_ef(void);
+
  
 #endif	/* XC_HEADER_TEMPLATE_H */
 

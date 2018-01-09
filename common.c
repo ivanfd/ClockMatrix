@@ -9,10 +9,11 @@ uint8_t events = MAIN_EVENT; // подія, яка відбувається
 bit show_digit; // чи показувати цифри, в нал. мигання
 bit en_put; // чи можна писати у буфер символи
 uint8_t temperature; // температура з кімнатного датчика
-uint8_t temperature_radio; // температура з радіо датчика
+uint16_t temperature_radio; // температура з радіо датчика
 bit err_ds18 = 0;// помилка датчика радіо
 uint16_t err_ds_count = 0;
 uint8_t minus; // знак температури
+uint8_t minus_radio = '+'; // знак температури
 uint8_t timer_val = 0, time_flag = 0; // для конвертування температури
 extern uint8_t(*pFont)[][5];
 uint8_t type_font = 0; // шрифт годин
@@ -31,10 +32,21 @@ uint8_t blk_dot = 0; // дозвіл на мигання кнопок
 extern uint8_t en_h_snd; // чи можна генерувати сигнал
 extern uint8_t h_snd_t; //година співпадає з дозволом
 extern uint8_t snd_flag; // один раз відтворювати
+uint8_t en_ds_1;    //  чи пок. температуру з датчика 1
+uint8_t en_ds_2;    //  чи пок. температуру з датчика 2
+uint8_t en_bmp280; //  чи показуємо тиск
+uint8_t const compile_date[12]   = __DATE__;     // Mmm dd yyyy
+uint8_t const compile_time[9]    = __TIME__;     // hh:mm:ss
+ 
 
 
-__EEPROM_DATA(5, 2, 1, 2, 1, 0, 0, 0); // ініціалізація еепром, 
+
+__EEPROM_DATA(5, 2, 1, 2, 1, 1, 1, 1); // ініціалізація еепром, 
 // 0 - тип шрифту (від 1 до 5)
+// 1 - тип годинника (1,2)
+// 2 - тип яскравості(0, 1). 1 - автоматично, 0 - ручний
+// 3 - значеняя яскравості для ручного
+// 4 - щогодинний сигнал
 
 // читаємо з DS3231 години, хвилини, секунди та дату
 // 
@@ -93,9 +105,14 @@ void GetTime(void)
             //pre_ref_dis();
             RTOS_DeleteTask(default_state);
             RTOS_DeleteTask(home_temp);
-            RTOS_SetTask(radio_temp, 0, cycle_main);
-            // clear_matrix();
+            if (en_ds_2)
+                RTOS_SetTask(radio_temp, 0, cycle_main);
+            else {
+                RTOS_SetTask(time_led, 0, cycle_main);
+                pre_ref_dis();
+            }
             break;
+
     }
 }
 
@@ -104,6 +121,8 @@ void GetTime(void)
 //*************************************************
 
 void radio_temp(void) {
+    uint8_t fptmp;
+    
     switch (events) {
         case MAIN_EVENT:
             clear_matrix();
@@ -114,18 +133,29 @@ void radio_temp(void) {
                 putchar_down(21, 'r', &Font);
             } else {
 
-                if (temperature_radio != 0xFF) {
+                if (temperature_radio != 0xFFFF) {
+
+                    fptmp = temperature_radio % 10; // остача
+                    temperature_radio = temperature_radio / 10; // ціла частина
+                    if (fptmp >= 6) temperature_radio += 1;
+
                     if (!((temperature_radio / 10) % 10)) // якщо перша цифра 0
                     {
-                        pic_to_led(0, 2);
+                        pic_to_led(3, 2);
                         //  putchar_down(13,(temperature/10) % 10 + 48);
-                        putchar_down(9, minus, &Font);
-                        putchar_down(15, temperature_radio % 10, pFont);
-                        putchar_down(21, 176, &Font);
-
+                        if (temperature_radio != 0) {
+                            putchar_down(13, minus_radio, &Font);
+                            putchar_down(19, temperature_radio % 10, pFont);
+                            putchar_down(25, 176, &Font);
+                        } else {
+                            //putchar_down(9, 0, &Font);
+                            putchar_down(13, temperature_radio % 10, pFont);
+                            putchar_down(19, 176, &Font);
+                        }
                     } else {
                         pic_to_led(0, 2);
-                        putchar_down(9, minus, &Font);
+
+                        putchar_down(9, minus_radio, &Font);
                         putchar_down(15, (temperature_radio / 10) % 10, pFont);
                         putchar_down(22, temperature_radio % 10, pFont);
                         putchar_down(27, 176, &Font);
@@ -290,29 +320,33 @@ void pre_ref_dis(void) {
 void time_led() {
     uint8_t data_array[4];
 
-    uint16_t test = 0;
 
     switch (events) {
         case MAIN_EVENT:
             FillBuf(type_clk);
+            if (type_clk == TYPE_CLK_2)
+                blk_dot = 1;
             if ((TTime.Ts > 5)&&(TTime.Ts < 7)) //прочитаємо температуру
             {
                 readTemp_Single(&temperature, &minus, &time_flag, &timer_val);
             }
             if (((TTime.Ts > 14)&&(TTime.Ts < 16)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо температуру
                 events = KEY_DOWN_EVENT;
-            if (((TTime.Ts > 39)&&(TTime.Ts < 41)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо атмосферний тиск
-                events = KEY_UP_EVENT;
+            if (en_bmp280) // якщо можна виводити атм. тиск
+                if (((TTime.Ts > 39)&&(TTime.Ts < 41)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо атмосферний тиск
+                    events = KEY_UP_EVENT;
             break;
         case KEY_OK_EVENT: // якщо натиснули кнопку ОК
-            RTOS_DeleteTask(time_led); // видаяляємо задачу в якій сидимо
+            RTOS_DeleteTask(time_led); // видаляємо задачу в якій сидимо
             RTOS_SetTask(time_set_min, 0, 50); //  ставимо задачу налаштування годинника
             RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
             TSTime = TTime;
             events = MAIN_EVENT;
             en_put = 0;
-            if (type_clk == TYPE_CLK_2)
+            if (type_clk == TYPE_CLK_2){
+                blk_dot = 0;
                 putchar_b_buf(13, 23, &Font);
+            }
             //clear_matrix();
             break;
         case KEY_UP_EVENT:
@@ -330,17 +364,30 @@ void time_led() {
 
             break;
         case KEY_DOWN_EVENT:
-
-            blk_dot = 0;
-            if (type_clk == TYPE_CLK_2)
-                putchar_b_buf(13, 23, &Font);
-            //scroll_left();
-            //dissolve();
-            Rand_ef();
-            RTOS_DeleteTask(time_led); //видаляємо задачу
-            RTOS_SetTask(home_temp, 0, cycle_main); //додаємо задачу 
+            if (en_ds_1) {
+                blk_dot = 0;
+                if (type_clk == TYPE_CLK_2)
+                    putchar_b_buf(13, 23, &Font);
+                //scroll_left();
+                //dissolve();
+                Rand_ef();
+                RTOS_DeleteTask(time_led); //видаляємо задачу
+                RTOS_SetTask(home_temp, 0, cycle_main); //додаємо задачу 
+                events = MAIN_EVENT;
+                en_put = 0;
+            } else if (en_ds_2) {
+                blk_dot = 0;
+                if (type_clk == TYPE_CLK_2)
+                    putchar_b_buf(13, 23, &Font);
+                //scroll_left();
+                //dissolve();
+                Rand_ef();
+                RTOS_DeleteTask(time_led); //видаляємо задачу
+                RTOS_SetTask(home_temp, 0, cycle_main); //додаємо задачу 
+                events = MAIN_EVENT;
+                en_put = 0;
+            }
             events = MAIN_EVENT;
-            en_put = 0;
             break;
         case KEY_EXIT_EVENT:
             events = MAIN_EVENT;
@@ -376,8 +423,9 @@ void time_led() {
         if ((TTime.Ts % 2 == 0)&&(oldsec_flag)) {
             oldsec_flag = 0;
             read_adc(); // прочитаємо дані з ацп
+            adj_brig(); //  регулюємо яскравість
         }
-        adj_brig(); //  регулюємо яскравість
+
     }
     en_put = 1;
 
@@ -386,8 +434,8 @@ void time_led() {
         nrf24_getData(&data_array);
         //spi_rw(FLUSH_RX); // очистити прийомний буфер
         nrf24_powerUpRx();
-        temperature_radio = data_array[0];
-        minus = data_array[1];
+        temperature_radio = data_array[1] | (uint16_t) (data_array[2] << 8);
+        minus_radio = data_array[0];
         err_ds_count = 0;
         err_ds18 = 0;
     } else
@@ -424,7 +472,8 @@ void time_led() {
 void usart_r() {
 
     static uint8_t i = 0;
-
+    uint8_t j;
+    
     if (EUSART_DataReady) {
 
         usart_data[i++] = EUSART_Read();
@@ -528,8 +577,8 @@ void usart_r() {
                 // формат "$bXN  X - тип(1 - автомат 0 - вручну, N - значення ручної - 1-8)
                 // 
                 if (((usart_data[2]-48) == 0) || ((usart_data[2]-48) == 1)) {
-                    brg_type = usart_data[2]-48;
-                    brig = usart_data[3]-48;
+                    brg_type = usart_data[2] - 48;
+                    brig = usart_data[3] - 48;
                     write_eep(EE_TYPE_BRG, brg_type);
                 } else {
                     EUSART_Write('E');
@@ -549,7 +598,7 @@ void usart_r() {
 
                 break;
             case 's': // налаштування через синій зуб щогодинного сигналу
-                // формат "$іX  X - тип(1 - є 0 - нема)
+                // формат "$sX  X - тип(1 - є 0 - нема)
                 // 
                 if (((usart_data[2] - 48) == 0) || ((usart_data[2] - 48) == 1)) {
                     en_h_snd = usart_data[2] - 48;
@@ -567,10 +616,95 @@ void usart_r() {
                 EUSART_Write('\n');
 
                 break;
+            case 'a': // налаштування через синій зуб показу датчиків температури
+                // формат "$aXZ  XZ - датчики(X - кімнатний, Z - вуличний)(1 - показувати 0 - не показувати)
+                // 
+                if ((((usart_data[2] - 48) == 0) || ((usart_data[2] - 48) == 1)) && (((usart_data[3] - 48) == 0) || ((usart_data[3] - 48) == 1))) {
+                    en_ds_1 = usart_data[2] - 48;
+                    en_ds_2 = usart_data[3] - 48;
+                    write_eep(EE_EN_DS1, en_ds_1);
+                    write_eep(EE_EN_DS2, en_ds_2);
+                } else {
+                    EUSART_Write('E');
+                    EUSART_Write('R');
+                    EUSART_Write('\r');
+                    EUSART_Write('\n');
+                    break;
+                }
+                EUSART_Write('O');
+                EUSART_Write('K');
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+
+                break;
+            case 'e': // налаштування через синій зуб показу датчика тиску
+                // формат "$eX  X - датчик(1 - показувати 0 - не показувати)
+                // 
+                if (((usart_data[2] - 48) == 0) || ((usart_data[2] - 48) == 1)){
+                    en_bmp280 = usart_data[2] - 48;
+                    write_eep(EE_EN_BMP, en_bmp280);
+                } else {
+                    EUSART_Write('E');
+                    EUSART_Write('R');
+                    EUSART_Write('\r');
+                    EUSART_Write('\n');
+                    break;
+                }
+                EUSART_Write('O');
+                EUSART_Write('K');
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+
+                break;
+            case 'r': // читаємо тестові значення
+                // 
+                switch (usart_data[2]) {
+                    case 'a': // $ra - показати значеняя АЦП
+                        EUSART_Write(((adc_res / 100) % 10) + 48); // передаємо першу цифру
+                        EUSART_Write(((adc_res / 10) % 10) + 48); //......
+                        EUSART_Write((adc_res % 10) + 48);
+                        break;
+                    case 'v': // $rv - показати ID
+                        //j = strlen(VERSION);
+                        //for (j = 0; j <= (strlen(VERSION)) - 1; j++)
+                        for (j = 0; j <= 11; j++)
+                            EUSART_Write(compile_date[j]); // передаємо першу цифру
+                        //  EUSART_Write(VERSION[j]); // передаємо першу цифру
+                        EUSART_Write('\r');
+                        EUSART_Write('\n');
+                        for (j = 0; j <= 8; j++)
+                            EUSART_Write(compile_time[j]); // передаємо першу цифру
+                        //  EUSART_Write(VERSION[j]); // передаємо першу цифру
+                        EUSART_Write('\r');
+                        EUSART_Write('\n');
+                        break;
+                    case 't': // $ra - показати значеняя АЦП
+                        EUSART_Write(minus_radio); // передаємо першу цифру
+                        EUSART_Write(((temperature_radio / 100) % 10) + 48); // передаємо першу цифру
+                        EUSART_Write(((temperature_radio / 10) % 10) + 48); //......
+                        EUSART_Write((temperature_radio % 10) + 48);
+                        break;
+
+                    default:
+                        EUSART_Write('E');
+                        EUSART_Write('R');
+                        EUSART_Write('\r');
+                        EUSART_Write('\n');
+                        break;
+                        
+                }
+                
+                EUSART_Write('O');
+                EUSART_Write('K');
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+
+                break;
         }
     }
     usart_data[0] = 0;
-    usart_data[1] = 0;
+    usart_data[1] = 0;    
+    usart_data[2] = 0;
     i = 0;
     reinit_rx();
 
@@ -615,8 +749,8 @@ void read_adc() {
 
 void adj_brig() {
 
-    if (adc_res >= 150)
-        Cmd7221(INTENSITY_R, 0x02); //Intensity Register - 1/16
+    if (adc_res >= 70)
+        Cmd7221(INTENSITY_R, 0x03); //Intensity Register - 1/16
     else if (adc_res <= 50)
         Cmd7221(INTENSITY_R, 0x00); //Intensity Register - 2/16
 
@@ -635,24 +769,8 @@ void adj_brig() {
 
 }
 
-void default_state(void) {
-    events = KEY_EXIT_EVENT;
-
-}
 
 
-//=========================================
-//  Вибір випадкового ефекту
-//=========================================
-void Rand_ef(void) {
-    uint8_t eff;
-    void (*function) (void);    // вказівник на функцію
-    void (*p_MyFunc[4])(void) = {dissolve, scroll_left,scroll_right,hide_two_side};
-
-    eff = (0 + rand() % 4);
-    function = p_MyFunc[eff];
-    (*function)();                               // виконуємо задачу
-}
 
 // функція переривання по входу RB0
 

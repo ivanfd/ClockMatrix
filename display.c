@@ -8,10 +8,14 @@ uint8_t i_char, i_bchar;    // індекс літери та байтк в літері
 uint8_t(*pFont)[][5] = &dFont1; // вказівник на шрифт цифр для показу годин     
 extern uint8_t idx_pnt;
 extern volatile uint8_t x1 = 0, x2 = 0, x3 = 0, x4 = 0, y1, y2, y3, y4; //Для зсуву стовбця вниз
+extern uint8_t blk_dot; // дозвіл на мигання кнопок
 
 const uint8_t dissolve_arr[16] = {253,191,239,127,251,223,247,254,253,191,239,127,251,223,247,254}; //масив для ефекту затухання
 //uint8_t Hours, Min, Sec;
 
+   static void (*function) (void); // вказівник на функцію
+//void (*p_MyFunc[4])(void) = {dissolve, scroll_left, scroll_right, hide_two_side};
+   const p_MyFunc my_func[4] = {dissolve, scroll_left, scroll_right, hide_two_side};
 //*****************************************
 //       засвітити піксель на матриці
 //*****************************************
@@ -163,6 +167,7 @@ void FillBuf(uint8_t type) {
     uint8_t i;
     switch (type) {
         case TYPE_CLK_1:
+            blk_dot = 0;
             for (i = 0; i < 5; ++i) {
                 if ((TTime.Thr / 10) % 10)
                     Dis_Buff[i] = (*pFont)[(TTime.Thr / 10) % 10][i];
@@ -189,7 +194,7 @@ void FillBuf(uint8_t type) {
             Dis_Buff[28] = 0;
             break;
         case TYPE_CLK_2:// якщо тип годинника 2
-
+            blk_dot = 1;
             y1 = (TTime.Thr / 10) % 10;
             y2 = TTime.Thr % 10;
             y3 = (TTime.Tmin / 10) % 10;
@@ -430,4 +435,16 @@ void dissolve(void) {
         for (k = 0; k < 100; k++) // пауза
             __delay_ms(1);
     }
+}
+
+//=========================================
+//  Вибір випадкового ефекту
+//=========================================
+void Rand_ef(void) {
+    uint8_t eff;
+
+
+    eff = (0 + rand() % 4);
+    function = my_func[eff];
+    (*function)();                               // виконуємо задачу
 }

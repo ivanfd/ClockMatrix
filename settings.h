@@ -21,6 +21,10 @@ void set_type_clk(void);
 void brg_set();
 void set_brg_manual();
 void set_sound_h(void);
+void set_en_ds1(void);
+void default_state(void);
+void set_en_ds2(void);
+void set_en_bmp(void);
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */
