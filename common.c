@@ -656,6 +656,39 @@ void usart_r() {
                 EUSART_Write('\n');
 
                 break;
+            case 'z': // reset controller
+                // скидаємо контролер через 4 сек. після команди.
+                // потрібно для bootloader
+
+                EUSART_Write('O');
+                EUSART_Write('K');
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+                __delay_ms(1000);
+                __delay_ms(1000);
+                __delay_ms(1000);
+                __delay_ms(1000);
+                asm("reset");
+
+                break;
+            case 'q': // виводимо біг строку температура
+                // формат "$qt 
+                // 
+                if (usart_data[2] == 't') {
+                    events = KEY_DOWN_EVENT;
+                } else {
+                    EUSART_Write('E');
+                    EUSART_Write('R');
+                    EUSART_Write('\r');
+                    EUSART_Write('\n');
+                    break;
+                }
+                EUSART_Write('O');
+                EUSART_Write('K');
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+
+                break;                
             case 'r': // читаємо тестові значення
                 // 
                 switch (usart_data[2]) {
@@ -663,6 +696,7 @@ void usart_r() {
                         EUSART_Write(((adc_res / 100) % 10) + 48); // передаємо першу цифру
                         EUSART_Write(((adc_res / 10) % 10) + 48); //......
                         EUSART_Write((adc_res % 10) + 48);
+                        EUSART_Write('_');
                         break;
                     case 'v': // $rv - показати ID
                         //j = strlen(VERSION);
@@ -683,6 +717,7 @@ void usart_r() {
                         EUSART_Write(((temperature_radio / 100) % 10) + 48); // передаємо першу цифру
                         EUSART_Write(((temperature_radio / 10) % 10) + 48); //......
                         EUSART_Write((temperature_radio % 10) + 48);
+                        EUSART_Write('_');
                         break;
 
                     default:

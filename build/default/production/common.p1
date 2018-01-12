@@ -6255,8 +6255,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 97 `c
 -> 110 `c
 -> 32 `c
--> 48 `c
--> 54 `c
+-> 49 `c
+-> 49 `c
 -> 32 `c
 -> 50 `c
 -> 48 `c
@@ -6265,23 +6265,23 @@ Version 3.2 HI-TECH Software Intermediate Code
 -> 0 `c
 ..
 ]
-[; ;common.c: 38: uint8_t const compile_date[12] = "Jan 06 2018";
+[; ;common.c: 38: uint8_t const compile_date[12] = "Jan 11 2018";
 "39
 [v _compile_time `Cuc ~T0 @X0 -> 9 `i e ]
 [i _compile_time
 :U ..
+-> 49 `c
+-> 54 `c
+-> 58 `c
 -> 48 `c
--> 48 `c
+-> 50 `c
 -> 58 `c
 -> 51 `c
--> 53 `c
--> 58 `c
--> 51 `c
--> 56 `c
+-> 50 `c
 -> 0 `c
 ..
 ]
-[; ;common.c: 39: uint8_t const compile_time[9] = "00:35:38";
+[; ;common.c: 39: uint8_t const compile_time[9] = "16:02:32";
 "44
 [; ;common.c: 44: asm("\tpsect eeprom_data,class=EEDATA,noexec"); asm("\tdb\t" "5" "," "2" "," "1" "," "2" "," "1" "," "1" "," "1" "," "1");
 [; <" 	psect eeprom_data,class=EEDATA,noexec ;# ">

@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Temp\smo.obj
+$C:\Temp\s534.obj
 idloc IDLOC 0 200000 200000 8 1
 init CODE 0 E E 4 1
 reset_vec CODE 0 0 0 4 1
@@ -2249,65 +2249,65 @@ FFC text28 CODE >238:D:\Ivan\Electro\XC8\18F4525\settings.c
 3C34 text0 CODE >34:D:\Ivan\Electro\XC8\18F4525\main.c
 3C4A text0 CODE >35:D:\Ivan\Electro\XC8\18F4525\main.c
 3C4C text0 CODE >39:D:\Ivan\Electro\XC8\18F4525\main.c
-373E cinit CODE >8296:C:\Temp\smo.
-373E cinit CODE >8298:C:\Temp\smo.
-373E cinit CODE >8301:C:\Temp\smo.
-373E cinit CODE >8568:C:\Temp\smo.
-3740 cinit CODE >8569:C:\Temp\smo.
-3742 cinit CODE >8570:C:\Temp\smo.
-3744 cinit CODE >8571:C:\Temp\smo.
-3746 cinit CODE >8572:C:\Temp\smo.
-3748 cinit CODE >8573:C:\Temp\smo.
-374A cinit CODE >8574:C:\Temp\smo.
-374E cinit CODE >8575:C:\Temp\smo.
-3752 cinit CODE >8576:C:\Temp\smo.
-3752 cinit CODE >8577:C:\Temp\smo.
-3754 cinit CODE >8578:C:\Temp\smo.
-3758 cinit CODE >8579:C:\Temp\smo.
-375A cinit CODE >8580:C:\Temp\smo.
-375C cinit CODE >8581:C:\Temp\smo.
-375E cinit CODE >8585:C:\Temp\smo.
-3760 cinit CODE >8586:C:\Temp\smo.
-3762 cinit CODE >8587:C:\Temp\smo.
-3764 cinit CODE >8588:C:\Temp\smo.
-3766 cinit CODE >8589:C:\Temp\smo.
-3768 cinit CODE >8590:C:\Temp\smo.
-376A cinit CODE >8591:C:\Temp\smo.
-376E cinit CODE >8592:C:\Temp\smo.
-3772 cinit CODE >8593:C:\Temp\smo.
-3772 cinit CODE >8594:C:\Temp\smo.
-3774 cinit CODE >8595:C:\Temp\smo.
-3778 cinit CODE >8596:C:\Temp\smo.
-377A cinit CODE >8597:C:\Temp\smo.
-377C cinit CODE >8598:C:\Temp\smo.
-377E cinit CODE >8602:C:\Temp\smo.
-3782 cinit CODE >8603:C:\Temp\smo.
-3784 cinit CODE >8604:C:\Temp\smo.
-3784 cinit CODE >8605:C:\Temp\smo.
-3786 cinit CODE >8606:C:\Temp\smo.
-3788 cinit CODE >8607:C:\Temp\smo.
-378A cinit CODE >8610:C:\Temp\smo.
-378E cinit CODE >8611:C:\Temp\smo.
-3790 cinit CODE >8612:C:\Temp\smo.
-3790 cinit CODE >8613:C:\Temp\smo.
-3792 cinit CODE >8614:C:\Temp\smo.
-3794 cinit CODE >8615:C:\Temp\smo.
-3796 cinit CODE >8618:C:\Temp\smo.
-379A cinit CODE >8619:C:\Temp\smo.
-379C cinit CODE >8620:C:\Temp\smo.
-379C cinit CODE >8621:C:\Temp\smo.
-379E cinit CODE >8622:C:\Temp\smo.
-37A0 cinit CODE >8623:C:\Temp\smo.
-37A2 cinit CODE >8626:C:\Temp\smo.
-37A4 cinit CODE >8629:C:\Temp\smo.
-37A6 cinit CODE >8630:C:\Temp\smo.
-37A8 cinit CODE >8636:C:\Temp\smo.
-37A8 cinit CODE >8638:C:\Temp\smo.
-37AA cinit CODE >8639:C:\Temp\smo.
-37AC cinit CODE >8641:C:\Temp\smo.
-37AE cinit CODE >8642:C:\Temp\smo.
-37B0 cinit CODE >8643:C:\Temp\smo.
-37B2 cinit CODE >8644:C:\Temp\smo.
+373E cinit CODE >8296:C:\Temp\s534.
+373E cinit CODE >8298:C:\Temp\s534.
+373E cinit CODE >8301:C:\Temp\s534.
+373E cinit CODE >8568:C:\Temp\s534.
+3740 cinit CODE >8569:C:\Temp\s534.
+3742 cinit CODE >8570:C:\Temp\s534.
+3744 cinit CODE >8571:C:\Temp\s534.
+3746 cinit CODE >8572:C:\Temp\s534.
+3748 cinit CODE >8573:C:\Temp\s534.
+374A cinit CODE >8574:C:\Temp\s534.
+374E cinit CODE >8575:C:\Temp\s534.
+3752 cinit CODE >8576:C:\Temp\s534.
+3752 cinit CODE >8577:C:\Temp\s534.
+3754 cinit CODE >8578:C:\Temp\s534.
+3758 cinit CODE >8579:C:\Temp\s534.
+375A cinit CODE >8580:C:\Temp\s534.
+375C cinit CODE >8581:C:\Temp\s534.
+375E cinit CODE >8585:C:\Temp\s534.
+3760 cinit CODE >8586:C:\Temp\s534.
+3762 cinit CODE >8587:C:\Temp\s534.
+3764 cinit CODE >8588:C:\Temp\s534.
+3766 cinit CODE >8589:C:\Temp\s534.
+3768 cinit CODE >8590:C:\Temp\s534.
+376A cinit CODE >8591:C:\Temp\s534.
+376E cinit CODE >8592:C:\Temp\s534.
+3772 cinit CODE >8593:C:\Temp\s534.
+3772 cinit CODE >8594:C:\Temp\s534.
+3774 cinit CODE >8595:C:\Temp\s534.
+3778 cinit CODE >8596:C:\Temp\s534.
+377A cinit CODE >8597:C:\Temp\s534.
+377C cinit CODE >8598:C:\Temp\s534.
+377E cinit CODE >8602:C:\Temp\s534.
+3782 cinit CODE >8603:C:\Temp\s534.
+3784 cinit CODE >8604:C:\Temp\s534.
+3784 cinit CODE >8605:C:\Temp\s534.
+3786 cinit CODE >8606:C:\Temp\s534.
+3788 cinit CODE >8607:C:\Temp\s534.
+378A cinit CODE >8610:C:\Temp\s534.
+378E cinit CODE >8611:C:\Temp\s534.
+3790 cinit CODE >8612:C:\Temp\s534.
+3790 cinit CODE >8613:C:\Temp\s534.
+3792 cinit CODE >8614:C:\Temp\s534.
+3794 cinit CODE >8615:C:\Temp\s534.
+3796 cinit CODE >8618:C:\Temp\s534.
+379A cinit CODE >8619:C:\Temp\s534.
+379C cinit CODE >8620:C:\Temp\s534.
+379C cinit CODE >8621:C:\Temp\s534.
+379E cinit CODE >8622:C:\Temp\s534.
+37A0 cinit CODE >8623:C:\Temp\s534.
+37A2 cinit CODE >8626:C:\Temp\s534.
+37A4 cinit CODE >8629:C:\Temp\s534.
+37A6 cinit CODE >8630:C:\Temp\s534.
+37A8 cinit CODE >8636:C:\Temp\s534.
+37A8 cinit CODE >8638:C:\Temp\s534.
+37AA cinit CODE >8639:C:\Temp\s534.
+37AC cinit CODE >8641:C:\Temp\s534.
+37AE cinit CODE >8642:C:\Temp\s534.
+37B0 cinit CODE >8643:C:\Temp\s534.
+37B2 cinit CODE >8644:C:\Temp\s534.
 # %SYMTAB Section
 # An enumeration of all symbols in the program.
 # The beginning of the section is indicated by %SYMTAB.
@@ -2342,7 +2342,7 @@ _RTOS_DeleteTask 33B6 0 CODE 0 text105 dist/default/production\18F4525.productio
 readTemp_Single@i 19 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 __Hibigdata 0 0 CODE 0 ibigdata dist/default/production\18F4525.production.obj
 decimal_to_bcd@d F 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
-__mediumconst B8E4 0 MEDIUMCONST 0 mediumconst C:\Temp\smo.obj
+__mediumconst B8E4 0 MEDIUMCONST 0 mediumconst C:\Temp\s534.obj
 _set_type_clk 23BC 0 CODE 0 text24 dist/default/production\18F4525.production.obj
 __size_of_bmp280ReadInt16 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 __size_of_bmp280ReadInt32 0 0 ABS 0 - dist/default/production\18F4525.production.obj
@@ -2464,14 +2464,14 @@ _RCEN 7E2B 0 ABS 0 - dist/default/production\18F4525.production.obj
 _RSEN 7E29 0 ABS 0 - dist/default/production\18F4525.production.obj
 _TMR0 FD6 0 ABS 0 - dist/default/production\18F4525.production.obj
 _TXIF 7CF4 0 ABS 0 - dist/default/production\18F4525.production.obj
-___sp 0 0 STACK 2 stack C:\Temp\smo.obj
+___sp 0 0 STACK 2 stack C:\Temp\s534.obj
 _brig DC 0 BANK0 1 bssBANK0 dist/default/production\18F4525.production.obj
 _main 3C04 0 CODE 0 text0 dist/default/production\18F4525.production.obj
 _rand 3BB4 0 CODE 0 text95 dist/default/production\18F4525.production.obj
 RTOS_DeleteTask@i D 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 btemp 7B 0 COMRAM 1 temp dist/default/production\18F4525.production.obj
 _my_func B93D 0 MEDIUMCONST 0 mediumconst dist/default/production\18F4525.production.obj
-start E 0 CODE 0 init C:\Temp\smo.obj
+start E 0 CODE 0 init C:\Temp\s534.obj
 _interval_scroll_text 41EE 0 CODE 0 text79 dist/default/production\18F4525.production.obj
 _EUSART_Write 3FB0 0 CODE 0 text41 dist/default/production\18F4525.production.obj
 __size_of___ftmul 0 0 ABS 0 - dist/default/production\18F4525.production.obj
@@ -2531,11 +2531,11 @@ __size_of_set_type_clk 0 0 ABS 0 - dist/default/production\18F4525.production.ob
 radio_temp@fptmp 22 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 bcd_to_decimal@d 6 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 __size_of_nrf24_init 0 0 ABS 0 - dist/default/production\18F4525.production.obj
-__accesstop 80 0 ABS 0 - C:\Temp\smo.obj
-intlevel0 0 0 CODE 0 text C:\Temp\smo.obj
-intlevel1 0 0 CODE 0 text C:\Temp\smo.obj
-intlevel2 0 0 CODE 0 text C:\Temp\smo.obj
-intlevel3 0 0 CODE 0 text C:\Temp\smo.obj
+__accesstop 80 0 ABS 0 - C:\Temp\s534.obj
+intlevel0 0 0 CODE 0 text C:\Temp\s534.obj
+intlevel1 0 0 CODE 0 text C:\Temp\s534.obj
+intlevel2 0 0 CODE 0 text C:\Temp\s534.obj
+intlevel3 0 0 CODE 0 text C:\Temp\s534.obj
 __ptext100 43CE 0 CODE 0 text100 dist/default/production\18F4525.production.obj
 __ptext101 4312 0 CODE 0 text101 dist/default/production\18F4525.production.obj
 __ptext102 4552 0 CODE 0 text102 dist/default/production\18F4525.production.obj
@@ -2606,11 +2606,11 @@ _bmp280Convert$3693 59 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.p
 __size_of_set_en_bmp 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 __size_of_set_en_ds1 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 __size_of_set_en_ds2 0 0 ABS 0 - dist/default/production\18F4525.production.obj
-___inthi_sp 0 0 STACK 2 stack C:\Temp\smo.obj
+___inthi_sp 0 0 STACK 2 stack C:\Temp\s534.obj
 __end_of_nrf24_read_buf 41BC 0 CODE 0 text61 dist/default/production\18F4525.production.obj
 __end_of_nrf24_read_reg 4510 0 CODE 0 text64 dist/default/production\18F4525.production.obj
 _nrf_tx_address BF65 0 MEDIUMCONST 0 mediumconst dist/default/production\18F4525.production.obj
-___intlo_sp 0 0 STACK 2 stack C:\Temp\smo.obj
+___intlo_sp 0 0 STACK 2 stack C:\Temp\s534.obj
 __LdataCOMRAM 0 0 ABS 0 dataCOMRAM dist/default/production\18F4525.production.obj
 _bcd_to_decimal 4568 0 CODE 0 text110 dist/default/production\18F4525.production.obj
 _EECON1bits FA6 0 ABS 0 - dist/default/production\18F4525.production.obj
@@ -2832,7 +2832,7 @@ __size_of_pic_to_led 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 __Hbigbss 0 0 BIGRAM 1 bigbss dist/default/production\18F4525.production.obj
 __Hbigram 0 0 ABS 0 bigram dist/default/production\18F4525.production.obj
 RTOS_SetTask@taskFunc 5 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
-__smallconst 0 0 SMALLCONST 0 smallconst C:\Temp\smo.obj
+__smallconst 0 0 SMALLCONST 0 smallconst C:\Temp\s534.obj
 __size_of_Send_Byte_7221 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 _I2C_Master_RepeatedStart 4660 0 CODE 0 text115 dist/default/production\18F4525.production.obj
 __end_of_hide_two_side 3BAA 0 CODE 0 text91 dist/default/production\18F4525.production.obj
@@ -3410,8 +3410,8 @@ _bmp280WriteByte 4470 0 CODE 0 text8 dist/default/production\18F4525.production.
 _idx_pnt CA 0 BANK0 1 bssBANK0 dist/default/production\18F4525.production.obj
 __size_of_write_bit 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 __size_of_write_eep 0 0 ABS 0 - dist/default/production\18F4525.production.obj
-stackhi F7F 0 ABS 0 - C:\Temp\smo.obj
-stacklo 264 0 ABS 0 - C:\Temp\smo.obj
+stackhi F7F 0 ABS 0 - C:\Temp\s534.obj
+stacklo 264 0 ABS 0 - C:\Temp\s534.obj
 nrf24_write_buf@reg A 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
 __Lintcode 8 0 CODE 0 intcode dist/default/production\18F4525.production.obj
 ?___lltoft D 0 COMRAM 1 cstackCOMRAM dist/default/production\18F4525.production.obj
@@ -3627,7 +3627,7 @@ __Ltext98 0 0 ABS 0 text98 dist/default/production\18F4525.production.obj
 __Ltext99 0 0 ABS 0 text99 dist/default/production\18F4525.production.obj
 _type_font 7A 0 COMRAM 1 bssCOMRAM dist/default/production\18F4525.production.obj
 __end_of_set_font 3D36 0 CODE 0 text77 dist/default/production\18F4525.production.obj
-__ramtop 1000 0 RAM 0 ramtop C:\Temp\smo.obj
+__ramtop 1000 0 RAM 0 ramtop C:\Temp\s534.obj
 _sprintf 404E 0 CODE 0 text78 dist/default/production\18F4525.production.obj
 __size_of_nrf24_write_buf 0 0 ABS 0 - dist/default/production\18F4525.production.obj
 __size_of_nrf24_write_reg 0 0 ABS 0 - dist/default/production\18F4525.production.obj

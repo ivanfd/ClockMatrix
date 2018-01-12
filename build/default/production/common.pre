@@ -4601,8 +4601,8 @@ extern uint8_t snd_flag;
 uint8_t en_ds_1;
 uint8_t en_ds_2;
 uint8_t en_bmp280;
-uint8_t const compile_date[12] = "Jan 06 2018";
-uint8_t const compile_time[9] = "00:35:38";
+uint8_t const compile_date[12] = "Jan 11 2018";
+uint8_t const compile_time[9] = "16:02:32";
 
 
 
