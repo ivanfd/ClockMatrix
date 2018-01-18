@@ -18,7 +18,7 @@
 #define _XTAL_FREQ  40000000 // чатота контролера 40м√ц
 
 
-#define VERSION "Clock v3.0.0 by Ivan_fd 03.01.2018"
+#define VERSION "Clock v3.0.0 by Ivan_fd"
 //#define DEBUG   // дл€ в≥дладки, розкоментувати.
 
 

@@ -23,11 +23,11 @@ uint8_t type_clk = TYPE_CLK_1; // вигляд годинника
 uint8_t idx_pnt = 0; // індекс, для вигляду мигаючих крапок
 volatile uint8_t x1, x2, x3, x4, y1, y2, y3, y4; //Для зсуву стовбця вниз
 uint16_t adc_res = 500; // результат вимірювання АЦП
-uint8_t oldsec;// секунди попередні
-bit oldsec_flag;
+uint8_t oldsec, oldmin;// секунди попередні
+bit oldsec_flag, oldmin_flag, bmp_show, mess_show;
 uint8_t brg_type;// яскравість по датчику, чи постійна
 uint8_t brig;// значення яскравості
-uint8_t usart_data[16];
+uint8_t usart_data[100];
 uint8_t blk_dot = 0; // дозвіл на мигання кнопок
 extern uint8_t en_h_snd; // чи можна генерувати сигнал
 extern uint8_t h_snd_t; //година співпадає з дозволом
@@ -35,6 +35,8 @@ extern uint8_t snd_flag; // один раз відтворювати
 uint8_t en_ds_1;    //  чи пок. температуру з датчика 1
 uint8_t en_ds_2;    //  чи пок. температуру з датчика 2
 uint8_t en_bmp280; //  чи показуємо тиск
+uint8_t count_min = 0; // лічильник пройдених хвилин
+uint8_t day_mess = 0; // день в який буде виводитись повідомлення
 uint8_t const compile_date[12]   = __DATE__;     // Mmm dd yyyy
 uint8_t const compile_time[9]    = __TIME__;     // hh:mm:ss
  
@@ -53,10 +55,13 @@ __EEPROM_DATA(5, 2, 1, 2, 1, 1, 1, 1); // ініціалізація еепром,
 void GetTime(void)
 {
     oldsec = TTime.Ts;
+    oldmin = TTime.Tmin;
     getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
     getDate(&TTime.Tdy,&TTime.Tdt,&TTime.Tmt,&TTime.Tyr);
     if (oldsec != TTime.Ts)
         oldsec_flag = 1;
+    if (oldmin != TTime.Tmin)
+        oldmin_flag = 1;
     if (TTime.Ts == 3)
         snd_flag = 1; //дозволяємо знову генерувати щогодинний сигнал
     if ((TTime.Thr >= 7)&&(TTime.Thr <= 23)&&(TTime.Tmin == 0)&&(TTime.Ts == 0)&&(snd_flag))
@@ -333,8 +338,18 @@ void time_led() {
             if (((TTime.Ts > 14)&&(TTime.Ts < 16)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо температуру
                 events = KEY_DOWN_EVENT;
             if (en_bmp280) // якщо можна виводити атм. тиск
-                if (((TTime.Ts > 39)&&(TTime.Ts < 41)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо атмосферний тиск
+                if (((TTime.Ts > 39)&&(TTime.Ts < 41)&&(bmp_show))){// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо атмосферний тиск
                     events = KEY_UP_EVENT;
+                    bmp_show = 0;
+                }
+            if (oldmin_flag) { // пройшла хвилина
+                count_min++; // збільшуємо лічильник хвилин
+                oldmin_flag = 0;
+            }
+            if(count_min == 2){
+                count_min = 0;
+                bmp_show = 1;
+            }
             break;
         case KEY_OK_EVENT: // якщо натиснули кнопку ОК
             RTOS_DeleteTask(time_led); // видаляємо задачу в якій сидимо
@@ -448,7 +463,14 @@ void time_led() {
         nrf24_powerUpRx(); // Переводимо датчик у режим прийому, та скидаємо всі переривання
         nrf24_init(120, 4); // Ще раз ініціалізуємо
     }
-
+    if (TTime.Tdt == day_mess) {    // будемо виводити строку. Наприклад - привітання.
+        if (((TTime.Tmin % 5) == 0) && (TTime.Ts == 35) && mess_show) { // один раз в 5 хвилин
+            blk_dot = 0;
+            interval_scroll_text();
+            blk_dot = 1;
+        }
+    } else
+        mess_show = 0;
 
     //#ifdef DEBUG
     //            if (nrf24_dataReady()) {
@@ -672,10 +694,12 @@ void usart_r() {
 
                 break;
             case 'q': // виводимо біг строку температура
-                // формат "$qt 
-                // 
+                // формат "$qt - температура, якщо є дозвіл на показ датчиків
+                // формат "$qp - атмосферний тиск
                 if (usart_data[2] == 't') {
-                    events = KEY_DOWN_EVENT;
+                    events = KEY_DOWN_EVENT;  // показати температуру
+                } else if (usart_data[2] == 'p') {
+                    events = KEY_UP_EVENT;  // показати тиск
                 } else {
                     EUSART_Write('E');
                     EUSART_Write('R');
@@ -688,7 +712,30 @@ void usart_r() {
                 EUSART_Write('\r');
                 EUSART_Write('\n');
 
-                break;                
+                break;
+            case 'S': // виводимо біг строку
+                // формат "$Stext -  текст, до 100 символів
+                for (j = 0; j <= (strlen(usart_data)) - 2; j++)
+                    text_buf[j] = usart_data[j + 2];
+                
+                EUSART_Write('O');
+                EUSART_Write('K');
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+
+                day_mess = TTime.Tdt;
+                mess_show = 1;
+                blk_dot = 0;
+                RTOS_DeleteTask(home_temp); //видаляємо задачу
+                RTOS_DeleteTask(radio_temp); //видаляємо задачу
+                interval_scroll_text();
+                RTOS_SetTask(time_led, 0, cycle_main); //додаємо задачу
+                blk_dot = 1;
+
+
+
+                break;                 
+                
             case 'r': // читаємо тестові значення
                 // 
                 switch (usart_data[2]) {
@@ -749,12 +796,12 @@ void usart_r() {
 void version(void)
 {
     uint8_t i;
-    
-    sprintf(text_buf, VERSION); 
-    interval_scroll_text();
-//    while(scroll_text())
-//    {
-//        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+
+    sprintf(text_buf,"%s %s %s", VERSION, compile_date, compile_time); // формуємо строку
+    interval_scroll_text();// виводимо біг. строку
+    //    while(scroll_text())
+    //    {
+    //        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
 //        for(i=0; i<SPEED_STRING; i++)
 //            __delay_ms(1);
 //

@@ -60,7 +60,7 @@ typedef void (*p_MyFunc)();
  void interval_scroll_text();
  void scroll_right(void);
  void hide_two_side(void);
-  void Rand_ef(void);
+ void Rand_ef(void);
 
  
 #endif	/* XC_HEADER_TEMPLATE_H */

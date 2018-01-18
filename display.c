@@ -3,7 +3,7 @@
 
 uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
 //uint8_t TxtBuf[6];          // буфер дл¤ цифр
-uint8_t text_buf[100];      // буфер для біг строки
+uint8_t text_buf[100];      // буфер для біг строки, та прийому даних з компорта
 uint8_t i_char, i_bchar;    // індекс літери та байтк в літері
 uint8_t(*pFont)[][5] = &dFont1; // вказівник на шрифт цифр для показу годин     
 extern uint8_t idx_pnt;
@@ -15,7 +15,7 @@ const uint8_t dissolve_arr[16] = {253,191,239,127,251,223,247,254,253,191,239,12
 
    static void (*function) (void); // вказівник на функцію
 //void (*p_MyFunc[4])(void) = {dissolve, scroll_left, scroll_right, hide_two_side};
-   const p_MyFunc my_func[4] = {dissolve, scroll_left, scroll_right, hide_two_side};
+   const p_MyFunc my_func[4] = {dissolve, scroll_left, scroll_right, hide_two_side}; //масив вказівників на функції
 //*****************************************
 //       засвітити піксель на матриці
 //*****************************************

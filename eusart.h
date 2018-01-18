@@ -12,7 +12,7 @@
   Section: Macro Declarations
 */
 #define EUSART_TX_BUFFER_SIZE 16
-#define EUSART_RX_BUFFER_SIZE 16
+#define EUSART_RX_BUFFER_SIZE 100
 
 #define EUSART_DataReady  (eusartRxCount)
 
