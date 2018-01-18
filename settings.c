@@ -32,11 +32,11 @@ void time_set_min(void)
             RTOS_SetTask(time_set_hr, 0, 50); // ставимо задачу, налаштування годин
             RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
             if (type_clk == TYPE_CLK_1) {
-                putchar_b_buf(13, (TSTime.Tmin / 10) % 10, pFont);
-                putchar_b_buf(19, TSTime.Tmin % 10, pFont);
+                putchar_b_buf(13, (TSTime.Tmin / 10) % 10, pFont, &Dis_Buff);
+                putchar_b_buf(19, TSTime.Tmin % 10, pFont, &Dis_Buff);
             } else {
-                putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
-                putchar_b_buf(25, TTime.Tmin % 10, pFont);
+                putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont, &Dis_Buff);
+                putchar_b_buf(25, TTime.Tmin % 10, pFont, &Dis_Buff);
             }
             events = MAIN_EVENT;
             en_put = 0;
@@ -68,19 +68,19 @@ void time_set_min(void)
         if (show_digit) // чи показувати цифри
         {
             if (type_clk == TYPE_CLK_1) {
-                putchar_b_buf(13, (TSTime.Tmin / 10) % 10, pFont);
-                putchar_b_buf(19, TSTime.Tmin % 10, pFont);
+                putchar_b_buf(13, (TSTime.Tmin / 10) % 10, pFont, &Dis_Buff);
+                putchar_b_buf(19, TSTime.Tmin % 10, pFont, &Dis_Buff);
             } else {
-                putchar_b_buf(19, (TSTime.Tmin / 10) % 10, pFont);
-                putchar_b_buf(25, TSTime.Tmin % 10, pFont);
+                putchar_b_buf(19, (TSTime.Tmin / 10) % 10, pFont, &Dis_Buff);
+                putchar_b_buf(25, TSTime.Tmin % 10, pFont, &Dis_Buff);
             }
         } else {
             if (type_clk == TYPE_CLK_1) {
-                putchar_b_buf(13, 0, &Font);
-                putchar_b_buf(19, 0, &Font);
+                putchar_b_buf(13, 0, &Font, &Dis_Buff);
+                putchar_b_buf(19, 0, &Font, &Dis_Buff);
             } else {
-                putchar_b_buf(19, 0, &Font);
-                putchar_b_buf(25, 0, &Font);
+                putchar_b_buf(19, 0, &Font, &Dis_Buff);
+                putchar_b_buf(25, 0, &Font, &Dis_Buff);
             }
         }
     }
@@ -139,25 +139,25 @@ void time_set_hr(void)
             // putchar_b_buf(19,TSTime.Tmin % 10, pFont);
             if (type_clk == TYPE_CLK_1) {
                 if ((TSTime.Thr / 10) % 10)
-                    putchar_b_buf(0, (TSTime.Thr / 10) % 10, pFont);
+                    putchar_b_buf(0, (TSTime.Thr / 10) % 10, pFont, &Dis_Buff);
                 else
-                    putchar_b_buf(0, 0, &Font);
-                putchar_b_buf(6, TSTime.Thr % 10, pFont);
+                    putchar_b_buf(0, 0, &Font, &Dis_Buff);
+                putchar_b_buf(6, TSTime.Thr % 10, pFont, &Dis_Buff);
             } else {
                 if ((TSTime.Thr / 10) % 10)
-                    putchar_b_buf(1, (TSTime.Thr / 10) % 10, pFont);
+                    putchar_b_buf(1, (TSTime.Thr / 10) % 10, pFont, &Dis_Buff);
                 else
-                    putchar_b_buf(1, 0, &Font);
-                putchar_b_buf(7, TSTime.Thr % 10, pFont);
+                    putchar_b_buf(1, 0, &Font, &Dis_Buff);
+                putchar_b_buf(7, TSTime.Thr % 10, pFont, &Dis_Buff);
             }
         } else {
             if (type_clk == TYPE_CLK_1) {
-                putchar_b_buf(0, 0, &Font);
-                putchar_b_buf(6, 0, &Font);
+                putchar_b_buf(0, 0, &Font, &Dis_Buff);
+                putchar_b_buf(6, 0, &Font, &Dis_Buff);
             } else {
 
-                putchar_b_buf(1, 0, &Font);
-                putchar_b_buf(7, 0, &Font);
+                putchar_b_buf(1, 0, &Font, &Dis_Buff);
+                putchar_b_buf(7, 0, &Font, &Dis_Buff);
             }
         }
     }
@@ -206,11 +206,11 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,STR_YR[0], &Font);
-    putchar_b_buf(6,STR_YR[1], &Font);
-    putchar_b_buf(12,STR_YR[2], &Font);
-    putchar_b_buf(18,(TSTime.Tyr/10) % 10, pFont);
-    putchar_b_buf(24,TSTime.Tyr % 10, pFont);
+    putchar_b_buf(0,STR_YR[0], &Font, &Dis_Buff);
+    putchar_b_buf(6,STR_YR[1], &Font, &Dis_Buff);
+    putchar_b_buf(12,STR_YR[2], &Font, &Dis_Buff);
+    putchar_b_buf(18,(TSTime.Tyr/10) % 10, pFont, &Dis_Buff);
+    putchar_b_buf(24,TSTime.Tyr % 10, pFont, &Dis_Buff);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;
@@ -259,58 +259,58 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,STR_MNT[0], &Font);
-    putchar_b_buf(6,STR_MNT[1], &Font);
-    putchar_b_buf(12,STR_MNT[2], &Font);
+    putchar_b_buf(0,STR_MNT[0], &Font, &Dis_Buff);
+    putchar_b_buf(6,STR_MNT[1], &Font, &Dis_Buff);
+    putchar_b_buf(12,STR_MNT[2], &Font, &Dis_Buff);
     switch(TSTime.Tmt)
     {
         case 1:
-        putchar_b_buf(18,STR_MNT_1[0], &Font);
-        putchar_b_buf(24,STR_MNT_1[1], &Font);
+        putchar_b_buf(18,STR_MNT_1[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_1[1], &Font, &Dis_Buff);
         break;
         case 2:
-        putchar_b_buf(18,STR_MNT_2[0], &Font);
-        putchar_b_buf(24,STR_MNT_2[1], &Font);
+        putchar_b_buf(18,STR_MNT_2[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_2[1], &Font, &Dis_Buff);
         break;
         case 3:
-        putchar_b_buf(18,STR_MNT_3[0], &Font);
-        putchar_b_buf(24,STR_MNT_3[1], &Font);
+        putchar_b_buf(18,STR_MNT_3[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_3[1], &Font, &Dis_Buff);
         break;
         case 4:
-        putchar_b_buf(18,STR_MNT_4[0], &Font);
-        putchar_b_buf(24,STR_MNT_4[1], &Font);
+        putchar_b_buf(18,STR_MNT_4[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_4[1], &Font, &Dis_Buff);
         break;
         case 5:
-        putchar_b_buf(18,STR_MNT_5[0], &Font);
-        putchar_b_buf(24,STR_MNT_5[1], &Font);
+        putchar_b_buf(18,STR_MNT_5[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_5[1], &Font, &Dis_Buff);
         break;
         case 6:
-        putchar_b_buf(18,STR_MNT_6[0], &Font);
-        putchar_b_buf(24,STR_MNT_6[1], &Font);
+        putchar_b_buf(18,STR_MNT_6[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_6[1], &Font, &Dis_Buff);
         break;        
         case 7:
-        putchar_b_buf(18,STR_MNT_7[0], &Font);
-        putchar_b_buf(24,STR_MNT_7[1], &Font);
+        putchar_b_buf(18,STR_MNT_7[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_7[1], &Font, &Dis_Buff);
         break;
         case 8:
-        putchar_b_buf(18,STR_MNT_8[0], &Font);
-        putchar_b_buf(24,STR_MNT_8[1], &Font);
+        putchar_b_buf(18,STR_MNT_8[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_8[1], &Font, &Dis_Buff);
         break;        
         case 9:
-        putchar_b_buf(18,STR_MNT_9[0], &Font);
-        putchar_b_buf(24,STR_MNT_9[1], &Font);
+        putchar_b_buf(18,STR_MNT_9[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_9[1], &Font, &Dis_Buff);
         break;
         case 10:
-        putchar_b_buf(18,STR_MNT_10[0], &Font);
-        putchar_b_buf(24,STR_MNT_10[1], &Font);
+        putchar_b_buf(18,STR_MNT_10[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_10[1], &Font, &Dis_Buff);
         break;        
         case 11:
-        putchar_b_buf(18,STR_MNT_11[0], &Font);
-        putchar_b_buf(24,STR_MNT_11[1], &Font);
+        putchar_b_buf(18,STR_MNT_11[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_11[1], &Font, &Dis_Buff);
         break;
         case 12:
-        putchar_b_buf(18,STR_MNT_12[0], &Font);
-        putchar_b_buf(24,STR_MNT_12[1], &Font);
+        putchar_b_buf(18,STR_MNT_12[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_MNT_12[1], &Font, &Dis_Buff);
         break;        
 
     }
@@ -361,11 +361,11 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,STR_DATE[0], &Font);
-    putchar_b_buf(6,STR_DATE[1], &Font);
-    putchar_b_buf(12,STR_DATE[2], &Font);
-    putchar_b_buf(18,(TSTime.Tdt/10) % 10, pFont);
-    putchar_b_buf(24,TSTime.Tdt % 10 , pFont);
+    putchar_b_buf(0,STR_DATE[0], &Font, &Dis_Buff);
+    putchar_b_buf(6,STR_DATE[1], &Font, &Dis_Buff);
+    putchar_b_buf(12,STR_DATE[2], &Font, &Dis_Buff);
+    putchar_b_buf(18,(TSTime.Tdt/10) % 10, pFont, &Dis_Buff);
+    putchar_b_buf(24,TSTime.Tdt % 10 , pFont, &Dis_Buff);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;
@@ -414,38 +414,38 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,STR_DAY[0], &Font);
-    putchar_b_buf(6,STR_DAY[1], &Font);
-    putchar_b_buf(12,STR_DAY[2], &Font);
+    putchar_b_buf(0,STR_DAY[0], &Font, &Dis_Buff);
+    putchar_b_buf(6,STR_DAY[1], &Font, &Dis_Buff);
+    putchar_b_buf(12,STR_DAY[2], &Font, &Dis_Buff);
     switch(TSTime.Tdy)
     {
         case 2:
-        putchar_b_buf(18,STR_DAY_1[0], &Font);
-        putchar_b_buf(24,STR_DAY_1[1], &Font);
+        putchar_b_buf(18,STR_DAY_1[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_DAY_1[1], &Font, &Dis_Buff);
         break;
         case 3:
-        putchar_b_buf(18,STR_DAY_2[0], &Font);
-        putchar_b_buf(24,STR_DAY_2[1], &Font);
+        putchar_b_buf(18,STR_DAY_2[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_DAY_2[1], &Font, &Dis_Buff);
         break;
         case 4:
-        putchar_b_buf(18,STR_DAY_3[0], &Font);
-        putchar_b_buf(24,STR_DAY_3[1], &Font);
+        putchar_b_buf(18,STR_DAY_3[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_DAY_3[1], &Font, &Dis_Buff);
         break;
         case 5:
-        putchar_b_buf(18,STR_DAY_4[0], &Font);
-        putchar_b_buf(24,STR_DAY_4[1], &Font);
+        putchar_b_buf(18,STR_DAY_4[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_DAY_4[1], &Font, &Dis_Buff);
         break;
         case 6:
-        putchar_b_buf(18,STR_DAY_5[0], &Font);
-        putchar_b_buf(24,STR_DAY_5[1], &Font);
+        putchar_b_buf(18,STR_DAY_5[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_DAY_5[1], &Font, &Dis_Buff);
         break;
         case 7:
-        putchar_b_buf(18,STR_DAY_6[0], &Font);
-        putchar_b_buf(24,STR_DAY_6[1], &Font);
+        putchar_b_buf(18,STR_DAY_6[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_DAY_6[1], &Font, &Dis_Buff);
         break;        
         case 1:
-        putchar_b_buf(18,STR_DAY_7[0], &Font);
-        putchar_b_buf(24,STR_DAY_7[1], &Font);
+        putchar_b_buf(18,STR_DAY_7[0], &Font, &Dis_Buff);
+        putchar_b_buf(24,STR_DAY_7[1], &Font, &Dis_Buff);
         break;
     }
 }    
@@ -498,11 +498,11 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,STR_FONT[0], &Font);
-    putchar_b_buf(6,STR_FONT[1], &Font);
-    putchar_b_buf(12,STR_FONT[2], &Font);
-    putchar_b_buf(18,type_font % 10, pFont);
-    putchar_b_buf(24,0, &Font);
+    putchar_b_buf(0,STR_FONT[0], &Font, &Dis_Buff);
+    putchar_b_buf(6,STR_FONT[1], &Font, &Dis_Buff);
+    putchar_b_buf(12,STR_FONT[2], &Font, &Dis_Buff);
+    putchar_b_buf(18,type_font % 10, pFont, &Dis_Buff);
+    putchar_b_buf(24,0, &Font, &Dis_Buff);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;
@@ -552,11 +552,11 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,STR_TP_CLK[0], &Font);
-    putchar_b_buf(6,STR_TP_CLK[1], &Font);
-        putchar_b_buf(12, STR_TP_CLK[2], &Font);
-        putchar_b_buf(18, type_clk % 10, pFont);
-        putchar_b_buf(24, 0, &Font);
+    putchar_b_buf(0,STR_TP_CLK[0], &Font, &Dis_Buff);
+    putchar_b_buf(6,STR_TP_CLK[1], &Font, &Dis_Buff);
+        putchar_b_buf(12, STR_TP_CLK[2], &Font, &Dis_Buff);
+        putchar_b_buf(18, type_clk % 10, pFont, &Dis_Buff);
+        putchar_b_buf(24, 0, &Font, &Dis_Buff);
     }
     Update_Matrix(Dis_Buff); // обновити дані на дисплеї
     en_put = 1;
@@ -617,15 +617,15 @@ void brg_set() {
             break;
     }
     if (en_put) {
-        putchar_b_buf(0, STR_BRG[0], &Font);
-        putchar_b_buf(6, STR_BRG[1], &Font);
-        putchar_b_buf(12, STR_BRG[2], &Font);
+        putchar_b_buf(0, STR_BRG[0], &Font, &Dis_Buff);
+        putchar_b_buf(6, STR_BRG[1], &Font, &Dis_Buff);
+        putchar_b_buf(12, STR_BRG[2], &Font, &Dis_Buff);
         if (brg_type) {
-            putchar_b_buf(18, STR_BRG_A[0], &Font);
-            putchar_b_buf(24, STR_BRG_A[1], &Font);
+            putchar_b_buf(18, STR_BRG_A[0], &Font, &Dis_Buff);
+            putchar_b_buf(24, STR_BRG_A[1], &Font, &Dis_Buff);
         } else {
-            putchar_b_buf(18, STR_BRG_M[0], &Font);
-            putchar_b_buf(24, STR_BRG_M[1], &Font);
+            putchar_b_buf(18, STR_BRG_M[0], &Font, &Dis_Buff);
+            putchar_b_buf(24, STR_BRG_M[1], &Font, &Dis_Buff);
         }
 
     }
@@ -679,11 +679,11 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,STR_BRG[0], &Font);
-    putchar_b_buf(6,STR_BRG[1], &Font);
-    putchar_b_buf(12,STR_BRG[2], &Font);
-    putchar_b_buf(18,brig % 10, pFont);
-    putchar_b_buf(24,0, &Font);
+    putchar_b_buf(0,STR_BRG[0], &Font, &Dis_Buff);
+    putchar_b_buf(6,STR_BRG[1], &Font, &Dis_Buff);
+    putchar_b_buf(12,STR_BRG[2], &Font, &Dis_Buff);
+    putchar_b_buf(18,brig % 10, pFont, &Dis_Buff);
+    putchar_b_buf(24,0, &Font, &Dis_Buff);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;    
@@ -733,11 +733,11 @@ switch (events)
     }
 if(en_put)
 {
-    putchar_b_buf(0,STR_SND_H[0], &Font);
-    putchar_b_buf(6,STR_SND_H[1], &Font);
-    putchar_b_buf(12,STR_SND_H[2], &Font);
-    putchar_b_buf(18,en_h_snd % 10, pFont);
-    putchar_b_buf(24,0, &Font);
+    putchar_b_buf(0,STR_SND_H[0], &Font, &Dis_Buff);
+    putchar_b_buf(6,STR_SND_H[1], &Font, &Dis_Buff);
+    putchar_b_buf(12,STR_SND_H[2], &Font, &Dis_Buff);
+    putchar_b_buf(18,en_h_snd % 10, pFont, &Dis_Buff);
+    putchar_b_buf(24,0, &Font, &Dis_Buff);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;    
@@ -784,14 +784,14 @@ switch (events)
    
     }
 if(en_put) {
-        putchar_b_buf(0, STR_DS1[0], &Font);
-        putchar_b_buf(6, STR_DS1[1], &Font);
-        putchar_b_buf(12, STR_DS1[2], &Font);
+        putchar_b_buf(0, STR_DS1[0], &Font, &Dis_Buff);
+        putchar_b_buf(6, STR_DS1[1], &Font, &Dis_Buff);
+        putchar_b_buf(12, STR_DS1[2], &Font, &Dis_Buff);
         if (en_ds_1)
-            putchar_b_buf(18, '+', &Font);
+            putchar_b_buf(18, '+', &Font, &Dis_Buff);
         else
-            putchar_b_buf(18, '-', &Font);
-        putchar_b_buf(24, 0, &Font);
+            putchar_b_buf(18, '-', &Font, &Dis_Buff);
+        putchar_b_buf(24, 0, &Font, &Dis_Buff);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;    
@@ -838,14 +838,14 @@ switch (events)
    
     }
 if(en_put) {
-        putchar_b_buf(0, STR_DS2[0], &Font);
-        putchar_b_buf(6, STR_DS2[1], &Font);
-        putchar_b_buf(12, STR_DS2[2], &Font);
+        putchar_b_buf(0, STR_DS2[0], &Font, &Dis_Buff);
+        putchar_b_buf(6, STR_DS2[1], &Font, &Dis_Buff);
+        putchar_b_buf(12, STR_DS2[2], &Font, &Dis_Buff);
         if (en_ds_2)
-            putchar_b_buf(18, '+', &Font);
+            putchar_b_buf(18, '+', &Font, &Dis_Buff);
         else
-            putchar_b_buf(18, '-', &Font);
-        putchar_b_buf(24, 0, &Font);
+            putchar_b_buf(18, '-', &Font, &Dis_Buff);
+        putchar_b_buf(24, 0, &Font, &Dis_Buff);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;    
@@ -892,14 +892,14 @@ switch (events)
    
     }
 if(en_put) {
-        putchar_b_buf(0, STR_BMP[0], &Font);
-        putchar_b_buf(6, STR_BMP[1], &Font);
-        putchar_b_buf(12, STR_BMP[2], &Font);
+        putchar_b_buf(0, STR_BMP[0], &Font, &Dis_Buff);
+        putchar_b_buf(6, STR_BMP[1], &Font, &Dis_Buff);
+        putchar_b_buf(12, STR_BMP[2], &Font, &Dis_Buff);
         if (en_bmp280)
-            putchar_b_buf(18, '+', &Font);
+            putchar_b_buf(18, '+', &Font, &Dis_Buff);
         else
-            putchar_b_buf(18, '-', &Font);
-        putchar_b_buf(24, 0, &Font);
+            putchar_b_buf(18, '-', &Font, &Dis_Buff);
+        putchar_b_buf(24, 0, &Font, &Dis_Buff);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;    

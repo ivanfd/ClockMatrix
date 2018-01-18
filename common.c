@@ -43,7 +43,7 @@ uint8_t const compile_time[9]    = __TIME__;     // hh:mm:ss
 
 
 
-__EEPROM_DATA(5, 2, 1, 2, 1, 1, 1, 1); // ініціалізація еепром, 
+__EEPROM_DATA(4, 2, 1, 2, 1, 1, 1, 1); // ініціалізація еепром, 
 // 0 - тип шрифту (від 1 до 5)
 // 1 - тип годинника (1,2)
 // 2 - тип яскравості(0, 1). 1 - автоматично, 0 - ручний
@@ -84,12 +84,12 @@ void GetTime(void)
                 clear_matrix();
                 if (!((temperature/10) % 10)) // якщо перша цифра 0
                 {
-                    pic_to_led(3,1);
+                    pic_to_led(3,1, &Dis_Buff);
                   //  putchar_down(13,(temperature/10) % 10 + 48);
                     putchar_down(13,temperature % 10, pFont);
                     putchar_down(19,176, &Font);
                 } else {
-                pic_to_led(3, 1);
+                pic_to_led(3, 1, &Dis_Buff);
                 putchar_down(13, (temperature / 10) % 10, pFont);
                 putchar_down(19, temperature % 10, pFont);
                 putchar_down(25, 176, &Font);
@@ -132,7 +132,7 @@ void radio_temp(void) {
         case MAIN_EVENT:
             clear_matrix();
             if (err_ds18) {
-                pic_to_led(0, 2);
+                pic_to_led(0, 2, &Dis_Buff);
                 putchar_down(9, 'E', &Font);
                 putchar_down(15, 'r', &Font);
                 putchar_down(21, 'r', &Font);
@@ -146,7 +146,7 @@ void radio_temp(void) {
 
                     if (!((temperature_radio / 10) % 10)) // якщо перша цифра 0
                     {
-                        pic_to_led(3, 2);
+                        pic_to_led(3, 2, &Dis_Buff);
                         //  putchar_down(13,(temperature/10) % 10 + 48);
                         if (temperature_radio != 0) {
                             putchar_down(13, minus_radio, &Font);
@@ -158,7 +158,7 @@ void radio_temp(void) {
                             putchar_down(19, 176, &Font);
                         }
                     } else {
-                        pic_to_led(0, 2);
+                        pic_to_led(0, 2, &Dis_Buff);
 
                         putchar_down(9, minus_radio, &Font);
                         putchar_down(15, (temperature_radio / 10) % 10, pFont);
@@ -167,7 +167,7 @@ void radio_temp(void) {
 
                     }
                 } else {
-                    pic_to_led(0, 2);
+                    pic_to_led(0, 2, &Dis_Buff);
 
                     putchar_down(9, '-', &Font);
                     putchar_down(15, '-', &Font);
@@ -231,21 +231,20 @@ void pressure(void) {
 
     switch (events) {
         case MAIN_EVENT:
-            clear_matrix();
+           // press = 75126;
             if (press) {
-                //                pic_to_led(3, 4);
-                //                putchar_down(11, (press / 100) % 10, pFont);
-                //                putchar_down(17, (press / 10) % 10, pFont);
-                //                putchar_down(23, press % 10, pFont);
                 pr = press / 100;
-                pic_to_led(3, 4);
-                putchar_down(11, (pr / 100) % 10, pFont);
-                putchar_down(17, (pr / 10) % 10, pFont);
-                putchar_down(23, pr % 10, pFont);
-                //putchar_down(25, '.', &Font);
+                fill_buff_t(pr);
+                center_two_side();
+//                pic_to_led(3, 4, &Dis_Buff);
+//                putchar_down(11, (pr / 100) % 10, pFont);
+//                putchar_down(17, (pr / 10) % 10, pFont);
+//                putchar_down(23, pr % 10, pFont);
+                
 
             } else {
-                pic_to_led(3, 4);
+                clear_matrix();
+                pic_to_led(3, 4, &Dis_Buff);
                 putchar_down(11, 'E', &Font);
                 putchar_down(17, 'R', &Font);
                 putchar_down(23, 'R', &Font);
@@ -338,18 +337,18 @@ void time_led() {
             if (((TTime.Ts > 14)&&(TTime.Ts < 16)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо температуру
                 events = KEY_DOWN_EVENT;
             if (en_bmp280) // якщо можна виводити атм. тиск
-                if (((TTime.Ts > 39)&&(TTime.Ts < 41)&&(bmp_show))){// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо атмосферний тиск
+                if (((TTime.Ts > 39)&&(TTime.Ts < 41)&&((TTime.Tmin % 2) == 0))){    //  виведемо атмосферний тиск
                     events = KEY_UP_EVENT;
-                    bmp_show = 0;
+                  //  bmp_show = 0;
                 }
-            if (oldmin_flag) { // пройшла хвилина
-                count_min++; // збільшуємо лічильник хвилин
-                oldmin_flag = 0;
-            }
-            if(count_min == 2){
-                count_min = 0;
-                bmp_show = 1;
-            }
+//            if (oldmin_flag) { // пройшла хвилина
+//                count_min++; // збільшуємо лічильник хвилин
+//                oldmin_flag = 0;
+//            }
+//            if(count_min == 2){
+//                count_min = 0;
+//                bmp_show = 1;
+//            }
             break;
         case KEY_OK_EVENT: // якщо натиснули кнопку ОК
             RTOS_DeleteTask(time_led); // видаляємо задачу в якій сидимо
@@ -360,7 +359,7 @@ void time_led() {
             en_put = 0;
             if (type_clk == TYPE_CLK_2){
                 blk_dot = 0;
-                putchar_b_buf(13, 23, &Font);
+                putchar_b_buf(13, 23, &Font, &Dis_Buff);
             }
             //clear_matrix();
             break;
@@ -369,7 +368,7 @@ void time_led() {
             blk_dot = 0;
             bmp280Convert(&press, &temperbmp280);
             if (type_clk == TYPE_CLK_2)
-                putchar_b_buf(13, 23, &Font);
+                putchar_b_buf(13, 23, &Font, &Dis_Buff);
             //scroll_right();
             Rand_ef(); // випадковий ефект
             RTOS_DeleteTask(time_led); //видаляємо задачу
@@ -382,7 +381,7 @@ void time_led() {
             if (en_ds_1) {
                 blk_dot = 0;
                 if (type_clk == TYPE_CLK_2)
-                    putchar_b_buf(13, 23, &Font);
+                    putchar_b_buf(13, 23, &Font, &Dis_Buff);
                 //scroll_left();
                 //dissolve();
                 Rand_ef();
@@ -393,7 +392,7 @@ void time_led() {
             } else if (en_ds_2) {
                 blk_dot = 0;
                 if (type_clk == TYPE_CLK_2)
-                    putchar_b_buf(13, 23, &Font);
+                    putchar_b_buf(13, 23, &Font, &Dis_Buff);
                 //scroll_left();
                 //dissolve();
                 Rand_ef();

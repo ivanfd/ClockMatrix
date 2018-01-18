@@ -46,21 +46,23 @@ typedef void (*p_MyFunc)();
  void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag);       
  void FillBuf(uint8_t type);
  
- void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
+ void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[][5], uint8_t *buf);
  void putchar_s_buf(uint8_t x, uint8_t symbol);
- void pixel_on(uint8_t x, uint8_t y);
- void pixel_off(uint8_t x, uint8_t y);
+ void pixel_on(uint8_t x, uint8_t y, uint8_t *buf);
+ void pixel_off(uint8_t x, uint8_t y, uint8_t *buf);
  void clear_matrix(void);
  uint8_t scroll_text(void);
  void putchar_down(uint8_t x, uint8_t symbol, uint8_t (*pF)[10][5]);
  void putchar_down_s(uint8_t x, uint8_t symbol);
- void pic_to_led(uint8_t x, uint8_t pic);
+ void pic_to_led(uint8_t x, uint8_t pic, uint8_t *buf);
  void scroll_left(void);
  void dissolve(void);
  void interval_scroll_text();
  void scroll_right(void);
  void hide_two_side(void);
  void Rand_ef(void);
+ void fill_buff_t(uint16_t data);
+ void center_two_side(void);
 
  
 #endif	/* XC_HEADER_TEMPLATE_H */

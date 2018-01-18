@@ -2,6 +2,7 @@
 #include "display.h"
 
 uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
+uint8_t Dis_Buff_t[BUF_SIZE]; // буфер дисплея temp
 //uint8_t TxtBuf[6];          // буфер дл¤ цифр
 uint8_t text_buf[100];      // буфер для біг строки, та прийому даних з компорта
 uint8_t i_char, i_bchar;    // індекс літери та байтк в літері
@@ -19,44 +20,46 @@ const uint8_t dissolve_arr[16] = {253,191,239,127,251,223,247,254,253,191,239,12
 //*****************************************
 //       засвітити піксель на матриці
 //*****************************************
-void pixel_on(uint8_t x, uint8_t y)
+void pixel_on(uint8_t x, uint8_t y, uint8_t *buf)
 {
-    Dis_Buff[x] |= (1<<y);
+    *(buf+x) |= (1<<y);    
+    //Dis_Buff[x] |= (1<<y);
 }
 
 //*****************************************
 //      загасити піксель на матриці
 //*****************************************
-void pixel_off(uint8_t x, uint8_t y)
+void pixel_off(uint8_t x, uint8_t y, uint8_t *buf)
 {
-    Dis_Buff[x] &= ~(1<<y);
+   *(buf+x) &= ~(1<<y);
+    //Dis_Buff[x] &= ~(1<<y);
 }
 
 //**********************************************
 //  вивід картинки на дисплей у позицію x
 //**********************************************
-void pic_to_led(uint8_t x, uint8_t pic)
-{
-uint8_t i, j, mask=0x01;
 
- for(i=0; i<7; i++){            //стобчики
-        for(j=0;j<8;j++){       //строки 
-            if(pic7x8[pic][i] & mask){  
-                pixel_on(x+i,j);
-                } 
-                else {                    
-                pixel_off(x+i,j);         
-                };
-        mask = mask<<1;  
+void pic_to_led(uint8_t x, uint8_t pic, uint8_t *buf) {
+    uint8_t i, j, mask = 0x01;
+
+    for (i = 0; i < 7; i++) { //стобчики
+        for (j = 0; j < 8; j++) { //строки 
+            if (pic7x8[pic][i] & mask) {
+                pixel_on(x + i, j, buf);
+            }
+            else {
+                pixel_off(x + i, j, buf);
+            };
+            mask = mask << 1;
         };
-    mask=0x01; 
- };   
+        mask = 0x01;
+    };
 }
 
 //***********************************************
 //вставити символ у відповідну позицію на матрицю
 //***********************************************
-void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[][5])
+void putchar_b_buf(uint8_t x, uint8_t symbol, uint8_t (*pF)[][5], uint8_t *buf)
 {
 uint8_t i, j, mask=0x01;
 
@@ -66,9 +69,9 @@ uint8_t i, j, mask=0x01;
         for(j=0;j<8;j++)//перебір строк - 8біт
         {      
             if((*pF)[symbol] [i] & mask) // якщо відповідний біт не = 0
-                pixel_on(x+i,j);        //засвічуємо піксель
+                pixel_on(x+i,j,buf);        //засвічуємо піксель
             else                        //якщо ні
-                pixel_off(x+i,j);       //гасимо
+                pixel_off(x+i,j,buf);       //гасимо
                 
                 mask = mask<<1;         // 
         };
@@ -90,9 +93,9 @@ symbol -= 47;
         for(j=0;j<8;j++)//перебір строк - 8біт
         {      
             if(FontS[symbol] [i] & mask) // якщо відповідний біт не = 0
-                pixel_on(x+i,j);        //засвічуємо піксель
+                pixel_on(x+i,j,&Dis_Buff);        //засвічуємо піксель
             else                        //якщо ні
-                pixel_off(x+i,j);       //гасимо
+                pixel_off(x+i,j,&Dis_Buff);       //гасимо
                 
                 mask = mask<<1;         // 
         };
@@ -205,23 +208,23 @@ void FillBuf(uint8_t type) {
                 if (x4 != y4)
                     putchar_down(25, TTime.Tmin % 10, pFont);
                 else
-                    putchar_b_buf(25, TTime.Tmin % 10, pFont);
+                    putchar_b_buf(25, TTime.Tmin % 10, pFont, &Dis_Buff);
 
                 if (x3 != y3)
                     putchar_down(19, (TTime.Tmin / 10) % 10, pFont);
                 else
-                    putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
+                    putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont, &Dis_Buff);
 
                 if (x2 != y2)
                     putchar_down(7, TTime.Thr % 10, pFont);
                 else
-                    putchar_b_buf(7, TTime.Thr % 10, pFont);
+                    putchar_b_buf(7, TTime.Thr % 10, pFont, &Dis_Buff);
 
                 if ((TTime.Thr / 10) % 10) {
                     if (x1 != y1)
                         putchar_down(1, (TTime.Thr / 10) % 10, pFont);
                     else
-                        putchar_b_buf(1, (TTime.Thr / 10) % 10, pFont);
+                        putchar_b_buf(1, (TTime.Thr / 10) % 10, pFont, &Dis_Buff);
 
                 } else
                     putchar_down(1, 0, &Font);
@@ -236,13 +239,13 @@ void FillBuf(uint8_t type) {
 
             } else {
                 if ((TTime.Thr / 10) % 10)
-                    putchar_b_buf(1, (TTime.Thr / 10) % 10, pFont);
+                    putchar_b_buf(1, (TTime.Thr / 10) % 10, pFont, &Dis_Buff);
                 else
-                    putchar_b_buf(1, 0, &Font);
-                putchar_b_buf(7, TTime.Thr % 10, pFont);
+                    putchar_b_buf(1, 0, &Font, &Dis_Buff);
+                putchar_b_buf(7, TTime.Thr % 10, pFont, &Dis_Buff);
                // putchar_b_buf(13, 23 + idx_pnt, &Font);
-                putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont);
-                putchar_b_buf(25, TTime.Tmin % 10, pFont);
+                putchar_b_buf(19, (TTime.Tmin / 10) % 10, pFont, &Dis_Buff);
+                putchar_b_buf(25, TTime.Tmin % 10, pFont, &Dis_Buff);
             }
             break;
     }
@@ -447,4 +450,38 @@ void Rand_ef(void) {
     eff = (0 + rand() % 4);
     function = my_func[eff];
     (*function)();                               // виконуємо задачу
+}
+
+//*******************************************
+//  Заповнення тимчасового буфера екрану
+//*******************************************
+void fill_buff_t(uint16_t data){
+    uint8_t i, j;
+
+
+    for (i = 0; i <= BUF_SIZE; i++)
+        Dis_Buff_t[i] = 0;
+
+    pic_to_led(3, 4, &Dis_Buff_t);
+    putchar_b_buf(11, (data / 100) % 10, pFont, &Dis_Buff_t);
+    putchar_b_buf(17, (data / 10) % 10, pFont, &Dis_Buff_t);
+    putchar_b_buf(23, data % 10, pFont, &Dis_Buff_t);
+
+}
+
+//*******************************************
+//  Ефект виводу тексту зсередини
+//*******************************************
+void center_two_side(void){
+    uint8_t i, k, shiftr = 16, shiftl = 15;
+
+    for (i = 0; i <= 15; i++) {
+        Dis_Buff[shiftr++] = Dis_Buff_t[shiftr];
+        Dis_Buff[shiftl--] = Dis_Buff_t[shiftl];
+
+
+        Update_Matrix(Dis_Buff); // обновити дані на дисплеї
+        for (k = 0; k < 30; k++) // пауза
+            __delay_ms(1);
+    }
 }
