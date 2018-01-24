@@ -4,8 +4,9 @@
 uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
 uint8_t Dis_Buff_t[BUF_SIZE]; // буфер дисплея temp
 //uint8_t TxtBuf[6];          // буфер дл¤ цифр
-uint8_t text_buf[100];      // буфер для біг строки, та прийому даних з компорта
-uint8_t i_char, i_bchar;    // індекс літери та байтк в літері
+uint8_t text_buf[50];      // буфер для біг строки
+uint8_t rs_text_buf[100]; // буфер для біг строки з компорта
+uint8_t i_char, i_bchar;    // індекс літери та байт в літері
 uint8_t(*pFont)[][5] = &dFont1; // вказівник на шрифт цифр для показу годин     
 extern uint8_t idx_pnt;
 extern volatile uint8_t x1 = 0, x2 = 0, x3 = 0, x4 = 0, y1, y2, y3, y4; //Для зсуву стовбця вниз
@@ -297,7 +298,7 @@ void FillBufS(uint8_t *buf, uint8_t edit_Flag, uint8_t scr_flag)
 //*******************************
 //   Вивід бігучого рядка
 //*******************************
-uint8_t scroll_text(void)
+uint8_t scroll_text(uint8_t *buf)
 {
     uint8_t i;
     
@@ -306,7 +307,7 @@ uint8_t scroll_text(void)
 
     if ((i_bchar) >= 5)      // якщо вивели один символ
       {
-        if (text_buf[i_char] == 0)  // якщо строка закінчилась
+        if (*(buf + i_char) == 0)  // якщо строка закінчилась
         {
             i_bchar++;
             if (i_bchar >= 32)      // якщо добили буфер до кінця нулями
@@ -325,7 +326,7 @@ uint8_t scroll_text(void)
     }
      else
      {
-        Dis_Buff[31] = Font[ text_buf[i_char]][i_bchar++]; // у 31 позицію нову колонку
+        Dis_Buff[31] = Font[ *(buf+i_char)][i_bchar++]; // у 31 позицію нову колонку
 
      }
 
@@ -387,11 +388,11 @@ void scroll_right(void)
 //===============================================
 //      інтервал виводу для біг. строки
 //===============================================
-void interval_scroll_text()
+void interval_scroll_text(uint8_t *buf)
 {
   uint8_t i;
         
-while(scroll_text())
+while(scroll_text(buf))
     {
         Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
         for(i=0; i<SPEED_STRING; i++)

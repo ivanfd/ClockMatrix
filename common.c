@@ -3,7 +3,8 @@
 extern uint8_t TxtBuf[6]; // буфер дл¤ цифр
 extern uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
 extern uint8_t key_event; // стан кнопок
-extern uint8_t text_buf[100]; // буфер для біг строки
+extern uint8_t text_buf[50]; // буфер для біг строки
+extern uint8_t rs_text_buf[100];
 uint8_t events = MAIN_EVENT; // подія, яка відбувається
 //uint8_t delay_digit = 0;            // для паузи мигання цифр
 bit show_digit; // чи показувати цифри, в нал. мигання
@@ -264,7 +265,7 @@ void pressure(void) {
             //
             if (press) {
                 sprintf(text_buf, "мм.рт.ст.");
-                interval_scroll_text();
+                interval_scroll_text(&text_buf);
             } else
                         //scroll_right();
             Rand_ef(); // випадковий ефект
@@ -462,10 +463,11 @@ void time_led() {
         nrf24_powerUpRx(); // Переводимо датчик у режим прийому, та скидаємо всі переривання
         nrf24_init(120, 4); // Ще раз ініціалізуємо
     }
-    if (TTime.Tdt == day_mess) {    // будемо виводити строку. Наприклад - привітання.
+    if (TTime.Tdt == day_mess) { // будемо виводити строку. Наприклад - привітання.
         if (((TTime.Tmin % 5) == 0) && (TTime.Ts == 35) && mess_show) { // один раз в 5 хвилин
             blk_dot = 0;
-            interval_scroll_text();
+            putchar_b_buf(13, 23, &Font, &Dis_Buff);
+            interval_scroll_text(&rs_text_buf);
             blk_dot = 1;
         }
     } else
@@ -713,10 +715,14 @@ void usart_r() {
 
                 break;
             case 'S': // виводимо біг строку
-                // формат "$Stext -  текст, до 100 символів
-                for (j = 0; j <= (strlen(usart_data)) - 2; j++)
-                    text_buf[j] = usart_data[j + 2];
-                
+                // формат "$Sxtext -  текст, до 100 символів
+                // x - признак UTF8 or ASCII. u - utf8, a - ascii
+                if (usart_data[2] == 'a') {
+                    for (j = 0; j <= (strlen(usart_data)) - 3; j++)
+                        rs_text_buf[j] = usart_data[j + 3];
+                } else if (usart_data[2] == 'u')
+                    convert_utf(&usart_data);
+
                 EUSART_Write('O');
                 EUSART_Write('K');
                 EUSART_Write('\r');
@@ -727,7 +733,7 @@ void usart_r() {
                 blk_dot = 0;
                 RTOS_DeleteTask(home_temp); //видаляємо задачу
                 RTOS_DeleteTask(radio_temp); //видаляємо задачу
-                interval_scroll_text();
+                interval_scroll_text(&rs_text_buf);
                 RTOS_SetTask(time_led, 0, cycle_main); //додаємо задачу
                 blk_dot = 1;
 
@@ -797,7 +803,7 @@ void version(void)
     uint8_t i;
 
     sprintf(text_buf,"%s %s %s", VERSION, compile_date, compile_time); // формуємо строку
-    interval_scroll_text();// виводимо біг. строку
+    interval_scroll_text(&text_buf);// виводимо біг. строку
     //    while(scroll_text())
     //    {
     //        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
@@ -823,6 +829,48 @@ void read_adc() {
 #endif  
 
 }
+
+//*****************************************
+//  Перетворення кирилиці/ UTF8 --> ASCII
+//*****************************************
+void convert_utf(uint8_t *buf) {
+    uint16_t temp;
+    uint8_t i, j = 0;
+    uint8_t len;
+
+    len = (strlen(buf)) - 3; // довжина строки
+
+    for (i = 0; i <= (len); i++) { // проходимо всю строку
+        if (*(buf + j + 3) > 192) { // Якщо символ unicode
+            temp = (uint16_t)(*(buf + j + 3) << 8) | *(buf + j + 3 + 1);
+            if (temp == 53380)// літера Є
+                temp -= 53210;
+            else if (temp == 53382)// літера І
+                temp -= 53204;
+            else if (temp == 53383)// літера Ї
+                temp -= 53208;
+            else if (temp == 53652)// літера є
+                temp -= 53466;
+            else if (temp == 53654)// літера і
+                temp -= 53475;
+            else if (temp == 53655)// літера ї
+                temp -= 53464;
+            else if (temp <= 53439)
+                temp = temp - 53200;
+            else if ((temp >= 53632)&&(temp <= 53647))
+                temp = temp - 53392;
+            rs_text_buf[i] = (uint8_t) temp;
+            j += 2;
+            len -= 1;
+
+        } else{
+            rs_text_buf[i] = *(buf + j + 3);
+            j++;
+        }
+    }
+
+}
+
 
 //===========================================
 //          Яскравість матриці

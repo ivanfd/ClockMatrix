@@ -74,7 +74,7 @@
  void adj_brig();
 
  void usart_r();
-
+ void convert_utf(uint8_t *buf);
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */
