@@ -28,7 +28,7 @@ uint8_t oldsec, oldmin;// секунди попередні
 bit oldsec_flag, oldmin_flag, bmp_show, mess_show;
 uint8_t brg_type;// яскравість по датчику, чи постійна
 uint8_t brig;// значення яскравості
-uint8_t usart_data[100];
+uint8_t usart_data[EUSART_RX_BUFFER_SIZE];
 uint8_t blk_dot = 0; // дозвіл на мигання кнопок
 extern uint8_t en_h_snd; // чи можна генерувати сигнал
 extern uint8_t h_snd_t; //година співпадає з дозволом
@@ -331,6 +331,8 @@ void time_led() {
             FillBuf(type_clk);
             if (type_clk == TYPE_CLK_2)
                 blk_dot = 1;
+            else
+                blk_dot = 0;
             if ((TTime.Ts > 5)&&(TTime.Ts < 7)) //прочитаємо температуру
             {
                 readTemp_Single(&temperature, &minus, &time_flag, &timer_val);
@@ -385,6 +387,7 @@ void time_led() {
                     putchar_b_buf(13, 23, &Font, &Dis_Buff);
                 //scroll_left();
                 //dissolve();
+                //scroll_down_one();
                 Rand_ef();
                 RTOS_DeleteTask(time_led); //видаляємо задачу
                 RTOS_SetTask(home_temp, 0, cycle_main); //додаємо задачу 
@@ -722,7 +725,10 @@ void usart_r() {
                         rs_text_buf[j] = usart_data[j + 3];
                 } else if (usart_data[2] == 'u')
                     convert_utf(&usart_data);
-
+                else if (usart_data[2] == 'o') {
+                    mess_show = 0; // вимикаэмо вивід строки
+                    break;
+                }
                 EUSART_Write('O');
                 EUSART_Write('K');
                 EUSART_Write('\r');
@@ -736,9 +742,6 @@ void usart_r() {
                 interval_scroll_text(&rs_text_buf);
                 RTOS_SetTask(time_led, 0, cycle_main); //додаємо задачу
                 blk_dot = 1;
-
-
-
                 break;                 
                 
             case 'r': // читаємо тестові значення

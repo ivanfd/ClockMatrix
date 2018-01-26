@@ -15,9 +15,9 @@ extern uint8_t blk_dot; // дозвіл на мигання кнопок
 const uint8_t dissolve_arr[16] = {253,191,239,127,251,223,247,254,253,191,239,127,251,223,247,254}; //масив для ефекту затухання
 //uint8_t Hours, Min, Sec;
 
-   static void (*function) (void); // вказівник на функцію
+static void (*function) (void); // вказівник на функцію
 //void (*p_MyFunc[4])(void) = {dissolve, scroll_left, scroll_right, hide_two_side};
-   const p_MyFunc my_func[4] = {dissolve, scroll_left, scroll_right, hide_two_side}; //масив вказівників на функції
+const p_MyFunc my_func[5] = {dissolve, scroll_left, scroll_down_one, scroll_right, hide_two_side}; //масив вказівників на функції
 //*****************************************
 //       засвітити піксель на матриці
 //*****************************************
@@ -441,14 +441,41 @@ void dissolve(void) {
     }
 }
 
+
+//**************************************************
+//             Ефект спадання вниз :-)
+//**************************************************
+
+void scroll_down_one(void) {
+    uint8_t i, j, k;
+    
+
+    for (i = 0; i <= 31; i++) {
+        if (Dis_Buff[i] == 0)
+            continue;
+        for (j = 0; j <= 7; j++) {
+            //Dis_Buff[x+i] = (Dis_Buff[x+i]<<1) | ((*pF)[symbol][i] >> (8-1-j));
+            Dis_Buff[i] = Dis_Buff[i] << 1;
+            Update_Matrix(Dis_Buff); // обновити дані на дисплеї
+            for (k = 0; k < 10; k++) // пауза
+                __delay_ms(1);
+        }
+
+    }
+}
+
+
 //=========================================
 //  Вибір випадкового ефекту
 //=========================================
 void Rand_ef(void) {
-    uint8_t eff;
+    static uint8_t eff = 0;
+    static uint8_t old_eff = 0;
 
-
-    eff = (0 + rand() % 4);
+    while (old_eff == eff) {
+        eff = (0 + rand() % 5);
+    }
+    old_eff = eff;
     function = my_func[eff];
     (*function)();                               // виконуємо задачу
 }

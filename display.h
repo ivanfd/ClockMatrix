@@ -63,6 +63,7 @@ typedef void (*p_MyFunc)();
  void Rand_ef(void);
  void fill_buff_t(uint16_t data);
  void center_two_side(void);
+ void scroll_down_one(void);
 
  
 #endif	/* XC_HEADER_TEMPLATE_H */
