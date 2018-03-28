@@ -56,6 +56,8 @@
 
 #define STR_BMP "јт:"
 
+#define STR_DST "DST:" //л≥тн≥й час
+
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */

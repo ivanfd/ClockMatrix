@@ -30,6 +30,7 @@
       <itemPath>spi.h</itemPath>
       <itemPath>strings.h</itemPath>
       <itemPath>settings.h</itemPath>
+      <itemPath>time.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -58,6 +59,7 @@
       <itemPath>spi.c</itemPath>
       <itemPath>nrf24l01p.c</itemPath>
       <itemPath>settings.c</itemPath>
+      <itemPath>time.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

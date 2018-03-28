@@ -36,8 +36,10 @@ extern uint8_t snd_flag; // один раз відтворювати
 uint8_t en_ds_1;    //  чи пок. температуру з датчика 1
 uint8_t en_ds_2;    //  чи пок. температуру з датчика 2
 uint8_t en_bmp280; //  чи показуємо тиск
+uint8_t en_dst; // перехід на літній час
 uint8_t count_min = 0; // лічильник пройдених хвилин
 uint8_t day_mess = 0; // день в який буде виводитись повідомлення
+uint8_t dst_flag = 0; // чи зараз літній час????
 uint8_t const compile_date[12]   = __DATE__;     // Mmm dd yyyy
 uint8_t const compile_time[9]    = __TIME__;     // hh:mm:ss
  
@@ -50,6 +52,11 @@ __EEPROM_DATA(4, 2, 1, 2, 1, 1, 1, 1); // ініціалізація еепром,
 // 2 - тип яскравості(0, 1). 1 - автоматично, 0 - ручний
 // 3 - значеняя яскравості для ручного
 // 4 - щогодинний сигнал
+// 5 - чи показувати температуру з датчика 1 (кімнатний)
+// 6 - чи показувати температуру з датчика 2 (радіодатчик)
+// 7 - чи показувати атмосферний тиск
+__EEPROM_DATA(1, 0, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, (слідуючі комірки пам'яті) 
+// 0 - автоматичний перехід на літній час
 
 // читаємо з DS3231 години, хвилини, секунди та дату
 // 
@@ -67,8 +74,10 @@ void GetTime(void)
         snd_flag = 1; //дозволяємо знову генерувати щогодинний сигнал
     if ((TTime.Thr >= 7)&&(TTime.Thr <= 23)&&(TTime.Tmin == 0)&&(TTime.Ts == 0)&&(snd_flag))
         h_snd_t = 1; //щогодинний сигнал
-  //  else
-   //     h_snd_t = 0; //щогодинний сигнал заборонити
+    if (en_dst)
+        dst_time(&TTime, &dst_flag);
+    else 
+        dst_flag = 0; // вимкнути признак літнього часу
 }
 
 
@@ -383,6 +392,7 @@ void time_led() {
         case KEY_DOWN_EVENT:
             if (en_ds_1) {
                 blk_dot = 0;
+                temperature_radio = data_array[1] | (uint16_t) (data_array[2] << 8);
                 if (type_clk == TYPE_CLK_2)
                     putchar_b_buf(13, 23, &Font, &Dis_Buff);
                 //scroll_left();
@@ -510,10 +520,18 @@ void usart_r() {
     if ((usart_data[0] == '$')) {
         switch (usart_data[1]) {
             case 't': // налаштування через синій зуб годин
-                    // формат "$tHHMM"
+                // формат "$tHHMM"
                 TSTime.Thr = ((usart_data[2] - 48)*10)+(usart_data[3] - 48);
                 TSTime.Tmin = ((usart_data[4] - 48)*10)+(usart_data[5] - 48);
-                setTime(TSTime.Thr, TSTime.Tmin, 0);
+                if (dst_flag) {// якщо час літній
+                    if (TSTime.Thr == 0)
+                        setTime(23, TSTime.Tmin, 0);
+                    else
+                        setTime((TSTime.Thr - 1), TSTime.Tmin, 0);
+                }
+                else
+                    setTime(TSTime.Thr, TSTime.Tmin, 0);
+                // setTime(TSTime.Thr, TSTime.Tmin, 0);
                 EUSART_Write('O');
                 EUSART_Write('K');
                 EUSART_Write('\r');
@@ -682,6 +700,25 @@ void usart_r() {
                 EUSART_Write('\n');
 
                 break;
+            case 'w': // налаштування через синій літнього часу
+                // формат "$wX  X - 1 - літній час 0 - нема
+                // 
+                if (((usart_data[2] - 48) == 0) || ((usart_data[2] - 48) == 1)) {
+                    en_dst = usart_data[2] - 48;
+                    write_eep(EE_EN_DST, en_dst); // запишемо в еепром
+                } else {
+                    EUSART_Write('E');
+                    EUSART_Write('R');
+                    EUSART_Write('\r');
+                    EUSART_Write('\n');
+                    break;
+                }
+                EUSART_Write('O');
+                EUSART_Write('K');
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+
+                break;
             case 'z': // reset controller
                 // скидаємо контролер через 4 сек. після команди.
                 // потрібно для bootloader
@@ -727,6 +764,10 @@ void usart_r() {
                     convert_utf(&usart_data);
                 else if (usart_data[2] == 'o') {
                     mess_show = 0; // вимикаэмо вивід строки
+                    EUSART_Write('O');
+                    EUSART_Write('K');
+                    EUSART_Write('\r');
+                    EUSART_Write('\n');
                     break;
                 }
                 EUSART_Write('O');

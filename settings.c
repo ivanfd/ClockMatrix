@@ -1,4 +1,5 @@
 #include "settings.h"
+#include "nrf24l01p.h"
 
 extern uint8_t(*pFont)[][5];
 extern uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
@@ -14,7 +15,8 @@ extern uint8_t blk_dot; // дозвіл на мигання кнопок
 extern uint8_t en_ds_1;    //  чи пок. температуру з датчика 1
 extern uint8_t en_ds_2;    //  чи пок. температуру з датчика 2
 extern uint8_t en_bmp280; //  чи показуємо тиск
-
+extern uint8_t dst_flag; // чи зараз літній час????
+extern uint8_t en_dst; // перехід на літній час
 //****************************************
 // налаштування годинника -  хвилини
 //****************************************
@@ -117,17 +119,30 @@ void time_set_hr(void)
             break;
         case KEY_UP_EVENT:
             TSTime.Thr++;
-            if(TSTime.Thr > 23) TSTime.Thr = 0;
-            RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
+            if (TSTime.Thr > 23) TSTime.Thr = 0;
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
             events = MAIN_EVENT;
-            setTime(TSTime.Thr,TSTime.Tmin,0);
+            if (dst_flag) {// якщо час літній
+                if (TSTime.Thr == 0)
+                    setTime(23, TSTime.Tmin, 0);
+                else
+                    setTime((TSTime.Thr - 1), TSTime.Tmin, 0);
+            } else
+                setTime(TSTime.Thr, TSTime.Tmin, 0);
             break;
         case KEY_DOWN_EVENT:
             TSTime.Thr--;
-            if(TSTime.Thr == 255) TSTime.Thr = 23;            
+            
+            if (TSTime.Thr == 255) TSTime.Thr = 23;            
             RTOS_SetTask(default_state, 2000, 0);  // 10 секунд для виходу
             events = MAIN_EVENT;
-            setTime(TSTime.Thr,TSTime.Tmin,0);
+            if (dst_flag) {// якщо час літній
+                if (TSTime.Thr == 0)
+                    setTime(23, TSTime.Tmin, 0);
+                else
+                    setTime((TSTime.Thr - 1), TSTime.Tmin, 0);
+            } else
+                setTime(TSTime.Thr, TSTime.Tmin, 0);
             break;            
    }   
    if(en_put)
@@ -799,7 +814,7 @@ if(en_put) {
 }
 
 //============================================================
-// Налаштування - чи можна показувати температуру з 1 датчика. 
+// Налаштування - чи можна показувати температуру з 2 датчика. 
 //============================================================
 void set_en_ds2(void){
 switch (events)
@@ -853,7 +868,7 @@ if(en_put) {
 }
 
 //============================================================
-// Налаштування - чи можна показувати температуру з 1 датчика. 
+// Налаштування - чи можна показувати тиск 
 //============================================================
 void set_en_bmp(void){
 switch (events)
@@ -863,8 +878,8 @@ switch (events)
         break;
         case KEY_OK_EVENT:
             RTOS_DeleteTask(set_en_bmp);
-            RTOS_SetTask(time_led, 0, cycle_main);
-            RTOS_DeleteTask(default_state); 
+            RTOS_SetTask(set_en_dst, 0, cycle_main);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу 
             events = MAIN_EVENT;
             en_put = 0;
             clear_matrix();
@@ -906,6 +921,61 @@ if(en_put) {
     
 }
 
+
+//============================================================
+// Налаштування - літный час 
+//============================================================
+void set_en_dst(void){
+switch (events)
+   {
+        case MAIN_EVENT:
+
+        break;
+        case KEY_OK_EVENT:
+            RTOS_DeleteTask(set_en_dst);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state); 
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_EXIT_EVENT:
+            RTOS_DeleteTask(set_en_dst);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state); 
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_UP_EVENT:
+            en_dst = !(en_dst);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_EN_DST, en_dst);
+            break;
+        case KEY_DOWN_EVENT:
+            en_dst = !(en_dst);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_EN_DST, en_dst);
+            break;
+   
+    }
+if(en_put) {
+        putchar_b_buf(0, STR_DST[0], &Font, &Dis_Buff);
+        putchar_b_buf(6, STR_DST[1], &Font, &Dis_Buff);
+        putchar_b_buf(12, STR_DST[2], &Font, &Dis_Buff);
+        putchar_b_buf(18, STR_DST[3], &Font, &Dis_Buff);
+        if (en_dst)
+            putchar_b_buf(24, '+', &Font, &Dis_Buff);
+        else
+            putchar_b_buf(24, '-', &Font, &Dis_Buff);
+//        putchar_b_buf(24, 0, &Font, &Dis_Buff);
+}    
+       Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+       en_put=1;    
+    
+}
 
 void default_state(void) {
     events = KEY_EXIT_EVENT;

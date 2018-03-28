@@ -20,6 +20,7 @@
 #include "settings.h"
 #include <stdint.h>
 #include <string.h>
+#include "time.h"
 
 
 #define SetBit(x,y)    do{ x |=  (1 << (y));} while(0)
@@ -49,6 +50,7 @@
 #define EE_EN_DS1 5 // еепром, чи показувати температуру з датчика 1
 #define EE_EN_DS2 6 // еепром, чи показувати температуру з датчика 2
 #define EE_EN_BMP 7 // еепром, датчик тиску
+#define EE_EN_DST 8 // еепром, літній час (активація переходу на літній час)
 
 #define TYPE_CLK_1 1  // вигляд годинника
 #define TYPE_CLK_2 2  // вигляд годинника
