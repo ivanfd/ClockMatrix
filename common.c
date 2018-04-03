@@ -18,6 +18,7 @@ uint8_t minus_radio = '+'; // знак температури
 uint8_t timer_val = 0, time_flag = 0; // для конвертування температури
 extern uint8_t(*pFont)[][5];
 uint8_t type_font = 0; // шрифт годин
+uint8_t type_temp = 2;
 uint32_t press, temperbmp280; // атмосферний тиск
 extern uint8_t play_sound; //  чи можна програвати
 uint8_t type_clk = TYPE_CLK_1; // вигляд годинника
@@ -137,7 +138,7 @@ void GetTime(void)
 
 void radio_temp(void) {
     uint8_t fptmp;
-    
+
     switch (events) {
         case MAIN_EVENT:
             clear_matrix();
@@ -150,38 +151,53 @@ void radio_temp(void) {
 
                 if (temperature_radio != 0xFFFF) {
 
-                    fptmp = temperature_radio % 10; // остача
-                    temperature_radio = temperature_radio / 10; // ціла частина
-                    if (fptmp >= 6) temperature_radio += 1;
+                    if (type_temp == TYPE_TEMP_1) {
+                        fptmp = temperature_radio % 10; // остача
+                        temperature_radio = temperature_radio / 10; // ціла частина
+                        if (fptmp >= 6) temperature_radio += 1;
 
-                    if (!((temperature_radio / 10) % 10)) // якщо перша цифра 0
-                    {
-                        pic_to_led(3, 2, &Dis_Buff);
-                        //  putchar_down(13,(temperature/10) % 10 + 48);
-                        if (temperature_radio != 0) {
-                            putchar_down(13, minus_radio, &Font);
-                            putchar_down(19, temperature_radio % 10, pFont);
-                            putchar_down(25, 176, &Font);
+                        if (!((temperature_radio / 10) % 10)) // якщо перша цифра 0
+                        {
+                            pic_to_led(3, 2, &Dis_Buff);
+                            //  putchar_down(13,(temperature/10) % 10 + 48);
+                            if (temperature_radio != 0) {
+                                putchar_down(13, minus_radio, &Font);
+                                putchar_down(19, temperature_radio % 10, pFont);
+                                putchar_down(25, 176, &Font);
+                            } else {
+                                //putchar_down(9, 0, &Font);
+                                putchar_down(13, temperature_radio % 10, pFont);
+                                putchar_down(19, 176, &Font);
+                            }
                         } else {
-                            //putchar_down(9, 0, &Font);
-                            putchar_down(13, temperature_radio % 10, pFont);
-                            putchar_down(19, 176, &Font);
+
+                            pic_to_led(0, 2, &Dis_Buff);
+
+                            putchar_down(9, minus_radio, &Font);
+                            putchar_down(15, (temperature_radio / 10) % 10, pFont);
+                            putchar_down(21, temperature_radio % 10, pFont);
+                            putchar_down(27, 176, &Font);
+
                         }
                     } else {
+                        temperature_radio = 254; //&&&&&&&&&&&&&&&&&??????
+                        minus_radio = '+';
+                        sprintf(text_buf, "%u%u%c%u%c", (temperature_radio / 100) % 10, (temperature_radio / 10) % 10, '.', temperature_radio % 10, '°'); // формуємо строку
+
                         pic_to_led(0, 2, &Dis_Buff);
-
                         putchar_down(9, minus_radio, &Font);
-                        putchar_down(15, (temperature_radio / 10) % 10, pFont);
-                        putchar_down(22, temperature_radio % 10, pFont);
-                        putchar_down(27, 176, &Font);
-
+                        putchar_down(15, text_buf[0] - 48, pFont);
+                        putchar_down(21, text_buf[1] - 48, pFont);
+                        putchar_down(27, text_buf[2], &Font);
+                        __delay_ms(1000);
+                        scroll_text_temp(text_buf,0);
                     }
                 } else {
                     pic_to_led(0, 2, &Dis_Buff);
 
                     putchar_down(9, '-', &Font);
                     putchar_down(15, '-', &Font);
-                    putchar_down(22, '-', &Font);
+                    putchar_down(21, '-', &Font);
                 }
             }
             events = TEMP_EVENT;

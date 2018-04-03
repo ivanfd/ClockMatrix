@@ -55,6 +55,8 @@
 #define TYPE_CLK_1 1  // вигляд годинника
 #define TYPE_CLK_2 2  // вигляд годинника
 #define MAX_BRIG 10 // максимальна яскравість
+#define TYPE_TEMP_1 1 //тип показу температури
+#define TYPE_TEMP_2 2 //тип показу температури
 
  void INT0_ISR(void);
  void GetTime(void);

@@ -64,6 +64,7 @@ typedef void (*p_MyFunc)();
  void fill_buff_t(uint16_t data);
  void center_two_side(void);
  void scroll_down_one(void);
+ void scroll_text_temp(uint8_t *buf, uint8_t pos);
 
  
 #endif	/* XC_HEADER_TEMPLATE_H */
