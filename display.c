@@ -1,7 +1,7 @@
 
 #include "display.h"
 
-uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
+uint8_t Dis_Buff[BUF_SIZE + BUF_SIZE_TEMP]; // буфер дисплея
 uint8_t Dis_Buff_t[BUF_SIZE]; // буфер дисплея temp
 //uint8_t TxtBuf[6];          // буфер дл¤ цифр
 uint8_t text_buf[50];      // буфер для біг строки
@@ -17,7 +17,7 @@ const uint8_t dissolve_arr[16] = {253,191,239,127,251,223,247,254,253,191,239,12
 
 static void (*function) (void); // вказівник на функцію
 //void (*p_MyFunc[4])(void) = {dissolve, scroll_left, scroll_right, hide_two_side};
-const p_MyFunc my_func[5] = {dissolve, scroll_left, scroll_down_one, scroll_right, hide_two_side}; //масив вказівників на функції
+const p_MyFunc my_func[5] = {dissolve, scroll_left, scroll_right, hide_two_side, scroll_down_one}; //масив вказівників на функції
 //*****************************************
 //       засвітити піксель на матриці
 //*****************************************
@@ -337,38 +337,18 @@ uint8_t scroll_text(uint8_t *buf) {
 //   Вивід бігучого рядка з температурою
 //******************************************
 
-void scroll_text_temp(uint8_t *buf, uint8_t pos) {
-    uint8_t i, j;
+void scroll_text_temp(uint8_t pos) {
+    uint8_t i, j, k;
 
-    for (i = 0; i < 31; i++) // зсуваємо всі пікселі на матриці вліво на 1 біт
-        Dis_Buff[i] = Dis_Buff[i + 1];
+    for (k = 0; k <= pos; k++) {
+        for (i = 0; i < 31; i++) // зсуваємо всі пікселі на матриці вліво на 1 біт
+            Dis_Buff[i] = Dis_Buff[i + 1];
 
-    if ((i_bchar) >= 5) // якщо вивели один символ
-    {
-        if (*(buf + i_char) == 0) // якщо строка закінчилась
-        {
-            i_bchar++;
-            if (i_bchar >= 32) // якщо добили буфер до кінця нулями
-            {
-                i_char = 0;
-                i_bchar = 0;
-                return; // виходимо
-            }
-        }
-        else {
-            Dis_Buff[31] = 0; // розділити букви
-            i_bchar = 0;
-            i_char++; // наступний байт (літера) строки
-        }
-    } else {
-        Dis_Buff[31] = Font[ *(buf + i_char)][i_bchar++]; // у 31 позицію нову колонку
-
+        Dis_Buff[31] = Dis_Buff[32 + k ]; // у 31 позицію нову колонку
+        Update_Matrix(Dis_Buff); // обновити дані на дисплеї
+        for (j = 0; j < SPEED_STRING; j++)
+            __delay_ms(1);
     }
-
-    Update_Matrix(Dis_Buff); // обновити дані на дисплеї
-    for (j = 0; j < SPEED_STRING; j++)
-        __delay_ms(1);
-
     return;
     
 }

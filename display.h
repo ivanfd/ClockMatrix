@@ -13,7 +13,7 @@
 #include "pict.h"
 #include "digits_f.h"
 
-
+#define BUF_SIZE_TEMP 11
 #define BUF_SIZE COUNT_MATRIX * 8
 #define SPEED_STRING 60     // швидкість бігучої строки, підібрати
 #define DELAY_SHIFT_DOWN 40 // швидкість ефекту зсуву вниз
@@ -64,7 +64,7 @@ typedef void (*p_MyFunc)();
  void fill_buff_t(uint16_t data);
  void center_two_side(void);
  void scroll_down_one(void);
- void scroll_text_temp(uint8_t *buf, uint8_t pos);
+ void scroll_text_temp(uint8_t pos);
 
  
 #endif	/* XC_HEADER_TEMPLATE_H */

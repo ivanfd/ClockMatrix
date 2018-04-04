@@ -3,56 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/main.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/eeprom.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/Font.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/ds3231.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/eeprom.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/main.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/pict.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/nrf24l01p.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/digits_f.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/dispatcher.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/ds18b20.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/i2c.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/ds18b20.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/i2c.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/dispatcher.c</file>
+            <file>file:/D:/Ivan/Electro/XC8/18F4525/common.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/display.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/display.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/timer.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/onewire.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/onewire.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/spi.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/eusart.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/timer.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/eusart.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/spi.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/sound.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/init.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/interrupt.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/BMP_280.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/interrupt.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/BMP_280.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/init.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/nrf24l01p.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/time.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/sound.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/time.h</file>
             <file>file:/D:/Ivan/Electro/XC8/18F4525/common.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/common.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/settings.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/ds3231.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/max7221.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/events.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/max7221.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/settings.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/key.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/bmp180.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/key.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/bmp180.c</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/strings.h</file>
-            <file>file:/D:/Ivan/Electro/XC8/18F4525/FontS.h</file>
         </group>
     </open-files>
 </project-private>

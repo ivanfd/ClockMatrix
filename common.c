@@ -1,7 +1,7 @@
 #include "common.h"
 
 extern uint8_t TxtBuf[6]; // буфер дл¤ цифр
-extern uint8_t Dis_Buff[BUF_SIZE]; // буфер дисплея
+extern uint8_t Dis_Buff[BUF_SIZE + BUF_SIZE_TEMP]; // буфер дисплея
 extern uint8_t key_event; // стан кнопок
 extern uint8_t text_buf[50]; // буфер для біг строки
 extern uint8_t rs_text_buf[100];
@@ -56,9 +56,9 @@ __EEPROM_DATA(4, 2, 1, 2, 1, 1, 1, 1); // ініціалізація еепром,
 // 5 - чи показувати температуру з датчика 1 (кімнатний)
 // 6 - чи показувати температуру з датчика 2 (радіодатчик)
 // 7 - чи показувати атмосферний тиск
-__EEPROM_DATA(1, 0, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, (слідуючі комірки пам'яті) 
+__EEPROM_DATA(1, 2, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, (слідуючі комірки пам'яті) 
 // 0 - автоматичний перехід на літній час
-
+// 1 - тип показу температури
 // читаємо з DS3231 години, хвилини, секунди та дату
 // 
 void GetTime(void)
@@ -148,10 +148,11 @@ void radio_temp(void) {
                 putchar_down(15, 'r', &Font);
                 putchar_down(21, 'r', &Font);
             } else {
-
+                        temperature_radio = 98; //&&&&&&&&&&&&&&&&&??????
+                        minus_radio = '+';
                 if (temperature_radio != 0xFFFF) {
 
-                    if (type_temp == TYPE_TEMP_1) {
+                    if ((type_temp == TYPE_TEMP_1) || (temperature_radio == 0)) {
                         fptmp = temperature_radio % 10; // остача
                         temperature_radio = temperature_radio / 10; // ціла частина
                         if (fptmp >= 6) temperature_radio += 1;
@@ -179,18 +180,32 @@ void radio_temp(void) {
                             putchar_down(27, 176, &Font);
 
                         }
-                    } else {
-                        temperature_radio = 254; //&&&&&&&&&&&&&&&&&??????
-                        minus_radio = '+';
+                    } else { // якщо тип 2
+
                         sprintf(text_buf, "%u%u%c%u%c", (temperature_radio / 100) % 10, (temperature_radio / 10) % 10, '.', temperature_radio % 10, '°'); // формуємо строку
 
-                        pic_to_led(0, 2, &Dis_Buff);
-                        putchar_down(9, minus_radio, &Font);
-                        putchar_down(15, text_buf[0] - 48, pFont);
-                        putchar_down(21, text_buf[1] - 48, pFont);
-                        putchar_down(27, text_buf[2], &Font);
-                        __delay_ms(1000);
-                        scroll_text_temp(text_buf,0);
+                        if (text_buf[0] != 48) { //якщо перша цифра не 0
+                            pic_to_led(3, 2, &Dis_Buff);
+                            putchar_down(11, minus_radio, &Font);
+                            putchar_down(17, text_buf[0] - 48, pFont); // цифра 1 - сотні
+                            putchar_down(23, text_buf[1] - 48, pFont); // цифра 2 - десятки
+                            putchar_down(29, text_buf[2], &Font);
+                            //putchar_down(32, text_buf[3] - 48, pFont);
+                            putchar_b_buf(32, text_buf[3] - 48, pFont, &Dis_Buff); // цифра 3 
+                            putchar_b_buf(38, text_buf[4], &Font, &Dis_Buff);
+                            __delay_ms(1000);
+                            scroll_text_temp(10);
+                        } else {
+                            pic_to_led(1, 2, &Dis_Buff);
+                            putchar_down(11, minus_radio, &Font);
+                            putchar_down(17, text_buf[1] - 48, pFont); // цифра 1 - десятки
+                            putchar_down(23, text_buf[2]  , &Font); // крапка
+                            putchar_down(26, text_buf[3] - 48  , pFont); // цифра 2 
+                            putchar_b_buf(32, text_buf[4], &Font, &Dis_Buff);//знак градуса
+                            __delay_ms(1000);
+                            scroll_text_temp(8);
+                        }
+
                     }
                 } else {
                     pic_to_led(0, 2, &Dis_Buff);
@@ -700,7 +715,7 @@ void usart_r() {
             case 'e': // налаштування через синій зуб показу датчика тиску
                 // формат "$eX  X - датчик(1 - показувати 0 - не показувати)
                 // 
-                if (((usart_data[2] - 48) == 0) || ((usart_data[2] - 48) == 1)){
+                if (((usart_data[2] - 48) == 0) || ((usart_data[2] - 48) == 1)) {
                     en_bmp280 = usart_data[2] - 48;
                     write_eep(EE_EN_BMP, en_bmp280);
                 } else {
@@ -722,6 +737,25 @@ void usart_r() {
                 if (((usart_data[2] - 48) == 0) || ((usart_data[2] - 48) == 1)) {
                     en_dst = usart_data[2] - 48;
                     write_eep(EE_EN_DST, en_dst); // запишемо в еепром
+                } else {
+                    EUSART_Write('E');
+                    EUSART_Write('R');
+                    EUSART_Write('\r');
+                    EUSART_Write('\n');
+                    break;
+                }
+                EUSART_Write('O');
+                EUSART_Write('K');
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+
+                break;
+            case 'v': // налаштування через синій типу показу температури
+                // формат "$vX  X - 1 - тип 1 2 - тип 2
+                // 
+                if (((usart_data[2] - 48) == TYPE_TEMP_1) || ((usart_data[2] - 48) == TYPE_TEMP_2)) {
+                    type_temp = usart_data[2] - 48;
+                    write_eep(EE_TYPE_TEMP, type_temp); // запишемо в еепром
                 } else {
                     EUSART_Write('E');
                     EUSART_Write('R');
