@@ -73,12 +73,14 @@ void GetTime(void)
         oldmin_flag = 1;
     if (TTime.Ts == 3)
         snd_flag = 1; //дозволяємо знову генерувати щогодинний сигнал
-    if ((TTime.Thr >= 7)&&(TTime.Thr <= 23)&&(TTime.Tmin == 0)&&(TTime.Ts == 0)&&(snd_flag))
-        h_snd_t = 1; //щогодинний сигнал
+
     if (en_dst)
         dst_time(&TTime, &dst_flag);
-    else 
+    else
         dst_flag = 0; // вимкнути признак літнього часу
+
+    if ((TTime.Thr >= 7)&&(TTime.Thr <= 23)&&(TTime.Tmin == 0)&&(TTime.Ts == 0)&&(snd_flag))
+        h_snd_t = 1; //щогодинний сигнал
 }
 
 
@@ -137,7 +139,7 @@ void GetTime(void)
 //*************************************************
 
 void radio_temp(void) {
-    uint8_t fptmp;
+    uint8_t fptmp, i;
 
     switch (events) {
         case MAIN_EVENT:
@@ -148,8 +150,8 @@ void radio_temp(void) {
                 putchar_down(15, 'r', &Font);
                 putchar_down(21, 'r', &Font);
             } else {
-                        temperature_radio = 98; //&&&&&&&&&&&&&&&&&??????
-                        minus_radio = '+';
+                       // temperature_radio = 98; //&&&&&&&&&&&&&&&&&??????
+                       // minus_radio = '+';
                 if (temperature_radio != 0xFFFF) {
 
                     if ((type_temp == TYPE_TEMP_1) || (temperature_radio == 0)) {
@@ -181,7 +183,8 @@ void radio_temp(void) {
 
                         }
                     } else { // якщо тип 2
-
+                        for (i = 32; i < BUF_SIZE + BUF_SIZE_TEMP; i++)
+                            Dis_Buff[i] = 0;
                         sprintf(text_buf, "%u%u%c%u%c", (temperature_radio / 100) % 10, (temperature_radio / 10) % 10, '.', temperature_radio % 10, '°'); // формуємо строку
 
                         if (text_buf[0] != 48) { //якщо перша цифра не 0

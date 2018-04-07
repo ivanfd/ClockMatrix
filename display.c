@@ -155,11 +155,11 @@ uint8_t i, j, k;
 //********************
 //   очистити матрицю
 //********************
-void clear_matrix(void)
-{
-   uint8_t i;
-   for (i=0; i<=BUF_SIZE; i++)
-       Dis_Buff[i] = 0;
+
+void clear_matrix(void) {
+    uint8_t i;
+    for (i = 0; i < BUF_SIZE; i++)
+        Dis_Buff[i] = 0;
 }
 
 
@@ -335,6 +335,7 @@ uint8_t scroll_text(uint8_t *buf) {
 
 //******************************************
 //   Вивід бігучого рядка з температурою
+//      pos - на скільки будемо зсувати
 //******************************************
 
 void scroll_text_temp(uint8_t pos) {
@@ -346,7 +347,7 @@ void scroll_text_temp(uint8_t pos) {
 
         Dis_Buff[31] = Dis_Buff[32 + k ]; // у 31 позицію нову колонку
         Update_Matrix(Dis_Buff); // обновити дані на дисплеї
-        for (j = 0; j < SPEED_STRING; j++)
+        for (j = 0; j < SPEED_STRING - 20; j++)
             __delay_ms(1);
     }
     return;
