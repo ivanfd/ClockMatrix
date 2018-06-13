@@ -26,7 +26,7 @@ void main(void) {
     while (1) {
         CLRWDT();
         //  printf("> ....\r\n");
-        if (temp_flag = readTemp_Single(&temperature, &minus)) {
+        if (readTemp_Single(&temperature, &minus)) {
             //data_array[0] = temperature; // пишемо в буфер температуру
             data_array[0] = minus;
             data_array[1] = temperature & 0xFF;

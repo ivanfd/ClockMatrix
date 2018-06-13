@@ -337,6 +337,8 @@ void pre_ref_dis(void) {
             getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
             putchar_down_s(25, (TTime.Ts / 10) % 10 + 1);
             putchar_down_s(29, TTime.Ts % 10 + 1);
+            if (en_dst)
+                dst_time(&TTime, &dst_flag);
             blk_dot = 0;
             break;
         case TYPE_CLK_2:
@@ -345,8 +347,11 @@ void pre_ref_dis(void) {
             else putchar_down(1, 0, &Font);
             putchar_down(7, TTime.Thr % 10, pFont);
             putchar_down(13, ':', &Font);
+            getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
             putchar_down(19, (TTime.Tmin / 10) % 10, pFont);
             putchar_down(25, TTime.Tmin % 10, pFont);
+            if (en_dst)
+                dst_time(&TTime, &dst_flag);
             blk_dot = 1;
             idx_pnt = 0;
             x1 = (TTime.Thr / 10) % 10;
