@@ -132,6 +132,7 @@ void RTOS_DispatchTask()
 }
 
 // переривання від таймера 0
+// налаштовано 5мс
  void TMR0_ISR(void)
 {
 

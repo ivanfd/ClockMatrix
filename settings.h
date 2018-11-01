@@ -26,6 +26,8 @@ void default_state(void);
 void set_en_ds2(void);
 void set_en_bmp(void);
 void set_en_dst(void);
+void set_type_temp(void);
+void set_en_am2302(void);
 
 
 #endif	/* XC_HEADER_TEMPLATE_H */

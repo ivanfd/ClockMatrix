@@ -81,6 +81,7 @@ extern uint8_t en_ds_2;    //  чи пок. температуру з датчика 2
 extern uint8_t en_bmp280; //  чи показуємо тиск
 extern uint8_t en_dst; // перехід на літній час
 extern uint8_t type_temp;
+extern uint8_t en_am2302; //датчик вологості
 //extern const unsigned char userID[8] @ 0x200000;
 //volatile unsigned char usrID[8];
 
@@ -125,6 +126,7 @@ void SYSTEM_Initialize(void)  // ініціалізація контролера
     en_bmp280 = read_eep(EE_EN_BMP);
     en_dst = read_eep(EE_EN_DST); // перехід на літній час
     type_temp = read_eep(EE_TYPE_TEMP); // тип показу температури
+    en_am2302 = read_eep(EE_EN_AM2302);
     srand(3);
 }
 

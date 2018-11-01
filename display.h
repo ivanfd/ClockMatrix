@@ -13,7 +13,7 @@
 #include "pict.h"
 #include "digits_f.h"
 
-#define BUF_SIZE_TEMP 11
+#define BUF_SIZE_TEMP 17
 #define BUF_SIZE COUNT_MATRIX * 8
 #define SPEED_STRING 60     // швидкість бігучої строки, підібрати
 #define DELAY_SHIFT_DOWN 40 // швидкість ефекту зсуву вниз

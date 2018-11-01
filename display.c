@@ -507,10 +507,10 @@ void fill_buff_t(uint16_t data){
     for (i = 0; i <= BUF_SIZE; i++)
         Dis_Buff_t[i] = 0;
 
-    pic_to_led(3, 4, &Dis_Buff_t);
-    putchar_b_buf(11, (data / 100) % 10, pFont, &Dis_Buff_t);
-    putchar_b_buf(17, (data / 10) % 10, pFont, &Dis_Buff_t);
-    putchar_b_buf(23, data % 10, pFont, &Dis_Buff_t);
+    pic_to_led(4, 4, &Dis_Buff_t);
+    putchar_b_buf(12, (data / 100) % 10, pFont, &Dis_Buff_t);
+    putchar_b_buf(18, (data / 10) % 10, pFont, &Dis_Buff_t);
+    putchar_b_buf(24, data % 10, pFont, &Dis_Buff_t);
 
 }
 

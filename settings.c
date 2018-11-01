@@ -17,6 +17,8 @@ extern uint8_t en_ds_2;    //  чи пок. температуру з датчика 2
 extern uint8_t en_bmp280; //  чи показуємо тиск
 extern uint8_t dst_flag; // чи зараз літній час????
 extern uint8_t en_dst; // перехід на літній час
+extern uint8_t type_temp;
+extern uint8_t en_am2302; //датчик вологості
 //****************************************
 // налаштування годинника -  хвилини
 //****************************************
@@ -933,7 +935,7 @@ switch (events)
         break;
         case KEY_OK_EVENT:
             RTOS_DeleteTask(set_en_dst);
-            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_SetTask(set_type_temp, 0, cycle_main);
             RTOS_DeleteTask(default_state); 
             events = MAIN_EVENT;
             en_put = 0;
@@ -973,7 +975,121 @@ if(en_put) {
 //        putchar_b_buf(24, 0, &Font, &Dis_Buff);
 }    
        Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+       en_put=1;     
+    
+    
+
+}
+
+//============================================================
+// Налаштування - тип відображення температури з радіодатчика
+// Є два типи. 1 - Округлена, 2 - температура з десятими
+//============================================================
+void set_type_temp(void){
+ switch (events)
+   {
+        case MAIN_EVENT:
+
+        break;
+        case KEY_OK_EVENT:
+            RTOS_DeleteTask(set_type_temp);
+            RTOS_SetTask(set_en_am2302, 0, cycle_main);
+            RTOS_DeleteTask(default_state); 
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_EXIT_EVENT:
+            RTOS_DeleteTask(set_type_temp);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state); 
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_UP_EVENT:
+            type_temp ++;
+            if (type_temp == 3) type_temp = 1;
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_TYPE_TEMP, type_temp);
+            break;
+        case KEY_DOWN_EVENT:
+            type_temp --;
+            if (type_temp == 0) type_temp = 2;
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_TYPE_TEMP, type_temp);
+            break;
+   
+    }
+if(en_put) {
+        putchar_b_buf(0, STR_TYPE_TEMP[0], &Font, &Dis_Buff);
+        putchar_b_buf(6, STR_TYPE_TEMP[1], &Font, &Dis_Buff);
+        putchar_b_buf(12, STR_TYPE_TEMP[2], &Font, &Dis_Buff);
+        putchar_b_buf(18, STR_TYPE_TEMP[3], &Font, &Dis_Buff);
+        putchar_b_buf(24, type_temp, pFont, &Dis_Buff);
+
+}    
+       Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
        en_put=1;    
+      
+    
+}
+
+//============================================================
+// Налаштування - показ датчика AM2302. Вологість.
+//============================================================
+void set_en_am2302(void){
+ switch (events)
+   {
+        case MAIN_EVENT:
+
+        break;
+        case KEY_OK_EVENT:
+            RTOS_DeleteTask(set_en_am2302);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state); 
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_EXIT_EVENT:
+            RTOS_DeleteTask(set_en_am2302);
+            RTOS_SetTask(time_led, 0, cycle_main);
+            RTOS_DeleteTask(default_state); 
+            events = MAIN_EVENT;
+            en_put = 0;
+            clear_matrix();
+            break;
+        case KEY_UP_EVENT:
+            en_am2302 = !(en_am2302);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_EN_AM2302, en_am2302);
+            break;
+        case KEY_DOWN_EVENT:
+            en_am2302 = !(en_am2302);
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
+            events = MAIN_EVENT;
+            write_eep(EE_EN_AM2302, en_am2302);
+            break;
+   
+    }
+if(en_put) {
+        putchar_b_buf(0, STR_AM2302[0], &Font, &Dis_Buff);
+        putchar_b_buf(6, STR_AM2302[1], &Font, &Dis_Buff);
+        putchar_b_buf(12, STR_AM2302[2], &Font, &Dis_Buff);
+        putchar_b_buf(18, STR_AM2302[3], &Font, &Dis_Buff);
+        if (en_am2302)
+            putchar_b_buf(24, '+', &Font, &Dis_Buff);
+        else
+            putchar_b_buf(24, '-', &Font, &Dis_Buff);
+
+}    
+       Update_Matrix(Dis_Buff);          // обновити дані на дисплеї
+       en_put=1;    
+      
     
 }
 

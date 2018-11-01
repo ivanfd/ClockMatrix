@@ -58,7 +58,9 @@
 
 #define STR_DST "DST:" //л≥тн≥й час
 
+#define STR_TYPE_TEMP "“п“:"
 
+#define STR_AM2302 "DHT:"
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

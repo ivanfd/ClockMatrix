@@ -38,12 +38,16 @@ uint8_t en_ds_1;    //  чи пок. температуру з датчика 1
 uint8_t en_ds_2;    //  чи пок. температуру з датчика 2
 uint8_t en_bmp280; //  чи показуємо тиск
 uint8_t en_dst; // перехід на літній час
+uint8_t en_am2302; //датчик вологості
 uint8_t count_min = 0; // лічильник пройдених хвилин
 uint8_t day_mess = 0; // день в який буде виводитись повідомлення
 uint8_t dst_flag = 0; // чи зараз літній час????
 uint8_t const compile_date[12]   = __DATE__;     // Mmm dd yyyy
 uint8_t const compile_time[9]    = __TIME__;     // hh:mm:ss
- 
+uint8_t valuesAM[5]; // масив байт з датчика AM2302
+uint8_t ErrAM;      //  помилка датчика AM2302
+uint16_t Rh, Td;    // вологість, температура
+uint8_t RhH, RhL, TdH, TdL; //  вологість цілі - десяті, температура цілі - десяті
 
 
 
@@ -56,9 +60,10 @@ __EEPROM_DATA(4, 2, 1, 2, 1, 1, 1, 1); // ініціалізація еепром,
 // 5 - чи показувати температуру з датчика 1 (кімнатний)
 // 6 - чи показувати температуру з датчика 2 (радіодатчик)
 // 7 - чи показувати атмосферний тиск
-__EEPROM_DATA(1, 2, 0, 0, 0, 0, 0, 0); // ініціалізація еепром, (слідуючі комірки пам'яті) 
+__EEPROM_DATA(1, 2, 1, 0, 0, 0, 0, 0); // ініціалізація еепром, (слідуючі комірки пам'яті) 
 // 0 - автоматичний перехід на літній час
 // 1 - тип показу температури
+// 2 - датчик AM2302
 // читаємо з DS3231 години, хвилини, секунди та дату
 // 
 void GetTime(void)
@@ -272,19 +277,27 @@ void set_font() {
 
 void pressure(void) {
     uint16_t pr;
+    uint8_t i;
 
     switch (events) {
         case MAIN_EVENT:
-           // press = 75126;
+            //press = 75126;
             if (press) {
                 pr = press / 100;
                 fill_buff_t(pr);
                 center_two_side();
-//                pic_to_led(3, 4, &Dis_Buff);
-//                putchar_down(11, (pr / 100) % 10, pFont);
-//                putchar_down(17, (pr / 10) % 10, pFont);
-//                putchar_down(23, pr % 10, pFont);
-                
+                //                pic_to_led(3, 4, &Dis_Buff);
+                //                putchar_down(11, (pr / 100) % 10, pFont);
+                //                putchar_down(17, (pr / 10) % 10, pFont);
+                //                putchar_down(23, pr % 10, pFont);
+                for (i = 32; i < BUF_SIZE + BUF_SIZE_TEMP; i++)
+                    Dis_Buff[i] = 0;
+                sprintf(text_buf, "мм.");
+                putchar_b_buf(32, text_buf[0], &Font, &Dis_Buff); //  
+                putchar_b_buf(38, text_buf[1], &Font, &Dis_Buff);
+                putchar_b_buf(44, text_buf[2], &Font, &Dis_Buff);
+                __delay_ms(1000);
+                scroll_text_temp(11);
 
             } else {
                 clear_matrix();
@@ -296,7 +309,7 @@ void pressure(void) {
             }
 
             events = TEMP_EVENT;
-            RTOS_SetTask(default_state, 400, 0); // 3,5 секунд для виходу
+            RTOS_SetTask(default_state, 400, 0); // 2 секунд для виходу
 
             // }
 
@@ -306,21 +319,70 @@ void pressure(void) {
         case KEY_EXIT_EVENT: // повертаємось в показ часу
             events = MAIN_EVENT;
             //
-            if (press) {
-                sprintf(text_buf, "мм.рт.ст.");
-                interval_scroll_text(&text_buf);
-            } else
-                        //scroll_right();
-            Rand_ef(); // випадковий ефект
-                //    scroll_left();
-            pre_ref_dis();
-            RTOS_DeleteTask(default_state);
-            RTOS_DeleteTask(pressure);
-            RTOS_SetTask(time_led, 0, cycle_main);
+            if (en_am2302) {
+                //sprintf(text_buf, "мм.рт.ст.");
+                //interval_scroll_text(&text_buf);
+                Rand_ef(); // випадковий ефект
+                RTOS_DeleteTask(default_state);
+                RTOS_DeleteTask(pressure);
+                RTOS_SetTask(hum, 0, cycle_main);
+            } else {
+                Rand_ef(); // випадковий ефект
+
+                pre_ref_dis();
+                RTOS_DeleteTask(default_state);
+                RTOS_DeleteTask(pressure);
+                RTOS_SetTask(time_led, 0, cycle_main);
+            }
             //clear_matrix();
             break;
     }
 }
+
+//==========================
+//  Вивід вологості
+//==========================
+
+void hum(void) {
+    uint8_t i;
+    switch (events) {
+        case MAIN_EVENT:
+            if (Rh < 1000) {
+                pic_to_led(1, 5, &Dis_Buff);
+                putchar_down(9, (Rh / 100) % 10, pFont);
+                putchar_down(15, (Rh / 10) % 10, pFont);
+                putchar_down(21, '.', &Font);
+                putchar_down(24, (Rh % 10), pFont);
+            } else {
+                pic_to_led(2, 5, &Dis_Buff);
+                putchar_down(11, (Rh / 1000) % 10, pFont);
+                putchar_down(17, (Rh / 100) % 10, pFont);
+                putchar_down(23, (Rh / 10) % 10, pFont);
+              //  putchar_down(26, '.', &Font);
+              //  putchar_down(28, (Rh % 10), pFont);
+            }
+            events = TEMP_EVENT;
+            RTOS_SetTask(default_state, 400, 0); // 2 секунд для виходу
+
+            // }
+
+            break;
+        case TEMP_EVENT:
+            break;
+        case KEY_EXIT_EVENT: // повертаємось в показ часу
+            events = MAIN_EVENT;
+
+            Rand_ef(); // випадковий ефект
+            pre_ref_dis();
+            RTOS_DeleteTask(default_state);
+            RTOS_DeleteTask(hum);
+            RTOS_SetTask(time_led, 0, cycle_main);
+
+            //clear_matrix();
+            break;
+    }
+}
+
 
 void pre_ref_dis(void) {
 
@@ -387,10 +449,12 @@ void time_led() {
             }
             if (((TTime.Ts > 14)&&(TTime.Ts < 16)))// ||((TTime.Ts>45)&&(TTime.Ts<47)))    //  виведемо температуру
                 events = KEY_DOWN_EVENT;
-            if (en_bmp280) // якщо можна виводити атм. тиск
-                if (((TTime.Ts > 39)&&(TTime.Ts < 41)&&((TTime.Tmin % 2) == 0))){    //  виведемо атмосферний тиск
+            if ((TTime.Ts > 39)&&(TTime.Ts < 41)) { //  виведемо атмосферний тиск
+                if ((en_bmp280) &&((TTime.Tmin % 2) == 0)) // якщо можна виводити атм. тиск
                     events = KEY_UP_EVENT;
-                  //  bmp_show = 0;
+                else
+                    events = KEY_DOWN_EVENT;
+                //  bmp_show = 0;
                 }
 //            if (oldmin_flag) { // пройшла хвилина
 //                count_min++; // збільшуємо лічильник хвилин
@@ -417,15 +481,31 @@ void time_led() {
         case KEY_UP_EVENT:
             //         asm("nop");
             blk_dot = 0;
+            ErrAM = DHT_GetData(&valuesAM); // вимірюємо вологість і температуру з АМ2302
+            if (ErrAM == 0) { // якщо нема помилок
+                Rh = ((uint16_t) valuesAM[0] << 8) + valuesAM[1];
+                Td = ((uint16_t) valuesAM[2] << 8) + valuesAM[3];
+                RhH = Rh / 10;
+                RhL = Rh % 10;
+                TdH = Td / 10;
+                TdL = Td % 10;
+            }
             bmp280Convert(&press, &temperbmp280);
             if (type_clk == TYPE_CLK_2)
                 putchar_b_buf(13, 23, &Font, &Dis_Buff);
             //scroll_right();
             Rand_ef(); // випадковий ефект
-            RTOS_DeleteTask(time_led); //видаляємо задачу
-            RTOS_SetTask(pressure, 0, cycle_main); //додаємо задачу 
-            events = MAIN_EVENT;
-            en_put = 0;
+            if (en_bmp280) {
+                RTOS_DeleteTask(time_led); //видаляємо задачу
+                RTOS_SetTask(pressure, 0, cycle_main); //додаємо задачу 
+                events = MAIN_EVENT;
+                en_put = 0;
+            } else {
+                RTOS_DeleteTask(time_led); //видаляємо задачу
+                RTOS_SetTask(hum, 0, cycle_main); //додаємо задачу 
+                events = MAIN_EVENT;
+                en_put = 0;
+            }
 
             break;
         case KEY_DOWN_EVENT:
@@ -777,6 +857,25 @@ void usart_r() {
                 EUSART_Write('\n');
 
                 break;
+            case 'y': // налаштування через синій am2302
+                // формат "$wX  X - 1 - показ. 0 - не показ.
+                // 
+                if (((usart_data[2] - 48) == EN_AM2302) || ((usart_data[2] - 48) == DIS_AM2302)) {
+                    en_am2302 = usart_data[2] - 48;
+                    write_eep(EE_EN_AM2302, en_am2302); // запишемо в еепром
+                } else {
+                    EUSART_Write('E');
+                    EUSART_Write('R');
+                    EUSART_Write('\r');
+                    EUSART_Write('\n');
+                    break;
+                }
+                EUSART_Write('O');
+                EUSART_Write('K');
+                EUSART_Write('\r');
+                EUSART_Write('\n');
+
+                break;                
             case 'z': // reset controller
                 // скидаємо контролер через 4 сек. після команди.
                 // потрібно для bootloader
@@ -873,7 +972,13 @@ void usart_r() {
                         EUSART_Write((temperature_radio % 10) + 48);
                         EUSART_Write('_');
                         break;
-
+                    case 'd': // $rd - показати температуру з датчика AM2302
+//                        EUSART_Write(minus_radio); // передаємо першу цифру
+                        EUSART_Write(((Td / 100) % 10) + 48); // передаємо першу цифру
+                        EUSART_Write(((Td / 10) % 10) + 48); //......
+                        EUSART_Write((Td % 10) + 48);
+                        EUSART_Write('_');
+                        break;
                     default:
                         EUSART_Write('E');
                         EUSART_Write('R');
