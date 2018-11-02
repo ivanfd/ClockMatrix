@@ -4,7 +4,9 @@
  * Тактова частота 40Мгц
  * Контролер годинника: DS3231 
  * Author: Ivan_fd
- * Version: 3.0.1
+ * Version: 3.0.1 
+ * Nov 02 2018
+ * 10:33:19
  */
 
 #include "main.h"

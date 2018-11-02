@@ -858,7 +858,7 @@ void usart_r() {
 
                 break;
             case 'y': // налаштування через синій am2302
-                // формат "$wX  X - 1 - показ. 0 - не показ.
+                // формат "$yX  X - 1 - показ. 0 - не показ.
                 // 
                 if (((usart_data[2] - 48) == EN_AM2302) || ((usart_data[2] - 48) == DIS_AM2302)) {
                     en_am2302 = usart_data[2] - 48;
@@ -1085,7 +1085,7 @@ void convert_utf(uint8_t *buf) {
 
 void adj_brig() {
 
-    if (adc_res >= 70)
+    if (adc_res >= 58)
         Cmd7221(INTENSITY_R, 0x03); //Intensity Register - 1/16
     else if (adc_res <= 50)
         Cmd7221(INTENSITY_R, 0x00); //Intensity Register - 2/16
