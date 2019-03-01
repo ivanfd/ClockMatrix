@@ -550,6 +550,10 @@ switch (events)
             events = MAIN_EVENT;
             en_put = 0;
             clear_matrix();
+            if (type_clk == 1)
+                blk_dot = 0;
+            else
+                blk_dot = 1;
 
             break;
         case KEY_UP_EVENT:
@@ -577,10 +581,7 @@ if(en_put)
     }
     Update_Matrix(Dis_Buff); // обновити дані на дисплеї
     en_put = 1;
-    if (type_clk == 1)
-        blk_dot = 0;
-    else
-        blk_dot = 1;
+
 }
 
  //=====================================================
@@ -936,7 +937,7 @@ switch (events)
         case KEY_OK_EVENT:
             RTOS_DeleteTask(set_en_dst);
             RTOS_SetTask(set_type_temp, 0, cycle_main);
-            RTOS_DeleteTask(default_state); 
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
             events = MAIN_EVENT;
             en_put = 0;
             clear_matrix();
@@ -994,7 +995,7 @@ void set_type_temp(void){
         case KEY_OK_EVENT:
             RTOS_DeleteTask(set_type_temp);
             RTOS_SetTask(set_en_am2302, 0, cycle_main);
-            RTOS_DeleteTask(default_state); 
+            RTOS_SetTask(default_state, 2000, 0); // 10 секунд для виходу
             events = MAIN_EVENT;
             en_put = 0;
             clear_matrix();
@@ -1061,6 +1062,10 @@ void set_en_am2302(void){
             events = MAIN_EVENT;
             en_put = 0;
             clear_matrix();
+            if (type_clk == 1)
+                blk_dot = 0;
+            else
+                blk_dot = 1;
             break;
         case KEY_UP_EVENT:
             en_am2302 = !(en_am2302);

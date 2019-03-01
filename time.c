@@ -15,9 +15,9 @@ uint8_t Mrt, Oct; // останн≥ дн≥ м≥с€ц≥в, число
         // перев≥р€Їмо, чи час л≥тн≥й
     if (((pTime->Tmt > 3) && (pTime->Tmt < 10)) ||
             ((pTime->Tmt == 3) && (pTime->Tdt > Mrt)) ||
-            ((pTime->Tmt == 3) && (pTime->Tdt = Mrt) && (pTime->Thr >= 3)) ||
+            ((pTime->Tmt == 3) && (pTime->Tdt == Mrt) && (pTime->Thr >= 3)) ||
             ((pTime->Tmt == 10) && (pTime->Tdt < Oct)) ||
-            ((pTime->Tmt == 10) && (pTime->Tdt = Oct) && (pTime->Thr <= 1)))
+            ((pTime->Tmt == 10) && (pTime->Tdt == Oct) && (pTime->Thr <= 1)))
         *dst = 1; // €кщо так, то ставимо признак
     else
         *dst = 0;
