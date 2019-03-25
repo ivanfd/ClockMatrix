@@ -24,6 +24,10 @@
                     <name>Combine</name>
                     <type>2</type>
                 </confElem>
+                <confElem>
+                    <name>Combine_18F452</name>
+                    <type>2</type>
+                </confElem>
             </confList>
             <formatting>
                 <project-formatting-style>false</project-formatting-style>

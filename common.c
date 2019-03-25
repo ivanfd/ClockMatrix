@@ -25,8 +25,8 @@ uint8_t type_clk = TYPE_CLK_1; // вигляд годинника
 uint8_t idx_pnt = 0; // індекс, для вигляду мигаючих крапок
 volatile uint8_t x1, x2, x3, x4, y1, y2, y3, y4; //Для зсуву стовбця вниз
 uint16_t adc_res = 500; // результат вимірювання АЦП
-uint8_t oldsec, oldmin;// секунди попередні
-bit oldsec_flag, oldmin_flag, bmp_show, mess_show;
+uint8_t oldsec;// секунди попередні
+bit oldsec_flag, mess_show; //oldmin_flag, bmp_show,
 uint8_t brg_type;// яскравість по датчику, чи постійна
 uint8_t brig;// значення яскравості
 uint8_t usart_data[EUSART_RX_BUFFER_SIZE];
@@ -39,7 +39,7 @@ uint8_t en_ds_2;    //  чи пок. температуру з датчика 2
 uint8_t en_bmp280; //  чи показуємо тиск
 uint8_t en_dst; // перехід на літній час
 uint8_t en_am2302; //датчик вологості
-uint8_t count_min = 0; // лічильник пройдених хвилин
+//uint8_t count_min = 0; // лічильник пройдених хвилин
 uint8_t day_mess = 0; // день в який буде виводитись повідомлення
 uint8_t dst_flag = 0; // чи зараз літній час????
 uint8_t const compile_date[12]   = __DATE__;     // Mmm dd yyyy
@@ -47,7 +47,7 @@ uint8_t const compile_time[9]    = __TIME__;     // hh:mm:ss
 uint8_t valuesAM[5]; // масив байт з датчика AM2302
 uint8_t ErrAM;      //  помилка датчика AM2302
 uint16_t Rh, Td;    // вологість, температура
-uint8_t RhH, RhL, TdH, TdL; //  вологість цілі - десяті, температура цілі - десяті
+//uint8_t RhH, RhL, TdH, TdL; //  вологість цілі - десяті, температура цілі - десяті
 
 
 
@@ -69,13 +69,13 @@ __EEPROM_DATA(1, 2, 1, 0, 0, 0, 0, 0); // ініціалізація еепром, (слідуючі комірк
 void GetTime(void)
 {
     oldsec = TTime.Ts;
-    oldmin = TTime.Tmin;
+//    oldmin = TTime.Tmin;
     getTime(&TTime.Thr, &TTime.Tmin, &TTime.Ts);
     getDate(&TTime.Tdy,&TTime.Tdt,&TTime.Tmt,&TTime.Tyr);
     if (oldsec != TTime.Ts)
         oldsec_flag = 1;
-    if (oldmin != TTime.Tmin)
-        oldmin_flag = 1;
+//    if (oldmin != TTime.Tmin)
+//        oldmin_flag = 1;
     if (TTime.Ts == 3)
         snd_flag = 1; //дозволяємо знову генерувати щогодинний сигнал
 
@@ -344,7 +344,7 @@ void pressure(void) {
 //==========================
 
 void hum(void) {
-    uint8_t i;
+  //  uint8_t i;
     switch (events) {
         case MAIN_EVENT:
             if (Rh < 1000) {
@@ -485,10 +485,10 @@ void time_led() {
             if (ErrAM == 0) { // якщо нема помилок
                 Rh = ((uint16_t) valuesAM[0] << 8) + valuesAM[1];
                 Td = ((uint16_t) valuesAM[2] << 8) + valuesAM[3];
-                RhH = Rh / 10;
-                RhL = Rh % 10;
-                TdH = Td / 10;
-                TdL = Td % 10;
+//                RhH = Rh / 10;
+//                RhL = Rh % 10;
+//                TdH = Td / 10;
+//                TdL = Td % 10;
             }
             bmp280Convert(&press, &temperbmp280);
             if (type_clk == TYPE_CLK_2)
@@ -1007,7 +1007,7 @@ void usart_r() {
 //  вивід версії
 void version(void)
 {
-    uint8_t i;
+  //  uint8_t i;
 
     sprintf(text_buf,"%s %s %s", VERSION, compile_date, compile_time); // формуємо строку
     interval_scroll_text(&text_buf);// виводимо біг. строку

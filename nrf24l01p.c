@@ -129,7 +129,7 @@ void nrf24_write_buf(uint8_t reg, uint8_t *pBuf, uint8_t length) {
 }
 
 /**************************************************         
-	„итаЇ 'length' з репг≥стру 'reg'         
+	„итаЇ 'length' з рег≥стру 'reg'         
 **************************************************/
 void nrf24_read_buf(uint8_t reg, uint8_t *pBuf, uint8_t length) {
     uint8_t status, i;

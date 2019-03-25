@@ -7,7 +7,7 @@
 */
 
 static uint8_t eusartTxHead = 0;
-static uint8_t eusartTxTail = 0;
+//static uint8_t eusartTxTail = 0;
 static uint8_t eusartTxBuffer[EUSART_TX_BUFFER_SIZE];
 volatile uint8_t eusartTxBufferRemaining;
 
@@ -29,12 +29,22 @@ void init_uart(void)
 {
     TRISCbits.RC6 = 1;
     TRISCbits.RC7 = 1;
-    TXSTAbits.BRGH = 1; // 1 = High speed
     TXSTAbits.SYNC = 0; // 0 = Asynchronous mode
     TXSTAbits.TXEN = 1; // 1 = Transmit enabled
     RCSTAbits.CREN = 1; // 1 = Enables receiver
     RCSTAbits.SPEN = 1; // 1 = Serial port enabled (configures RX/DT and TX/CK pins as serial port pins)
+
+#ifdef __18F4525__
+    TXSTAbits.BRGH = 1; // 1 = High speed
     BAUDCONbits.BRG16 = 1; // 1 = 16-bit Baud Rate Generator – SPBRGH and SPBRG
+    SPBRGH = 0x04;
+    SPBRG = 0x10;
+#endif
+
+#ifdef __18F452__
+    TXSTAbits.BRGH = 0; // 1 = Low speed
+    SPBRG = 64;
+#endif
     
     // BAUD = FOSC/[4 (n + 1)]
     // n = value of SPBRGH:SPBRG register pair
@@ -42,12 +52,11 @@ void init_uart(void)
     // BAUDRATE = 40000000/4*(1040 + 1) = 9606
     // ERROR = (9606 - 9600)/9600 = 0.06%
     
-    SPBRGH = 0x04;
-    SPBRG = 0x10;
+
     
         // initializing the driver state
     eusartTxHead = 0;
-    eusartTxTail = 0;
+   // eusartTxTail = 0;
     eusartTxBufferRemaining = sizeof(eusartTxBuffer);
 
     eusartRxHead = 0;

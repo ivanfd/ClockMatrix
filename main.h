@@ -19,7 +19,7 @@
 
 
 #define VERSION "Clock v3.0.1 by Ivan_fd"
-#define SHOW_VERSION
+//#define SHOW_VERSION
 //#define DEBUG   // для відладки, розкоментувати.
 
 

@@ -37,20 +37,20 @@ void bmp280_Init() {
     bmp280WriteByte(BMP280_REG_CONFIG, (BMP280_TSB_2000 | BMP280_FILTER_COEFFICIENT8 | BMP280_SPI_OFF));
     bmp280WriteByte(BMP280_REG_CONTROL, (BMP280_OVERSAMPLING_T16 | BMP280_OVERSAMPLING_P16 | BMP280_MODE_NORMAL));
 
-#ifdef DEBUG
-//    dig_T1 = 27504;
-//    dig_T2 = 26435;
-//    dig_T3 = -1000;
-//    dig_P1 = 36477;
-//    dig_P2 = -10685;
-//    dig_P3 = 3024;
-//    dig_P4 = 2855;
-//    dig_P5 = 140;
-//    dig_P6 = -7;
-//    dig_P7 = 15500;
-//    dig_P8 = -14600;
-//    dig_P9 = 6000;
-#endif
+//#ifdef DEBUG
+    dig_T1 = 27504;
+    dig_T2 = 26435;
+    dig_T3 = -1000;
+    dig_P1 = 36477;
+    dig_P2 = -10685;
+    dig_P3 = 3024;
+    dig_P4 = 2855;
+    dig_P5 = 140;
+    dig_P6 = -7;
+    dig_P7 = 15500;
+    dig_P8 = -14600;
+    dig_P9 = 6000;
+//#endif
 
 #ifdef DEBUG
     __delay_ms(200);
@@ -119,7 +119,7 @@ uint32_t bmp280ReadInt32(uint8_t address) {
 
 }
 
-void bmp280WriteByte(uint8_t address, int8_t data)
+void bmp280WriteByte(uint8_t address, uint8_t data)
 //---------------------------------------------- 
 {
     I2C_Master_Start();
@@ -159,7 +159,7 @@ int32_t bmp280ReadTemp() {
 
 
     temperature = bmp280ReadInt32(BMP280_REG_RESULT_TEMPRERATURE);
-
+    temperature = 519888;
 #ifdef DEBUG
     __delay_ms(200);
 
@@ -184,7 +184,7 @@ int32_t bmp280ReadPressure() {
 
 
     pressure = bmp280ReadInt32(BMP280_REG_RESULT_PRESSURE);
-
+   pressure = 415148;
 #ifdef DEBUG
     __delay_ms(200);
   // pressure = 415148;
@@ -291,8 +291,8 @@ uint8_t bmp280Convert(int32_t *press, int32_t *temper) {
 #endif  
 
     //*press = P;
-    //*press = P * 100 / 13332;
-    *press = P * 0.7501;
+    *press = P * 100 / 13332;
+    //*press = P * 0.7501;
     //    var1 = (((double)adc_T)/16384.0 - ((double)dig_T1)/1024.0) * ((double)dig_T2);
     //    //var9=(double)45678.125;
     //    #ifdef DEBUG

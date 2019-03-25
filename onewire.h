@@ -14,7 +14,7 @@ uint8_t read_bit(void);
 void write_bit(uint8_t bitval);
 uint8_t read_byte(void);
 void write_byte(uint8_t val);
-void Waiting_WR (void);
+//void Waiting_WR (void);
 
 #endif	/* XC_HEADER_TEMPLATE_H */
 

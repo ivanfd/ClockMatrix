@@ -442,7 +442,7 @@ void hide_two_side(void) {
 //**************************************************
 
 void dissolve(void) {
-    uint8_t i, j, n = 0, z, k;
+    uint8_t i, n = 0, z, k;
     
     
     for (z = 0; z <= 7; z++) {
@@ -501,7 +501,7 @@ void Rand_ef(void) {
 //  Заповнення тимчасового буфера екрану
 //*******************************************
 void fill_buff_t(uint16_t data){
-    uint8_t i, j;
+    uint8_t i;
 
 
     for (i = 0; i <= BUF_SIZE; i++)

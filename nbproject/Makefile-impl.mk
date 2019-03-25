@@ -27,11 +27,11 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 PROJECTNAME=18F4525
 
 # Active Configuration
-DEFAULTCONF=Combine
+DEFAULTCONF=Combine_18F452
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=StandAlone Combine 
+ALLCONFS=StandAlone Combine Combine_18F452 
 
 
 # build
@@ -47,6 +47,7 @@ ALLCONFS=StandAlone Combine
 .clobber-impl: .clobber-pre .depcheck-impl
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=StandAlone clean
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Combine clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Combine_18F452 clean
 
 
 
@@ -54,6 +55,7 @@ ALLCONFS=StandAlone Combine
 .all-impl: .all-pre .depcheck-impl
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=StandAlone build
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Combine build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=Combine_18F452 build
 
 
 

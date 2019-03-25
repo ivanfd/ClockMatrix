@@ -51,7 +51,7 @@
 
 void bmp280_Init();
 uint16_t bmp280ReadInt16(uint8_t address);
-void bmp280WriteByte(uint8_t address, int8_t data);
+void bmp280WriteByte(uint8_t address, uint8_t data);
 uint8_t bmp280ReadByte(uint8_t address) ;
 int32_t bmp280ReadTemp();
 uint32_t bmp280ReadInt32(uint8_t address);
